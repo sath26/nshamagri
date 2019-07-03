@@ -1,0 +1,32 @@
+{
+  "name": "shamagri",
+  "version": "0.0.1",
+  "description": "To make ERP app generally available",
+  "productName": "shamagri",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "sath26",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "apexcharts": "^3.8.1",
+    "axios": "^0.18.1",
+    "eslint": "^6.0.1",
+    "quasar": "^1.0.0",
+    "vue-apexcharts": "^1.4.0",
+    "vue-i18n": "^8.0.0"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "last 1 version, not dead, ie >= 11"
+  ]
+}

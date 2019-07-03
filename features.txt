@@ -1,0 +1,4 @@
+restaurant
+tax
+vat
+service charge

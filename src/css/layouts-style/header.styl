@@ -1,0 +1,93 @@
+@import '..\css\app.styl';
+.navBar {
+  background-image: linear-gradient(45deg, $navColor1, $navColor2);
+  height: 7vh;
+}
+
+.search-box {
+  width: 50%;
+}
+
+.icon-notification {
+  color: $notificationColor;
+}
+
+.icon-add {
+  color: $primary-white;
+}
+
+.txtShamagri {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-transform: uppercase;
+  color: #fafafa;
+  font-style: italic;
+
+  @media screen and (max-width: 720px) {
+    opacity: 0;
+  }
+}
+
+.profile-container {
+  background-image: url('../../src/assets/img/side-nav-bg.png');
+  background-size: cover;
+  margin: -8px 0px
+  .profile-wrapper {
+    text-align: center;
+  }
+}
+.icon-night {
+  width: 30px;
+}
+.search-box_toggle-btn
+  @media screen and (min-width: 602px) 
+    display none
+.component-search-desktop
+  @media screen and (max-width: 601px) 
+    display none
+// mobile search box
+.nowActive
+  animation searchBoxAnim 300ms ease forwards
+.search-box-mobile_container
+  height 45px
+  background-image #f2f2f2
+  transition all 5s ease
+  transform-origin center top
+  .search-box_mobile
+    color $navColor2
+    margin 0
+    padding 0
+    width 85%
+    border-radius 0
+  .btn-go
+    opacity .8
+    margin 0
+    padding 0
+    width 15%
+    background lighten($navColor2, 10%)
+    color #fafafa
+    border-radius 0
+    border none
+  @media screen and (min-width: 602px) 
+    display none
+.notification-container
+  position relative
+  .notification-dot
+    width 5px
+    height 5px
+    background $negative
+    border-radius 50%
+    font-size 3.5rem
+    fill $negative
+    position absolute
+    top 8px
+    left 18px
+    z-index 1 
+    animation dotBlink 1s ease infinite
+@keyframes dotBlink {
+  from {opacity: 0; transform:scale(.5);}
+  to {opacity: 1;  transform:scale(1.2);}
+  }
+@keyframes searchBoxAnim {
+  from {opacity: 0; transform: scaleY(0);}
+  to {opacity: 1; transform: scaleY(1);}
+  }
