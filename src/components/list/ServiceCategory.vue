@@ -1,5 +1,5 @@
 /* tailoring
-maintenaince(bike, car, electronic, plumbing) 
+sectiontenaince(bike, car, electronic, plumbing) 
 food and restaurant
 Wash(vehicle, clothes) 
 printing
@@ -25,39 +25,39 @@ plumbing */
         <div style="width: 500px; max-width: 90vw;">
           <q-list separator class="q-mb-sm">
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main label="Services"/>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section label="Services">Services</q-item-section>
 
-              <q-item-side right>
-                <q-btn flat color="secondary" v-close-overlay>
+              <q-item-section right>
+                <q-btn flat color="secondary" >
                   <q-icon name="add"/>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
           </q-list>
           <q-list highlight class="list-container">
             <q-item multiline to="/single_service">
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Course Completion</q-item-tile>
-                <q-item-tile sublabel>1.5 months</q-item-tile>
-              </q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>Course Completion</q-item-section>
+                <q-item-section sublabel>1.5 months</q-item-section>
+              </q-item-section>
             </q-item>
 
             <q-item multiline>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Crash Course</q-item-tile>
-                <q-item-tile sublabel>1 month</q-item-tile>
-              </q-item-main>
+              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>Crash Course</q-item-section>
+                <q-item-section sublabel>1 month</q-item-section>
+              </q-item-section>
             </q-item>
 
             <q-item multiline>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Monthly Course</q-item-tile>
-                <q-item-tile sublabel>3 months (minimum)</q-item-tile>
-              </q-item-main>
+              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>Monthly Course</q-item-section>
+                <q-item-section sublabel>3 months (minimum)</q-item-section>
+              </q-item-section>
             </q-item>
           </q-list>
         </div>

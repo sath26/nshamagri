@@ -66,12 +66,12 @@ Tutor	Rs. 750/- per hour
         <div style="width: 500px; max-width: 90vw;">
           <q-list separator class="q-mb-sm">
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>Course Completion</q-item-tile>
-              </q-item-main>
+              </q-item-section>
 
-              <q-item-side right>
+              <q-item-section right>
                 <q-btn flat color="secondary" v-close-overlay>
                   <q-icon name="add"/>
                 </q-btn>
@@ -88,17 +88,17 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
           </q-list>
           <q-list class="q-mb-sm section-teacher">
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>Teacher</q-item-tile>
-              </q-item-main>
+              </q-item-section>
 
-              <q-item-side right>
+              <q-item-section right>
                 <q-btn flat color="secondary" v-close-overlay>
                   <q-icon name="add"/>
                 </q-btn>
@@ -115,18 +115,18 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
             <q-item-separator/>
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>AS Level</q-item-tile>
-              </q-item-main>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-item-tile label>20000</q-item-tile>
-              </q-item-side>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
                   <q-popover>
@@ -140,18 +140,18 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
 
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>A2 Level</q-item-tile>
-              </q-item-main>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-item-tile label>20000</q-item-tile>
-              </q-item-side>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
                   <q-popover>
@@ -165,18 +165,18 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
 
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>A Level</q-item-tile>
-              </q-item-main>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-item-tile label>35000</q-item-tile>
-              </q-item-side>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
                   <q-popover>
@@ -190,17 +190,17 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
           </q-list>
           <q-list class="section-tutor">
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>Tutor</q-item-tile>
-              </q-item-main>
+              </q-item-section>
 
-              <q-item-side right>
+              <q-item-section right>
                 <q-btn flat color="secondary" v-close-overlay>
                   <q-icon name="add"/>
                 </q-btn>
@@ -217,18 +217,18 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
             <q-item-separator/>
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>AS Level</q-item-tile>
-              </q-item-main>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-item-tile label>10000</q-item-tile>
-              </q-item-side>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
                   <q-popover>
@@ -242,18 +242,18 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
 
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>A2 Level</q-item-tile>
-              </q-item-main>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-item-tile label>10000</q-item-tile>
-              </q-item-side>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
                   <q-popover>
@@ -267,18 +267,18 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
 
             <q-item multiline>
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
                 <q-item-tile label>A Level</q-item-tile>
-              </q-item-main>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-item-tile label>17000</q-item-tile>
-              </q-item-side>
-              <q-item-side right>
+              </q-item-section>
+              <q-item-section right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
                   <q-popover>
@@ -292,7 +292,7 @@ Tutor	Rs. 750/- per hour
                     </div>
                   </q-popover>
                 </q-btn>
-              </q-item-side>
+              </q-item-section>
             </q-item>
           </q-list>
         </div>
