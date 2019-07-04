@@ -5,37 +5,37 @@
     <q-page-container>
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-list separator class="q-mb-sm">
+          <q-list  bordered separator  class="q-mb-sm">
             <q-item multiline to="/add_goods">
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Goods</q-item-tile>
-              </q-item-main>
+              <q-item-section>
+                <q-item-section label>Goods</q-item-section>
+              </q-item-section>
 
-              <q-item-side right>
+              <q-item-section avatar>
                 <div class="group" style=" text-align: center;">
-                  <q-btn flat color="secondary" v-close-overlay>
+                  <q-btn flat color="secondary" >
                     <q-icon name="add"/>
                   </q-btn>
                 </div>
-              </q-item-side>
+              </q-item-section>
             </q-item>
           </q-list>
-          <q-list highlight>
+          <q-list bordered highlight>
             <q-item multiline link to="/single_product">
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Wai Wai(click here to go to single product)</q-item-tile>
-                <q-item-tile sublabel>Rs 20</q-item-tile>
-              </q-item-main>
+              <q-item-section>
+                <q-item-section label>Wai Wai(click here to go to single product)</q-item-section>
+                <q-item-section sublabel>Rs 20</q-item-section>
+              </q-item-section>
             </q-item>
 
             <q-item multiline link>
               <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Happy Happy</q-item-tile>
-                <q-item-tile sublabel>Rs 10</q-item-tile>
-              </q-item-main>
+              <q-item-section>
+                <q-item-section label>Happy Happy</q-item-section>
+                <q-item-section sublabel>Rs 10</q-item-section>
+              </q-item-section>
               <!--    <q-item-side right>
                 <q-btn round flat>
                   <q-icon name="more_vert"/>
@@ -53,15 +53,15 @@
               </q-item-side>-->
             </q-item>
 
-            <q-item multiline link>
+            <q-item multiline link to="/single_product">
               <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-main>
-                <q-item-tile label>Happy Happy</q-item-tile>
-                <q-item-tile sublabel>Rs 10</q-item-tile>
-                <q-item-tile sublabel>
-                  <q-btn label="Unavailable" color="deep-orange" size="sm" flat disabled/>
-                </q-item-tile>
-              </q-item-main>
+              <q-item-section>
+                <q-item-label >Happy Happy</q-item-label>
+                <q-item-label caption >Rs 10</q-item-label>
+              </q-item-section>
+                <q-item-section side top >
+                  <q-btn label="Unavailable" color="deep-orange" size="sm" flat />
+                </q-item-section>
             </q-item>
           </q-list>
         </div>

@@ -18,9 +18,9 @@
           <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo q-px-sm q-py-xs">
           <q-toolbar-title class="txtShamagri">shamagri</q-toolbar-title>
           <s-search class="component-search-desktop"></s-search>
-          <q-btn flat round color="grey-1" icon="search" 
+          <!-- <q-btn flat round color="grey-1" icon="search" 
           v-modal="mobileSearchBoxToggle"  @click="mobileSearchBoxToggle = !mobileSearchBoxToggle" 
-          class="search-box_toggle-btn"></q-btn>
+          class="search-box_toggle-btn"></q-btn> -->
           <s-notification class="q-px-sm"></s-notification>
           <q-btn outline color="white" class="q-mr-sm" to="/login">Login</q-btn>
           <!-- notification is also available but i need number of notification on top of the icon or change in color  -->
