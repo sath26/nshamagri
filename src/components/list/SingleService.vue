@@ -64,106 +64,84 @@ Tutor	Rs. 750/- per hour
       <s-header></s-header>
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-list separator class="q-mb-sm">
+          <q-list bordered separator class="q-mb-sm">
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>Course Completion</q-item-tile>
+                <q-item-section label>Course Completion</q-item-section>
               </q-item-section>
-
-              <q-item-section right>
-                <q-btn flat color="secondary" v-close-overlay>
-                  <q-icon name="add"/>
+              <q-item-section side>
+                <q-btn flat color="secondary" v-close-popup>
+                  <q-icon name="add" />
                 </q-btn>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+              </q-item-section>
+              <q-item-section top side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="negative" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="negative" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>
           </q-list>
-          <q-list class="q-mb-sm section-teacher">
+          <q-list bordered class="q-mb-sm section-teacher">
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>Teacher</q-item-tile>
+                <q-item-section label>Teacher</q-item-section>
               </q-item-section>
-
-              <q-item-section right>
-                <q-btn flat color="secondary" v-close-overlay>
-                  <q-icon name="add"/>
-                </q-btn>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
-                    <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
-                      </q-btn>
-                      <q-btn flat color="negative" v-close-overlay>
-                        <q-icon name="delete"/>
-                      </q-btn>
-                    </div>
-                  </q-popover>
+<q-item-section side>
+                <q-btn flat color="secondary" v-close-popup>
+                  <q-icon name="add" />
                 </q-btn>
               </q-item-section>
-            </q-item>
-            <q-item-separator/>
-            <q-item multiline>
-              <!-- <q-item-section image="statics/mountains.jpg"/> -->
-              <q-item-section>
-                <q-item-tile label>AS Level</q-item-tile>
-              </q-item-section>
-              <q-item-section right>
-                <q-item-tile label>20000</q-item-tile>
-              </q-item-section>
-              <q-item-section right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+              <q-item-section side>
+               
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="negative" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="negative" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>
-
+            <q-separator />
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>A2 Level</q-item-tile>
+                <q-item-section label>AS Level</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-item-tile label>20000</q-item-tile>
+              <q-item-section side>
+                <q-item-section label>20000</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="negative" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>
@@ -171,101 +149,103 @@ Tutor	Rs. 750/- per hour
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>A Level</q-item-tile>
+                <q-item-section label>A2 Level</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-item-tile label>35000</q-item-tile>
+              <q-item-section side>
+                <q-item-section label>20000</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
+                  </q-menu>
+                </q-btn>
+              </q-item-section>
+            </q-item>
+
+            <q-item multiline>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>A Level</q-item-section>
+              </q-item-section>
+              <q-item-section side>
+                <q-item-section label>35000</q-item-section>
+              </q-item-section>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
+                    <div class="group" style=" text-align: center;">
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
+                      </q-btn>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="delete" />
+                      </q-btn>
+                    </div>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>
           </q-list>
-          <q-list class="section-tutor">
+          <q-list bordered class="section-tutor">
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>Tutor</q-item-tile>
+                <q-item-section label>Tutor</q-item-section>
               </q-item-section>
+<q-item-section side>
 
-              <q-item-section right>
-                <q-btn flat color="secondary" v-close-overlay>
-                  <q-icon name="add"/>
+                <q-btn flat color="secondary" v-close-popup>
+                  <q-icon name="add" />
                 </q-btn>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+</q-item-section>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="negative" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="negative" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>
-            <q-item-separator/>
+            <q-separator />
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>AS Level</q-item-tile>
+                <q-item-section label>AS Level</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-item-tile label>10000</q-item-tile>
+              <q-item-section side>
+                <q-item-section label>10000</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
-                </q-btn>
-              </q-item-section>
-            </q-item>
-
-            <q-item multiline>
-              <!-- <q-item-section image="statics/mountains.jpg"/> -->
-              <q-item-section>
-                <q-item-tile label>A2 Level</q-item-tile>
-              </q-item-section>
-              <q-item-section right>
-                <q-item-tile label>10000</q-item-tile>
-              </q-item-section>
-              <q-item-section right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
-                    <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
-                      </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
-                      </q-btn>
-                    </div>
-                  </q-popover>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>
@@ -273,24 +253,49 @@ Tutor	Rs. 750/- per hour
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-tile label>A Level</q-item-tile>
+                <q-item-section label>A2 Level</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-item-tile label>17000</q-item-tile>
+              <q-item-section side>
+                <q-item-section label>10000</q-item-section>
               </q-item-section>
-              <q-item-section right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
                     <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
                       </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="delete" />
                       </q-btn>
                     </div>
-                  </q-popover>
+                  </q-menu>
+                </q-btn>
+              </q-item-section>
+            </q-item>
+
+            <q-item multiline>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>A Level</q-item-section>
+              </q-item-section>
+              <q-item-section side>
+                <q-item-section label>17000</q-item-section>
+              </q-item-section>
+              <q-item-section side>
+                <q-btn background flat>
+                  <q-icon name="more_vert" />
+                  <q-menu>
+                    <div class="group" style=" text-align: center;">
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="edit" />
+                      </q-btn>
+                      <q-btn flat color="secondary" v-close-popup>
+                        <q-icon name="delete" />
+                      </q-btn>
+                    </div>
+                  </q-menu>
                 </q-btn>
               </q-item-section>
             </q-item>

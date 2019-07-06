@@ -5,10 +5,9 @@
       <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
         <q-page padding class="row items-start">
           <q-card inline class="bigger q-ma-sm">
-            <q-card-media>
-              <img src="statics/parallax2.jpg">
-            </q-card-media>
-            <q-card-title class="relative-position">
+            <q-img src="statics/parallax2.jpg"/>
+            
+            <q-card-section class="relative-position">
               <q-btn
                 fab
                 color="secondary"
@@ -18,17 +17,17 @@
               />
 
               <div class="ellipsis">Cafe Basilico</div>
-              <!-- <q-rating slot="subtitle" :max="5"/> -->
-              <!-- <q-rating slot="subtitle" v-model="stars" :max="5"/> -->
+              <!-- <q-rating slot="subsection" :max="5"/> -->
+              <!-- <q-rating slot="subsection" v-model="stars" :max="5"/> -->
               <div slot="right" class="row items-center q-mt-md">
                 <q-icon name="place"/>250 ft
               </div>
-            </q-card-title>
-            <q-card-main>
+            </q-card-section>
+            <q-card-section>
               <p>Retailer</p>
               <p class="text-faded">Pan no: 0987654321</p>
-            </q-card-main>
-            <q-card-separator/>
+            </q-card-section>
+            <q-separator/>
             <q-card-actions>
               <q-btn flat icon>Opened now</q-btn>
               <q-btn flat>

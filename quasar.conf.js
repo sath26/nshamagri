@@ -68,8 +68,10 @@ module.exports = function (ctx) {
         // 'QCardMain',
         // 'QCardMedia',
         'QSeparator',
+        'QCardSection',
         'QCardActions',
-
+        'QImg',
+        
         'QTable',
         // pick only what you are using from:
         'QTh',
@@ -99,7 +101,10 @@ module.exports = function (ctx) {
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup',
+        'AddressbarColor',
+        'Meta'
       ],
 
       // Quasar plugins

@@ -23,19 +23,19 @@ plumbing */
       <s-header></s-header>
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-list separator class="q-mb-sm">
+          <q-list bordered separator class="q-mb-sm">
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section label="Services">Services</q-item-section>
 
               <q-item-section right>
-                <q-btn flat color="secondary" >
-                  <q-icon name="add"/>
+                <q-btn flat color="secondary">
+                  <q-icon name="add" />
                 </q-btn>
               </q-item-section>
             </q-item>
           </q-list>
-          <q-list highlight class="list-container">
+          <q-list bordered class="list-container">
             <q-item multiline to="/single_service">
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
