@@ -41,7 +41,6 @@
           v-model="left"
            :width="200"
           :breakpoint="500"
-          overlay
           show-if-above
           bordered
           content-class="bg-grey-3"
