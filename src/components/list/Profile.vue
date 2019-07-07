@@ -3,15 +3,16 @@
     <q-page-container>
       <s-header></s-header>
 
-      <q-tabs animated  color="secondary" align="justify">
-        <q-tab default name="buyers" slot="section" label="me"/>
+      <q-tabs  v-model="tab" animated  color="secondary" align="justify">
+        <q-tab default name="buyers"  label="me"/>
         <!-- <q-tab default name="buyers" slot="section" icon="mail" label="BUyers" /> -->
-        <q-tab name="sellers" slot="section" label="enterprise"/>
+        <q-tab name="sellers"  label="enterprise"/>
       </q-tabs>
+      <q-separator/>
       <q-tab-panels v-model="tab" animated >
         <q-tab-panel name="buyers">     
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
-            <q-page padding class="row items-start">
+            
               <q-card inline class="bigger q-ma-sm">
                 
                   <img src="statics/parallax2.jpg">
@@ -25,13 +26,13 @@
                   </q-btn>
                 </q-card-section>
               </q-card>
-            </q-page>
+            
           </div>
         </q-tab-panel>
 
         <q-tab-panel name="sellers">
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
-            <q-page padding class="row items-start">
+            
               <q-card inline class="bigger q-ma-sm">
                 
                   <img src="statics/parallax2.jpg">
@@ -65,7 +66,7 @@
                   <!-- <q-btn flat color="secondary">Message</q-btn> -->
                 </q-card-actions>
               </q-card>
-            </q-page>
+            
           </div>
         </q-tab-panel>
       </q-tab-panels>
