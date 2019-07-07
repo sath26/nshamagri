@@ -4,33 +4,33 @@
    
  */
  <template>
-    <q-layout view="lhh LpR lff" container>
+    <q-layout view="hHh LpR lFf" container>
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="q-pa-lg q-my-lg">
       <s-header></s-header>
       <div class="row">
         <q-card inline class="col my-card q-ma-sm">
           <div class="q-pa-sm">
-              <q-card-title class="relative-position">
+              <q-card-section class="relative-position">
                 <div class="ellipsis">Expenses(March)</div>
-              </q-card-title>
-            <q-card-main>5000</q-card-main>
+              </q-card-section>
+            <q-card-section>5000</q-card-section>
           </div>
         </q-card>
         <q-card inline class="col my-card q-ma-sm">
           <div class="q-pa-sm">
-            <q-card-title class="relative-position">
+            <q-card-section class="relative-position">
               <div class="ellipsis">Sales(March)</div>
-            </q-card-title>
-            <q-card-main>5000</q-card-main>
+            </q-card-section>
+            <q-card-section>5000</q-card-section>
           </div>
         </q-card>
         <q-card inline class="col my-card q-ma-sm">
           <div class="q-pa-sm">
-            <q-card-title class="relative-position">
+            <q-card-section class="relative-position">
             <div class="ellipsis">Profit(March)</div>
-          </q-card-title>
-          <q-card-main>5000</q-card-main>
+          </q-card-section>
+          <q-card-section>5000</q-card-section>
           </div>
         </q-card>
        </div>   
@@ -70,7 +70,7 @@ export default {
         }
       ],
       chartOptions: {
-        title: {
+        section: {
           text: "Sales and Expenses per month",
           margin: 10,
           floating: true,
