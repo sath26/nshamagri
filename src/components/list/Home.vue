@@ -36,7 +36,7 @@
        </div>   
         <q-page>
           <q-card class="bigger q-ma-sm">
-            <apexchart type="bar" height="500" :options="chartOptions" :series="series"/>
+            <apexchart type="area" height="500" :options="chartOptions" :series="series"/>
           </q-card>
         </q-page>
     </q-page-container>
@@ -59,65 +59,31 @@ export default {
   computed: {},
   data: function() {
     return {
-      series: [
-        {
-          name: "Expenses",
-          data: [44, 55, 41, 64, 22, 43, 21, 55, 65, 23, 56, 12]
-        },
-        {
-          name: "Sales",
-          data: [53, 32, 33, 52, 13, 44, 32, 32, 43, 53, 64, 23]
-        }
-      ],
-      chartOptions: {
-        section: {
-          text: "Sales and Expenses per month",
-          margin: 10,
-          floating: true,
-          style: {
-            fontSize: "16px",
-            color: "#fff"
-          }
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: "top"
-            }
-          }
-        },
+          chartOptions: {
         dataLabels: {
-          enabled: false,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
-            colors: ["#fff"]
-          }
+            enabled: false
         },
         stroke: {
-          show: false,
-          width: 1,
-          colors: ["#fff"]
+            curve: 'smooth'
         },
-
         xaxis: {
-          categories: [
-            "jan",
-            "feb",
-            "march",
-            "apr",
-            "may",
-            "jun",
-            "jul",
-            "aug",
-            "sep",
-            "oct",
-            "nov",
-            "dec"
-          ]
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        },
+        tooltip: {
+            fixed: {
+                enabled: false,
+                position: 'top'
+            }
         }
       }
+      ,
+      series: [{
+          name: 'Expenses',
+          data: [31, 40, 28, 51, 42, 109, 100]
+      }, {
+          name: 'Sales',
+          data: [11, 32, 45, 32, 34, 52, 41]
+      }],
     };
   }
 };

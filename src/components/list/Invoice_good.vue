@@ -73,7 +73,7 @@
           :filter="filter"
         >
           <template slot="top-right" slot-scope="props">
-            <q-search hide-underline v-model="filter" color="secondary"/>
+            <q-input hide-underline v-model="filter" color="secondary"/>
           </template>
           <template slot="top-left" slot-scope="props">
             <p class="q-caption">* Invoice(cannot be edited once made)</p>
