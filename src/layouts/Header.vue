@@ -38,75 +38,30 @@
       </q-header>
     </transition>
     <q-drawer
-      section="left"
-      v-model="left"
-      :overlay="leftOverlay"
-      :behavior="leftBehavior"
-      :breakpoint="leftBreakpoint"
-      :content-class="$q.theme === 'mat' ? 'bg-blue-grey-8' : null"
-    >
-      <q-list dark no-border>
-        <div to="/profile" class="profile-container q-mb-sm">
-          <q-item to="/profile">
-            <div class="profile-wrapper q-mx-auto">
-              <div class="user-info-container">
-                <q-icon name="account circle" size="3rem" color="white"/>
-                <q-item-section label="Saugat Thapa" style="color:#fafafa" sublabel/>
-              </div>
-            </div>
-          </q-item>
-        </div>
-        <q-item class="row">
-          <q-item-section v-if="!themeToggle" color="white" class="col-10">
-            <q-item>
-              <q-item-section>
-                <img src="..\assets\icons\night-icon.png" alt="Dark theme icon" class="icon-night">
-              </q-item-section>Dark Theme
-            </q-item>
-          </q-item-section>
-          <q-item-section v-if="themeToggle" color="white" class="col-10">Light Theme</q-item-section>
-          <q-toggle v-model="themeToggle" color="white" class="btn-toggle col-2"/>
-        </q-item>
-        <q-item to="/home">
-          <!-- <q-item-section icon="account circle"/> -->
-          <q-item-section label="Home" sublabel/>
-          <!-- <q-item-section right icon="thumb_up"/> -->
-        </q-item>
-        <q-separator/>
-        <q-item to="/my_products">
-          <!-- <q-item-section icon="account circle"/> -->
-          <q-item-section label="Goods" sublabel/>
-          <!-- <q-item-section right icon="thumb_up"/> -->
-        </q-item>
-        <q-item to="/my_services">
-          <!-- <q-item-section icon="view_array"/> -->
-          <q-item-section label="Services" sublabel/>
-        </q-item>
-        <q-item>
-          <!-- <q-item-section icon="view_array"/> -->
-          <q-item-section label="Measurement" sublabel/>
-        </q-item>
-        <q-separator/>
-        <q-item-label header>Payment</q-item-label>
-        <q-item to="/payment_bought">
-          <!-- <q-item-section icon="pin_drop"/> -->
-          <q-item-section label="Bought" sublabel/>
-        </q-item>
-        <q-item to="/payment_sold">
-          <!-- <q-item-section icon="pin_drop"/> -->
-          <q-item-section label="Sold" sublabel/>
-        </q-item>
-        <q-separator/>
-        <q-item>
-          <q-item-section label="Logout" style="color:#d34848" sublabel/>
-        </q-item>
-      </q-list>
-      <!-- account circle and profile name should be button that leads to profile
-          <q-item to="/showcase/demo/floating-action-button">
-          <q-item-section icon="play_for_work"/> 
-          <q-item-section label="Profile" sublabel/>
-      </q-item>-->
-    </q-drawer>
+          v-model="left"
+           :width="200"
+          :breakpoint="500"
+          show-if-above
+          bordered
+          content-class="bg-grey-3"
+        >
+          <q-scroll-area class="fit">
+            <q-list v-for="(menuItem, index) in menuList" :key="index">
+  
+              <q-item clickable :to="menuItem.route" :active="menuItem.label === 'Home'" v-ripple>
+                <q-item-section avatar>
+                  <q-icon :name="menuItem.icon" ></q-icon>
+                </q-item-section>
+                <q-item-section>
+                  {{ menuItem.label }}
+                </q-item-section>
+              </q-item>
+  
+             <q-separator v-if="menuItem.separator" ></q-separator>
+  
+            </q-list>
+          </q-scroll-area>
+        </q-drawer>
   </div>
 </template>
 <script>
@@ -123,7 +78,57 @@ export default {
     return {
       changeTheme: false,
       searchBox: "",
-      mobileSearchBoxToggle: false
+      mobileSearchBoxToggle: false,
+      menuList : [
+  {
+    icon: 'user',
+    label: 'Profile',
+    route: '/profile',
+    separator: true
+  },
+  {
+    icon: 'send',
+    label: 'Home',
+    route: '/home',
+    separator: false
+  },
+  {
+    icon: 'delete',
+    label: 'Goods',
+    route: '/my_products',
+    separator: false
+  },
+  {
+    icon: 'error',
+    label: 'Services',
+    route: '/my_services',
+    separator: true
+  },
+  {
+    icon: 'settings',
+    label: 'Measurement',
+    route: '/#',
+    separator: false
+  },
+  {
+    icon: 'feedback',
+    label: 'Bought',
+    route: '/payment_bought',
+    separator: false
+  },
+  {
+    icon: 'help',
+    label: 'Sold',
+    route: '/payment_sold',
+    separator: true
+  },
+  {
+    icon: 'logout',
+    label: 'Logout',
+    route: '/#',
+    separator: false
+  }
+]
     };
   },
   computed: {

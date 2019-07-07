@@ -100,7 +100,9 @@ module.exports = function (ctx) {
         'QFabAction',
         'QPageSticky',
 
-        'QPopupEdit'
+        'QPopupEdit',
+
+        'QScrollArea'
       ],
 
       directives: [

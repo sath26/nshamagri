@@ -4,34 +4,40 @@
    
  */
  <template>
-  <q-layout view="hHh LpR lFf">
+    <q-layout view="lhh LpR lff" container>
     <!-- this view put header and footer fixed but tab is not fixed yet-->
-    <q-page-container>
+    <q-page-container class="q-pa-lg q-my-lg">
       <s-header></s-header>
-      <div class="row top-btn_container">
-        <q-card inline class="my-card q-ma-sm">
-          <q-card-title class="relative-position">
-            <div class="ellipsis">Expenses(March)</div>
-          </q-card-title>
-          <q-card-main>5000</q-card-main>
+      <div class="row">
+        <q-card inline class="col my-card q-ma-sm">
+          <div class="q-pa-sm">
+              <q-card-title class="relative-position">
+                <div class="ellipsis">Expenses(March)</div>
+              </q-card-title>
+            <q-card-main>5000</q-card-main>
+          </div>
         </q-card>
-        <q-card inline class="my-card q-ma-sm">
-          <q-card-title class="relative-position">
-            <div class="ellipsis">Sales(March)</div>
-          </q-card-title>
-          <q-card-main>5000</q-card-main>
+        <q-card inline class="col my-card q-ma-sm">
+          <div class="q-pa-sm">
+            <q-card-title class="relative-position">
+              <div class="ellipsis">Sales(March)</div>
+            </q-card-title>
+            <q-card-main>5000</q-card-main>
+          </div>
         </q-card>
-        <q-card inline class="my-card q-ma-sm">
-          <q-card-title class="relative-position">
+        <q-card inline class="col my-card q-ma-sm">
+          <div class="q-pa-sm">
+            <q-card-title class="relative-position">
             <div class="ellipsis">Profit(March)</div>
           </q-card-title>
           <q-card-main>5000</q-card-main>
+          </div>
         </q-card>
        </div>   
         <q-page>
           <q-card class="bigger q-ma-sm">
-          <apexchart type="bar" height="500" :options="chartOptions" :series="series"/>
-        </q-card>
+            <apexchart type="bar" height="500" :options="chartOptions" :series="series"/>
+          </q-card>
         </q-page>
     </q-page-container>
     <s-footer></s-footer>
@@ -66,10 +72,7 @@ export default {
       chartOptions: {
         title: {
           text: "Sales and Expenses per month",
-          align: "left",
           margin: 10,
-          offsetX: 0,
-          offsetY: 0,
           floating: true,
           style: {
             fontSize: "16px",
@@ -121,10 +124,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .top-btn_container
-    width 100%
-    display block
-  
+*{
+  box-sizing:border-box;
+}
   .my-card
       width 32%
       @media screen and (max-width: 1214px) 
