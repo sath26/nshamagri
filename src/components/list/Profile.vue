@@ -3,12 +3,13 @@
     <q-page-container>
       <s-header></s-header>
 
-      <q-tabs animated swipeable inverted color="secondary" align="justify">
-        <q-tab default name="buyers" slot="title" label="me"/>
-        <!-- <q-tab default name="buyers" slot="title" icon="mail" label="BUyers" /> -->
-        <q-tab name="sellers" slot="title" label="enterprise"/>
-
-        <q-tab-panel name="buyers">
+      <q-tabs animated  color="secondary" align="justify">
+        <q-tab default name="buyers" slot="section" label="me"/>
+        <!-- <q-tab default name="buyers" slot="section" icon="mail" label="BUyers" /> -->
+        <q-tab name="sellers" slot="section" label="enterprise"/>
+      </q-tabs>
+      <q-tab-panels v-model="tab" animated >
+        <q-tab-panel name="buyers">     
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
             <q-page padding class="row items-start">
               <q-card inline class="bigger q-ma-sm">
@@ -45,8 +46,8 @@
                   />
 
                   <div class="ellipsis">Cafe Basilico</div>
-                  <!-- <q-rating slot="subtitle" :max="5"/> -->
-                  <!-- <q-rating slot="subtitle" v-model="stars" :max="5"/> -->
+                  <!-- <q-rating slot="subsection" :max="5"/> -->
+                  <!-- <q-rating slot="subsection" v-model="stars" :max="5"/> -->
                   <div slot="right" class="row items-center q-mt-md">
                     <q-icon name="place"/>250 ft
                   </div>
@@ -67,7 +68,7 @@
             </q-page>
           </div>
         </q-tab-panel>
-      </q-tabs>
+      </q-tab-panels>
     </q-page-container>
     <s-footer></s-footer>
   </q-layout>
@@ -82,6 +83,11 @@ export default {
     SHeader,
     SFooter
   },
+   data () {
+    return {
+      tab: 'buyers'
+    }
+    },
   computed: {
     // ...mapGetters("layoutDemo", ["view"])
   }

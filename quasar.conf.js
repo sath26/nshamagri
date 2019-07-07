@@ -54,6 +54,9 @@ module.exports = function (ctx) {
         'QTabs',
         'QTab',
         'QTabPanel',
+        'QTabPanels',
+        'QRouteTab',
+
         'QRouteTab',
 
         // 'QListHeader',
