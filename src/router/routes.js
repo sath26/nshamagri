@@ -9,7 +9,7 @@ const routes = [
     component: () => import('components/add/Sell.vue'),
   },
   {
-    path: '/home',
+    path: '/',
     component: () => import('components/list/Home.vue'),
   },
   {

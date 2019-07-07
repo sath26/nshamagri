@@ -89,7 +89,7 @@ export default {
   {
     icon: 'send',
     label: 'Home',
-    route: '/home',
+    route: '/',
     separator: false
   },
   {
