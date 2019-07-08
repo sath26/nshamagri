@@ -11,24 +11,43 @@
           </q-list>
           <q-list highlight class="list-container">
             <q-item to="/sold">
-              <q-item-side avatar="statics/boy-avatar.png"/>
-              <q-item-main label="RajKumar Bogati Kirana Pasal" label-lines="1"/>
-              <q-item-side right stamp="(1)"/>
+              <q-item-section avatar>
+                <q-avatar>
+                  <img src="statics/boy-avatar.png" alt />
+                </q-avatar>
+              </q-item-section>
+              <q-item-section label label-lines="1">RajKumar Bogati Kirana Pasal</q-item-section>
+              <q-item-section right stamp="(1)"></q-item-section>
             </q-item>
             <q-item>
-              <q-item-side avatar="statics/guy-avatar.png"/>
-              <q-item-main label="Pawan Kirana" label-lines="1"/>
-              <q-item-side right stamp="(3)"/>
+              <q-item-section  avatar>
+                <q-avatar>
+                  <img src="statics/guy-avatar.png" alt />
+                </q-avatar>
+              </q-item-section>
+
+              <q-item-section label label-lines="1">Pawan Kirana</q-item-section>
+              <q-item-section right stamp="(3)"></q-item-section>
             </q-item>
             <q-item>
-              <q-item-side avatar="statics/linux-avatar.png"/>
-              <q-item-main label="Vaiya ko Furniture Pasal" label-lines="1"/>
-              <q-item-side right stamp="(4)"/>
+              <q-item-section avatar>
+                <q-avatar>
+                  <img src="statics/linux-avatar.png" alt />
+                </q-avatar>
+              </q-item-section>
+
+              <q-item-section label label-lines="1">Vaiya ko Furniture Pasal</q-item-section>
+              <q-item-section right stamp="(4)"></q-item-section>
             </q-item>
             <q-item>
-              <q-item-side avatar="statics/mountains.jpg"/>
-              <q-item-main label="RajKumar Bogati Kirana Pasal" label-lines="1"/>
-              <q-item-side right stamp="(20)"/>
+              <q-item-section  avatar>
+                <q-avatar>
+                  <img src="statics/mountains.jpg" alt />
+                </q-avatar>
+              </q-item-section>
+
+              <q-item-section label label-lines="1">RajKumar Bogati Kirana Pasal</q-item-section>
+              <q-item-section right stamp="(20)"></q-item-section>
             </q-item>
           </q-list>
         </div>

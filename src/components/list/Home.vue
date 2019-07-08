@@ -4,39 +4,39 @@
    
  */
  <template>
-    <q-layout view="lhh LpR lff" container>
+    <q-layout view="hHh LpR lFf" container>
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="q-pa-lg q-my-lg">
       <s-header></s-header>
       <div class="row">
         <q-card inline class="col my-card q-ma-sm">
           <div class="q-pa-sm">
-              <q-card-title class="relative-position">
+              <q-card-section class="relative-position">
                 <div class="ellipsis">Expenses(March)</div>
-              </q-card-title>
-            <q-card-main>5000</q-card-main>
+              </q-card-section>
+            <q-card-section>5000</q-card-section>
           </div>
         </q-card>
         <q-card inline class="col my-card q-ma-sm">
           <div class="q-pa-sm">
-            <q-card-title class="relative-position">
+            <q-card-section class="relative-position">
               <div class="ellipsis">Sales(March)</div>
-            </q-card-title>
-            <q-card-main>5000</q-card-main>
+            </q-card-section>
+            <q-card-section>5000</q-card-section>
           </div>
         </q-card>
         <q-card inline class="col my-card q-ma-sm">
           <div class="q-pa-sm">
-            <q-card-title class="relative-position">
+            <q-card-section class="relative-position">
             <div class="ellipsis">Profit(March)</div>
-          </q-card-title>
-          <q-card-main>5000</q-card-main>
+          </q-card-section>
+          <q-card-section>5000</q-card-section>
           </div>
         </q-card>
        </div>   
         <q-page>
           <q-card class="bigger q-ma-sm">
-            <apexchart type="bar" height="500" :options="chartOptions" :series="series"/>
+            <apexchart type="area" height="500" :options="chartOptions" :series="series"/>
           </q-card>
         </q-page>
     </q-page-container>
@@ -59,65 +59,31 @@ export default {
   computed: {},
   data: function() {
     return {
-      series: [
-        {
-          name: "Expenses",
-          data: [44, 55, 41, 64, 22, 43, 21, 55, 65, 23, 56, 12]
-        },
-        {
-          name: "Sales",
-          data: [53, 32, 33, 52, 13, 44, 32, 32, 43, 53, 64, 23]
-        }
-      ],
-      chartOptions: {
-        title: {
-          text: "Sales and Expenses per month",
-          margin: 10,
-          floating: true,
-          style: {
-            fontSize: "16px",
-            color: "#fff"
-          }
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: "top"
-            }
-          }
-        },
+          chartOptions: {
         dataLabels: {
-          enabled: false,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
-            colors: ["#fff"]
-          }
+            enabled: false
         },
         stroke: {
-          show: false,
-          width: 1,
-          colors: ["#fff"]
+            curve: 'smooth'
         },
-
         xaxis: {
-          categories: [
-            "jan",
-            "feb",
-            "march",
-            "apr",
-            "may",
-            "jun",
-            "jul",
-            "aug",
-            "sep",
-            "oct",
-            "nov",
-            "dec"
-          ]
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        },
+        tooltip: {
+            fixed: {
+                enabled: false,
+                position: 'top'
+            }
         }
       }
+      ,
+      series: [{
+          name: 'Expenses',
+          data: [31, 40, 28, 51, 42, 109, 100]
+      }, {
+          name: 'Sales',
+          data: [11, 32, 45, 32, 34, 52, 41]
+      }],
     };
   }
 };

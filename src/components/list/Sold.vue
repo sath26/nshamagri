@@ -8,89 +8,96 @@
           <q-btn flat>RajKumar pasal</q-btn>
         </q-toolbar-title>
         <q-btn-group>
-          <q-btn flat color="black">(5000)
+          <q-btn flat color="black">
+            (5000)
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
               <strong>Unreceived</strong>
             </q-tooltip>
           </q-btn>
-          <q-btn flat color="secondary">20000
+          <q-btn flat color="secondary">
+            20000
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
               <strong>Received</strong>
             </q-tooltip>
           </q-btn>
-          <q-btn flat color="black">25000
+          <q-btn flat color="black">
+            25000
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
               <strong>Total</strong>
             </q-tooltip>
           </q-btn>
         </q-btn-group>
       </q-toolbar>
-      <q-tabs animated swipeable inverted color="secondary" align="justify">
-        <q-tab default name="invoice" slot="title" label="invoice" sublabel="25000"/>
-        <!-- <q-tab default name="buyers" slot="title" icon="mail" label="BUyers" /> -->
-        <q-tab name="paid_date" slot="title" label="received date"/>
+      <q-separator />
+
+      <q-tabs animated swipeable inverted color="secondary" v-model="tab" align="justify">
+        <q-tab default name="invoice"  label="invoice" sublabel="25000" />
+        <!-- <q-tab default name="buyers"  icon="mail" label="BUyers" /> -->
+        <q-tab name="paid_date"  label="received date" />
         <!-- each item leads to its particular statement bought and sold statement  -->
         <!-- dark orange to those whose payment is due or unreceived  -->
-        <q-tab-pane name="invoice">
+      </q-tabs>
+      <q-tab-panels v-model="tab">
+        <q-tab-panel name="invoice">
           <q-page padding class="row justify-center">
             <div style="width: 500px; max-width: 90vw;">
-              <q-list highlight>
+              <q-list bordered highlight>
                 <q-item to="/invoice_good">
-                  <q-item-main label="123" label-lines="1">
-                    <q-item-tile sublabel lines="2">
+                  <q-item-section label="123" label-lines="1">
+                    <q-item-section sublabel lines="2">
                       <span>Unreceived:</span>
                       1000
-                    </q-item-tile>
-                  </q-item-main>
-                  <q-item-side right color="secondary">+ 5000</q-item-side>
+                    </q-item-section>
+                  </q-item-section>
+                  <q-item-section side color="secondary">+ 5000</q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-main label="345" label-lines="1"/>
-                  <q-item-side right stamp="3 min"/>
+                  <q-item-section label="345" label-lines="1" >345</q-item-section>
+                  <q-item-section side stamp="3 min" >3 min</q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-main label="74j8" label-lines="1"/>
-                  <q-item-side right stamp="1 hr"/>
+                  <q-item-section label="74j8" label-lines="1" >74j8</q-item-section>
+                  <q-item-section side stamp="1 hr" >1 hr</q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-main label="433" label-lines="1"/>
-                  <q-item-side right stamp="1 day"/>
+                  <q-item-section label="433" label-lines="1" >433</q-item-section>
+                  <q-item-section side stamp="1 day" >1 day</q-item-section>
                 </q-item>
               </q-list>
             </div>
           </q-page>
-        </q-tab-pane>
+        </q-tab-panel>
 
-        <q-tab-pane name="paid_date">
+        <q-tab-panel name="paid_date">
           <q-page padding class="row justify-center">
             <div style="width: 500px; max-width: 90vw;">
               <q-list highlight>
                 <q-item to="/invoice_good">
-                  <q-item-main label="123" label-lines="1">
-                    <q-item-tile sublabel lines="2">
+                  <q-item-section label="123" label-lines="1">
+                    <q-item-section sublabel lines="2">
                       <span>Received by:</span>
                       Saugat Thapa
-                    </q-item-tile>
-                  </q-item-main>
-                  <q-item-side right color="secondary">+ 5000</q-item-side>
+                    </q-item-section>
+                  </q-item-section>
+                  <q-item-section side color="secondary">+ 5000</q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-main label="334" label-lines="1"/>
-                  <q-item-side right stamp="3 min"/>
+                  <q-item-section label="334" label-lines="1" >334</q-item-section>
+                  <q-item-section side stamp="3 min" >3 min</q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-main label="3434" label-lines="1"/>
-                  <q-item-side right stamp="1 hr"/>
+                  <q-item-section label="3434" label-lines="1" >3434</q-item-section>
+                  <q-item-section side stamp="1 hr" >1 hr</q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-main label="1123" label-lines="1"/>
-                  <q-item-side right stamp="1 day"/>
+                  <q-item-section label="1123" label-lines="1" >1123</q-item-section>
+                  <q-item-section side stamp="1 day" > 1 day</q-item-section>
                 </q-item>
               </q-list>
             </div>
           </q-page>
-        </q-tab-pane>
-      </q-tabs>
+        </q-tab-panel>
+      </q-tab-panels>
     </q-page-container>
 
     <s-footer></s-footer>
@@ -106,11 +113,15 @@ export default {
     SHeader,
     SFooter
   },
+  data() {
+    return {
+      tab: "invoice"
+    };
+  },
   computed: {}
 };
 </script>
 
-<style lang="stylus" scoped>
-</style>
+<style lang="stylus" scoped></style>
 
 
