@@ -37,9 +37,9 @@
         </div>
       </q-header>
     </transition>
-    <q-drawer
-          v-model="left"
-           :width="200"
+<q-drawer
+          v-model="drawer"
+          :width="200"
           :breakpoint="500"
           show-if-above
           bordered
@@ -48,7 +48,7 @@
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
   
-              <q-item clickable :to="menuItem.route" :active="menuItem.label === 'Home'" v-ripple>
+              <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple>
                 <q-item-section avatar>
                   <q-icon :name="menuItem.icon" ></q-icon>
                 </q-item-section>
@@ -87,9 +87,9 @@ export default {
     separator: true
   },
   {
-    icon: 'send',
+    icon: 'home',
     label: 'Home',
-    route: '/',
+    route: '/home',
     separator: false
   },
   {

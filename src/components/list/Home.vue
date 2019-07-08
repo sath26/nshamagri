@@ -8,25 +8,27 @@
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="q-pa-lg q-my-lg">
       <s-header></s-header>
-      <div class="row">
-        <q-card inline class="col my-card q-ma-sm">
-          <div class="q-pa-sm">
+      <div class="row card-container q-mb-md">
+        <q-card inline class="my-card col q-my-sm">
+          <div>
               <q-card-section class="relative-position">
                 <div class="ellipsis">Expenses(March)</div>
               </q-card-section>
             <q-card-section>5000</q-card-section>
           </div>
         </q-card>
-        <q-card inline class="col my-card q-ma-sm">
-          <div class="q-pa-sm">
+                  <q-separator inset ></q-separator>
+        <q-card inline class="my-card col q-my-sm">
+          <div>
             <q-card-section class="relative-position">
               <div class="ellipsis">Sales(March)</div>
             </q-card-section>
             <q-card-section>5000</q-card-section>
           </div>
         </q-card>
-        <q-card inline class="col my-card q-ma-sm">
-          <div class="q-pa-sm">
+                  <q-separator inset ></q-separator>
+        <q-card inline class="my-card col q-my-sm">
+          <div>
             <q-card-section class="relative-position">
             <div class="ellipsis">Profit(March)</div>
           </q-card-section>
@@ -34,11 +36,11 @@
           </div>
         </q-card>
        </div>   
-        <q-page>
-          <q-card class="bigger q-ma-sm">
-            <apexchart type="area" height="500" :options="chartOptions" :series="series"/>
-          </q-card>
-        </q-page>
+       <div class="row">
+          <q-card class="bigger col-12">
+              <apexchart type="area" height="500" :options="chartOptions" :series="series"/>
+            </q-card>
+          </div>
     </q-page-container>
     <s-footer></s-footer>
   </q-layout>
