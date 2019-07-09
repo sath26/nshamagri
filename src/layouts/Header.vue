@@ -49,7 +49,7 @@
             <q-list v-for="(menuItem, index) in menuList" :key="index">
               <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple>
                 <q-item-section avatar>
-                  <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="25" height="25">
+                  <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="28" height="28">
                   <q-icon :name="menuItem.icon" ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -82,7 +82,7 @@ export default {
       drawer:true,
       menuList : [
   {
-    icon: 'user',
+    icon: 'face',
     label: 'Profile',
     route: '/profile',
     separator: true
@@ -106,19 +106,19 @@ export default {
     separator: true
   },
   {
-    icon: 'settings',
+    iconSrc: '/assets/icons/measurement-icon.svg',
     label: 'Measurement',
     route: '/#',
     separator: false
   },
   {
-    icon: 'feedback',
+    iconSrc: '/assets/icons/bought-icon.svg',
     label: 'Bought',
     route: '/payment_bought',
     separator: false
   },
   {
-    icon: 'help',
+    iconSrc: '/assets/icons/sold-icon.svg',
     label: 'Sold',
     route: '/payment_sold',
     separator: true
