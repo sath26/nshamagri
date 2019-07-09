@@ -43,7 +43,6 @@
           :breakpoint="500"
           show-if-above
           bordered
-          overlay
           content-class="bg-grey-3"
         >
           <q-scroll-area class="fit">
