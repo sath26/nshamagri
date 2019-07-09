@@ -44,6 +44,7 @@
           show-if-above
           bordered
           content-class="bg-grey-3"
+          overlay
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
