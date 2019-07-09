@@ -6,9 +6,10 @@
  <template>
     <q-layout view="hHh LpR lFf" container>
     <!-- this view put header and footer fixed but tab is not fixed yet-->
-    <q-page-container class="q-pa-lg q-my-lg">
+    <q-page-container>
       <s-header></s-header>
-      <div class="row card-container q-mb-md">
+      <div class="content-wrapper">
+        <div class="row card-container q-mb-md">
         <q-card inline class="my-card col q-my-sm">
           <div>
               <q-card-section class="relative-position">
@@ -36,11 +37,10 @@
           </div>
         </q-card>
        </div>   
-       <div class="row">
-          <q-card class="bigger col-12">
-              <apexchart type="area" height="500" :options="chartOptions" :series="series"/>
-            </q-card>
+          <div class="chart">
+              <apexchart width="100%" height="500" :options="chartOptions" :series="series"/>
           </div>
+      </div>
     </q-page-container>
     <s-footer></s-footer>
   </q-layout>
@@ -61,7 +61,10 @@ export default {
   computed: {},
   data: function() {
     return {
-          chartOptions: {
+      window:{
+        width: 0
+      },
+      chartOptions: {          
         dataLabels: {
             enabled: false
         },
@@ -85,16 +88,20 @@ export default {
       }, {
           name: 'Sales',
           data: [11, 32, 45, 32, 34, 52, 41]
-      }],
+      }]
     };
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-*{
-  box-sizing:border-box;
-}
+*
+  box-sizing border-box
+
+  .content-wrapper
+    overflow hidden
+    padding 20px
+    justify-content center
   .my-card
       width 32%
       @media screen and (max-width: 1214px) 

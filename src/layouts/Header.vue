@@ -47,9 +47,9 @@
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
-  
               <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple>
                 <q-item-section avatar>
+                  <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="25" height="25">
                   <q-icon :name="menuItem.icon" ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -94,13 +94,13 @@ export default {
     separator: false
   },
   {
-    icon: 'delete',
+    iconSrc: '/assets/icons/Product-icon.svg',
     label: 'Goods',
     route: '/my_products',
     separator: false
   },
   {
-    icon: 'error',
+    iconSrc: '/assets/icons/service-icon.svg',
     label: 'Services',
     route: '/my_services',
     separator: true
@@ -122,6 +122,12 @@ export default {
     label: 'Sold',
     route: '/payment_sold',
     separator: true
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    route: '/#',
+    separator: false
   },
   {
     icon: 'logout',
