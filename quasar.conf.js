@@ -54,6 +54,9 @@ module.exports = function (ctx) {
         'QTabs',
         'QTab',
         'QTabPanel',
+        'QTabPanels',
+        'QRouteTab',
+
         'QRouteTab',
 
         // 'QListHeader',
@@ -97,7 +100,9 @@ module.exports = function (ctx) {
         'QFabAction',
         'QPageSticky',
 
-        'QPopupEdit'
+        'QPopupEdit',
+
+        'QScrollArea'
       ],
 
       directives: [
@@ -117,7 +122,7 @@ module.exports = function (ctx) {
 
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
+       vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
