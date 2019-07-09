@@ -79,6 +79,7 @@ export default {
       changeTheme: false,
       searchBox: "",
       mobileSearchBoxToggle: false,
+      drawer:true,
       menuList : [
   {
     icon: 'user',

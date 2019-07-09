@@ -55,7 +55,7 @@ module.exports = function (ctx) {
         'QTab',
         'QTabPanel',
         'QRouteTab',
-
+        'QTabPanels',
         // 'QListHeader',
         'QFooter',
         'QSeparator',
@@ -89,7 +89,7 @@ module.exports = function (ctx) {
         'QSelect',
         'QField',
         'QChip',
-
+        'QScrollArea',
         'QTooltip',
 
         'QToggle',
@@ -117,7 +117,7 @@ module.exports = function (ctx) {
 
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
+      vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
