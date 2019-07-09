@@ -74,12 +74,13 @@
                       Riwat Rai
                     </q-item-section>
                   </q-item-section>
-                  <q-item-section side color="red">- 5000
-                    <q-item-section sublabel lines="2">
+                  <q-item-section side class="text-red">
+                    - 5000
+                  </q-item-section>
+                    <q-item-section side sublabel lines="2">
                       <!-- <span>Unpaid:</span> -->
                       (1000)
                     </q-item-section>
-                  </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section label="334" label-lines="1">

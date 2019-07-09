@@ -7,7 +7,7 @@
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
           <q-list separator class="q-mb-sm">
-            <q-list-header color="secondary">Sold</q-list-header>
+            <q-item-label color="secondary">Sold</q-item-label>
           </q-list>
           <q-list highlight class="list-container">
             <q-item to="/sold">

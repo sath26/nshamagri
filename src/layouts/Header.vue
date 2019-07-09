@@ -38,11 +38,12 @@
       </q-header>
     </transition>
 <q-drawer
-          v-model="drawer"
+           v-model="left"
           :width="200"
           :breakpoint="500"
           show-if-above
           bordered
+          overlay
           content-class="bg-grey-3"
         >
           <q-scroll-area class="fit">
@@ -79,6 +80,7 @@ export default {
       changeTheme: false,
       searchBox: "",
       mobileSearchBoxToggle: false,
+      drawer:true,
       menuList : [
   {
     icon: 'user',
