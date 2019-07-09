@@ -38,7 +38,7 @@
       </q-header>
     </transition>
 <q-drawer
-          v-model="drawer"
+           v-model="left"
           :width="200"
           :breakpoint="500"
           show-if-above
