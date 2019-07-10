@@ -28,7 +28,7 @@ plumbing */
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section label="Services">Services</q-item-section>
 
-              <q-item-section right>
+              <q-item-section avatar>
                 <q-btn flat color="secondary">
                   <q-icon name="add" />
                 </q-btn>

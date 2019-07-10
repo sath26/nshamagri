@@ -88,7 +88,7 @@ module.exports = function (ctx) {
         'QDialog',
 
         'QExpansionItem',
-
+        'QForm',
         'QInput',
         'QSelect',
         'QField',

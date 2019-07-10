@@ -106,13 +106,13 @@ export default {
     iconSrc: '/assets/icons/service-icon.svg',
     label: 'Services',
     route: '/my_services',
-    separator: true
+    separator: false
   },
   {
     iconSrc: '/assets/icons/measurement-icon.svg',
     label: 'Measurement',
-    route: '/#',
-    separator: false
+    route: '/measurement',
+    separator: true
   },
   {
     iconSrc: '/assets/icons/bought-icon.svg',
@@ -129,13 +129,13 @@ export default {
   {
     icon: 'settings',
     label: 'Settings',
-    route: '/#',
+    route: '/settings',
     separator: false
   },
   {
     icon: 'logout',
     label: 'Logout',
-    route: '/#',
+    route: '/logout',
     separator: false
   }
 ]

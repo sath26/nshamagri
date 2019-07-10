@@ -3,7 +3,7 @@
 another ui is needed when supplier provides u good with all info and u dont have toinsert it 
  */
 <template>
-  <q-layout view="hHh LpR lFf ">
+  <q-layout view="hHh LpR lFf">
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container>
       <s-header></s-header>

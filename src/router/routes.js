@@ -11,6 +11,11 @@ const routes = [
     component: () => import('components/list/Profile.vue'),
 
   },
+  {
+    path: '/measurement',
+    component: () => import('components/list/Measurement.vue'),
+
+  },
   /* *********************goods********************************* */
   {
     path: '/my_products',

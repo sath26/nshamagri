@@ -2,16 +2,25 @@
 another ui is needed when supplier provides u good with all info and u dont have toinsert it 
  */
 <template>
-  <q-layout view="hHh LpR lFf ">
-    <!-- this view put header and footer fixed but tab is not fixed yet-->
+  <q-layout view="hHh LpR lFf">
     <q-page-container>
       <s-header></s-header>
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-input v-model="goods" float-label="Goods Name" color="secondary"/>
-          <q-input v-model="brand" float-label="Brand Name" color="secondary"/>
-          <q-select filter v-model="select" :options="options"/>
-          <q-btn to="/add_goods" label="Save" color="secondary" flat/>
+          <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
+          <q-input filled v-model="goods" label="Goods Name" color="secondary"/>
+          <q-input filled v-model="price" label="Price" color="secondary"/>
+          <!-- <q-select filter v-model="select" :options="options"/> -->
+          <div>
+        <!-- <q-btn label="Submit" type="submit" color="primary"/> -->
+          <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
+        <q-btn label="Reset" type="reset" color="secondary" flat class="q-ml-sm" />
+      </div>
+      </q-form>
         </div>
       </q-page>
     </q-page-container>
@@ -33,7 +42,7 @@ export default {
     return {
       search: "",
       goods: "",
-      brand: "",
+      price: "",
       select: "",
       options: [
         {
@@ -70,6 +79,32 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    onSubmit () {
+      if (this.accept !== true) {
+        this.$q.notify({
+          color: 'red-5',
+          textColor: 'white',
+          icon: 'fas fa-exclamation-triangle',
+          message: 'You need to accept the license and terms first'
+        })
+      }
+      else {
+        this.$q.notify({
+          color: 'green-4',
+          textColor: 'white',
+          icon: 'fas fa-check-circle',
+          message: 'Submitted'
+        })
+      }
+    },
+
+    onReset () {
+      this.goods = null
+      this.price = null
+      // this.accept = false
+    }
   }
 };
 </script>

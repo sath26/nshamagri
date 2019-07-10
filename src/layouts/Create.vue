@@ -1,6 +1,6 @@
 <template>
   <div>
-     <q-btn-dropdown color="secondary" label="Create">
+     <q-btn-dropdown color="secondary text-white" label="Create" flat>
       <q-list>
         <q-item clickable v-close-popup @click="onItemClick">
           <q-item-section>

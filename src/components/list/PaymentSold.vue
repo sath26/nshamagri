@@ -6,10 +6,16 @@
 
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-list separator class="q-mb-sm">
-            <q-item-label color="secondary">Sold</q-item-label>
+          <q-list bordered separator class="q-mb-sm list-container">
+            
+            <q-item>
+            <q-item-section>
+              <q-item-section label>Sold</q-item-section>
+            </q-item-section>
+            </q-item>
+         
           </q-list>
-          <q-list highlight class="list-container">
+          <q-list bordered  class="list-container">
             <q-item to="/sold">
               <q-item-section avatar>
                 <q-avatar>
