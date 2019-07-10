@@ -48,7 +48,7 @@
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
-              <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple>
+              <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple exact>
                 <q-item-section avatar>
                   <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="28" height="28">
                   <q-icon :name="menuItem.icon" ></q-icon>
