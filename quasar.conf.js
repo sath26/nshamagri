@@ -55,6 +55,9 @@ module.exports = function (ctx) {
         'QTabs',
         'QTab',
         'QTabPanel',
+        'QTabPanels',
+        'QRouteTab',
+
         'QRouteTab',
         'QTabPanels',
         // 'QListHeader',
@@ -98,7 +101,9 @@ module.exports = function (ctx) {
         'QFabAction',
         'QPageSticky',
 
-        'QPopupEdit'
+        'QPopupEdit',
+
+        'QScrollArea'
       ],
 
       directives: [

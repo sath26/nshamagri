@@ -3,7 +3,7 @@ const routes = [
   
   /* **************************list***************************/
   {
-    path: '/home',
+    path: '/',
     component: () => import('components/list/Home.vue'),
   },
   {

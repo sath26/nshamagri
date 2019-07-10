@@ -48,9 +48,9 @@
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
-  
               <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple>
                 <q-item-section avatar>
+                  <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="28" height="28">
                   <q-icon :name="menuItem.icon" ></q-icon>
                 </q-item-section>
                 <q-item-section>
@@ -85,7 +85,7 @@ export default {
       drawer:true,
       menuList : [
   {
-    icon: 'user',
+    icon: 'face',
     label: 'Profile',
     route: '/profile',
     separator: true
@@ -93,38 +93,44 @@ export default {
   {
     icon: 'home',
     label: 'Home',
-    route: '/home',
+    route: '/',
     separator: false
   },
   {
-    icon: 'delete',
+    iconSrc: '/assets/icons/Product-icon.svg',
     label: 'Goods',
     route: '/my_products',
     separator: false
   },
   {
-    icon: 'error',
+    iconSrc: '/assets/icons/service-icon.svg',
     label: 'Services',
     route: '/my_services',
     separator: true
   },
   {
-    icon: 'settings',
+    iconSrc: '/assets/icons/measurement-icon.svg',
     label: 'Measurement',
     route: '/#',
     separator: false
   },
   {
-    icon: 'feedback',
+    iconSrc: '/assets/icons/bought-icon.svg',
     label: 'Bought',
     route: '/payment_bought',
     separator: false
   },
   {
-    icon: 'help',
+    iconSrc: '/assets/icons/sold-icon.svg',
     label: 'Sold',
     route: '/payment_sold',
     separator: true
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    route: '/#',
+    separator: false
   },
   {
     icon: 'logout',
