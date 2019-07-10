@@ -7,6 +7,7 @@
     <q-layout view="hHh LpR lFf" container>
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="q-pa-lg q-my-lg">
+      <q-page padding>
       <s-header></s-header>
       <div class="row card-container q-mb-md">
         <q-card inline class="my-card col q-my-sm">
@@ -41,6 +42,7 @@
               <apexchart type="area" height="500" :options="chartOptions" :series="series"/>
             </q-card>
           </div>
+      </q-page>
     </q-page-container>
     <s-footer></s-footer>
   </q-layout>

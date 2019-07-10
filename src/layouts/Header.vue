@@ -21,6 +21,7 @@
           <!-- <q-btn flat round color="grey-1" icon="search" 
           v-modal="mobileSearchBoxToggle"  @click="mobileSearchBoxToggle = !mobileSearchBoxToggle" 
           class="search-box_toggle-btn"></q-btn> -->
+          <s-create class="q-px-sm"></s-create>
           <s-notification class="q-px-sm"></s-notification>
           <q-btn outline color="white" class="q-mr-sm" to="/login">Login</q-btn>
           <!-- notification is also available but i need number of notification on top of the icon or change in color  -->
@@ -44,7 +45,6 @@
           show-if-above
           bordered
           content-class="bg-grey-3"
-          overlay
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
@@ -68,11 +68,13 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import SSearch from "./Search.vue";
+import SCreate from "./Create.vue";
 import SNotification from "./Notification.vue";
 export default {
   components: {
     SSearch,
-    SNotification
+    SNotification,
+    SCreate,
   },
   name: "SHeader",
   data() {

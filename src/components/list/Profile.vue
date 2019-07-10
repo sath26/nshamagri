@@ -4,30 +4,13 @@
       <s-header></s-header>
 
       <q-tabs v-model="tab" animated color="secondary" align="justify">
-        <q-tab default name="buyers" label="me" />
-        <!-- <q-tab default name="buyers" slot="section" icon="mail" label="BUyers" /> -->
-        <q-tab name="sellers" label="enterprise" />
+        <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
+        <q-tab name="enterprise" label="enterprise" />
+        <q-tab name="member" label="members" />
       </q-tabs>
       <q-separator />
       <q-tab-panels v-model="tab" animated>
-        <q-tab-panel name="buyers">
-          <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
-            <q-card inline class="bigger q-ma-sm">
-              <img src="statics/parallax2.jpg" />
-
-              <q-card-section class="relative-position">
-                <div class="ellipsis">Saugat Thapa</div>
-              </q-card-section>
-              <q-card-section>
-                <q-btn flat>
-                  <q-icon name="phone" />9860181513
-                </q-btn>
-              </q-card-section>
-            </q-card>
-          </div>
-        </q-tab-panel>
-
-        <q-tab-panel name="sellers">
+         <q-tab-panel name="enterprise">
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
             <q-card inline class="bigger q-ma-sm">
               <img src="statics/parallax2.jpg" />
@@ -63,13 +46,32 @@
             </q-card>
           </div>
         </q-tab-panel>
+       
+
+       
+          <q-tab-panel name="member">
+          <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
+            <q-card inline class="bigger q-ma-sm">
+              <img src="statics/parallax2.jpg" />
+
+              <q-card-section class="relative-position">
+                <div class="ellipsis">Saugat Thapa</div>
+              </q-card-section>
+              <q-card-section>
+                <q-btn flat>
+                  <q-icon name="phone" />9860181513
+                </q-btn>
+              </q-card-section>
+            </q-card>
+          </div>
+        </q-tab-panel>
       </q-tab-panels>
     </q-page-container>
     <s-footer></s-footer>
   </q-layout>
 </template>
 <script>
-//consists of buyers and sellers
+//consists of me and enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 import { mapState, mapGetters } from "vuex";
@@ -80,7 +82,7 @@ export default {
   },
   data() {
     return {
-      tab: "buyers"
+      tab: "enterprise"
     };
   },
   computed: {

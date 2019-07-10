@@ -4,12 +4,12 @@
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container>
       <s-header></s-header>
-      <q-toolbar inverted class="mid-toolbar">
+      <q-toolbar inverted class="secondary">
         <q-toolbar-title>
-          <q-btn flat color="white">RajKumar pasal</q-btn>
+          <q-btn flat >RajKumar pasal</q-btn>
         </q-toolbar-title>
         <q-btn-group outline class="desktop-transition-mid_toolbar">
-          <q-btn flat color="white">
+          <q-btn flat >
             25 Jun, 2019
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
               <strong>Date</strong>
@@ -35,9 +35,10 @@
           </q-btn>
         </q-btn-group>
       </q-toolbar>
+      <q-separator/>
       <div class="mobile-transition-mid_toolbar">
         <q-btn-group outline class="q-ml-lg">
-          <q-btn flat color="white">
+          <q-btn flat >
             25 Jun, 2019
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
               <strong>Date</strong>
@@ -64,9 +65,10 @@
         </q-btn-group>
       </div>
       <q-page padding class="docs-table">
+        <!--  class="invoice-table"
+          dark-->
         <q-table
-          class="invoice-table"
-          dark
+          
           :data="tableData"
           :columns="columns"
           row-key="name"

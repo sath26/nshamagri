@@ -1,50 +1,20 @@
 
 const routes = [
-  {
-    path: '/choose',
-    component: () => import('components/add/Choose.vue'),
-  },
-  {
-    path: '/invoice',
-    component: () => import('components/add/Sell.vue'),
-  },
+  
+  /* **************************list***************************/
   {
     path: '/home',
     component: () => import('components/list/Home.vue'),
-  },
-  {
-    path: '/search',
-    component: () => import('components/consumer/Search.vue'),
-
   },
   {
     path: '/profile',
     component: () => import('components/list/Profile.vue'),
 
   },
-  {
-    path: '/enterprise',
-    component: () => import('components/consumer/SingleEnterprise.vue'),
-
-  },
+  /* *********************goods********************************* */
   {
     path: '/my_products',
     component: () => import('components/list/MyProducts.vue'),
-
-  },
-  {
-    path: '/add_goods',
-    component: () => import('components/add/Good.vue'),//back to my_products
-
-  },
-  {
-    path: '/my_services',
-    component: () => import('components/list/ServiceCategory.vue'),
-
-  },
-  {
-    path: '/add_service',
-    component: () => import('components/add/Service.vue'),//back to my_products
 
   },
   {
@@ -55,12 +25,30 @@ const routes = [
 
   },
   {
+    path: '/single_product',
+    component: () => import('components/list/SingleProduct.vue'),//back to my_product
+  },
+  
+  /* *********************services********************************* */
+
+  {
+    path: '/my_services',
+    component: () => import('components/list/ServiceCategory.vue'),
+
+  },
+  
+  {
     path: '/invoice_service',
     component: () => import('components/list/Invoice_service.vue'),
     //back to bought or sold
     //back to enterprise stock
 
   },
+  {
+    path: '/single_service',
+    component: () => import('components/list/SingleService.vue'),//back to my_services
+  },
+  
   {
     path: '/bought',
     component: () => import('components/list/Bought.vue'),
@@ -88,17 +76,45 @@ const routes = [
     //it also takes to invoice
   },
 
+ 
+
+  
+  /***************create********************************************************/
   {
-    path: '/single_product',
-    component: () => import('components/list/SingleProduct.vue'),//back to my_product
+    path: '/choose',
+    component: () => import('components/add/Choose.vue'),
   },
   {
-    path: '/single_service',
-    component: () => import('components/list/SingleService.vue'),//back to my_services
+    path: '/invoice',
+    component: () => import('components/add/Sell.vue'),
   },
+  {
+    path: '/add_goods',
+    component: () => import('components/add/Good.vue'),//back to my_products
+
+  },
+  
+  {
+    path: '/add_service',
+    component: () => import('components/add/Service.vue'),//back to my_products
+
+  },
+
   {
     path: '/add_good',
     component: () => import('components/add/NewGood.vue'),
+  },
+  /* ******************************rest************************************/
+  {
+    path: '/search',
+    component: () => import('components/consumer/Search.vue'),
+
+  },
+ 
+  {
+    path: '/enterprise',
+    component: () => import('components/consumer/SingleEnterprise.vue'),
+
   },
   {
     path: '/search',
@@ -112,6 +128,7 @@ const routes = [
     path: '/register',
     component: () => import('components/Register.vue'),
   }
+ 
 ]
 
 // Always leave this as last one
