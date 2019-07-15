@@ -4,46 +4,49 @@
    
  */
  <template>
-    <q-layout view="hHh LpR lFf" container>
+  <q-layout view="hHh LpR lFf" >
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="q-pa-lg q-my-lg">
       <q-page padding>
-      <s-header></s-header>
-      <div class="content-wrapper">
-        <div class="row card-container q-mb-md">
-        <q-card inline class="my-card col q-my-sm">
-          <div>
-              <q-card-section class="relative-position">
-                <div class="ellipsis">Expenses(March)</div>
-              </q-card-section>
-            <q-card-section>5000</q-card-section>
+        <s-header></s-header>
+        <div class="content-wrapper">
+          <div class="row card-container q-mb-md">
+            <q-card inline class="my-card col q-my-sm">
+              <div>
+                <q-card-section class="relative-position">
+                  <div class="ellipsis">Expenses(March)</div>
+                </q-card-section>
+                <q-card-section>5000</q-card-section>
+              </div>
+            </q-card>
+            <q-separator inset></q-separator>
+            <q-card inline class="my-card col q-my-sm">
+              <div>
+                <q-card-section class="relative-position">
+                  <div class="ellipsis">Sales(March)</div>
+                </q-card-section>
+                <q-card-section>5000</q-card-section>
+              </div>
+            </q-card>
+            <q-separator inset></q-separator>
+            <q-card inline class="my-card col q-my-sm">
+              <div>
+                <q-card-section class="relative-position">
+                  <div class="ellipsis">Profit(March)</div>
+                </q-card-section>
+                <q-card-section>5000</q-card-section>
+              </div>
+            </q-card>
           </div>
-        </q-card>
-                  <q-separator inset ></q-separator>
-        <q-card inline class="my-card col q-my-sm">
-          <div>
-            <q-card-section class="relative-position">
-              <div class="ellipsis">Sales(March)</div>
-            </q-card-section>
-            <q-card-section>5000</q-card-section>
-          </div>
-        </q-card>
-                  <q-separator inset ></q-separator>
-        <q-card inline class="my-card col q-my-sm">
-          <div>
-            <q-card-section class="relative-position">
-            <div class="ellipsis">Profit(March)</div>
-          </q-card-section>
-          <q-card-section>5000</q-card-section>
-          </div>
-        </q-card>
-       </div>   
-          <div class="chart">
-              <apexchart width="100%" height="500" :options="chartOptions" :series="series"/>
-          </div>
-      </div>
+         
+            <div class=" chart row">
+               <div class="col-12" v-if="show">
+              <apexchart width="100%" height="500" :options="chartOptions" :series="series" />
+               </div>
+            </div>
+          
+        </div>
       </q-page>
-
     </q-page-container>
     <s-footer></s-footer>
   </q-layout>
@@ -60,58 +63,64 @@ export default {
     SFooter,
     apexchart: VueApexCharts
   },
-
+mounted() {
+    this.$nextTick(() => { this.show = true })
+  },
   computed: {},
   data: function() {
     return {
-      window:{
+      show: false,
+      window: {
         width: 0
       },
-      chartOptions: {          
+      chartOptions: {
         dataLabels: {
-            enabled: false
+          enabled: false
         },
         stroke: {
-            curve: 'smooth'
+          curve: "smooth"
         },
         xaxis: {
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]
         },
         tooltip: {
-            fixed: {
-                enabled: false,
-                position: 'top'
-            }
+          fixed: {
+            enabled: false,
+            position: "top"
+          }
         }
-      }
-      ,
-      series: [{
-          name: 'Expenses',
+      },
+      series: [
+        {
+          name: "Expenses",
           data: [31, 40, 28, 51, 42, 109, 100]
-      }, {
-          name: 'Sales',
+        },
+        {
+          name: "Sales",
           data: [11, 32, 45, 32, 34, 52, 41]
-      }]
+        }
+      ]
     };
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-*
-  box-sizing border-box
+* {
+  box-sizing: border-box;
 
-  .content-wrapper
-    overflow hidden
-    padding 20px
-    justify-content center
-  .my-card
-      width 32%
-      @media screen and (max-width: 1214px) 
-       width 31%
-      @media screen and (max-width: 601px) 
-       width 100%
-      
+  .my-card {
+    width: 100%;
+
+    @media screen and (max-width: 1214px) {
+      width: 31%;
+    }
+
+    @media screen and (max-width: 601px) {
+      width: 100%;
+    }
+  }
+}
 </style>
 
 
