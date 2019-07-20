@@ -13,13 +13,12 @@
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
             <div class="login-header"><img src="\assets\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
-            <q-field>
-              <q-input color="secondary" v-model="email" type="email" :before="[{icon: 'mail', handler () {}}]" float-label="Email" class="q-my-sm input-field" />
-              <q-input color="secondary" v-model="password" type="password" :before="[{icon: 'vpn_key', handler () {}}]" float-label="Password" class="q-my-xs input-field"/>
-            </q-field>
+                      <q-input v-model="email" filled type="email" hint="Email" ></q-input>
+                      <q-input v-model="password" filled type="password" hint="Password" ></q-input>
             <q-btn flat class="forgot-btn">forgot password?</q-btn>
-            <q-btn size="md" icon="input" label="sign-in" style="width:100%;" class="q-mt-lg sign-in-btn"/>
-            <q-btn size="md" icon="fab fa-facebook" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"/> 
+            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="absolute-left fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon" style="width:40px; height:40px"></q-icon>
+</q-btn>
+             
             <div class="create-account-btn-container"><span class="txt-newuser">New User?</span><q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn></div>
           </div>
         </div>
@@ -34,8 +33,9 @@ export default {
   name: 'MyLayout',
   data () {
     return {
-      email: '',
-      password: ''
+      password: '',
+      isPwd: true,
+      email: ''
     }
   },
   methods: {
@@ -81,4 +81,6 @@ export default {
   width 300px
   @media screen and (max-width: 450px) 
     width 220px
+.fb-icon
+  padding 6px
 </style>
