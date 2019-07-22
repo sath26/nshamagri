@@ -13,7 +13,8 @@
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
             <div class="login-header"><img src="\assets\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
-                      <q-input v-model="email" filled type="email" hint="Email" ></q-input>
+                      <q-input v-model="email" filled type="email" hint="Email"></q-input>
+                        <div class="q-py-sm"></div>
                       <q-input v-model="password" filled type="password" hint="Password" ></q-input>
             <q-btn flat class="forgot-btn">forgot password?</q-btn>
             <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="absolute-left fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon" style="width:40px; height:40px"></q-icon>
