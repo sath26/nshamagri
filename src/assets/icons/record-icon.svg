@@ -9,22 +9,22 @@
       <g id="Paper-1" transform="translate(4.469 -10.155)">
         <path id="Path_2" data-name="Path 2" d="M625.469,536.718v32.574l22.438-8.267V528.845Z" transform="translate(-625.469 -528.845)" fill="#d5d5d5" stroke="#d5d5d5" stroke-width="1"/>
         <path id="Path_1" data-name="Path 1" d="M625.469,536.718v32.574l22.438-8.267V528.845Z" transform="translate(-624.87 -528.246)" fill="#fafafa" stroke="#d5d5d5" stroke-width="1"/>
-        <path id="Path_3" data-name="Path 3" d="M625.469,530.367v6.3l4.339-1.6v-6.223Z" transform="translate(-621.814 -499.945)" fill="#fff" stroke="#707070" stroke-width="1" opacity="0.47"/>
-        <line id="Line_1" data-name="Line 1" y1="5.994" x2="17.382" transform="translate(3.615 10.582)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_2" data-name="Line 2" y1="5.994" x2="17.382" transform="translate(3.615 15.377)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_3" data-name="Line 3" y1="5.994" x2="17.382" transform="translate(3.615 20.173)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_4" data-name="Line 4" y1="3.596" x2="10.19" transform="translate(10.808 26.166)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_5" data-name="Line 5" y1="3.596" x2="10.19" transform="translate(10.808 29.163)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <path id="Path_3" data-name="Path 3" d="M625.469,530.367v6.3l4.339-1.6v-6.223Z" transform="translate(-621.814 -499.945)" fill="#fff" stroke="black" stroke-width="1" opacity="0.47"/>
+        <line id="Line_1" data-name="Line 1" y1="5.994" x2="17.382" transform="translate(3.615 10.582)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_2" data-name="Line 2" y1="5.994" x2="17.382" transform="translate(3.615 15.377)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_3" data-name="Line 3" y1="5.994" x2="17.382" transform="translate(3.615 20.173)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_4" data-name="Line 4" y1="3.596" x2="10.19" transform="translate(10.808 26.166)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_5" data-name="Line 5" y1="3.596" x2="10.19" transform="translate(10.808 29.163)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
       </g>
       <g id="Paper-1-2" data-name="Paper-1" transform="translate(6.866 -8.357)">
         <path id="Path_2-2" data-name="Path 2" d="M625.469,536.718v32.574l22.438-8.267V528.845Z" transform="translate(-625.469 -528.845)" fill="#d5d5d5" stroke="#d5d5d5" stroke-width="1"/>
         <path id="Path_1-2" data-name="Path 1" d="M625.469,536.718v32.574l22.438-8.267V528.845Z" transform="translate(-624.87 -528.246)" fill="#fafafa"/>
-        <path id="Path_3-2" data-name="Path 3" d="M625.469,530.367v6.3l4.339-1.6v-6.223Z" transform="translate(-621.814 -502.342)" fill="#fff" stroke="#707070" stroke-width="1" opacity="0.47"/>
-        <line id="Line_1-2" data-name="Line 1" y1="5.994" x2="17.382" transform="translate(3.615 8.185)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_2-2" data-name="Line 2" y1="5.994" x2="17.382" transform="translate(3.615 12.98)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_3-2" data-name="Line 3" y1="5.994" x2="17.382" transform="translate(3.615 17.775)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_4-2" data-name="Line 4" y1="3.596" x2="10.19" transform="translate(10.808 23.769)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
-        <line id="Line_5-2" data-name="Line 5" y1="3.596" x2="10.19" transform="translate(10.808 26.766)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <path id="Path_3-2" data-name="Path 3" d="M625.469,530.367v6.3l4.339-1.6v-6.223Z" transform="translate(-621.814 -502.342)" fill="#fff" stroke="black" stroke-width="1" opacity="0.47"/>
+        <line id="Line_1-2" data-name="Line 1" y1="5.994" x2="17.382" transform="translate(3.615 8.185)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_2-2" data-name="Line 2" y1="5.994" x2="17.382" transform="translate(3.615 12.98)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_3-2" data-name="Line 3" y1="5.994" x2="17.382" transform="translate(3.615 17.775)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_4-2" data-name="Line 4" y1="3.596" x2="10.19" transform="translate(10.808 23.769)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
+        <line id="Line_5-2" data-name="Line 5" y1="3.596" x2="10.19" transform="translate(10.808 26.766)" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" opacity="0.47"/>
       </g>
     </g>
   </g>
