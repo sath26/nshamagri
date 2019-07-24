@@ -39,7 +39,7 @@
             </q-card>
           </div>
          
-            <div class=" chart row">
+            <div class="chart row">
                <div class="col-12" v-if="show">
               <apexchart width="100%" height="500" :options="chartOptions" :series="series" />
                </div>

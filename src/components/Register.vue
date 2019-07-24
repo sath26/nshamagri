@@ -1,10 +1,10 @@
 <template>
-    <div class="main-container">
+    <div class="register-main-container">
         <transition
   enter-active-class="animated fadeIn"
   appear
 >
-              <q-btn to="/home" flat class="q-ma-md" icon="home"></q-btn>
+              <q-btn to="/home" flat class="q-ma-md" color="grey-9" size="lg" icon="home"></q-btn>
         </transition>
          <transition
   enter-active-class="animated flipInY"
@@ -52,8 +52,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.main-container 
+.register-main-container 
   background #fafafa
+  animation flipInY .5s cubic-bezier(0,.68,1,.63)
+  overflow hidden
+  &:webkit-scrollbar
+    display none
 .sub-container
   width 40%
   margin 0 auto

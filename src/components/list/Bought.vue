@@ -7,7 +7,7 @@
         <q-toolbar-title>
           <q-btn flat>RajKumar pasal</q-btn>
         </q-toolbar-title>
-        <q-btn-group>
+        <div class="q-pa-sm q-gutter-sm">
           <q-btn flat color="black">(5000)
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
               <strong>Unpaid</strong>
@@ -23,10 +23,12 @@
               <strong>Total</strong>
             </q-tooltip>
           </q-btn>
-        </q-btn-group>
+        </div>
       </q-toolbar>
        <q-separator/>
-      <q-tabs v-model="tab" animated swipeable inverted color="secondary" align="justify">
+      <q-tabs v-model="tab" animated swipeable inverted active-color="secondary"
+            indicator-color="secondary"
+            align="justify">
         <q-tab default name="invoice"  label="invoice"/>
         <!-- <q-tab default name="buyers" slot="title" icon="mail" label="BUyers" /> -->
         <q-tab name="paid_date"  label="paid date"/>

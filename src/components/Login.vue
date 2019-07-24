@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container">
+    <div class="login-main-container">
         <transition
   enter-active-class="animated fadeIn"
   appear
@@ -46,8 +46,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.main-container 
+.login-main-container 
   background #fafafa
+  animation flipInY .5s cubic-bezier(0,.68,1,.63)
+  overflow hidden
+  &:webkit-scrollbar
+    display none
 .sub-container
   width 40%
   margin 0 auto
@@ -84,4 +88,7 @@ export default {
     width 220px
 .fb-icon
   padding 6px
+.flipInY {
+  transition: all 5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
 </style>
