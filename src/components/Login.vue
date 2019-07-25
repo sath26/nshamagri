@@ -17,7 +17,7 @@
                         <div class="q-py-sm"></div>
                       <q-input v-model="password" filled type="password" hint="Password" ></q-input>
             <q-btn flat class="forgot-btn">forgot password?</q-btn>
-            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="absolute-left fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon" style="width:40px; height:40px"></q-icon>
+            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
 </q-btn>
              
             <div class="create-account-btn-container"><span class="txt-newuser">New User?</span><q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn></div>
@@ -86,9 +86,13 @@ export default {
   width 300px
   @media screen and (max-width: 450px) 
     width 220px
-.fb-icon
-  padding 6px
-.flipInY {
-  transition: all 5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
+.sign-in-facebook-btn
+  .fb-icon
+    img 
+      width 35px 
+      height 35px
+      position absolute
+      top 50%
+      left 2%
+      transform translateY(-50%)
 </style>

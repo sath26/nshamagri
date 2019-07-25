@@ -25,7 +25,7 @@
                   <q-input standout="bg-teal text-white" v-model="confrimPassword" label="Confirm password"></q-input>
                 </div>
               <q-toggle class="q-pt-sm" v-model="accept" label="I accept the license and terms" ></q-toggle>
-            <q-btn size="lg" label="Sign-up with Facebook" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="absolute-left fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon" style="width:40px; height:40px"></q-icon>
+            <q-btn size="lg" label="Sign-up with Facebook" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
 </q-btn>
           </div>
         </div>
@@ -106,5 +106,11 @@ export default {
     font-weight 600
     font-size 1.5em 
 .fb-icon
-  padding 6px
+    img 
+      width 35px 
+      height 35px
+      position absolute
+      top 50%
+      left 2%
+      transform translateY(-50%)
 </style>

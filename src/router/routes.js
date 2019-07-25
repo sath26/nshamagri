@@ -7,6 +7,10 @@ const routes = [
     component: () => import('components/list/Home.vue'),
   },
   {
+    path: '/landing_page',
+    component: () => import('components/list/LandingPage.vue'),
+  },
+  {
     path: '/profile',
     component: () => import('components/list/Profile.vue'),
 
