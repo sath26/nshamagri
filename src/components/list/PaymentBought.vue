@@ -6,13 +6,9 @@
 
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-list bordered  class="q-mb-sm list-container">
-            <q-item>
-            <q-item-section>
-              <q-item-section label>Bought</q-item-section>
-            </q-item-section>
-            </q-item>
-          </q-list>
+          <q-toolbar class="bg-secondary text-white shadow-2">
+              <q-toolbar-title class="q-pa-sm text-uppercase">bought</q-toolbar-title>
+          </q-toolbar>
           <q-list bordered highlight class="list-container">
             <q-item clickable to="/bought">
               <q-item-section avatar>

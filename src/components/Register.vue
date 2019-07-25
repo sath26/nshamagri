@@ -1,10 +1,10 @@
 <template>
-    <div class="main-container">
+    <div class="register-main-container">
         <transition
   enter-active-class="animated fadeIn"
   appear
 >
-              <q-btn to="/home" flat class="q-ma-md" icon="home"></q-btn>
+              <q-btn to="/home" flat class="q-ma-md" color="grey-9" size="lg" icon="home"></q-btn>
         </transition>
          <transition
   enter-active-class="animated flipInY"
@@ -13,14 +13,20 @@
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
             <div class="login-header"><img src="\assets\logo\logo-sm.svg" alt="shamagri logo" class="shamagri-logo"></div><div class="welcome-txt q-py-lg"><p>Welcome To,</p><p class="shamagri-txt">Shamagri</p></div>
-            <q-field>
-              <q-input color="secondary" v-model="name" type="text" :before="[{icon: 'person', handler () {}}]" float-label="User Name" class="q-my-sm input-field" />
-              <q-input color="secondary" v-model="email" type="email" :before="[{icon: 'mail', handler () {}}]" float-label="Email" class="q-my-sm input-field" />
-              <q-input color="secondary" v-model="password" type="password" :before="[{icon: 'vpn_key', handler () {}}]" float-label="Password" class="q-my-xs input-field"/>
-              <q-input color="secondary" v-model="password" type="password" :before="[{icon: 'vpn_key', handler () {}}]" float-label="Confirm Password" class="q-my-xs input-field"/>
-            </q-field>
-            <q-btn size="md" icon="input" label="Register" style="width:100%;" class="q-mt-lg sign-in-btn"/>
-            <q-btn size="md" icon="fab fa-facebook" label="Sign-up with Facebook" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"/>
+                <div class="q-gutter-md">
+                  <q-input standout="bg-teal text-white" v-model="email" label="Email"></q-input>
+                   <q-input
+                    standout="bg-teal text-white"
+                    v-model="phone"
+                    label="Phone"
+                    mask="+(###) ##########"
+                  ></q-input>
+                  <q-input standout="bg-teal text-white" v-model="password" label="Password"></q-input>
+                  <q-input standout="bg-teal text-white" v-model="confrimPassword" label="Confirm password"></q-input>
+                </div>
+              <q-toggle class="q-pt-sm" v-model="accept" label="I accept the license and terms" ></q-toggle>
+            <q-btn size="lg" label="Sign-up with Facebook" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="absolute-left fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon" style="width:40px; height:40px"></q-icon>
+</q-btn>
           </div>
         </div>
         </transition>
@@ -35,7 +41,8 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      accept: false
     }
   },
   methods: {
@@ -45,8 +52,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.main-container 
+.register-main-container 
   background #fafafa
+  animation flipInY .5s cubic-bezier(0,.68,1,.63)
+  overflow hidden
+  &:webkit-scrollbar
+    display none
 .sub-container
   width 40%
   margin 0 auto
@@ -94,4 +105,6 @@ export default {
 .shamagri-txt
     font-weight 600
     font-size 1.5em 
+.fb-icon
+  padding 6px
 </style>

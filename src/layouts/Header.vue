@@ -1,12 +1,8 @@
  <template>
   <div>
     <!-- this view put header and footer fixed but tab is not fixed yet-->
-    <transition
-  enter-active-class="animated fadeIn"
-  appear
->
       <q-header :reveal="headerReveal">
-        <q-toolbar inverted class="navBar">
+        <q-toolbar class="navBar">
           <q-btn
             flat
             round
@@ -37,7 +33,6 @@
     />
         </div>
       </q-header>
-    </transition>
 <q-drawer
            v-model="left"
           :width="200"

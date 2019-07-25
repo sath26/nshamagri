@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container">
+    <div class="login-main-container">
         <transition
   enter-active-class="animated fadeIn"
   appear
@@ -13,13 +13,13 @@
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
             <div class="login-header"><img src="\assets\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
-            <q-field>
-              <q-input color="secondary" v-model="email" type="email" :before="[{icon: 'mail', handler () {}}]" float-label="Email" class="q-my-sm input-field" />
-              <q-input color="secondary" v-model="password" type="password" :before="[{icon: 'vpn_key', handler () {}}]" float-label="Password" class="q-my-xs input-field"/>
-            </q-field>
+                      <q-input v-model="email" filled type="email" hint="Email"></q-input>
+                        <div class="q-py-sm"></div>
+                      <q-input v-model="password" filled type="password" hint="Password" ></q-input>
             <q-btn flat class="forgot-btn">forgot password?</q-btn>
-            <q-btn size="md" icon="input" label="sign-in" style="width:100%;" class="q-mt-lg sign-in-btn"/>
-            <q-btn size="md" icon="fab fa-facebook" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"/> 
+            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="absolute-left fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon" style="width:40px; height:40px"></q-icon>
+</q-btn>
+             
             <div class="create-account-btn-container"><span class="txt-newuser">New User?</span><q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn></div>
           </div>
         </div>
@@ -34,8 +34,9 @@ export default {
   name: 'MyLayout',
   data () {
     return {
-      email: '',
-      password: ''
+      password: '',
+      isPwd: true,
+      email: ''
     }
   },
   methods: {
@@ -45,8 +46,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.main-container 
+.login-main-container 
   background #fafafa
+  animation flipInY .5s cubic-bezier(0,.68,1,.63)
+  overflow hidden
+  &:webkit-scrollbar
+    display none
 .sub-container
   width 40%
   margin 0 auto
@@ -81,4 +86,9 @@ export default {
   width 300px
   @media screen and (max-width: 450px) 
     width 220px
+.fb-icon
+  padding 6px
+.flipInY {
+  transition: all 5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div>
      <q-btn-dropdown color="secondary text-white" label="Create" flat>
-      <q-list>
-        <q-item clickable v-close-popup @click="onItemClick">
+      <q-list >
+        <q-item clickable  v-close-popup @click="onItemClick">
           <q-item-section>
-            <q-item-label>Goods</q-item-label>
+            <q-item-label >Goods</q-item-label>
           </q-item-section>
         </q-item>
 

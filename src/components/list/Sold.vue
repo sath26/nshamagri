@@ -5,9 +5,9 @@
       <s-header></s-header>
       <q-toolbar inverted color="secondary">
         <q-toolbar-title>
-          <q-btn flat>RajKumar pasal</q-btn>
+          <q-btn flat>rajkumar pasal</q-btn>
         </q-toolbar-title>
-        <q-btn-group>
+        <div class="q-pa-sm q-gutter-sm">
           <q-btn flat color="black">
             (5000)
             <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
@@ -26,11 +26,12 @@
               <strong>Total</strong>
             </q-tooltip>
           </q-btn>
-        </q-btn-group>
+        </div>
       </q-toolbar>
       <q-separator />
 
-      <q-tabs animated swipeable inverted color="secondary" v-model="tab" align="justify">
+      <q-tabs animated swipeable inverted active-color="secondary"
+            indicator-color="secondary" v-model="tab" align="justify">
         <q-tab default name="invoice"  label="invoice" sublabel="25000" />
         <!-- <q-tab default name="buyers"  icon="mail" label="BUyers" /> -->
         <q-tab name="paid_date"  label="received date" />
