@@ -86,8 +86,12 @@ const routes = [
   
   /***************create********************************************************/
   {
-    path: '/choose',
-    component: () => import('components/add/Choose.vue'),
+    path: '/choose_service',
+    component: () => import('components/add/ChooseServices.vue'),
+  },
+  {
+    path: '/choose_good',
+    component: () => import('components/add/ChooseGoods.vue'),
   },
   {
     path: '/invoice',

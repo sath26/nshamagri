@@ -9,16 +9,21 @@ add good or service after saved takes back to invoice(remember route)
       <s-header></s-header>
 
       <q-page padding class="docs-table">
+        <div class="q-gutter-y-md column">
+        <q-form class="q-gutter-md">
         <q-select
           :value="lazy"
           @change="val => lazy = val"
           filter
           multiple
           chips
-          inverted
+          filled
           color="tertiary"
           :options="options"
+          label="Choose goods/services"
         />
+        <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
+        </q-form>
         <q-table
           class="invoice-table"
           dark
@@ -29,7 +34,7 @@ add good or service after saved takes back to invoice(remember route)
           :filter="filter"
         >
           <template slot="top-right" slot-scope="props">
-            <q-search hide-underline v-model="filter" color="secondary"/>
+            <q-input filled hide-underline v-model="filter" color="secondary"/>
           </template>
           <template slot="top-left" slot-scope="props">
             <p class="q-caption">* Click on cells to edit</p>
@@ -52,6 +57,7 @@ add good or service after saved takes back to invoice(remember route)
             <q-td key="expiry_left" :props="props">{{ props.row.expiry_left }}</q-td>
           </q-tr>
         </q-table>
+        </div>
       </q-page>
     </q-page-container>
     <s-footer></s-footer>
