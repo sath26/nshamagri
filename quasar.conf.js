@@ -95,7 +95,7 @@ module.exports = function (ctx) {
         'QChip',
         'QScrollArea',
         'QTooltip',
-
+        'QOptionGroup',
         'QToggle',
         'QFab',
         'QFabAction',
@@ -103,7 +103,9 @@ module.exports = function (ctx) {
 
         'QPopupEdit',
 
-        'QScrollArea'
+        'QScrollArea',
+
+        'QSpace'
       ],
 
       directives: [

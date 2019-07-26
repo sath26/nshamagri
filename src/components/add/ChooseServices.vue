@@ -1,0 +1,177 @@
+/* 
+seller makes the invoice 
+user dont even have the option
+add good or service after saved takes back to invoice(remember route)
+ */
+ <template>
+  <q-layout view="hHh LpR lFf">
+    <q-page-container>
+      <s-header></s-header>
+
+      <q-page padding class="docs-table">
+        <div class="q-gutter-y-md column">
+        <q-form class="q-gutter-md">
+        <q-select
+          :value="lazy"
+          @change="val => lazy = val"
+          filter
+          multiple
+          chips
+          filled
+          color="tertiary"
+          :options="options"
+          label="Choose goods/services"
+        />
+        <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
+        </q-form>
+        <q-table
+          class="invoice-table"
+          dark
+          :data="lazy"
+          :columns="columns"
+          row-key="name"
+          no-data-label="Select product from above"
+          :filter="filter"
+        >
+          <template slot="top-right" slot-scope="props">
+            <q-input filled hide-underline v-model="filter" color="secondary"/>
+          </template>
+          <template slot="top-left" slot-scope="props">
+            <p class="q-caption">* Click on cells to edit</p>
+          </template>
+          <q-tr slot="body" slot-scope="props" :props="props">
+            <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
+            <q-td key="desc" :props="props">
+              {{ props.row.product }}
+              <q-popup-edit v-model="props.row.product" title="Update product" buttons>
+                <q-input type="text" v-model="props.row.product"/>
+              </q-popup-edit>
+            </q-td>
+
+            <q-td key="rate" :props="props">
+              {{ props.row.rate }}
+              <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
+            </q-td>
+            <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
+            <q-td key="total" :props="props">{{ props.row.total }}</q-td>
+            <q-td key="expiry_left" :props="props">{{ props.row.expiry_left }}</q-td>
+          </q-tr>
+        </q-table>
+        </div>
+      </q-page>
+    </q-page-container>
+    <s-footer></s-footer>
+  </q-layout>
+</template>
+<script>
+//consists of buyers and sellers
+import SHeader from "../../layouts/Header";
+import SFooter from "../../layouts/Footer";
+import { mapState, mapGetters } from "vuex";
+export default {
+  components: {
+    SHeader,
+    SFooter
+  },
+  data() {
+    return {
+      lazy: [
+        /* {
+          product: "hululu",
+          rate: 30,
+          quantity: 5,
+          expiry_left: 150
+        } */
+      ],
+
+      options: [
+        {
+          label: "Google",
+          value: {
+            product: "Google",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        },
+        {
+          label: "Facebook",
+          value: {
+            product: "Facebook",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        },
+        {
+          label: "Twitter",
+          value: {
+            product: "Twitter",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        },
+        {
+          label: "Apple Inc.",
+          value: {
+            product: "Apple Inc.",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        },
+        {
+          label: "Oracle",
+          value: {
+            product: "Oracle",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        }
+      ],
+      columns: [
+        {
+          name: "desc", //dont rename name
+          required: false,
+          label: "Goods/Services",
+          align: "left",
+          field: "product",
+          sortable: false
+        },
+
+        { name: "rate", label: "Rate(Rs)", field: "rate", sortable: false }, //dont rename name
+        {
+          name: "quantity",
+          label: "Quantity",
+          field: "expiry_left",
+          sortable: false
+        }, //dont rename name
+        {
+          name: "total",
+          label: "Total",
+          field: "total",
+          sortable: false
+        }, //dont rename name
+        {
+          name: "expiry_left",
+          label: "Expiry Left",
+          field: "expiry_left",
+          sortable: false,
+          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
+        }
+      ],
+      filter: ""
+    };
+  },
+  computed: {
+    // ...mapGetters("layoutDemo", ["view"])
+  }
+};
+</script>
+
+<style lang="stylus" scoped>
+</style>
+
+

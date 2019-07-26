@@ -4,7 +4,7 @@
    
  */
  <template>
-  <q-layout view="hHh LpR lFf" >
+  <q-layout view="hHh LpR lFf">
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="q-pa-lg q-my-lg">
       <q-page padding>
@@ -38,13 +38,18 @@
               </div>
             </q-card>
           </div>
-         
-            <div class="chart row">
-               <div class="col-12" v-if="show">
-              <apexchart width="100%" height="500" :options="chartOptions" :series="series" />
-               </div>
+
+          <div class="chart row">
+            <div class="col-12" v-if="show">
+              <apexchart
+                type="area"
+                width="100%"
+                height="500"
+                :options="chartOptions"
+                :series="series"
+              />
             </div>
-          
+          </div>
         </div>
       </q-page>
     </q-page-container>
@@ -63,8 +68,10 @@ export default {
     SFooter,
     apexchart: VueApexCharts
   },
-mounted() {
-    this.$nextTick(() => { this.show = true })
+  mounted() {
+    this.$nextTick(() => {
+      this.show = true;
+    });
   },
   computed: {},
   data: function() {
