@@ -19,7 +19,7 @@
           class="search-box_toggle-btn"></q-btn> -->
           <s-create class="q-px-sm"></s-create>
           <s-notification class="q-px-sm"></s-notification>
-          <q-btn outline color="white" class="q-mr-sm" to="/login">Login</q-btn>
+          <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile"><q-tooltip><strong>User profile</strong></q-tooltip><img src="..\assets\icons\User-icon.svg" alt="User-icon"></img></q-btn>
           <!-- notification is also available but i need number of notification on top of the icon or change in color  -->
         </q-toolbar>
         <div v-show="mobileSearchBoxToggle" v-bind:class="{nowActive: mobileSearchBoxToggle}"  class="search-box-mobile_container row no-shadow">
@@ -52,9 +52,7 @@
                   {{ menuItem.label }}
                 </q-item-section>
               </q-item>
-  
-             <q-separator v-if="menuItem.separator" ></q-separator>
-  
+             <q-separator v-if="menuItem.separator"></q-separator>
             </q-list>
           </q-scroll-area>
         </q-drawer>
@@ -79,12 +77,6 @@ export default {
       mobileSearchBoxToggle: false,
       drawer:true,
       menuList : [
-  {
-    icon: 'face',
-    label: 'Profile',
-    route: '/profile',
-    separator: true
-  },
   {
     icon: 'home',
     label: 'Home',

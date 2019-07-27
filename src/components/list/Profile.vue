@@ -3,7 +3,8 @@
     <q-page-container>
       <s-header></s-header>
 
-      <q-tabs v-model="tab" animated color="secondary" align="justify">
+      <q-tabs  v-model="tab" animated  active-color="secondary"
+            indicator-color="secondary" align="justify">
         <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
         <q-tab name="enterprise" label="enterprise" />
         <q-tab name="member" label="members" />
@@ -23,7 +24,6 @@
                   class="absolute"
                   style="top: 0; right: 8px; transform: translateY(-50%);"
                 />
-
                 <div class="ellipsis">Cafe Basilico</div>
                 <!-- <q-rating slot="subsection" :max="5"/> -->
                 <!-- <q-rating slot="subsection" v-model="stars" :max="5"/> -->
@@ -46,9 +46,7 @@
             </q-card>
           </div>
         </q-tab-panel>
-       
-
-       
+  <!-- Member profile panel -->
           <q-tab-panel name="member">
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
             <q-card inline class="bigger q-ma-sm">
