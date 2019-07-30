@@ -6,12 +6,15 @@
           <q-btn
             flat
             round
-            style="font-size: 1.2rem;"
+            style="font-size: 1rem;"
             color="white"
             icon="menu"
             @click="left = !left"
-          />
-          <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo q-px-sm q-py-xs">
+            class="side-menu_btn q-mr-sm"
+          /></q-btn>
+          <div class="logo-container vertical-middle">
+            <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo q-pa-xs">
+          </div>
           <q-toolbar-title class="txtShamagri">shamagri</q-toolbar-title>
           <s-search class="component-search-desktop"></s-search>
           <!-- <q-btn flat round color="grey-1" icon="search" 
@@ -43,7 +46,7 @@
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
-              <q-item :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" v-ripple exact>
+              <q-item class="side-menu_items" active-class="bg-teal-7 text-white" :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" exact>
                 <q-item-section avatar>
                   <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="28" height="28">
                   <q-icon :name="menuItem.icon" ></q-icon>

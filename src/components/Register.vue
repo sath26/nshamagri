@@ -25,7 +25,9 @@
           </div>
         </div>
         </transition>
-
+    <div class="bg-img_container">
+        <img class="bg-img" src="..\assets\img\Login-register-bgShape@2x.png" alt="illustrator">
+      </div>
     </div>
 </template>
 
@@ -48,7 +50,7 @@ export default {
 
 <style lang="stylus" scoped>
 .register-main-container 
-  background #fafafa
+  background transparent
   overflow hidden
   &:webkit-scrollbar
     display none
@@ -108,4 +110,12 @@ export default {
       top 50%
       left 2%
       transform translateY(-50%)
+.bg-img_container
+  padding 0
+  position absolute
+  bottom 1%
+  z-index -1
+  .bg-img 
+    width 100%
+    background-size cover
 </style>
