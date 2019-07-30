@@ -12,8 +12,8 @@
             @click="left = !left"
             class="side-menu_btn q-mr-sm"
           /></q-btn>
-          <div class="logo-container vertical-middle">
-            <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo q-pa-xs">
+          <div class="logo-container">
+            <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="vertical-middle shamagri-logo q-pa-xs">
           </div>
           <q-toolbar-title class="txtShamagri">shamagri</q-toolbar-title>
           <s-search class="component-search-desktop"></s-search>

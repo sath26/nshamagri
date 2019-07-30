@@ -1,7 +1,9 @@
  <template>
     <div>
       <q-toolbar class="navbar">
-          <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo q-px-sm q-py-xs">
+          <div class="logo-container">
+            <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo vertical-middle q-pa-xs">
+          </div>
           <q-toolbar-title class="text-title">Shamagri</q-toolbar-title>
          <q-btn outline color="white" class="q-mr-sm" to="/login">Login</q-btn>
       </q-toolbar>
