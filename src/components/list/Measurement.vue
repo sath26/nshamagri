@@ -69,6 +69,12 @@
                 <q-item-label>Pieces</q-item-label>
               </q-item-section>
             </q-item>
+              <q-item multiline link>
+              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
+              <q-item-section>
+                <q-item-label>Monthly</q-item-label>
+              </q-item-section>
+            </q-item>
           </q-list>
         </div>
       </q-page>

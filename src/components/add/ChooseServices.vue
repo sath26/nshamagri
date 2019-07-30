@@ -13,8 +13,7 @@ add good or service after saved takes back to invoice(remember route)
         <q-form class="q-gutter-md">
         <q-select
           :value="lazy"
-          @change="val => lazy = val"
-          filter
+          v-model="multiple"
           multiple
           chips
           filled
@@ -26,8 +25,8 @@ add good or service after saved takes back to invoice(remember route)
         </q-form>
         <q-table
           class="invoice-table"
-          dark
-          :data="lazy"
+          
+          :data="multiple"
           :columns="columns"
           row-key="name"
           no-data-label="Select product from above"
@@ -42,19 +41,19 @@ add good or service after saved takes back to invoice(remember route)
           <q-tr slot="body" slot-scope="props" :props="props">
             <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
             <q-td key="desc" :props="props">
-              {{ props.row.product }}
+              {{ props.row.value.product }}
               <q-popup-edit v-model="props.row.product" title="Update product" buttons>
-                <q-input type="text" v-model="props.row.product"/>
+                <q-input type="text" v-model="props.row.value.product"/>
               </q-popup-edit>
             </q-td>
 
             <q-td key="rate" :props="props">
-              {{ props.row.rate }}
+              {{ props.row.value.rate }}
               <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
             </q-td>
-            <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
-            <q-td key="total" :props="props">{{ props.row.total }}</q-td>
-            <q-td key="expiry_left" :props="props">{{ props.row.expiry_left }}</q-td>
+            <q-td key="quantity" :props="props">{{ props.row.value.quantity }}</q-td>
+            <q-td key="total" :props="props">{{ props.row.value.total }}</q-td>
+            <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td>
           </q-tr>
         </q-table>
         </div>
@@ -83,7 +82,7 @@ export default {
           expiry_left: 150
         } */
       ],
-
+      multiple: null,
       options: [
         {
           label: "Google",
