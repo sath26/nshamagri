@@ -17,11 +17,11 @@ sell will be fixed icon
         color="secondary"
         icon="add"
         class="animate-pop"
-        
+        to="/choose_service"
         @click="icon = true"
       />
     </q-page-sticky>
-    <q-dialog v-model="icon">
+    <!-- <q-dialog v-model="icon">
       <q-card>
         <q-toolbar class="row items-center">
           <q-toolbar-title>Create invoice</q-toolbar-title>
@@ -38,7 +38,7 @@ sell will be fixed icon
           <q-btn flat :to="group">Next</q-btn>
         </q-card-actions>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
   </div>
 </template>
 <script>

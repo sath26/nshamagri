@@ -79,34 +79,35 @@ export default {
       mobileSearchBoxToggle: false,
       drawer:true,
       menuList : [
-  {
-    icon: 'face',
-    label: 'Profile',
-    route: '/profile',
-    separator: true
-  },
+  
   {
     icon: 'home',
     label: 'Home',
     route: '/',
     separator: false
   },
+   {
+    icon: 'face',
+    label: 'Profile',
+    route: '/profile',
+    separator: true
+  },
   {
     iconSrc: '/assets/icons/Product-icon.svg',
-    label: 'Goods',
+    label: 'Quotation',
     route: '/my_products',
     separator: false
   },
   {
     iconSrc: '/assets/icons/service-icon.svg',
-    label: 'Services',
+    label: 'Category',
     route: '/my_services',
     separator: false
   },
-  {
+ {
     iconSrc: '/assets/icons/measurement-icon.svg',
-    label: 'Measurement',
-    route: '/measurement',
+    label: 'Unit',
+    route: '/unit',
     separator: true
   },
   {

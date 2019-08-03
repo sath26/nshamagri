@@ -10,22 +10,9 @@ add good or service after saved takes back to invoice(remember route)
 
       <q-page padding class="docs-table">
         <div class="q-gutter-y-md column">
-        <q-form class="q-gutter-md">
-        <q-select
-          :value="lazy"
-          v-model="multiple"
-          multiple
-          chips
-          filled
-          color="tertiary"
-          :options="options"
-          label="Choose goods/services"
-        />
-        <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
-        </q-form>
+        
         <q-table
           class="invoice-table"
-          
           :data="multiple"
           :columns="columns"
           row-key="name"
@@ -56,6 +43,19 @@ add good or service after saved takes back to invoice(remember route)
             <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td>
           </q-tr>
         </q-table>
+        <q-form class="q-gutter-md">
+        <q-select
+          :value="lazy"
+          v-model="multiple"
+          multiple
+          chips
+          filled
+          color="tertiary"
+          :options="options"
+          label="Choose goods/services"
+        />
+        <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
+        </q-form>
         </div>
       </q-page>
     </q-page-container>
@@ -82,7 +82,7 @@ export default {
           expiry_left: 150
         } */
       ],
-      multiple: null,
+      multiple: [],
       options: [
         {
           label: "Google",
@@ -158,7 +158,7 @@ export default {
           label: "Expiry Left",
           field: "expiry_left",
           sortable: false,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
+          
         }
       ],
       filter: ""
