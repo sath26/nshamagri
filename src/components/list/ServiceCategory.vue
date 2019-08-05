@@ -26,7 +26,7 @@ plumbing */
           <q-list bordered separator class="q-mb-sm">
             <q-item multiline>
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
-              <q-item-section label="Services">Services</q-item-section>
+              <q-item-section label="Services">Category</q-item-section>
 
               <q-item-section avatar>
                 <q-btn flat color="secondary">

@@ -13,9 +13,10 @@ add good or service after saved takes back to invoice(remember route)
         <q-form class="q-gutter-md">
         <q-select
           :value="lazy"
-          @change="val => lazy = val"
-          filter
+          
+          
           multiple
+          v-model="multiple"
           chips
           filled
           color="tertiary"
@@ -27,11 +28,12 @@ add good or service after saved takes back to invoice(remember route)
         <q-table
           class="invoice-table"
           dark
-          :data="lazy"
+          :data="multiple"
           :columns="columns"
           row-key="name"
           no-data-label="Select product from above"
           :filter="filter"
+            :pagination.sync="pagination"
         >
           <template slot="top-right" slot-scope="props">
             <q-input filled hide-underline v-model="filter" color="secondary"/>
@@ -75,6 +77,13 @@ export default {
   },
   data() {
     return {
+        pagination: {
+        sortBy: 'name',
+        descending: false,
+        page: 2,
+        rowsPerPage: 3,
+         rowsNumber: 4 
+      },
       lazy: [
         /* {
           product: "hululu",
@@ -83,7 +92,7 @@ export default {
           expiry_left: 150
         } */
       ],
-
+      multiple:[],
       options: [
         {
           label: "Google",

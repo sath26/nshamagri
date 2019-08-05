@@ -4,19 +4,19 @@
       <q-list >
         <q-item clickable  v-close-popup @click="onItemClick">
           <q-item-section>
-            <q-item-label >Goods</q-item-label>
+            <q-item-label >Quotation</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item clickable v-close-popup @click="onItemClick">
           <q-item-section>
-            <q-item-label>Service</q-item-label>
+            <q-item-label>Category</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item clickable v-close-popup @click="onItemClick">
           <q-item-section>
-            <q-item-label>Measurement</q-item-label>
+            <q-item-label>Unit</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

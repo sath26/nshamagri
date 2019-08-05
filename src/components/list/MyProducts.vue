@@ -9,7 +9,7 @@
             <q-item multiline to="/add_goods">
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-section label>Goods</q-item-section>
+                <q-item-section label>Quotation</q-item-section>
               </q-item-section>
 
               <q-item-section avatar>

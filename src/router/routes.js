@@ -16,7 +16,7 @@ const routes = [
 
   },
   {
-    path: '/measurement',
+    path: '/unit',
     component: () => import('components/list/Measurement.vue'),
 
   },
@@ -123,7 +123,11 @@ const routes = [
     component: () => import('components/consumer/Search.vue'),
 
   },
- 
+  {
+    path: '/settings',
+    component: () => import('pages/Settings.vue'),
+
+  },
   {
     path: '/enterprise',
     component: () => import('components/consumer/SingleEnterprise.vue'),

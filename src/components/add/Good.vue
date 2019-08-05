@@ -12,8 +12,10 @@ another ui is needed when supplier provides u good with all info and u dont have
       @reset="onReset"
       class="q-gutter-md"
     >
-          <q-input filled v-model="goods" label="Goods Name" color="secondary"/>
+          <q-input filled v-model="goods" label="Goods/Services Name" color="secondary"/>
           <q-input filled v-model="price" label="Price" color="secondary"/>
+          <q-input filled v-model="price" label="Unit" color="secondary"/>
+          <q-input filled v-model="price" label="Good or Service(radio option)" color="secondary"/>
           <!-- <q-select filter v-model="select" :options="options"/> -->
           <div>
         <!-- <q-btn label="Submit" type="submit" color="primary"/> -->

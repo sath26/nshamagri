@@ -80,28 +80,38 @@ export default {
       mobileSearchBoxToggle: false,
       drawer:true,
       menuList : [
+<<<<<<< HEAD
+=======
+  
+>>>>>>> f7441d5d6cc0df74b292d1826a4e7532b356f1cf
   {
     icon: 'home',
     label: 'Home',
     route: '/',
     separator: false
   },
+   {
+    icon: 'face',
+    label: 'Profile',
+    route: '/profile',
+    separator: true
+  },
   {
     iconSrc: '/assets/icons/Product-icon.svg',
-    label: 'Goods',
+    label: 'Quotation',
     route: '/my_products',
     separator: false
   },
   {
     iconSrc: '/assets/icons/service-icon.svg',
-    label: 'Services',
+    label: 'Category',
     route: '/my_services',
     separator: false
   },
-  {
+ {
     iconSrc: '/assets/icons/measurement-icon.svg',
-    label: 'Measurement',
-    route: '/measurement',
+    label: 'Unit',
+    route: '/unit',
     separator: true
   },
   {
