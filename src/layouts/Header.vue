@@ -80,10 +80,7 @@ export default {
       mobileSearchBoxToggle: false,
       drawer:true,
       menuList : [
-<<<<<<< HEAD
-=======
   
->>>>>>> f7441d5d6cc0df74b292d1826a4e7532b356f1cf
   {
     icon: 'home',
     label: 'Home',
@@ -97,19 +94,19 @@ export default {
     separator: true
   },
   {
-    iconSrc: '/assets/icons/Product-icon.svg',
+    iconSrc: '/assets/icons/quotation-icon.svg',
     label: 'Quotation',
     route: '/my_products',
     separator: false
   },
   {
-    iconSrc: '/assets/icons/service-icon.svg',
+    iconSrc: '/assets/icons/category-icon.svg',
     label: 'Category',
     route: '/my_services',
     separator: false
   },
  {
-    iconSrc: '/assets/icons/measurement-icon.svg',
+    iconSrc: '/assets/icons/unit-icon.svg',
     label: 'Unit',
     route: '/unit',
     separator: true
