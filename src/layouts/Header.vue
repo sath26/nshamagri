@@ -46,7 +46,7 @@
         >
           <q-scroll-area class="fit">
             <q-list v-for="(menuItem, index) in menuList" :key="index">
-              <q-item class="side-menu_items" active-class="bg-teal-7 text-white" :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" exact>
+              <q-item class="side-menu_items" active-class="bg-teal text-white" :to="menuItem.route" clickable :active="menuItem.label === 'Outbox'" exact>
                 <q-item-section avatar>
                   <img v-if="menuItem.iconSrc" :src="menuItem.iconSrc" alt="Icon" width="28" height="28">
                   <q-icon :name="menuItem.icon" ></q-icon>
@@ -56,6 +56,17 @@
                 </q-item-section>
               </q-item>
              <q-separator v-if="menuItem.separator"></q-separator>
+            </q-list>
+             <q-separator></q-separator>
+            <q-list>
+              <q-item class="side-menu_items text-red-8 " to="/landing_page">
+                <q-item-section avatar>
+                  <q-icon name="logout"></q-icon>
+                </q-item-section>
+                <q-item-section>
+                  Logout
+                </q-item-section>
+              </q-item>
             </q-list>
           </q-scroll-area>
         </q-drawer>
@@ -127,12 +138,6 @@ export default {
     icon: 'settings',
     label: 'Settings',
     route: '/settings',
-    separator: false
-  },
-  {
-    icon: 'logout',
-    label: 'Logout',
-    route: '/logout',
     separator: false
   }
 ]
