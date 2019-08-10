@@ -75,13 +75,18 @@ export default {
     left: 60px;
   }
 }
-@media screen and (min-width: 565px)
-  .mobile-bg_img
-    display none
+@media screen and (max-width: 850px)
+  .web-bg_img
+    height 40vh
   .devices_img
     width 60%
     top 40%
-    left 20%   
+    right 22%
+  .intro-text
+    width 80%
+@media screen and (min-width: 565px)
+  .mobile-bg_img
+    display none
 @media screen and (max-width: 564px)
   .web-bg_img
     display none
@@ -90,7 +95,7 @@ export default {
     margin 0 auto
     text-align center
     top 30%
-    right 12%
+    right 10%
   .intro-text
     .get-started
       width 100%
@@ -112,9 +117,7 @@ export default {
       font-size 3.5vw
     .p-breaker
       display none
-@media screen and (max-width: 850px)
-  .web-bg_img
-    height 40vh
+
 </style>  
 
  
