@@ -15,7 +15,7 @@ developed to help grow and maintain all businesses. </p>
             <div class="get-started">
               <div class="text-caption sub-header">Try Shamagri for free!</div>
               <div class="email-submit row q-my-lg">
-                <q-input filled v-model="text" dark color="white" class="col-7 q-mr-sm" label="E-mail Address"></q-input><q-btn class="col-3 shadow-1" label="Get Started" color="teal-5"></q-btn>
+                <q-input filled v-model="text" dark color="white" class="col q-mr-sm email-input" label="E-mail Address"></q-input><q-btn class="col-4 shadow-1" label="Get Started" color="teal-5"></q-btn>
               </div>
             </div>
         </div>
@@ -97,10 +97,12 @@ export default {
     top 30%
     right 10%
   .intro-text
+    .email-input
+      width 70%
     .get-started
-      width 100%
       position absolute
       top 500%
+      left 18%
       .sub-header
         font-size 1.5em
         top 0
@@ -108,7 +110,6 @@ export default {
       font-size 3vw
 @media screen and (max-width: 650px)
   .intro-text
-    width 100%
     top 10%
     left 3%
     h5
