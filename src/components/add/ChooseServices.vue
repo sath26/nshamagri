@@ -10,52 +10,54 @@ add good or service after saved takes back to invoice(remember route)
 
       <q-page padding class="docs-table">
         <div class="q-gutter-y-md column">
-        
-        <q-table
-          class="invoice-table"
-          :data="multiple"
-          :columns="columns"
-          row-key="name"
-          no-data-label="Select product from above"
-          :filter="filter"
-        >
-          <template slot="top-right" slot-scope="props">
-            <q-input filled hide-underline v-model="filter" color="secondary"/>
-          </template>
-          <template slot="top-left" slot-scope="props">
-            <p class="q-caption">* Click on cells to edit</p>
-          </template>
-          <q-tr slot="body" slot-scope="props" :props="props">
-            <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
-            <q-td key="desc" :props="props">
-              {{ props.row.value.product }}
-              <q-popup-edit v-model="props.row.product" title="Update product" buttons>
-                <q-input type="text" v-model="props.row.value.product"/>
-              </q-popup-edit>
-            </q-td>
+          <q-table
+            title="Invoice"
+            class="invoice-table"
+            :data="multiple"
+            :columns="columns"
+            row-key="name"
+            no-data-label="Select product from below"
+            separator="vertical"
+          >
+            <template slot="top-left" slot-scope="props">
+              <p class="q-caption">* Click on cells to edit</p>
+            </template>
+            <q-tr slot="body" slot-scope="props" :props="props">
+              <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
+              <q-td key="desc" :props="props">
+                {{ props.row.value.product }}
+                <q-popup-edit v-model="props.row.product" title="Update product" buttons>
+                  <q-input type="text" v-model="props.row.value.product" />
+                </q-popup-edit>
+              </q-td>
 
-            <q-td key="rate" :props="props">
-              {{ props.row.value.rate }}
-              <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
-            </q-td>
-            <q-td key="quantity" :props="props">{{ props.row.value.quantity }}</q-td>
-            <q-td key="total" :props="props">{{ props.row.value.total }}</q-td>
-            <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td>
-          </q-tr>
-        </q-table>
-        <q-form class="q-gutter-md">
-        <q-select
-          :value="lazy"
-          v-model="multiple"
-          multiple
-          chips
-          filled
-          color="tertiary"
-          :options="options"
-          label="Choose goods/services"
-        />
-        <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
-        </q-form>
+              <q-td key="rate" :props="props">
+                {{ props.row.value.rate }}
+                <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
+              </q-td>
+              <q-td key="quantity" :props="props">{{ props.row.value.quantity }}</q-td>
+              <q-td key="total" :props="props">{{ props.row.value.total }}</q-td>
+              <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td>
+            </q-tr>
+          </q-table>
+          <q-form class="q-gutter-md">
+            <q-select
+               ref="select"
+              v-model="multiple"
+              multiple
+              input-debounce="0"
+              use-chips
+              filled
+              color="tertiary"
+              :options="filterOptions"
+              label="Choose goods/services"
+              use-input
+              @filter="filterFn"
+              @input="onValueChange"
+               @new-value="createValue"
+            />
+            <q-btn to="/add_goods" label="Save" color="secondary" type="submit" />
+          </q-form>
         </div>
       </q-page>
     </q-page-container>
@@ -67,23 +69,7 @@ add good or service after saved takes back to invoice(remember route)
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 import { mapState, mapGetters } from "vuex";
-export default {
-  components: {
-    SHeader,
-    SFooter
-  },
-  data() {
-    return {
-      lazy: [
-        /* {
-          product: "hululu",
-          rate: 30,
-          quantity: 5,
-          expiry_left: 150
-        } */
-      ],
-      multiple: [],
-      options: [
+const stringOptions = [
         {
           label: "Google",
           value: {
@@ -121,6 +107,24 @@ export default {
           }
         },
         {
+          label: "Linux Inc.",
+          value: {
+            product: "Linux Inc.",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        },
+        {
+          label: "Dell Inc.",
+          value: {
+            product: "Dell Inc.",
+            rate: 30,
+            quantity: 5,
+            expiry_left: 150
+          }
+        },
+        {
           label: "Oracle",
           value: {
             product: "Oracle",
@@ -129,7 +133,17 @@ export default {
             expiry_left: 150
           }
         }
-      ],
+      ];
+export default {
+  components: {
+    SHeader,
+    SFooter
+  },
+  data() {
+    return {
+      lazy: [],
+      multiple: [],
+      filterOptions: stringOptions,
       columns: [
         {
           name: "desc", //dont rename name
@@ -157,8 +171,7 @@ export default {
           name: "expiry_left",
           label: "Expiry Left",
           field: "expiry_left",
-          sortable: false,
-          
+          sortable: false
         }
       ],
       filter: ""
@@ -166,11 +179,38 @@ export default {
   },
   computed: {
     // ...mapGetters("layoutDemo", ["view"])
+  },
+  methods: {
+     onValueChange(){
+     this.$refs['select'].__resetInputValue()
+    },
+    createValue (val, done) {
+      console.log(val);
+          if (val.length > 0) {
+        if (!this.filterOptions.includes(val)) {
+          this.filterOptions.push(val)
+        }
+        done(val, 'toggle')
+      }
+    },
+    filterFn(val, update) {
+      update(() => {
+        if (val === "") {
+          this.filterOptions = stringOptions;
+        } else {
+          const needle = val.toLowerCase();
+         
+
+          this.filterOptions = stringOptions.filter(
+            v => v.label.toLowerCase().indexOf(needle) > -1
+          );
+        }
+      });
+    }
   }
 };
 </script>
 
-<style lang="stylus" scoped>
-</style>
+<style lang="stylus" scoped></style>
 
 
