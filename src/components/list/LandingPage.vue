@@ -1,5 +1,5 @@
  <template>
-    <div>
+    <div class="container">
       <q-toolbar class="navbar">
           <div class="logo-container">
             <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo vertical-middle q-pa-xs">
@@ -11,7 +11,7 @@
         <div class="intro-text q-px-lg">
           <h5>your <span>business</span> our assist</h5>
           <p>Welcome to Shamagri, a simple resource management app <br class="p-breaker"> 
-developed to help grow and maintain all businesses. </p>
+developed to help grow and maintain all businesses <br class="p-breaker"> and fulfil all customer needs. </p>
             <div class="get-started">
               <div class="text-caption sub-header">Try Shamagri for free!</div>
               <div class="email-submit row q-my-lg">
@@ -22,6 +22,19 @@ developed to help grow and maintain all businesses. </p>
         <img src="\assets\img\Landing-page-bg.png" class="web-bg_img" alt="Background-img-1">
         <img src="\assets\img\devices-graphics@2x.png" class="devices_img" alt="Background-img-1">
         <img src="\assets\img\landing-page-mobile-bg.png" class="mobile-bg_img" alt="Background-img-1">
+      </div>
+      <div class="footer-nav">
+            <div class="contact-info">
+                   <div class="chip"><q-icon name="place"></q-icon> Address</div>
+                   <div class="chip"><q-icon name="phone"></q-icon> Phone number</div>
+                   <div class="chip"><q-icon name="email"></q-icon> E-mail</div>
+            </div>
+            <ul class="footer-nav-items_list">
+              <li>Terms and Condition</li>
+              <li>Privacy</li>
+              <li>FAQ</li>
+              <li>Support</li>
+            </ul>
       </div>
     </div>
 </template>
@@ -68,7 +81,30 @@ export default {
       font-size 2vw
       line-height 1.2
       margin-top -5%
-
+  .intro-section 
+    min-height 100%
+  .footer-nav
+    width 100%
+    background #35947A
+    position relative
+    bottom 0
+    .contact-info
+      width 60%
+      padding 20px
+      background #29705d
+      margin 0 auto 
+      text-align center
+      .chip
+        color #fafafa
+        display inline
+        padding 20px
+    .footer-nav-items_list
+      margin 0 
+      padding 20px
+      list-style none
+      text-decoration none
+      li 
+        color #fafafa
 @media screen and (max-width: 1140px) {
   .intro-text {
     top: 100px;
