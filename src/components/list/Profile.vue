@@ -34,9 +34,9 @@
                     </div>
                     <div class="card-footer">
                       <div class="social_media-icons">
-                          <a href="/" target="_blank">Facebook</a>
-                          <a href="/" target="_blank">Linkden</a>
-                          <a href="/" target="_blank">Twitter</i></a>
+                          <a href="/" target="_blank"><img src="\assets\icons\facebook.svg" alt="Facebook icon"></a>
+                          <a href="/" target="_blank"><img src="\assets\icons\linkedin.svg" alt="Linkedin icon"></a>
+                          <a href="/" target="_blank"><img src="\assets\icons\twitter.svg" alt="Twitter icon"></i></a>
                       </div>
                     </div>
                 </div>
@@ -129,18 +129,26 @@ export default {
     transition .1s ease-in-out
     &:hover
       color inherit
-.card-footer
-  text-align center
+    // a 
+    //  padding 20px
+     
+.card-footer 
+  width 100%
+  height 80px
  .social_media-icons
-    margin-top 10px
-    padding 15px 0px
-    background-color #FAFAFA
-    ,a 
-      padding 10px
-      display inline
-      transition .1s ease-in-out      
-      &:hover
-        font-size 20px
+   text-align center
+   position relative
+   top 25%
+   a 
+    margin auto 35px
+.card-footer .social_media-icons img 
+  width 40px
+  height 40px 
+  vertical-align -50%
+  webkit-transition all .11s ease-in-out 
+  transition all .11s ease-in-out 
+  &:hover
+   transform scale(1.5)
 .card-quick_info
   h3
     font-size 2rem
@@ -152,7 +160,8 @@ export default {
     li
      font-size 1.2rem
      display inline
-     padding 0 20px
+     margin-left 21px
+  
 </style>
 
 
