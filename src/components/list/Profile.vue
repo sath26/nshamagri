@@ -6,12 +6,12 @@
       <q-tabs v-model="tab" animated  active-color="secondary"
             indicator-color="secondary" align="justify">
         <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
-        <q-tab name="enterprise" label="enterprise" />
-        <q-tab name="member" label="members" />
+        <q-tab class="q-pa-sm" name="enterprise" label="enterprise" />
+        <q-tab class="q-pa-sm" name="member" label="members" />
       </q-tabs>
       <q-separator />
-      <q-tab-panels v-model="tab" animated class="bg-grey-1">
-         <q-tab-panel name="enterprise">
+      <q-tab-panels  v-model="tab" animated class="bg-grey-1">
+         <q-tab-panel  name="enterprise">
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
             <!-- Contact Card ~ #01 -->
                 <div id="enterprise-profile_card">
@@ -30,7 +30,10 @@
                     <div class="card-body">
                       <a href="/"><q-icon name="email"></q-icon> cabrown96@live.com</a>
                       <a href="/"><q-icon name="phone"></q-icon> +1 123-456-7890</a>
-                      <a href="/"><q-icon name="place"></q-icon> Kathmandu, Nepal</a>
+                      <div class="address-info row">
+                        <a class="col" href="/"><q-icon name="place"></q-icon> Kathmandu, Nepal</a>
+                        <q-btn flat class="col text-red-6" >Locate on map</q-btn>
+                      </div>
                     </div>
                     <div class="card-footer">
                       <div class="social_media-icons">
@@ -96,7 +99,6 @@ export default {
 
 .tab-me, .tab-enterprise 
   background $tab-color
-  
 #enterprise-profile_card
   color #424242
   overflow hidden
@@ -119,6 +121,8 @@ export default {
   width 50%
   margin 0 auto
   padding 20px
+  .address-info
+    width 350px
   a
     display block
     padding 5px 0px
