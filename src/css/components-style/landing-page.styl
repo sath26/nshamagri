@@ -16,4 +16,137 @@
     @media screen and (max-width: 720px) 
       opacity 0
 
+ .web-bg_img
+    width 100%
+  .mobile-bg_img
+    width 100%
+  .devices_img
+    width 30%
+    position absolute 
+    top 23vw
+    right 5%
+  .intro-text
+    position absolute
+    top 150px
+    left 200px
+    color #fafafa
+    h5
+      font-size 3vw
+      padding 0
+      text-transform uppercase
+      font-weight 500
+      line-height 0
+      span 
+        color #FFE45C
+    p
+      font-size 2vw
+      line-height 1.2
+      margin-top -5%
+  .intro-section 
+    min-height 100%    
+.info-cards
+  margin-top 800px
+  text-align center
+  .info-card
+    width 250px
+    height 320px
+    display inline-block
+    .graphics_container
+      width 100%
+      background #f6d365
+      padding 0
+      text-align center
+      img
+        width 60%
+        padding 5px
+    .search-graphics_container
+        height 155px
+        background #65F68B
+        .search-graphics
+         width 100%
+         margin 20px auto
+    .info-text
+      text-align left
+      font-size 1.1em
+      color #424242
+      h5 
+       padding 0
+       margin 0
+       font-weight 700 
+.learn-more_btn
+  text-align center
+  position relative
+  top 29vh
+  h5
+    margin 0
+  .arrow-down_icon
+    opacity 0
+    transition all .5s linear
+    animation fadeDown .6s infinite ease-in-out
+// Media queries
+@media screen and (max-width: 1140px) {
+  .intro-text {
+    top: 100px;
+    left: 60px;
+  }
+}
+@media screen and (max-width: 850px)
+  .web-bg_img
+    height 40vh
+  .devices_img
+    width 60%
+    top 40%
+    right 22%
+  .intro-text
+    width 80%
+@media screen and (min-width: 565px)
+  .mobile-bg_img
+    display none
+@media screen and (max-width: 564px)
+  .web-bg_img
+    display none
+  .devices_img
+    width 80%
+    margin 0 auto
+    text-align center
+    top 30%
+    right 10%
+  .intro-text
+    .email-input
+      width 70%
+    .get-started
+      position absolute
+      top 500%
+      left 18%
+      .sub-header
+        font-size 1.5em
+        top 0
+    p
+      font-size 3vw
+@media screen and (max-width: 650px)
+  .intro-text
+    top 10%
+    left 3%
+    h5
+      font-size 4.5vw
+    p
+      font-size 3.5vw
+    .p-breaker
+      display none
+  .info-cards
+    .info-card
+      margin 0 auto
+      margin-bottom 40px
+      display block
 
+// Animation keyframes
+@keyframes fadeDown{
+    from{
+      transform: translateY(-35%);
+      opacity: 0;
+    } 
+    to{
+      transform: translateY(10%);
+      opacity: 1;
+    }  
+  }

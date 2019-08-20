@@ -3,43 +3,19 @@ sell will be fixed icon
 
  */
 <template>
-  <!-- footer content -->
-  <!-- <q-layout-footer v-model="footer"> -->
-  <!-- <q-layout-footer class="row justify-center"> -->
-  <!-- <q-btn label="Buy" @click="clickHandler1"/> -->
-  <!-- <q-btn size="lg" label="Buy" push class="col-6 footer-btn"/> -->
-  <!-- <q-btn size="lg" label="Sell" push class="col-6 footer-btn"/> -->
-  <!-- </q-layout-footer> -->
-  <div>
-    <q-page-sticky expand position="bottom-right" :offset="[18, 18]">
-      <q-btn
-        fab-mini
-        color="secondary"
-        icon="add"
-        class="animate-pop"
-        to="/choose_service"
-        @click="icon = true"
-      />
-    </q-page-sticky>
-    <!-- <q-dialog v-model="icon">
-      <q-card>
-        <q-toolbar class="row items-center">
-          <q-toolbar-title>Create invoice</q-toolbar-title>
-          
-          <q-btn icon="close" flat round dense v-close-popup />
-        </q-toolbar>
-
-        <q-card-section>
-          <div class="q-pa-lg">
-            <q-option-group v-model="group" :options="options" />
-          </div>
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn flat :to="group">Next</q-btn>
-        </q-card-actions>
-      </q-card>
-    </q-dialog> -->
-  </div>
+ <div class="footer-nav">
+            <div class="contact-info">
+                   <div class="chip"><q-icon name="place"></q-icon> Address</div>
+                   <div class="chip"><q-icon name="phone"></q-icon> Phone number</div>
+                   <div class="chip"><q-icon name="email"></q-icon> E-mail</div>
+            </div>
+            <ul class="footer-nav-items_list">
+              <li>Terms and Condition</li>
+              <li>Privacy</li>
+              <li>FAQ</li>
+              <li>Support</li>
+            </ul>
+      </div>
 </template>
 <script>
 export default {
@@ -65,10 +41,28 @@ export default {
 </script>
 
 <style lang="stylus">
-.footer-btn {
-  border-radius: 0;
-  color: #41aaa8;
-  background: #fafafa;
-}
+.footer-nav
+    width 100%
+    background #35947A
+    position relative
+    bottom 0
+    .contact-info
+      width 60%
+      padding 20px
+      background #29705d
+      border-radius 0 0 10px 10px 
+      margin 0 auto 
+      text-align center
+      .chip
+        color #fafafa
+        display inline
+        padding 20px
+    .footer-nav-items_list
+      margin 0 
+      padding 20px
+      list-style none
+      text-decoration none
+      li 
+        color #fafafa
 </style>
 
