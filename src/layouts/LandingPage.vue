@@ -23,13 +23,17 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
         <img src="\assets\img\devices-graphics@2x.png" class="devices_img" alt="Background-img-1">
         <img src="\assets\img\landing-page-mobile-bg.png" class="mobile-bg_img" alt="Background-img-1">
       </div>
-      <div class="learn-more_btn">
+      <!-- More info btn -->
+      <div :class="vmbc" >
         <h5>Wanna learn more?</h5>
-        <a href="#infoCards"><img class="arrow-down_icon" src="\assets\icons\arrow-down_icon.svg" alt="arrow down icon"></a>
+        <p>scroll down</p>
+        <a v-on:click="changeScroll"><img class="arrow-down_icon" src="\assets\icons\arrow-down_icon.svg" alt="arrow down icon">
+</a>  
       </div>
       <!-- INFO CARDS SECTION -->
       <section id="infoCards" class="info-cards q-pa-lg">
-        <q-card class="info-card info-card_invoice q-ma-lg">
+        <div class="cards-wrapper">
+          <q-card class="info-card info-card_invoice q-ma-lg">
          <div class="graphics_container">
             <img src="\assets\img\Invoice-graphics.png" alt="Invoice graphics">
          </div>
@@ -57,6 +61,7 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
             We provide this legal document before or after the supply of goods or services.
           </q-card-section>
         </q-card>
+        </div>
       </section>
       <f-footer></f-footer>
     </div>
@@ -69,8 +74,24 @@ export default {
   },
   data() {
     return {
+      vmbc:["learn-more_btn"],
     };
-  }
+  },
+  methods: {
+    scrollValue(){
+      if(window.scrollY > 600){
+        this.vmbc.push("hideBtn")
+      }else{
+        this.vmbc.splice(1)
+      }
+    },
+    changeScroll(){
+      window.scrollTo(0, 800);
+    }
+  },
+  mounted() {
+  document.addEventListener('scroll', this.scrollValue)
+}
 };
 </script>
 <style lang="stylus" scoped>

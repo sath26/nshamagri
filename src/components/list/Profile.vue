@@ -64,7 +64,6 @@
         </q-tab-panel>
       </q-tab-panels>
     </q-page-container>
-    <s-footer></s-footer>
   </q-layout>
 </template>
 <script>
