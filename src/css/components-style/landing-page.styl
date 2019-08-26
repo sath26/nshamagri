@@ -1,6 +1,7 @@
 @import '..\app.styl';
 // .container
 //   scroll-behavior smooth 
+
 .navbar 
   background-image linear-gradient(45deg, $navColor1, $navColor2)
   height 7vh
@@ -47,10 +48,15 @@
   .intro-section 
     min-height 100%    
 .info-cards
-  margin-top 800px
+  height 800px
+  margin-top 400px
   text-align center
+  background-image url("..\assets\img\cards-bg.png")
+  background-size cover
+  overflow hidden
   .cards-wrapper
-   transform translateY(-50%)
+    transform translateY(35%)
+    display inline-block
   .info-card
     width 250px
     height 320px
@@ -70,6 +76,8 @@
         .search-graphics
          width 100%
          margin 20px auto
+    .quotation-graphics_container
+        background #6bc5d2
     .info-text
       text-align left
       font-size 1.1em
@@ -84,8 +92,9 @@
   display none
 .learn-more_btn
   text-align center
-  position relative
-  top 25vh
+  position absolute
+  top 87vh
+  left 45vw
   h5
     margin 0
   p

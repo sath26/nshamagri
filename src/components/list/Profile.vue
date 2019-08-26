@@ -2,7 +2,6 @@
   <q-layout view="hHh LpR lFf">
     <q-page-container>
       <s-header></s-header>
-
       <q-tabs v-model="tab" animated  active-color="secondary"
             indicator-color="secondary" align="justify">
         <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
@@ -12,7 +11,8 @@
       <q-separator />
       <q-tab-panels  v-model="tab" animated class="bg-grey-1">
          <q-tab-panel  name="enterprise">
-          <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
+          <div class="row">
+             <div class="profile-left_content col-4">
             <!-- Contact Card ~ #01 -->
                 <div id="enterprise-profile_card">
                     <div class="card-banner">
@@ -43,6 +43,8 @@
                       </div>
                     </div>
                 </div>
+          </div>
+          <div class="profile-right_content bg-teal col-8"></div>
           </div>
         </q-tab-panel>
   <!-- Member profile panel -->

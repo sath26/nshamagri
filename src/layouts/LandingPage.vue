@@ -32,18 +32,19 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
       </div>
       <!-- INFO CARDS SECTION -->
       <section id="infoCards" class="info-cards q-pa-lg">
+        <div class="text-h4 text-grey-2">Finding product and services couldn't get any easier</div>
         <div class="cards-wrapper">
-          <q-card class="info-card info-card_invoice q-ma-lg">
-         <div class="graphics_container">
-            <img src="\assets\img\Invoice-graphics.png" alt="Invoice graphics">
-         </div>
-          <q-card-section class="info-text">
-            <h5>Invoice</h5>
-            The main highlight of Shamagri is Invoices.
-            We provide this legal document before or after the supply of goods or services.
-          </q-card-section>
+          <q-card class="info-card info-card_invoice q-ma-xl">
+            <div class="graphics_container">
+                <img src="\assets\img\Invoice-graphics.png" alt="Invoice graphics">
+            </div>
+              <q-card-section class="info-text">
+                <h5>Invoice</h5>
+                The main highlight of Shamagri is Invoices.
+                We provide this legal document before or after the supply of goods or services.
+              </q-card-section>
         </q-card>
-        <q-card class="info-card info-card_invoice q-ma-lg">
+        <q-card class="info-card info-card_invoice q-ma-xl">
          <div class="graphics_container search-graphics_container">
             <img class="search-graphics" src="\assets\img\search-graphics.png" alt="Invoice graphics">
          </div>
@@ -52,13 +53,13 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
             Quick and easy search of any products or services by categorization and optimization. 
           </q-card-section>
         </q-card>
-        <q-card class="info-card info-card_invoice q-ma-lg">
-         <div class="graphics_container">
-            <img src="\assets\img\Invoice-graphics.png" alt="Invoice graphics">
+        <q-card class="info-card info-card_quotation q-ma-xl">
+         <div class="quotation-graphics_container">
+            <img src="\assets\img\quotation-graphics.png" alt="Invoice graphics">
          </div>
           <q-card-section class="info-text">
-            The main highlight of Shamagri is Invoices.
-            We provide this legal document before or after the supply of goods or services.
+            <h5>Quotation</h5>
+            Get all the right quotations for your product or service.
           </q-card-section>
         </q-card>
         </div>
@@ -86,7 +87,11 @@ export default {
       }
     },
     changeScroll(){
-      window.scrollTo(0, 800);
+      window.scrollTo({
+        top: 1000,
+        left: 0,
+        behavior: 'smooth'
+      });
     }
   },
   mounted() {
