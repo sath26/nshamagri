@@ -51,9 +51,9 @@
             </div>
           </div>
         </div>
+        <q-btn round class="bg-teal text-grey-1 float-right" icon="add"></q-btn>
       </q-page>
     </q-page-container>
-    <s-footer></s-footer>
   </q-layout>
 </template>
 <script>
