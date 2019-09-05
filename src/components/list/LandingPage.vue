@@ -2,7 +2,7 @@
     <div>
       <q-toolbar class="navbar">
           <div class="logo-container">
-            <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo vertical-middle q-pa-xs">
+            <img src="statics\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo vertical-middle q-pa-xs">
           </div>
           <q-toolbar-title class="text-title">Shamagri</q-toolbar-title>
          <q-btn outline color="white" class="q-mr-sm" to="/login">Login</q-btn>
@@ -19,9 +19,9 @@ developed to help grow and maintain all businesses. </p>
               </div>
             </div>
         </div>
-        <img src="\assets\img\Landing-page-bg.png" class="web-bg_img" alt="Background-img-1">
-        <img src="\assets\img\devices-graphics@2x.png" class="devices_img" alt="Background-img-1">
-        <img src="\assets\img\landing-page-mobile-bg.png" class="mobile-bg_img" alt="Background-img-1">
+        <img src="statics\img\Landing-page-bg.png" class="web-bg_img" alt="Background-img-1">
+        <img src="statics\img\devices-graphics@2x.png" class="devices_img" alt="Background-img-1">
+        <img src="statics\img\landing-page-mobile-bg.png" class="mobile-bg_img" alt="Background-img-1">
       </div>
     </div>
 </template>

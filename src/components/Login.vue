@@ -7,12 +7,12 @@
 >
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
-            <div class="login-header"><img src="\assets\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
+            <div class="login-header"><img src="statics\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
                       <q-input v-model="email" filled type="email" hint="Email"></q-input>
                         <div class="q-py-sm"></div>
                       <q-input v-model="password" filled type="password" hint="Password" ></q-input>
             <q-btn flat class="forgot-btn">forgot password?</q-btn>
-            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
+            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/statics/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
 </q-btn>
              
             <div class="create-account-btn-container"><span class="txt-newuser">New User?</span><q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn></div>
@@ -20,7 +20,7 @@
         </div>
         </transition>
       <div class="bg-img_container">
-        <img class="bg-img" src="..\assets\img\Login-register-bgShape@2x.png" alt="illustrator">
+        <img class="bg-img" src="statics\img\Login-register-bgShape@2x.png" alt="illustrator">
       </div>
     </div>
 </template>

@@ -13,7 +13,7 @@
             class="side-menu_btn q-mr-sm"
           /></q-btn>
           <div class="logo-container">
-            <img src="\assets\logo\logo-sm.svg" alt="Shamagri Logo" class="vertical-middle shamagri-logo q-pa-xs">
+            <img src="\statics\logo\logo-sm.svg" alt="Shamagri Logo" class="vertical-middle shamagri-logo q-pa-xs">
           </div>
           <q-toolbar-title class="txtShamagri">shamagri</q-toolbar-title>
           <s-search class="component-search-desktop"></s-search>
@@ -22,7 +22,7 @@
           class="search-box_toggle-btn"></q-btn> -->
           <s-create class="q-px-sm"></s-create>
           <s-notification class="q-px-sm"></s-notification>
-          <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile"><q-tooltip><strong>User profile</strong></q-tooltip><img src="..\assets\icons\User-icon.svg" alt="User-icon"></img></q-btn>
+          <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile"><q-tooltip><strong>User profile</strong></q-tooltip><img src="..\statics\icons\User-icon.svg" alt="User-icon"></img></q-btn>
           <!-- notification is also available but i need number of notification on top of the icon or change in color  -->
         </q-toolbar>
         <div v-show="mobileSearchBoxToggle" v-bind:class="{nowActive: mobileSearchBoxToggle}"  class="search-box-mobile_container row no-shadow">
@@ -77,6 +77,12 @@ import { mapState, mapGetters } from "vuex";
 import SSearch from "./Search.vue";
 import SCreate from "./Create.vue";
 import SNotification from "./Notification.vue";
+// import quotation-icon from  ;
+// import category-icon from ;
+// import unit-icon from ;
+// import bought-icon from ;
+// import sold-icon from ;
+
 export default {
   components: {
     SSearch,
@@ -105,31 +111,31 @@ export default {
     separator: true
   },
   {
-    iconSrc: '/assets/icons/quotation-icon.svg',
+    iconSrc: 'statics/icons/Quotation-icon.svg',
     label: 'Quotation',
     route: '/my_products',
     separator: false
   },
   {
-    iconSrc: '/assets/icons/category-icon.svg',
+    iconSrc: 'statics/icons/category-icon.svg',
     label: 'Category',
     route: '/my_services',
     separator: false
   },
  {
-    iconSrc: '/assets/icons/unit-icon.svg',
+    iconSrc: 'statics/icons/unit-icon.svg',
     label: 'Unit',
     route: '/unit',
     separator: true
   },
   {
-    iconSrc: '/assets/icons/bought-icon.svg',
+    iconSrc: 'statics/icons/bought-icon.svg',
     label: 'Bought',
     route: '/payment_bought',
     separator: false
   },
   {
-    iconSrc: '/assets/icons/sold-icon.svg',
+    iconSrc: 'statics/icons/sold-icon.svg',
     label: 'Sold',
     route: '/payment_sold',
     separator: true
