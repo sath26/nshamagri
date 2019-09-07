@@ -12,7 +12,7 @@
       <q-tab-panels  v-model="tab" animated class="bg-grey-1">
          <q-tab-panel  name="enterprise">
           <div class="row">
-             <div class="profile-left_content col-5">
+             <div class="profile-left_content bg-grey-2  col-5">
             <!-- Contact Card ~ #01 -->
                 <div id="enterprise-profile_card">
                     <div class="card-banner">
