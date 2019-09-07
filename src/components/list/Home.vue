@@ -6,7 +6,7 @@
  <template>
   <q-layout view="hHh LpR lFf">
     <!-- this view put header and footer fixed but tab is not fixed yet-->
-    <q-page-container class="q-pa-lg q-my-lg">
+    <q-page-container class="">
       <q-page padding>
         <s-header></s-header>
         <div class="content-wrapper">

@@ -12,7 +12,7 @@
       <q-tab-panels  v-model="tab" animated class="bg-grey-1">
          <q-tab-panel  name="enterprise">
           <div class="row">
-             <div class="profile-left_content col-4">
+             <div class="profile-left_content col-5">
             <!-- Contact Card ~ #01 -->
                 <div id="enterprise-profile_card">
                     <div class="card-banner">
@@ -34,6 +34,7 @@
                         <a class="col" href="/"><q-icon name="place"></q-icon> Kathmandu, Nepal</a>
                         <q-btn flat class="col text-red-6" >Locate on map</q-btn>
                       </div>
+                      <a href="/"><q-icon name="note"></q-icon> 223 049 023</a>
                     </div>
                     <div class="card-footer">
                       <div class="social_media-icons">
@@ -44,7 +45,19 @@
                     </div>
                 </div>
           </div>
-          <div class="profile-right_content bg-teal col-8"></div>
+          <div class="profile-right_content bg-teal col-7">
+            <q-tabs
+          v-model="tab"
+          dense
+          align="justify"
+          class="bg-teal-7 text-white shadow-2"
+          :breakpoint="0"
+        >
+          <q-tab label="Quotation"></q-tab>
+          <q-tab label="Invoice"></q-tab>
+          <q-tab label="Customer"></q-tab>
+        </q-tabs>
+          </div>
           </div>
         </q-tab-panel>
   <!-- Member profile panel -->
@@ -72,11 +85,13 @@
 //consists of me and enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+import GINVOICE from "./Invoice_good";
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
-    SFooter
+    SFooter,
+    GINVOICE
   },
   data() {
     return {
@@ -155,9 +170,9 @@ export default {
   &:hover
    transform scale(1.5)
 .card-quick_info
+    text-align center
   h3
     font-size 2rem
-    text-align center
     padding 0
     margin 0
   ul
@@ -166,6 +181,8 @@ export default {
      font-size 1.2rem
      display inline
      margin-left 21px
+.info-content
+  padding 0
   
 </style>
 
