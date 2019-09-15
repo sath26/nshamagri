@@ -12,15 +12,20 @@ another ui is needed when supplier provides u good with all info and u dont have
       @reset="onReset"
       class="q-gutter-md"
     >
-          <q-input filled v-model="goods" label="Goods/Services Name" color="secondary"/>
+          <q-input filled v-model="name" label="Goods/Services Name" color="secondary"/>
           <q-input filled v-model="price" label="Price" color="secondary"/>
-          <q-input filled v-model="price" label="Unit" color="secondary"/>
+          <q-input filled v-model="unit" label="Unit" color="secondary"/>
           <q-input filled v-model="price" label="Good or Service(radio option)" color="secondary"/>
           <!-- <q-select filter v-model="select" :options="options"/> -->
+          <q-input filled v-model="inptag" label="Tags" color="secondary">
+            <q-btn round flat @click="addTag" icon="add"></q-btn>
+          </q-input>
+           <q-chip removable v-for="tag in tags" @remove="log('Icecream')" color="teal" text-color="white">{{tag}}</q-chip>
           <div>
+            
         <!-- <q-btn label="Submit" type="submit" color="primary"/> -->
-          <q-btn to="/add_goods" label="Save" color="secondary" type="submit"/>
-        <q-btn label="Reset" type="reset" color="secondary" flat class="q-ml-sm" />
+          <q-btn to="/add_goods" label="save" color="secondary" type="submit"/>
+          <q-btn label="Reset" type="reset" color="secondary" flat class="q-ml-sm" />
       </div>
       </q-form>
         </div>
@@ -43,8 +48,11 @@ export default {
   data() {
     return {
       search: "",
-      goods: "",
+      name: "",
       price: "",
+      unit:"",
+      inptag:"",
+      tags:[],
       select: "",
       options: [
         {
@@ -106,7 +114,11 @@ export default {
       this.goods = null
       this.price = null
       // this.accept = false
-    }
+    },
+    addTag(){
+      this.tags.push(this.inptag)
+      this.inptag = ""
+    },
   }
 };
 </script>

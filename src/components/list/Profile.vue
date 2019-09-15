@@ -45,19 +45,22 @@
                     </div>
                 </div>
           </div>
-          <div class="profile-right_content bg-teal col-7">
-            <q-tabs
-          v-model="tab"
-          dense
-          align="justify"
-          class="bg-teal-7 text-white shadow-2"
-          :breakpoint="0"
-        >
-          <q-tab label="Quotation"></q-tab>
-          <q-tab label="Invoice"></q-tab>
-          <q-tab label="Customer"></q-tab>
-        </q-tabs>
-          </div>
+            <div class="profile-right_content bg-teal col-7">
+              <q-tabs
+            v-model="subTab"
+            dense
+            align="justify"
+            class="bg-teal-7 text-white shadow-2"
+            :breakpoint="0"
+          >
+            <q-tab label="Quotation"></q-tab>
+            <q-tab label="Invoice"></q-tab>
+            <q-tab label="Customer"></q-tab>
+          </q-tabs>
+          <q-tab-panels>
+
+          </q-tab-panels>
+            </div>
           </div>
         </q-tab-panel>
   <!-- Member profile panel -->
@@ -95,7 +98,8 @@ export default {
   },
   data() {
     return {
-      tab: "enterprise"
+      tab: "enterprise",
+      subTab: "profileInfo"
     };
   },
   computed: {
