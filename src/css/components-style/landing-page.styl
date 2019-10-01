@@ -48,14 +48,13 @@
   .intro-section 
     min-height 100%    
 .info-cards
-  height 800px
+  height 100%
   margin-top 400px
   text-align center
   background-image url("..\assets\img\cards-bg.png")
   background-size cover
   overflow hidden
   .cards-wrapper
-    transform translateY(35%)
     display inline-block
   .info-card
     width 250px
@@ -64,7 +63,7 @@
     transition transform .1s ease
     .graphics_container
       width 100%
-      background #f6d365
+      background #F6ED7A
       padding 0
       text-align center
       img
@@ -72,12 +71,12 @@
         padding 5px
     .search-graphics_container
         height 155px
-        background #65F68B
+        background #7AF697
         .search-graphics
          width 100%
          margin 20px auto
     .quotation-graphics_container
-        background #6bc5d2
+        background #7AE2F6
     .info-text
       text-align left
       font-size 1.1em
@@ -87,7 +86,7 @@
        margin 0
        font-weight 700 
     &:hover
-      transform scale(1.2)
+      transform scale(1.1)
 .hideBtn
   display none
 .learn-more_btn
@@ -126,11 +125,10 @@
   .web-bg_img
     display none
   .devices_img
-    width 80%
+    width 70%
     margin 0 auto
-    text-align center
-    top 30%
-    right 10%
+    top 60%
+    right 15%
   .intro-text
     .email-input
       width 70%
@@ -154,11 +152,14 @@
     .p-breaker
       display none
   .info-cards
-    .info-card
+    margin 0
+    .info-card 
+      width 230px
+      height 300px
+      font-size .75em
       margin 0 auto
       margin-bottom 40px
       display block
-
 // Animation keyframes
 @keyframes fadeDown{
     from {
