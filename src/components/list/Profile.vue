@@ -10,9 +10,11 @@
       </q-tabs>
       <q-separator />
       <q-tab-panels  v-model="tab" animated class="bg-grey-1">
-         <q-tab-panel  name="enterprise">
-          <div class="row">
-             <div class="profile-left_content bg-grey-2  col-5">
+         <q-tab-panel name="enterprise">
+              <div class="profile-background_img_container">
+                <img src="../../assets/img/Profile-bg_graphics.png" alt="profile background image">
+              </div>
+             <div class="profile-content">
             <!-- Contact Card ~ #01 -->
                 <div id="enterprise-profile_card">
                     <div class="card-banner">
@@ -27,6 +29,9 @@
                         </ul>
                     </div>
                     <q-separator></q-separator>
+                    <div class="edit-btn_container">
+                      <q-btn class="edit-btn ">Edit info</q-btn>
+                    </div>
                     <div class="card-body">
                       <a href="/"><q-icon name="email"></q-icon> cabrown96@live.com</a>
                       <a href="/"><q-icon name="phone"></q-icon> +1 123-456-7890</a>
@@ -36,6 +41,7 @@
                       </div>
                       <a href="/"><q-icon name="note"></q-icon> 223 049 023</a>
                     </div>
+                    
                     <div class="card-footer">
                       <div class="social_media-icons">
                           <a href="/" target="_blank"><img src="\assets\icons\facebook.svg" alt="Facebook icon"></a>
@@ -44,23 +50,7 @@
                       </div>
                     </div>
                 </div>
-          </div>
-            <div class="profile-right_content bg-teal col-7">
-              <q-tabs
-            v-model="subTab"
-            dense
-            align="justify"
-            class="bg-teal-7 text-white shadow-2"
-            :breakpoint="0"
-          >
-            <q-tab label="Quotation"></q-tab>
-            <q-tab label="Invoice"></q-tab>
-            <q-tab label="Customer"></q-tab>
-          </q-tabs>
-          <q-tab-panels>
-
-          </q-tab-panels>
-            </div>
+                
           </div>
         </q-tab-panel>
   <!-- Member profile panel -->
@@ -119,6 +109,18 @@ export default {
 
 .tab-me, .tab-enterprise 
   background $tab-color
+.profile-content
+  margin 5% auto
+  width 800px
+  background transparent
+  position relative
+  z-index 15
+.profile-background_img_container
+  width 100%
+  position absolute
+  z-index 10
+  img
+   width 98.5%
 #enterprise-profile_card
   color #424242
   overflow hidden
@@ -134,9 +136,15 @@ export default {
 .card-banner
 	height 100%
 	width 100%
-	padding-top 30px
-	background-size cover
+  background-size cover
 	background-position center
+.avatar
+  img
+   border-radius 3px
+   border 5px solid #fafafa
+.edit-btn_container
+  text-align center
+  margin-top 10px
 .card-body
   width 50%
   margin 0 auto
