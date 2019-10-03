@@ -21,5 +21,5 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-@import '..\css\layouts-style\header.styl';
+@import "..\css\layouts-style\header.styl";
 </style>
