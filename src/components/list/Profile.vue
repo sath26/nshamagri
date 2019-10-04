@@ -14,34 +14,40 @@
               <div class="profile-background_img_container">
                 <img src="../../assets/img/Profile-bg_graphics.png" alt="profile background image">
               </div>
-             <div class="profile-content">
-            <!-- Contact Card ~ #01 -->
-                <div id="enterprise-profile_card">
+            <!-- Profile card ~ #01 -->
+                <div id="enterprise-profile_card" class="q-pa-xl">
                     <div class="card-banner">
-                        <div class="avatar"><img src="statics/parallax2.jpg" /></div>
-                    </div>
-                    <div class="card-quick_info">
-                        <h3>Saugat enterprise</h3>
-                        <ul class="info-content">
-                          <li>Quotation <span>200</span></li>
-                          <li>Invoice <span>120</span></li>
-                          <li>Customer <span>30</span></li>
-                        </ul>
+                        <div class="avatar">
+                          <img class="usr-img" src="statics/parallax2.jpg" /> 
+                          <div class="img-edit">
+                            <a href="#">Change</a>
+                            <a href="#">Delete</a>
+                          </div>
+                        </div>
+                        <div class="card-quick_info">
+                          <h3>Saugat enterprise</h3>
+                          <ul class="info-content">
+                            <li>Quotation <span>200</span></li>
+                            <li>Invoice <span>120</span></li>
+                            <li>Customer <span>30</span></li>
+                          </ul>
+                        </div>
                     </div>
                     <q-separator></q-separator>
-                    <div class="edit-btn_container">
-                      <q-btn class="edit-btn ">Edit info</q-btn>
+                    <div class="card-body row">
+                      <ul class="info-list col">
+                        <li><q-icon name="email"></q-icon>saugathapa@gmail.com</li>
+                        <li><q-icon name="phone"></q-icon> +1 123-456-7890</li>
+                        <li><q-icon name="place"></q-icon> Kathmandu, Nepal</li>
+                        <li><q-icon name="note"></q-icon> 223 049 023</li>
+                      </ul>
+                      <ul class="edit-list col">
+                        <li><a href="#">Edit</a></li>
+                        <li><a href="#">Edit</a></li>
+                        <li><a href="#">Edit</a></li>
+                        <li><a href="#">Edit</a></li>
+                      </ul>
                     </div>
-                    <div class="card-body">
-                      <a href="/"><q-icon name="email"></q-icon> cabrown96@live.com</a>
-                      <a href="/"><q-icon name="phone"></q-icon> +1 123-456-7890</a>
-                      <div class="address-info row">
-                        <a class="col" href="/"><q-icon name="place"></q-icon> Kathmandu, Nepal</a>
-                        <q-btn flat class="col text-red-6" >Locate on map</q-btn>
-                      </div>
-                      <a href="/"><q-icon name="note"></q-icon> 223 049 023</a>
-                    </div>
-                    
                     <div class="card-footer">
                       <div class="social_media-icons">
                           <a href="/" target="_blank"><img src="statics\icons\facebook.svg" alt="Facebook icon"></a>
@@ -49,9 +55,7 @@
                           <a href="/" target="_blank"><img src="statics\icons\twitter.svg" alt="Twitter icon"></i></a>
                       </div>
                     </div>
-                </div>
-                
-          </div>
+                </div>    
         </q-tab-panel>
   <!-- Member profile panel -->
           <q-tab-panel name="member">
@@ -106,64 +110,80 @@ export default {
 #me-card, #enterprise-profile_card 
   background $primary-white
   margin 0 auto
-
 .tab-me, .tab-enterprise 
-  background $tab-color
-.profile-content
-  margin 5% auto
-  width 800px
-  background transparent
-  position relative
-  z-index 15
+  background $tab-color 
 .profile-background_img_container
   width 100%
   position absolute
   z-index 10
+  overflow hidden
   img
    width 98.5%
+   height 350px
+   border-radius 5px   
 #enterprise-profile_card
-  color #424242
-  overflow hidden
-	border-radius 15px
-	text-align center
-  display block
-.avatar
   width 100%
-  text-align center
- img
-  width 400px
-  height 400px
+  height 100%
+  margin-top 5%
+  position relative
+  z-index 15
+  .card-banner
+    display flex
+    flex-wrap nowrap
+.usr-img
+  width 300px
+  height 300px
+  box-shadow 0px 0px 7px rgba(0,0,0, .3)
+.card-quick_info
+    text-align center
+    align-self flex-end
+  h3
+    font-size 2rem
+    padding 0
+    margin 0
+  ul
+    list-style none
+    li
+     font-size 1.2rem
+     display inline
+     margin-left 21px
+.info-content
+  padding 0
 .card-banner
 	height 100%
 	width 100%
   background-size cover
 	background-position center
-.avatar
-  img
-   border-radius 3px
-   border 5px solid #fafafa
-.edit-btn_container
+.img-edit
   text-align center
-  margin-top 10px
+  a
+   text-decoration none
+   margin 0 20px 
 .card-body
-  width 50%
+  width 100%
   margin 0 auto
   padding 20px
+  .info-list
+    li
+     padding 18px 0px
+     display block
+  .edit-list
+    li
+     color #6bc5d2
+     font-size .8em
+     text-align right
   .address-info
     width 350px
   a
     display block
     padding 5px 0px
-    font-size 14px
+    font-size 1.8em
     color #9E9E9E
     text-decoration none
     webkit-transition .1s ease-in-out
     transition .1s ease-in-out
     &:hover
       color inherit
-    // a 
-    //  padding 20px
-     
 .card-footer 
   width 100%
   height 80px
@@ -181,20 +201,7 @@ export default {
   transition all .11s ease-in-out 
   &:hover
    transform scale(1.5)
-.card-quick_info
-    text-align center
-  h3
-    font-size 2rem
-    padding 0
-    margin 0
-  ul
-    list-style none
-    li
-     font-size 1.2rem
-     display inline
-     margin-left 21px
-.info-content
-  padding 0
+
   
 </style>
 
