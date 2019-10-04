@@ -20,7 +20,7 @@ another ui is needed when supplier provides u good with all info and u dont have
           <q-input filled v-model="inptag" label="Tags" color="secondary">
             <q-btn round flat @click="addTag" icon="add"></q-btn>
           </q-input>
-           <q-chip removable v-for="tag in tags" @remove="log('Icecream')" color="teal" text-color="white">{{tag}}</q-chip>
+           <q-chip removable v-for="tag in tags" @remove="log('Icecream')" color="teal" text-color="white" v-bind:key="tag.id">{{tag}}</q-chip>
           <div>
             
         <!-- <q-btn label="Submit" type="submit" color="primary"/> -->
@@ -52,7 +52,10 @@ export default {
       price: "",
       unit:"",
       inptag:"",
-      tags:[],
+      tags:[
+        {id:1,tag:"saugat"},
+        {id:2, tag:"narmala"}
+      ],
       select: "",
       options: [
         {

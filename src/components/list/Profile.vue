@@ -18,7 +18,7 @@
             <!-- Contact Card ~ #01 -->
                 <div id="enterprise-profile_card">
                     <div class="card-banner">
-                        <div class="avatar" ><img src="statics/parallax2.jpg" /></div>
+                        <div class="avatar"><img src="statics/parallax2.jpg" /></div>
                     </div>
                     <div class="card-quick_info">
                         <h3>Saugat enterprise</h3>
@@ -44,9 +44,9 @@
                     
                     <div class="card-footer">
                       <div class="social_media-icons">
-                          <a href="/" target="_blank"><img src="\assets\icons\facebook.svg" alt="Facebook icon"></a>
-                          <a href="/" target="_blank"><img src="\assets\icons\linkedin.svg" alt="Linkedin icon"></a>
-                          <a href="/" target="_blank"><img src="\assets\icons\twitter.svg" alt="Twitter icon"></i></a>
+                          <a href="/" target="_blank"><img src="statics\icons\facebook.svg" alt="Facebook icon"></a>
+                          <a href="/" target="_blank"><img src="statics\icons\linkedin.svg" alt="Linkedin icon"></a>
+                          <a href="/" target="_blank"><img src="statics\icons\twitter.svg" alt="Twitter icon"></i></a>
                       </div>
                     </div>
                 </div>

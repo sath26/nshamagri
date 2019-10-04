@@ -22,7 +22,7 @@
           class="search-box_toggle-btn"></q-btn> -->
           <s-create class="q-px-sm"></s-create>
           <s-notification class="q-px-sm"></s-notification>
-          <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile"><q-tooltip><strong>User profile</strong></q-tooltip><img src="..\statics\icons\User-icon.svg" alt="User-icon"></img></q-btn>
+          <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile"><q-tooltip><strong>User profile</strong></q-tooltip><img src="statics\icons\User-icon.svg" alt="User-icon"></img></q-btn>
           <!-- notification is also available but i need number of notification on top of the icon or change in color  -->
         </q-toolbar>
         <div v-show="mobileSearchBoxToggle" v-bind:class="{nowActive: mobileSearchBoxToggle}"  class="search-box-mobile_container row no-shadow">
@@ -77,6 +77,7 @@ import { mapState, mapGetters } from "vuex";
 import SSearch from "./Search.vue";
 import SCreate from "./Create.vue";
 import SNotification from "./Notification.vue";
+
 // import quotation-icon from  ;
 // import category-icon from ;
 // import unit-icon from ;
@@ -111,7 +112,7 @@ export default {
     separator: true
   },
   {
-    iconSrc: 'statics/icons/Quotation-icon.svg',
+    iconSrc: "statics/icons/Quotation-icon.svg",
     label: 'Quotation',
     route: '/my_products',
     separator: false
@@ -135,7 +136,7 @@ export default {
     separator: false
   },
   {
-    iconSrc: 'statics/icons/sold-icon.svg',
+    iconSrc: './statics/icons/sold-icon.svg',
     label: 'Sold',
     route: '/payment_sold',
     separator: true

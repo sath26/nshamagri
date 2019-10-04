@@ -26,7 +26,7 @@
         </div>
         </transition>
     <div class="bg-img_container">
-        <img class="bg-img" src="..\statics\img\Login-register-bgShape@2x.png" alt="illustrator">
+        <img class="bg-img" src="\assets\img\Login-register-bgShape@2x.png" alt="illustrator">
       </div>
     </div>
 </template>

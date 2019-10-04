@@ -27,7 +27,7 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
       <div :class="vmbc" >
         <h5>Wanna learn more?</h5>
         <p>scroll down</p>
-        <a v-on:click="changeScroll"><img class="arrow-down_icon" src="\assets\icons\arrow-down_icon.svg" alt="arrow down icon">
+        <a v-on:click="changeScroll"><img class="arrow-down_icon" src="statics\icons\arrow-down_icon.svg" alt="arrow down icon">
 </a>  
       </div>
       <!-- INFO CARDS SECTION -->
@@ -36,7 +36,7 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
         <div class="cards-wrapper">
           <q-card class="info-card info-card_invoice q-ma-xl">
             <div class="graphics_container">
-                <img src="\assets\img\Invoice-graphics.png" alt="Invoice graphics">
+                <img src="statics/img/Invoice-graphics.png" alt="Invoice graphics">
             </div>
               <q-card-section class="info-text">
                 <h5>Invoice</h5>
@@ -46,7 +46,7 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
         </q-card>
         <q-card class="info-card info-card_invoice q-ma-xl">
          <div class="graphics_container search-graphics_container">
-            <img class="search-graphics" src="\assets\img\search-graphics.png" alt="Invoice graphics">
+            <img class="search-graphics" src="statics/img/search-graphics.png" alt="search graphics">
          </div>
           <q-card-section class="info-text">
             <h5>Optimized search</h5>
@@ -55,7 +55,7 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
         </q-card>
         <q-card class="info-card info-card_quotation q-ma-xl">
          <div class="quotation-graphics_container">
-            <img src="\assets\img\quotation-graphics.png" alt="Invoice graphics">
+            <img src="statics\img\quotation-graphics.png" alt="quotation graphics">
          </div>
           <q-card-section class="info-text">
             <h5>Quotation</h5>
@@ -64,14 +64,14 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
         </q-card>
         </div>
       </section>
-      <f-footer></f-footer>
+      <l-footer></l-footer>
     </div>
 </template>
 <script>
-import FFooter from "./Footer.vue"
+import LFooter from "./LFooter.vue"
 export default {
   components : {
-    FFooter
+    LFooter
   },
   data() {
     return {
