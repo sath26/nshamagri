@@ -7,7 +7,7 @@
 >
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
-            <div class="login-header"><img src="\assets\logo\logo-sm.svg" alt="shamagri logo" class="shamagri-logo"></div><div class="welcome-txt q-py-lg"><p>Welcome To,</p><p class="shamagri-txt">Shamagri</p></div>
+            <div class="login-header"><img src="\statics\logo\logo-sm.svg" alt="shamagri logo" class="shamagri-logo"></div><div class="welcome-txt q-py-lg"><p>Welcome To,</p><p class="shamagri-txt">Shamagri</p></div>
                 <div class="q-gutter-md">
                   <q-input standout="bg-teal text-white" v-model="email" label="Email"></q-input>
                    <q-input
@@ -20,7 +20,7 @@
                   <q-input standout="bg-teal text-white" v-model="confrimPassword" label="Confirm password"></q-input>
                 </div>
               <q-toggle class="q-pt-sm" v-model="accept" label="I accept the license and terms" ></q-toggle>
-            <q-btn size="lg" label="Sign-up with Facebook" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/assets/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
+            <q-btn size="lg" label="Sign-up with Facebook" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/statics/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
 </q-btn>
           </div>
         </div>

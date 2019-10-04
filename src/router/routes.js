@@ -8,7 +8,7 @@ const routes = [
   },
   {
     path: '/landing_page',
-    component: () => import('components/list/LandingPage.vue'),
+    component: () => import('layouts/LandingPage.vue'),
   },
   {
     path: '/profile',

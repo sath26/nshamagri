@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="55" viewBox="0 0 55 55">
+  <defs>
+    <clipPath id="clip-arrow-down_icon">
+      <rect width="55" height="55"/>
+    </clipPath>
+  </defs>
+  <g id="arrow-down_icon" clip-path="url(#clip-arrow-down_icon)">
+    <g id="down-icon" transform="translate(-933 -956)">
+      <circle id="Ellipse_17" data-name="Ellipse 17" cx="26.408" cy="26.408" r="26.408" transform="translate(934 957)" fill="#5bc7aa"/>
+      <path id="Path_81" data-name="Path 81" d="M3421.675,6081l15.34,11.684L3452.771,6081" transform="translate(-2477.061 -5101.655)" fill="none" stroke="#fafafa" stroke-linecap="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>
