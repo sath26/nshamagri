@@ -19,3 +19,4 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
  - `customer` lai ni xuttai page ma list nai banauna parxa aba hamle: tyo vaneko `sold` page ko cusotmer list nai ho
  - `invoice` ko lagi chai we wont show any page or content k `count` will only matter
 # Nirik
+- right now just go with the flow and provide any `improvement` u can : either `code` or `ideas`
