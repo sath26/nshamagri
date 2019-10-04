@@ -20,3 +20,4 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
  - `invoice` ko lagi chai we wont show any page or content k `count` will only matter
 # Nirik
 - right now just go with the flow and provide any `improvement` u can : either `code` or `ideas`
+- `code` ma improvement dina lai chai plz create your own `branch`
