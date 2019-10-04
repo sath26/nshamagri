@@ -14,8 +14,8 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 
 # Riwat
 - sunna taile chai aba profile ko update garna paro 
-⋅⋅⋅ - kura k ta vanda profile ma `qutoation`, `customer`, `invoice` ko lagi chai hamle 
-⋅⋅⋅ - chai `quotation` lai chai tei quotation list page ma lane banaune socheko maile
-⋅⋅⋅ - `customer` lai ni xuttai page ma list nai banauna parxa aba hamle: tyo vaneko `sold` page ko cusotmer list nai ho
-⋅⋅⋅ - `invoice` ko lagi chai we wont show any page or content k `count` will only matter
+ - kura k ta vanda profile ma `qutoation`, `customer`, `invoice` ko lagi chai hamle 
+ - chai `quotation` lai chai tei quotation list page ma lane banaune socheko maile
+ - `customer` lai ni xuttai page ma list nai banauna parxa aba hamle: tyo vaneko `sold` page ko cusotmer list nai ho
+ - `invoice` ko lagi chai we wont show any page or content k `count` will only matter
 # Nirik
