@@ -16,7 +16,7 @@
               </div>
             <!-- Profile card ~ #01 -->
                 <div id="enterprise-profile_card" class="q-pa-xl">
-                    <div class="card-banner">
+                      <div class="card-banner">
                         <div class="avatar">
                           <img class="usr-img" src="statics/parallax2.jpg" /> 
                           <div class="img-edit">
@@ -27,27 +27,32 @@
                         <div class="card-quick_info">
                           <h3>Saugat enterprise</h3>
                           <ul class="info-content">
-                            <li>Quotation <span>200</span></li>
-                            <li>Invoice <span>120</span></li>
-                            <li>Customer <span>30</span></li>
+                            <li><div class="info-box"><div class="info-head">Quotation</div><div class="info-count text-h5">200</div></div></li>
+                            <li><div class="info-box"><div class="info-head">Invoice</div><div class="info-count text-h5">120</div></div></li>
+                            <li><div class="info-box"><div class="info-head">Customer</div><div class="info-count text-h5">35</div></div></li>
                           </ul>
                         </div>
                     </div>
-                    <q-separator></q-separator>
+                    <!-- profile-detail card -->
+                    <q-card class="shadow-1 q-mt-lg">
+                      <q-card-section>
+                        <div class="text-h5 text-grey-8 q-ml-xl">Profile details</div>
+                      </q-card-section>
                     <div class="card-body row">
-                      <ul class="info-list col">
+                      <ul class="info-list col-8">
                         <li><q-icon name="email"></q-icon>saugathapa@gmail.com</li>
                         <li><q-icon name="phone"></q-icon> +1 123-456-7890</li>
                         <li><q-icon name="place"></q-icon> Kathmandu, Nepal</li>
                         <li><q-icon name="note"></q-icon> 223 049 023</li>
                       </ul>
-                      <ul class="edit-list col">
+                      <ul class="edit-list col-2">
                         <li><a href="#">Edit</a></li>
                         <li><a href="#">Edit</a></li>
                         <li><a href="#">Edit</a></li>
                         <li><a href="#">Edit</a></li>
                       </ul>
                     </div>
+                    </q-card>
                     <div class="card-footer">
                       <div class="social_media-icons">
                           <a href="/" target="_blank"><img src="statics\icons\facebook.svg" alt="Facebook icon"></a>
@@ -124,7 +129,7 @@ export default {
 #enterprise-profile_card
   width 100%
   height 100%
-  margin-top 5%
+  margin-top 3%
   position relative
   z-index 15
   .card-banner
@@ -137,18 +142,24 @@ export default {
 .card-quick_info
     text-align center
     align-self flex-end
+    margin-left 20px
   h3
     font-size 2rem
     padding 0
     margin 0
-  ul
-    list-style none
-    li
-     font-size 1.2rem
-     display inline
-     margin-left 21px
+    float left
 .info-content
+  width 100%
   padding 0
+  display inline
+  list-style none   
+  li
+    font-size 1.2rem
+    display inline
+    padding-left 210px
+    .info-box
+
+      display inline-block
 .card-banner
 	height 100%
 	width 100%
