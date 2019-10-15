@@ -42,7 +42,7 @@ plumbing */
                   @blur="blurFocusOff()"
                   ref="focus"
                   color="secondary"
-                  v-model="category"
+                  v-model="new_category"
                 >
                   <template v-slot:append>
                     <q-btn flat color="secondary" v-if="done" @click>
@@ -58,7 +58,19 @@ plumbing */
               <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-section label>Course Completion</q-item-section>
+                <q-item-section label v-show="!showField('category')" @click="focusField('category')">{{category}}</q-item-section>
+                <q-item-section label  v-show="showField('category')">
+                  <q-input
+                 
+                  filled
+                  @focus="focusField('category')"
+                  @blur="blurField"
+                  ref="focus"
+                  color="secondary"
+                  v-model="category"
+                >
+                </q-input>
+                </q-item-section>
               </q-item-section>
             </q-item>
 
@@ -107,7 +119,9 @@ export default {
   },
   data() {
     return {
+      new_category:"",
       category: "",
+      edit_category: "",
       add: true,
       done: false
     };
@@ -136,7 +150,19 @@ export default {
     },
     blurFocusOff() {
       this.$refs.focus.blur();
-    }
+    },
+    focusField(category){
+      this.edit_category = category;
+    },
+    blurField(){
+      this.edit_category = '';
+    },
+    showField(category){
+      return (category == '' || this.edit_category == category)
+    },
+    edit(){},
+    remove(){},
+    insert(){}
   },
   mounted() {}
 };
