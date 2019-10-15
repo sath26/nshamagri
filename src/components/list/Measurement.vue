@@ -6,18 +6,32 @@
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
           <q-list bordered separator class="q-mb-sm">
-            <q-item multiline to="/add_goods">
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Measurement</q-item-section>
-              </q-item-section>
-
+           <q-item multiline>
               <q-item-section avatar>
-                <div class="group" style=" text-align: center;">
-                  <q-btn flat color="secondary">
-                    <q-icon name="add" />
-                  </q-btn>
-                </div>
+                <q-btn flat color="secondary" v-if="add" @click="focusOn()">
+                  <q-icon color="secondary" name="add" />
+                </q-btn>
+                <q-btn flat color="secondary" v-else @click.stop="focusOff()">
+                  <q-icon color="secondary" name="close" />
+                </q-btn>
+              </q-item-section>
+              <!-- <q-item-section image="sta tics/mountains.jpg"/> -->
+              <q-item-section label="Services">
+                <q-input
+                  filled
+                  label="Unit"
+                  @focus="focusOn()"
+                  @blur="blurFocusOff()"
+                  ref="focus"
+                  color="secondary"
+                  v-model="unit"
+                >
+                  <template v-slot:append>
+                    <q-btn flat color="secondary" v-if="done" @click>
+                      <q-icon name="done" />
+                    </q-btn>
+                  </template>
+                </q-input>
               </q-item-section>
             </q-item>
           </q-list>
@@ -86,18 +100,21 @@
 <script>
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import ModalGood from "../add/NewGood";
+
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
     SFooter,
-    ModalGood
+    
   },
   data() {
     return {
       search: "",
-      opened: false
+      opened: false,
+       unit: "",
+      add: true,
+      done: false
     };
   },
   computed: {
@@ -110,7 +127,22 @@ export default {
         this.$store.commit("layoutDemo/setToggleAddGood", val);
       }
     }
-  }
+  },
+   methods: {
+    focusOn() {
+      this.add = false;
+      this.$refs.focus.focus();
+      this.done = true;
+    },
+    focusOff() {
+      this.add = true;
+      this.category = "";
+      this.done = false;
+    },
+    blurFocusOff() {
+      this.$refs.focus.blur();
+    }
+  },
 };
 </script>
 

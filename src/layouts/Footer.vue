@@ -17,7 +17,7 @@ sell will be fixed icon
         color="secondary"
         icon="add"
         class="animate-pop"
-        to="/choose_service"
+        to="/invoice"
         @click="icon = true"
       />
     </q-page-sticky>

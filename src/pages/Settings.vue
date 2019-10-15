@@ -77,13 +77,13 @@
 <script>
 import SHeader from "../layouts/Header";
 import SFooter from "../layouts/Footer";
-import ModalGood from "../components/add/NewGood";
+
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
     SFooter,
-    ModalGood
+   
   },
   data() {
     return {

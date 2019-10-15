@@ -22,8 +22,8 @@ const routes = [
   },
   /* *********************goods********************************* */
   {
-    path: '/my_products',
-    component: () => import('components/list/MyProducts.vue'),
+    path: '/quotation',
+    component: () => import('components/list/Quotation.vue'),
 
   },
   {
@@ -33,26 +33,16 @@ const routes = [
     //back to enterprise stock
 
   },
-  {
-    path: '/single_product',
-    component: () => import('components/list/SingleProduct.vue'),//back to my_product
-  },
-  
+
   /* *********************services********************************* */
 
   {
-    path: '/my_services',
-    component: () => import('components/list/ServiceCategory.vue'),
+    path: '/category',
+    component: () => import('components/list/Category.vue'),
 
   },
   
-  {
-    path: '/invoice_service',
-    component: () => import('components/list/Invoice_service.vue'),
-    //back to bought or sold
-    //back to enterprise stock
-
-  },
+  
   {
     path: '/single_service',
     component: () => import('components/list/SingleService.vue'),//back to my_services
@@ -88,35 +78,26 @@ const routes = [
  
 
   
-  /***************create********************************************************/
-  {
-    path: '/choose_service',
-    component: () => import('components/add/ChooseServices.vue'),
-  },
-  {
-    path: '/choose_good',
-    component: () => import('components/add/ChooseGoods.vue'),
-  },
+  /***************add********************************************************/
   {
     path: '/invoice',
-    component: () => import('components/add/Sell.vue'),
+    component: () => import('components/add/Invoice.vue'),
   },
+
+
   {
-    path: '/add_goods',
-    component: () => import('components/add/Good.vue'),//back to my_products
+    path: '/add/quotation',
+    component: () => import('components/add/Quotation.vue'),//back to my_products
 
   },
   
   {
-    path: '/add_service',
-    component: () => import('components/add/Service.vue'),//back to my_products
+    path: '/add/unit',
+    component: () => import('components/add/Unit.vue'),//back to my_products
 
   },
 
-  {
-    path: '/add_good',
-    component: () => import('components/add/NewGood.vue'),
-  },
+ 
   /* ******************************rest************************************/
   {
     path: '/search',
