@@ -36,21 +36,16 @@
                     <!-- profile-detail card -->
                     <q-card class="shadow-1 q-mt-lg">
                       <q-card-section>
-                        <div class="text-h5 text-grey-8 q-ml-xl">Profile details</div>
+                        <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
                       </q-card-section>
-                    <div class="card-body row">
-                      <ul class="info-list col-8">
-                        <li><q-icon name="email"></q-icon>saugathapa@gmail.com</li>
-                        <li><q-icon name="phone"></q-icon> +1 123-456-7890</li>
-                        <li><q-icon name="place"></q-icon> Kathmandu, Nepal</li>
-                        <li><q-icon name="note"></q-icon> 223 049 023</li>
+                    <div class="card-body">
+                      <ul class="info-list">
+                        <li><q-icon name="email"></q-icon>saugathapa@gmail.com <span class="edit-btn">Edit</span></li> 
+                        <li class="col"><q-icon name="phone"></q-icon> +1 123-456-7890 <span class="edit-btn">Edit</span></li>
+                        <li class="col"><q-icon name="place"></q-icon> Kathmandu, Nepal <span class="edit-btn">Edit</span></li>
+                        <li class="col"><q-icon name="note"></q-icon> 223 049 023 <span class="edit-btn">Edit</span></li>
                       </ul>
-                      <ul class="edit-list col-2">
-                        <li><a href="#">Edit</a></li>
-                        <li><a href="#">Edit</a></li>
-                        <li><a href="#">Edit</a></li>
-                        <li><a href="#">Edit</a></li>
-                      </ul>
+                          
                     </div>
                     </q-card>
                     <div class="card-footer">
@@ -158,7 +153,6 @@ export default {
     display inline
     padding-left 210px
     .info-box
-
       display inline-block
 .card-banner
 	height 100%
@@ -175,14 +169,22 @@ export default {
   margin 0 auto
   padding 20px
   .info-list
+    width 90%
+    display inline-block
     li
+     font-size 2em
      padding 18px 0px
-     display block
-  .edit-list
-    li
-     color #6bc5d2
-     font-size .8em
-     text-align right
+     list-style none
+     position relative
+     .edit-btn
+      color #40bfc1
+      cursor pointer
+      opacity .5
+      position absolute
+      top 22%
+      right 0%
+      &:hover
+       opacity 1
   .address-info
     width 350px
   a
