@@ -6,15 +6,15 @@
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
           <q-list bordered separator class="q-mb-sm">
-            <q-item multiline to="/add_goods">
+            <q-item multiline >
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-section label>Measurement</q-item-section>
+                <q-item-section label>Unit</q-item-section>
               </q-item-section>
 
               <q-item-section avatar>
                 <div class="group" style=" text-align: center;">
-                  <q-btn flat color="secondary">
+                  <q-btn flat color="secondary" to="/add/unit">
                     <q-icon name="add" />
                   </q-btn>
                 </div>
@@ -86,13 +86,13 @@
 <script>
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import ModalGood from "../add/NewGood";
+
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
     SFooter,
-    ModalGood
+    
   },
   data() {
     return {

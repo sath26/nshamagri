@@ -5,28 +5,36 @@
     <q-page-container>
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-list  bordered separator  class="q-mb-sm">
-            <q-item multiline to="/add_goods">
+          <q-list bordered separator class="q-mb-sm">
+            <q-item multiline>
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
+              
               <q-item-section>
                 <q-item-section label>Quotation</q-item-section>
               </q-item-section>
 
               <q-item-section avatar>
                 <div class="group" style=" text-align: center;">
-                  <q-btn flat color="secondary" >
-                    <q-icon name="add"/>
+                  <q-btn flat color="secondary" to="/add/quotation">
+                    <q-icon name="add" />
                   </q-btn>
                 </div>
               </q-item-section>
             </q-item>
           </q-list>
           <q-list bordered highlight>
-            <q-item multiline link to="/single_product">
+            <q-item multiline link>
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-section label>Wai Wai(click here to go to single product)</q-item-section>
-                <q-item-section sublabel>Rs 20</q-item-section>
+                <q-item-section label>Wai Wai</q-item-section>
+                <q-item-section sublabel>Rs 20 / packet</q-item-section>
+                <q-item-section sublabel>
+                  <q-chip dense>Food</q-chip>
+                  <q-chip dense>Dry</q-chip>
+                  <q-chip dense>Junk</q-chip>
+                  <q-chip dense>Cheap</q-chip>
+                  <q-chip dense>Popular</q-chip>
+                </q-item-section>
               </q-item-section>
             </q-item>
 
@@ -34,7 +42,7 @@
               <!-- <q-item-side image="statics/parallax1.jpg"/> -->
               <q-item-section>
                 <q-item-section label>Happy Happy</q-item-section>
-                <q-item-section sublabel>Rs 10</q-item-section>
+                <q-item-section sublabel>Rs 10 / packet</q-item-section>
               </q-item-section>
               <!--    <q-item-side right>
                 <q-btn round flat>
@@ -53,15 +61,15 @@
               </q-item-side>-->
             </q-item>
 
-            <q-item multiline link to="/single_product">
+            <q-item multiline link>
               <!-- <q-item-side image="statics/parallax1.jpg"/> -->
               <q-item-section>
-                <q-item-label >Happy Happy</q-item-label>
-                <q-item-label caption >Rs 10</q-item-label>
+                <q-item-label>Happy Happy</q-item-label>
+                <q-item-label sublabel>Rs 10 / packet</q-item-label>
               </q-item-section>
-                <q-item-section side top >
-                  <q-btn label="Unavailable" color="deep-orange" size="sm" flat />
-                </q-item-section>
+              <q-item-section side top>
+                <q-btn label="Unavailable" color="deep-orange" size="sm" flat />
+              </q-item-section>
             </q-item>
           </q-list>
         </div>
@@ -74,13 +82,12 @@
 <script>
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import ModalGood from "../add/NewGood";
+
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
-    SFooter,
-    ModalGood
+    SFooter
   },
   data() {
     return {

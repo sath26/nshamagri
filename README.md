@@ -11,7 +11,16 @@ until now there is UI for enterprise but for clients and admin same UI element c
 `LFooter.vue` is for landing page only and `Footer.vue` is for Sticky button
 
 i am currently looking inside [https://github.com/kefranabg/bento-starter]. this has vuex, vue and firebase with firebase authentication
-
+# how to for service
+- title: as level, a2 level, alevel
+- chips/tags: course completion, crash course, monthly course, teacher, tutor
+- price: 20000
+- unit: 1.5 months, 1month, 3 months(minimum)
+# how to for goods
+- wai wai:title
+- chips/tags: packet item
+- price: 20
+- unit: packet
 # Riwat
 - sunna taile chai aba profile ko update garna paro 
  - kura k ta vanda profile ma `qutoation`, `customer`, `invoice` ko lagi chai hamle 

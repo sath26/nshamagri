@@ -90,6 +90,7 @@ module.exports = function (ctx) {
         'QExpansionItem',
         'QForm',
         'QInput',
+        'QRadio',
         'QSelect',
         'QField',
         'QChip',

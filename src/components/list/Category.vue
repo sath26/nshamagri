@@ -25,22 +25,40 @@ plumbing */
         <div style="width: 500px; max-width: 90vw;">
           <q-list bordered separator class="q-mb-sm">
             <q-item multiline>
-              <!-- <q-item-section image="statics/mountains.jpg"/> -->
-              <q-item-section label="Services">Category</q-item-section>
-
               <q-item-section avatar>
-                <q-btn flat color="secondary">
-                  <q-icon name="add" />
+                <q-btn flat color="secondary" v-if="add" @click="focusOn()">
+                  <q-icon color="secondary" name="add" />
                 </q-btn>
+                <q-btn flat color="secondary" v-else @click.stop="focusOff()">
+                  <q-icon color="secondary" name="close" />
+                </q-btn>
+              </q-item-section>
+              <!-- <q-item-section image="statics/mountains.jpg"/> -->
+              <q-item-section label="Services">
+                <q-input
+                  filled
+                  label="Category"
+                  @focus="focusOn()"
+                  @blur="blurFocusOff()"
+                  ref="focus"
+                  color="secondary"
+                  v-model="category"
+                >
+                  <template v-slot:append>
+                    <q-btn flat color="secondary" v-if="done" @click>
+                      <q-icon name="done" />
+                    </q-btn>
+                  </template>
+                </q-input>
               </q-item-section>
             </q-item>
           </q-list>
           <q-list bordered class="list-container">
-            <q-item multiline to="/single_service">
+            <q-item multiline>
+              <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section>
                 <q-item-section label>Course Completion</q-item-section>
-                <q-item-section sublabel>1.5 months</q-item-section>
               </q-item-section>
             </q-item>
 
@@ -48,7 +66,6 @@ plumbing */
               <!-- <q-item-section image="statics/parallax1.jpg"/> -->
               <q-item-section>
                 <q-item-section label>Crash Course</q-item-section>
-                <q-item-section sublabel>1 month</q-item-section>
               </q-item-section>
             </q-item>
 
@@ -56,7 +73,18 @@ plumbing */
               <!-- <q-item-section image="statics/parallax1.jpg"/> -->
               <q-item-section>
                 <q-item-section label>Monthly Course</q-item-section>
-                <q-item-section sublabel>3 months (minimum)</q-item-section>
+              </q-item-section>
+            </q-item>
+            <q-item multiline>
+              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>Teacher</q-item-section>
+              </q-item-section>
+            </q-item>
+            <q-item multiline>
+              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
+              <q-item-section>
+                <q-item-section label>Tutor</q-item-section>
               </q-item-section>
             </q-item>
           </q-list>
@@ -70,13 +98,19 @@ plumbing */
 //consists of buyers and sellers
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import ModalService from "../add/NewService";
+
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
-    SFooter,
-    ModalService
+    SFooter
+  },
+  data() {
+    return {
+      category: "",
+      add: true,
+      done: false
+    };
   },
   computed: {
     ...mapGetters("layoutDemo", ["view"]),
@@ -88,7 +122,23 @@ export default {
         this.$store.commit("layoutDemo/setToggleAddService", val);
       }
     }
-  }
+  },
+  methods: {
+    focusOn() {
+      this.add = false;
+      this.$refs.focus.focus();
+      this.done = true;
+    },
+    focusOff() {
+      this.add = true;
+      this.category = "";
+      this.done = false;
+    },
+    blurFocusOff() {
+      this.$refs.focus.blur();
+    }
+  },
+  mounted() {}
 };
 </script>
 

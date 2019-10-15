@@ -114,13 +114,13 @@ export default {
   {
     iconSrc: "statics/icons/Quotation-icon.svg",
     label: 'Quotation',
-    route: '/my_products',
+    route: '/quotation',
     separator: false
   },
   {
     iconSrc: 'statics/icons/category-icon.svg',
     label: 'Category',
-    route: '/my_services',
+    route: '/category',
     separator: false
   },
  {
