@@ -29,11 +29,13 @@
                 <q-item-section label>Wai Wai</q-item-section>
                 <q-item-section sublabel>Rs 20 / packet</q-item-section>
                 <q-item-section sublabel>
-                  <q-chip dense>Food</q-chip>
-                  <q-chip dense>Dry</q-chip>
-                  <q-chip dense>Junk</q-chip>
-                  <q-chip dense>Cheap</q-chip>
-                  <q-chip dense>Popular</q-chip>
+                  <div>
+                    <q-chip dense>Food</q-chip>
+                    <q-chip dense>Dry</q-chip>
+                    <q-chip dense>Junk</q-chip>
+                    <q-chip dense>Cheap</q-chip>
+                    <q-chip dense>Popular</q-chip>
+                  </div>
                 </q-item-section>
               </q-item-section>
             </q-item>
