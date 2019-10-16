@@ -21,7 +21,29 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 - chips/tags: packet item
 - price: 20
 - unit: packet
+# me
+## changes remaining
+- finish working on database crud of category
+- finish working on database crud of unit
+- finish working ond database crud of quotation
+- finish working on database crud of invoice
+- finish working on database of enterprise
+- finish working on authentication
+- finish working on member role assignment
+- finish working on security rules
+- finish workin gon database for dashboard
+- finish working on retrieval of bought user/enterprise
+- finish working on retrieval of sold user/enterprise
+- finsih working on retrieval of invoice of each date of invoice received and each payment
+- finish working on retrieval of invoice of each date of invoice sent and each income
 # Riwat
+## changes remaining
+- ui when no data for enterprise profile
+- search funcitonality: once clicked on input of where to search: goods/service or bought or sold 
+- search functionality with date based result for invoice: bought or sold
+- search functionality with person based result for invoice: bought or sold
+- search functionality with price and nearby based result for goods/service
+## done some changes
 - sunna taile chai aba profile ko update garna paro 
  - kura k ta vanda profile ma `qutoation`, `customer`, `invoice` ko lagi chai hamle 
  - chai `quotation` lai chai tei quotation list page ma lane banaune socheko maile
