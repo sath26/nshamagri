@@ -36,6 +36,8 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 - finish working on retrieval of sold user/enterprise
 - finsih working on retrieval of invoice of each date of invoice received and each payment
 - finish working on retrieval of invoice of each date of invoice sent and each income
+- notification for verification of transaction: send request(how to find the user or enterprise)
+- (new) status for invoice created for the day
 # Riwat
 ## changes remaining
 - ui when no data for enterprise profile
