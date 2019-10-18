@@ -59,34 +59,35 @@ plumbing */
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section avatar>
                 <q-btn flat v-if="hover && cantChangeIconAfterFocus" @mouseover="mouseover()">
-                  <q-icon color="secondary" name="img:statics/icons/category-icon.svg" />
+                  <q-icon  name="img:statics/icons/category-icon.svg" />
                 </q-btn>
-                <q-btn flat color="secondary" v-else @mouseleave="mouseleave()">
-                  <q-icon color="secondary" name="delete" />
+                <q-btn flat  v-else @mouseleave="mouseleave()">
+                  <q-icon  name="delete" />
                 </q-btn>
               </q-item-section>
               <q-item-section>
                 <q-item-section
                   label
-                  v-show="!showField('category')"
-                  @click="focusField('category')"
-                >{{category}}</q-item-section>
-                <q-item-section label v-show="showField('category')">
+                  v-show="!showField('ecategory')"
+                  @click="focusField('ecategory')"
+                >{{ecategory}}</q-item-section>
+                <q-item-section label v-show="showField('ecategory')">
                   <q-input
                     filled
-                    @focus="focusField('category')"
+                    color="grey-10"
+                    @focus="focusField('ecategory')"
                     @blur="blurField"
                     ref="efocus"
-                    color="secondary"
-                    v-model="category"
+                    
+                    v-model="ecategory"
                   ></q-input>
                 </q-item-section>
               </q-item-section>
               <q-item-section avatar>
-                <q-btn flat color="secondary" v-if="editIcon" @click="edit()">
+                <q-btn flat  v-if="editIcon" @click="edit()">
                   <q-icon name="edit" />
                 </q-btn>
-                <q-btn flat color="secondary" v-else @click="rename()">
+                <q-btn flat  v-else @click="rename()">
                   <q-icon name="done" />
                 </q-btn>
               </q-item-section>
@@ -138,13 +139,14 @@ export default {
   data() {
     return {
       new_category: "",
-      category: "Course Completion(click me)",
+      ecategory: "Course Completion(click me)",
       edit_category: "",
       add: true,
       done: false,
       hover: true,
       cantChangeIconAfterFocus:true,//for delete from category icon
-      editIcon: true// for edit icon to be true
+      editIcon: true,// for edit icon to be true,
+      category: ""
     };
   },
   computed: {
@@ -173,9 +175,9 @@ export default {
       // this.$refs.focus.blur();
       
     },
-    focusField(category) {
+    focusField(ecategory) {
       this.editIcon= false;
-      this.edit_category = category;
+      this.edit_category = ecategory;
       this.hover = false;
       this.cantChangeIconAfterFocus = false;
        this.$refs["efocus"].focus()
@@ -184,14 +186,14 @@ export default {
       this.edit_category = "";
       this.hover = true;
     },
-    showField(category) {
-      return category == "" || this.edit_category == category;
+    showField(ecategory) {
+      return ecategory == "" || this.edit_category == ecategory;
     },
     edit() {
       
     
     
-      this.focusField('category')
+      this.focusField('ecategory')
   
     },
     remove() {},
