@@ -1,16 +1,16 @@
  <template>
     <div class="container">
       <q-toolbar class="navbar">
-          <div class="logo-container">
+          <div class="logo-container q-pl-xl">
             <img src="\statics\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo vertical-middle q-pa-xs">
           </div>
           <q-toolbar-title class="text-title">Shamagri</q-toolbar-title>
-         <q-btn outline color="white" class="q-mr-sm" to="/login">Login</q-btn>
+         <q-btn outline color="white" class="q-mr-xl" to="/login">Login</q-btn>
       </q-toolbar>
       <div class="intro-section">
         <div class="intro-text q-px-lg">
-          <h5>your <span>business</span> our assist</h5>
-          <p>Welcome to Shamagri, a simple resource management app <br class="p-breaker"> 
+          <p class="intro-head-text">your <span>business</span> our assist</p>
+          <p class="intro-body-text">Welcome to Shamagri, a simple resource management app <br class="p-breaker"> 
 developed to help grow and maintain all businesses <br class="p-breaker"> and fulfil all customer needs. </p>
             <div class="get-started-section">
               <div class="text-caption sub-header">Try Shamagri for free!</div>
@@ -32,7 +32,7 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
       </div>
       <!-- INFO CARDS SECTION -->
       <section id="infoCards" class="info-cards q-pa-lg">
-        <div class="text-h4 text-grey-2">Finding product and services couldn't get any easier</div>
+        <div class="text-h4 text-grey-2 infoCards-header-text">Finding product and services couldn't get any easier</div>
         <div class="cards-wrapper">
           <q-card class="info-card info-card_invoice q-ma-xl">
             <div class="graphics_container">

@@ -11,7 +11,6 @@
       width 40px
       height 40px
       background #fafafa
-    
   .text-title
     font-family 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
     text-transform uppercase
@@ -33,20 +32,20 @@
     top 150px
     left 200px
     color #fafafa
-    h5
-      font-size 3vw
-      padding 0
-      text-transform uppercase
-      font-weight 500
-      line-height 0
+    p.intro-head-text
+        font-size 3em
+        text-transform uppercase
+        font-weight 500
+        line-height 1
+        padding 10px 0  
       span 
         color #FFE45C
-    p
+    .intro-body-text
       font-size 2vw
       line-height 1.2
       margin-top -5%
   .intro-section 
-    min-height 100%    
+    height 100%    
 .info-cards
   height 100%
   margin-top 400px
@@ -118,41 +117,50 @@
     right 22%
   .intro-text
     width 80%
+  .learn-more_btn
+    display none
 @media screen and (min-width: 565px)
   .mobile-bg_img
     display none
 @media screen and (max-width: 564px)
+  .intro-section 
+    background #49957D
+  .info-cards
+    margin 0
+  .infoCards-header-text
+    font-size 1.5em
+    line-height 1 
+    padding 20px 0
   .web-bg_img
     display none
   .devices_img
     width 70%
     margin 0 auto
-    top 60%
+    top 110vw
     right 15%
   .intro-text
     .email-input
       width 70%
-    .get-started
-      position absolute
-      top 500%
-      left 18%
+    .get-started-section
+      display none
       .sub-header
         font-size 1.5em
         top 0
-    p
-      font-size 3vw
+    p.intro-head-text
+      line-height 1
+    p.intro-body-text
+      font-size 1.4em
 @media screen and (max-width: 650px)
   .intro-text
     top 10%
     left 3%
     h5
-      font-size 4.5vw
+      font-size 1em
     p
-      font-size 3.5vw
+      font-size 1.2em
     .p-breaker
       display none
   .info-cards
-    margin 0
     .info-card 
       width 230px
       height 300px
