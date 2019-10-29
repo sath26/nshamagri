@@ -106,7 +106,10 @@ module.exports = function (ctx) {
 
         'QScrollArea',
 
-        'QSpace'
+        'QSpace',
+        
+        'QSlider',
+        'QCheckbox'
       ],
 
       directives: [
