@@ -6,8 +6,8 @@
               <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
             </template>
       </q-input>
-        <div v-if="searchPopout" class="search-extension">
-           <q-card class="my-card">
+        <div  class="search-extension" :class="{ extensionActive:searchPopout, extensionDeactive:searchPopout==false }">
+          <q-card class="my-card">
           <q-tabs
             v-model="tab"
             class="text-grey my-card-tab"
@@ -109,11 +109,11 @@
           </q-tabs>
           <q-separator ></q-separator>
           <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="enterprise">
+            <q-tab-panel name="enterprise" class="ent-panel">
               <!-- Card -->
               <q-card v-for="n in 2" flat class="enterprise-card_container">
-                <q-card-section class="test">
-                  <div class="list-card_container row items-center shadow-2 q-my-sm">
+                <q-card-section>
+                  <div class="list-card_container row items-center shadow-4 q-my-sm">
                 <div class="usr-img_container col">
                   <img class="usr-img" src="../statics/guy-avatar.png" alt="dummy image">
                 </div>
@@ -192,15 +192,22 @@ export default {
 <style lang="stylus" scoped>
   .colorGreen
     color #4B7D6E
+  .ent-panel
+    background #399779
+  .enterprise-card_container
+    background none
   .search-extension
     width 100%
     height 100%
     position absolute
-    top 90% 
-    left 0
     border none
+    left 0
     .my-card
       border-radius 0px
+  .extensionActive
+    animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
+  .extensionDeactive
+    animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
   .filter-dropdown_content-list_item
     background transparent
     padding 0
@@ -217,6 +224,7 @@ export default {
 // card styling
 .list-card_container
   overflow hidden
+  background #fafafa
   color #424242
   vertical-align center
   position relative
@@ -274,4 +282,30 @@ export default {
     position absolute
     bottom -5%
     right 2%
+  
+  @keyframes extInAnimation{
+    0%{
+      top:0;
+      opacity:0;
+    }
+    100%{
+      opacity:1;
+      top:70px;
+    }
+  }
+  @keyframes extOutAnimation{
+    0%{
+      opacity:1;
+      top:70px;
+      transform: scale(1);
+    }
+    99%{
+      opacity:0;
+      top:-400px;
+      transform: scale(1);
+    }
+    100%{
+      transform: scale(0);
+    }
+  }
 </style>
