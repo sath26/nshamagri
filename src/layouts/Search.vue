@@ -31,7 +31,7 @@
             </q-btn-dropdown>
             <!-- Filter dropdown button -->
             <q-btn flat class="colorGreen" @click="filter = true" > 
-              <q-avatar square size="25px" class="q-mr-sm">
+              <q-avatar square class="q-mr-sm">
                 <q-img class="filter-icon" src="../statics/icons/Filter-icon.svg" alt="filter icon"></q-img>
               </q-avatar>
               Filter
@@ -196,6 +196,9 @@ export default {
     background #399779
   .enterprise-card_container
     background none
+  .filter-icon
+    width 25px
+    height 20px
   .search-extension
     width 100%
     height 100%
@@ -207,7 +210,7 @@ export default {
   .extensionActive
     animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
   .extensionDeactive
-    animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
+    display none
   .filter-dropdown_content-list_item
     background transparent
     padding 0
@@ -291,21 +294,6 @@ export default {
     100%{
       opacity:1;
       top:70px;
-    }
-  }
-  @keyframes extOutAnimation{
-    0%{
-      opacity:1;
-      top:70px;
-      transform: scale(1);
-    }
-    99%{
-      opacity:0;
-      top:-400px;
-      transform: scale(1);
-    }
-    100%{
-      transform: scale(0);
     }
   }
 </style>
