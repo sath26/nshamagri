@@ -54,7 +54,8 @@ plumbing */
             </q-item>
           </q-list>
           <q-list bordered class="list-container">
-            <q-item multiline>
+            <q-item multiline v-for="(categories, index) in category"
+              :key="categories.id">
               <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section avatar>
@@ -70,7 +71,7 @@ plumbing */
                   label
                   v-show="!showField('ecategory')"
                   @click="focusField('ecategory')"
-                >{{ecategory}}</q-item-section>
+                >{{categories.title}}</q-item-section>
                 <q-item-section label v-show="showField('ecategory')">
                   <q-input
                     filled
@@ -92,32 +93,6 @@ plumbing */
                 </q-btn>
               </q-item-section>
             </q-item>
-
-            <q-item multiline>
-              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Crash Course</q-item-section>
-              </q-item-section>
-            </q-item>
-
-            <q-item multiline>
-              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Monthly Course</q-item-section>
-              </q-item-section>
-            </q-item>
-            <q-item multiline>
-              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Teacher</q-item-section>
-              </q-item-section>
-            </q-item>
-            <q-item multiline>
-              <!-- <q-item-section image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Tutor</q-item-section>
-              </q-item-section>
-            </q-item>
           </q-list>
         </div>
       </q-page>
@@ -129,8 +104,8 @@ plumbing */
 //consists of buyers and sellers
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-
-import { mapState, mapGetters } from "vuex";
+import { fireDB, storage, auth, db } from '../../store/service/firebase';
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   components: {
     SHeader,
@@ -146,11 +121,13 @@ export default {
       hover: true,
       cantChangeIconAfterFocus:true,//for delete from category icon
       editIcon: true,// for edit icon to be true,
-      category: ""
+      // category: ""
     };
   },
   computed: {
     ...mapGetters("layoutDemo", ["view"]),
+    ...mapState("category", ["category"]),
+    
     newServiceToggler: {
       get() {
         return this.$store.state.layoutDemo.toggleNewService;
@@ -160,7 +137,13 @@ export default {
       }
     }
   },
+  created() {
+    // this.$store.dispatch('fetchCategory', db.collection('category'))
+    this.fetchCategory();// this is a variable in category but function in reddit-clone
+    //db.collection('category')
+  },
   methods: {
+    ...mapActions("category", ["fetchCategory"]),
     focusOn() {
       this.add = false;
       this.$refs.focus.focus();

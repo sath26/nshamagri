@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import { vuexfireMutations } from 'vuexfire'
 import layoutDemo from './layoutDemo'
-
+import category from './category'
+import auth from './auth'
 Vue.use(Vuex)
 
 /*
@@ -12,8 +13,14 @@ Vue.use(Vuex)
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
+    mutations: {
+      // other mutations
+      ...vuexfireMutations,
+    },
     modules: {
-      layoutDemo
+      layoutDemo,
+      category,
+      auth
     }
   })
   if (process.env.DEV && module.hot) {
