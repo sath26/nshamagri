@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60.319" height="52" viewBox="0 0 60.319 52">
+  <g id="Filter-icon" transform="translate(58.319 0.248) rotate(90)">
+    <g id="Third" transform="translate(52.095 56.319) rotate(180)">
+      <line id="Line_5" data-name="Line 5" y2="56.319" transform="translate(7.744)" fill="none" stroke="#4b7d6e" stroke-linecap="round" stroke-width="4"/>
+      <g id="Ellipse_38" data-name="Ellipse 38" transform="translate(0.344 22.975)" fill="#fafafa" stroke="#4b7d6e" stroke-width="2">
+        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
+        <ellipse cx="7.5" cy="8" rx="6.5" ry="7" fill="none"/>
+      </g>
+    </g>
+    <g id="Second" transform="translate(33.792 56.319) rotate(180)">
+      <line id="Line_5-2" data-name="Line 5" y2="56.319" transform="translate(7.744)" fill="none" stroke="#4b7d6e" stroke-linecap="round" stroke-width="4"/>
+      <g id="Ellipse_38-2" data-name="Ellipse 38" transform="translate(0.04 4.975)" fill="#fafafa" stroke="#4b7d6e" stroke-width="2">
+        <circle cx="7.5" cy="7.5" r="7.5" stroke="none"/>
+        <circle cx="7.5" cy="7.5" r="6.5" fill="none"/>
+      </g>
+    </g>
+    <g id="First">
+      <line id="Line_5-3" data-name="Line 5" y2="56.319" transform="translate(7.744)" fill="none" stroke="#4b7d6e" stroke-linecap="round" stroke-width="4"/>
+      <g id="Ellipse_38-3" data-name="Ellipse 38" transform="translate(-0.248 5.345)" fill="#fafafa" stroke="#4b7d6e" stroke-width="2">
+        <ellipse cx="8" cy="7.5" rx="8" ry="7.5" stroke="none"/>
+        <ellipse cx="8" cy="7.5" rx="7" ry="6.5" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

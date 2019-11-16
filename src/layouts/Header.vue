@@ -190,7 +190,6 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import '..\css\layouts-style\header'
-
 </style>
 
  
