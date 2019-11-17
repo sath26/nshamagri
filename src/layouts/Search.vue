@@ -45,7 +45,7 @@
                 <q-card-section>
                   <q-btn-dropdown auto-close stretch flat :label="categorySelection" class="dd dd-category q-pa-sm">
                 <q-list >
-                  <q-item v-for="category in categories" tag="label" v-ripple class="q-pr-xl">
+                  <q-item v-for="category in categories" :key="category.name" tag="label" v-ripple class="q-pr-xl">
                     <q-item-section avatar>
                       <q-radio v-model="categorySelection" :val="category.value" color="teal" ></q-radio>
                     </q-item-section>
@@ -111,7 +111,7 @@
           <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="enterprise" class="ent-panel">
               <!-- Card -->
-              <q-card v-for="n in 2" flat class="enterprise-card_container">
+              <q-card v-for="n in 2" :key="n" flat class="enterprise-card_container">
                 <q-card-section>
                   <div class="list-card_container row items-center shadow-4 q-my-sm">
                 <div class="usr-img_container col">

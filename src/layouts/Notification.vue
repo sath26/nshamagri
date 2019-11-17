@@ -7,7 +7,7 @@
       </q-tooltip>
     </q-btn>
     <div :class="{notiBoxActive:notificationBox}" class="notification-box shadow-8" >
-      <q-card v-for="n in 10" class="container-card " label="Notification">
+      <q-card v-for="n in 10" :key="n" class="container-card " label="Notification">
         <q-card-section class="text-black row">
           <div class="usr-info_img col-1"><img src="../statics/boy-avatar.png" alt="usr-img"> <p>Riwat Rai</p></div>
           <div class="txt-content col q-ml-xl">

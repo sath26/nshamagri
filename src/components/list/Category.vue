@@ -59,7 +59,7 @@ plumbing */
               <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section avatar>
-                <q-btn flat v-if="hover && cantChangeIconAfterFocus" @mouseover="mouseover()">
+                <q-btn flat v-if="categories.hover && categories.cantChangeIconAfterFocus" :key="index"  @mouseover="mouseover()">
                   <q-icon  name="img:statics/icons/category-icon.svg" />
                 </q-btn>
                 <q-btn flat  v-else @mouseleave="mouseleave()">
@@ -69,26 +69,26 @@ plumbing */
               <q-item-section>
                 <q-item-section
                   label
-                  v-show="!showField('ecategory')"
-                  @click="focusField('ecategory')"
+                  v-show="!showField(categories.title)"
+                  @click="focusField(categories.title)"
                 >{{categories.title}}</q-item-section>
-                <q-item-section label v-show="showField('ecategory')">
+                <q-item-section label v-show="showField(categories.title)">
                   <q-input
                     filled
                     color="grey-10"
-                    @focus="focusField('ecategory')"
-                    @blur="blurField"
+                    @focus="focusField(categories.title)"
+                    @blur="blurField()"
                     ref="efocus"
                     
-                    v-model="ecategory"
+                    v-model="categories.title"
                   ></q-input>
                 </q-item-section>
               </q-item-section>
               <q-item-section avatar>
-                <q-btn flat  v-if="editIcon" @click="edit()">
+                <q-btn flat  v-if="categories.editIcon" @click="edit(categories)">
                   <q-icon name="edit" />
                 </q-btn>
-                <q-btn flat  v-else @click="rename()">
+                <q-btn flat  v-else @click="rename(categories)">
                   <q-icon name="done" />
                 </q-btn>
               </q-item-section>
@@ -114,14 +114,14 @@ export default {
   data() {
     return {
       new_category: "",
-      ecategory: "Course Completion(click me)",
+      ecategory: "",
       edit_category: "",
       add: true,
-      done: false,
-      hover: true,
       cantChangeIconAfterFocus:true,//for delete from category icon
+      done: false,
       editIcon: true,// for edit icon to be true,
-      // category: ""
+      hover: true,
+       categories: []
     };
   },
   computed: {
@@ -146,24 +146,24 @@ export default {
     ...mapActions("category", ["fetchCategory"]),
     focusOn() {
       this.add = false;
-      this.$refs.focus.focus();
       this.done = true;
+      this.$refs.focus.focus();
     },
     focusOff() {
       this.add = true;
-      this.category = "";
       this.done = false;
+      this.category = "";
     },
     blurFocusOff() {
       // this.$refs.focus.blur();
       
     },
     focusField(ecategory) {
-      this.editIcon= false;
-      this.edit_category = ecategory;
+      ecategory.editIcon= false;
       this.hover = false;
       this.cantChangeIconAfterFocus = false;
-       this.$refs["efocus"].focus()
+      this.edit_category = ecategory.title;//variable remains same but server must have it
+      //  this.$refs["efocus"].focus();
     },
     blurField() {
       this.edit_category = "";
@@ -172,12 +172,8 @@ export default {
     showField(ecategory) {
       return ecategory == "" || this.edit_category == ecategory;
     },
-    edit() {
-      
-    
-    
-      this.focusField('ecategory')
-  
+    edit(ecategory) {
+      this.focusField(ecategory)
     },
     remove() {},
     insert() {},
@@ -187,11 +183,11 @@ export default {
     mouseleave: function() {
       this.hover = true;
     },
-    rename(){
+    rename(ecategory){
       this.hover = true;
-       this.editIcon =true;
+       ecategory.editIcon =true;
       this.cantChangeIconAfterFocus = true;//for delete from category icon
-      this.$refs["efocus"].blur();
+      // this.$refs["efocus"].blur();
     }
   },
   mounted() {}
