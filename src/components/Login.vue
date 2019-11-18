@@ -8,11 +8,11 @@
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
             <div class="login-header"><img src="statics\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
-                      <q-input v-model="email" filled type="email" hint="Email"></q-input>
+                      <q-input color="teal" v-model="email" filled type="email" hint="Email"></q-input>
                         <div class="q-py-sm"></div>
-                      <q-input v-model="password" filled type="password" hint="Password" ></q-input>
+                      <q-input color="teal" v-model="password" filled type="password" hint="Password" ></q-input>
             <q-btn flat class="forgot-btn">forgot password?</q-btn>
-            <q-btn size="lg" label="Facebook sign-in" style="width:100%;" class="q-mt-md q-mb-lg sign-in-facebook-btn"><q-icon class="fb-icon"><img src="/statics/icons/facebook-btn-icon.svg" alt="Facebook-icon"></q-icon>
+            <q-btn size="lg" label="Google sign-in" class="q-mt-md q-mb-lg sign-in-google-btn"><q-icon class="g-icon"><img src="/statics/icons/Google-btn_icon.png" alt="Facebook-icon"></q-icon>
 </q-btn>
              
             <div class="create-account-btn-container"><span class="txt-newuser">New User?</span><q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn></div>
@@ -66,9 +66,18 @@ export default {
   .sign-in-btn
     background-image linear-gradient(#42C282,#2E9681)
     color #fafafa
-  .sign-in-facebook-btn
-    background-image linear-gradient(#4B6FD6,#415FB4)
-    color #fafafa
+  .sign-in-google-btn
+    width 100%
+    background-image linear-gradient(#fff,#f2f2f2)
+    color #393939
+    .g-icon
+      img 
+        width 35px 
+        height 35px
+        position absolute
+        top 50%
+        left 2%
+        transform translateY(-50%)
   .forgot-btn
     font-size .8rem
     color #4C8D64
@@ -83,15 +92,6 @@ export default {
   width 300px
   @media screen and (max-width: 450px) 
     width 220px
-.sign-in-facebook-btn
-  .fb-icon
-    img 
-      width 35px 
-      height 35px
-      position absolute
-      top 50%
-      left 2%
-      transform translateY(-50%)
 .bg-img_container
   padding 0
   position absolute
