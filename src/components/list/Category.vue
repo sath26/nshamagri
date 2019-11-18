@@ -59,10 +59,10 @@ plumbing */
               <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section avatar>
-                <q-btn flat v-if="categories.hover && categories.cantChangeIconAfterFocus" :key="index"  @mouseover="mouseover()">
+                <q-btn flat v-if="categories.hover && categories.cantChangeIconAfterFocus" :key="index"  @mouseover="mouseover(categories)">
                   <q-icon  name="img:statics/icons/category-icon.svg" />
                 </q-btn>
-                <q-btn flat  v-else @mouseleave="mouseleave()">
+                <q-btn flat  v-else @mouseleave="mouseleave(categories)">
                   <q-icon  name="delete" />
                 </q-btn>
               </q-item-section>
@@ -119,9 +119,10 @@ export default {
       add: true,
       cantChangeIconAfterFocus:true,//for delete from category icon
       done: false,
-      editIcon: true,// for edit icon to be true,
+      // editIcon: true,// for edit icon to be true,
       hover: true,
-       categories: []
+       categories: [],
+       
     };
   },
   computed: {
@@ -143,7 +144,7 @@ export default {
     //db.collection('category')
   },
   methods: {
-    ...mapActions("category", ["fetchCategory"]),
+    ...mapActions("category", ["fetchCategory", "createCategory", "updateCategory"]),
     focusOn() {
       this.add = false;
       this.done = true;
@@ -177,16 +178,21 @@ export default {
     },
     remove() {},
     insert() {},
-    mouseover: function() {
-      this.hover = false;
+    mouseover(categories) {
+      categories.hover = false;
     },
-    mouseleave: function() {
-      this.hover = true;
+    mouseleave(categories) {
+      categories.hover = true;
     },
     rename(ecategory){
-      this.hover = true;
-       ecategory.editIcon =true;
+      ecategory.hover = true;
+      ecategory.editIcon =true;
       this.cantChangeIconAfterFocus = true;//for delete from category icon
+     
+      this.updateCategory( {
+        title:ecategory.title,
+        id: ecategory.id
+      })
       // this.$refs["efocus"].blur();
     }
   },

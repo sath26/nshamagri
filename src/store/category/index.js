@@ -33,12 +33,46 @@ const actions= {
     categories.created_at = firebase.firestore.FieldValue.serverTimestamp();
     categories.updated_at = firebase.firestore.FieldValue.serverTimestamp();
     try {
-      await categories.collection(category).add(categories);
+      await db.collection(category).doc(categories);
+      //Add a new document with a generated id.
     } catch (error) {
       console.error(error);
     }
-  }
-  
+  },
+  async updateCategory({ getters }, categories) {
+    // const result = posts.doc();
+    // post.id = result.id;
+   console.log(categories);
+    const hello = {
+      title: categories.title
+    };
+    const id = categories.id;
+    // categories.user_id = firebase.auth().currentUser.uid;
+   // authentication required here, else everything works
+    try {
+      await db.collection('category')
+        .doc(id)
+        .set(hello);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async deleteCategory({ getters }, categories) {
+    // const result = posts.doc();
+    // post.id = result.id;
+    
+    id = categories.id;
+    // categories.user_id = firebase.auth().currentUser.uid;
+
+    try {
+      await db.
+        collection(category)
+        .doc(id)
+        .delete();
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 const getters={
   
