@@ -62,7 +62,7 @@ plumbing */
                 <q-btn flat v-if="categories.hover && categories.cantChangeIconAfterFocus" :key="index"  @mouseover="mouseover(categories)">
                   <q-icon  name="img:statics/icons/category-icon.svg" />
                 </q-btn>
-                <q-btn flat  v-else @mouseleave="mouseleave(categories)">
+                <q-btn flat  v-else @click="" @mouseleave="mouseleave(categories)">
                   <q-icon  name="delete" />
                 </q-btn>
               </q-item-section>
@@ -70,14 +70,14 @@ plumbing */
                 <q-item-section
                   label
                   v-show="!showField(categories.title)"
-                  @click="focusField(categories.title)"
+                  @click="focusField(categories)"
                 >{{categories.title}}</q-item-section>
                 <q-item-section label v-show="showField(categories.title)">
                   <q-input
                     filled
                     color="grey-10"
-                    @focus="focusField(categories.title)"
-                    @blur="blurField()"
+                    @focus="focusField(categories)"
+                    @blur="blurField(categories)"
                     ref="efocus"
                     
                     v-model="categories.title"
@@ -119,7 +119,7 @@ export default {
       add: true,
       cantChangeIconAfterFocus:true,//for delete from category icon
       done: false,
-      // editIcon: true,// for edit icon to be true,
+       editIcon: true,// for edit icon to be true,
       hover: true,
        categories: [],
        
@@ -166,9 +166,10 @@ export default {
       this.edit_category = ecategory.title;//variable remains same but server must have it
       //  this.$refs["efocus"].focus();
     },
-    blurField() {
+    blurField(ecategory) {
       this.edit_category = "";
       this.hover = true;
+      
     },
     showField(ecategory) {
       return ecategory == "" || this.edit_category == ecategory;
