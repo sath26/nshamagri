@@ -4,6 +4,7 @@ const routes = [
   /* **************************list***************************/
   {
     path: '/',
+    name:'main',
     component: () => import('components/list/Home.vue'),
   },
   {

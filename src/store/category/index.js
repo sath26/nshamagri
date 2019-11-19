@@ -52,7 +52,7 @@ const actions= {
     try {
       await db.collection('category')
         .doc(id)
-        .set(hello);
+        .update(hello);
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,7 @@
 import { generate } from 'shortid';
 import firebase from 'firebase';
 import { fireDB, storage, auth, db } from '../service/firebase';
+import router from '../../router'
 const google = new firebase.auth.GoogleAuthProvider();
 
 const state={
@@ -8,29 +9,50 @@ const state={
   pic: null,
   error: null,
   loading: false,
-}
+};
 const getters={
+  isAuthenticated(state) {
+    return !!state.user;
+  },
 
-}
-const actions={
-  createUser ({ commit }, payload) {
+};
+
+const mutations={
+  setUser(state, payload) {
+    state.user = payload;
+  },
+
+  setPic(state, payload) {
+    state.pic = payload;
+  },
+
+   setLoading(state, payload) {
+    state.loading = payload;
+  },
+
+    setError(state, payload) {
+    state.error = payload;
+  }
+};
+const actions = {
+  createUser({ commit }, payload) {
     commit('setLoading', true)
     auth.createUserWithEmailAndPassword(payload.email, payload.password)
-    .then(user => {
-      commit('setUser', { email: user.email });
-      commit('setError', null);
-      router.push('/home');
-    })
-    .catch(error => {
-      commit('setError', error.message);
-    })
-    .finally(() => {
-      commit('setLoading', false);
-    });
+      .then(user => {
+        commit('setUser', { email: user.email });
+        commit('setError', null);
+        router.push('/home');
+      })
+      .catch(error => {
+        commit('setError', error.message);
+      })
+      .finally(() => {
+        commit('setLoading', false);
+      });
   },
 
 
-  userSignIn ({commit}, payload) {
+  userSignIn({ commit }, payload) {
     commit('setLoading', true);
     auth
       .signInWithEmailAndPassword(payload.email, payload.password)
@@ -50,25 +72,25 @@ const actions={
       });
   },
 
-  userSignInWithGoogle({commit}, payload) {
+  userSignInWithGoogle({ commit }, payload) {
     commit('setLoading', true);
-    
+
     auth
       .signInWithPopup(google)
       .then(async result => {
         const accessToken = result.credential.accessToken;
         const { user } = result;
-        
+        console.log(user);
         commit('setUser', { email: user.email, fullName: user.displayName, accessToken });
         sessionStorage.setItem('email', user.email);
         sessionStorage.setItem('accessToken', accessToken);
 
-        await store.dispatch('getPhoto');
-        if (!store.state.pic) {
+        // await this.$store.dispatch('getPhoto');
+        // if (!this.$store.state.pic) {
           commit('setPic', user.photoURL);
-        }
+        // }
         commit('setError', null);
-        router.push('/home');
+        this.$router.push({ path: '/' });
       })
       .catch(error => {
         commit('setError', error.message);
@@ -78,15 +100,15 @@ const actions={
       });
   },
 
-    async autoSignIn ({commit}, payload) {
-        commit('setUser', { email: payload.email });
-        await store.dispatch('getPhoto');
-        router.push('/home');
-      },
- 
+  async autoSignIn({ commit }, payload) {
+    commit('setUser', { email: payload.email });
+    await store.dispatch('getPhoto');
+    router.push('/home');
+  },
 
- 
-  userSignOut ({commit}) {
+
+
+  userSignOut({ commit }) {
     auth.signOut();
     sessionStorage.clear();
     commit('setUser', null);
@@ -94,19 +116,19 @@ const actions={
     commit('setTodo', null);
     router.push('/');
   },
-  resetPassword ({commit}, payload) {
+  resetPassword({ commit }, payload) {
     commit('setLoading', true);
     auth
-    .sendPasswordResetEmail(payload.email)
-    .then(() => {
-      commit('setError', null);
-      router.push('/');
-    }).catch(err => {
-      commit('setError', err);
-    })
-    .finally(() => {
-      commit('setLoading', false);
-    })
+      .sendPasswordResetEmail(payload.email)
+      .then(() => {
+        commit('setError', null);
+        router.push('/');
+      }).catch(err => {
+        commit('setError', err);
+      })
+      .finally(() => {
+        commit('setLoading', false);
+      })
   },
 
   takePhoto({ commit }, payload) {
@@ -121,52 +143,34 @@ const actions={
       storage.ref()
         .child(`${key}/profile`)
         .put(blob)
-          .then( async () => {
-            const url = await storage.ref()
+        .then(async () => {
+          const url = await storage.ref()
             .child(`${key}/profile`)
             .getDownloadURL();
 
-            commit('setPic', url);
-            router.go(-1);
-          })
-          .catch((err) => commit('setError', err))
-          .finally(() => commit('setLoading', false))
+          commit('setPic', url);
+          router.go(-1);
+        })
+        .catch((err) => commit('setError', err))
+        .finally(() => commit('setLoading', false))
     });
   },
-  getPhoto({ commit }, payload) {
+  /* getPhoto({ commit }, payload) {
     const { email } = store.state.user;
     const key = btoa(email);
 
     if (store.state.pic === null) {
       storage.ref()
-      .child(`${key}/profile`)
-      .getDownloadURL()
-      .then((url) => {
-        commit('setPic', url);
-      })
-      .catch((err) => commit('setError', err))
-      .finally(() => commit('setLoading', false));
+        .child(`${key}/profile`)
+        .getDownloadURL()
+        .then((url) => {
+          commit('setPic', url);
+        })
+        .catch((err) => commit('setError', err))
+        .finally(() => commit('setLoading', false));
     }
-  }
-}
-const mutations={
-  setUser(state, payload) {
-    state.user = payload;
-  },
-
-  setPic(state, payload) {
-    state.pic = payload;
-  },
-
-   setLoading(state, payload) {
-    state.loading = payload;
-  },
-
-    setError(state, payload) {
-    state.error = payload;
-  }
-}
-
+  } */
+};
 export default {
   namespaced: true,
   state,
