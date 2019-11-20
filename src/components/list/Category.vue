@@ -42,7 +42,7 @@ plumbing */
                   @blur="blurFocusOff()"
                   ref="focus"
                   color="secondary"
-                  v-model="new_category"
+                  v-model.lazy="new_category"
                 >
                   <template v-slot:append>
                     <q-btn flat color="secondary" v-if="done" @click>
@@ -69,17 +69,18 @@ plumbing */
               <q-item-section>
                 <q-item-section
                   label
-                  v-show="!showField(categories.title)"
-                  @click="focusField(categories)"
+                  v-show="!showField(categories)"
+                  @click.exact="focusField(categories)"
                 >{{categories.title}}</q-item-section>
-                <q-item-section label v-show="showField(categories.title)">
+                <q-item-section label v-show="showField(categories)">
                   <q-input
                     filled
                     color="grey-10"
-                    @focus="focusField(categories)"
-                    @blur="blurField(categories)"
+                    @focus.exact="focusField(categories)"
+                    @blur.exact="blurField(categories)"
+                    @keyup.enter="focusField(categories)"
                     ref="efocus"
-                    
+                   
                     v-model="categories.title"
                   ></q-input>
                 </q-item-section>
@@ -160,6 +161,10 @@ export default {
       
     },
     focusField(ecategory) {
+       ecategory.done = true;
+      if(event){
+        event.preventDefault();
+      }
       ecategory.editIcon= false;
       this.hover = false;
       this.cantChangeIconAfterFocus = false;
@@ -167,12 +172,25 @@ export default {
       //  this.$refs["efocus"].focus();
     },
     blurField(ecategory) {
+      if(event){
+        event.stopPropagation();
+      }
+      ecategory.done = false; 
       this.edit_category = "";
       this.hover = true;
       
     },
+    prevent(){
+      if(event){
+        event.stopPropagation();
+      }
+    },
     showField(ecategory) {
-      return ecategory == "" || this.edit_category == ecategory;
+      return ecategory.done;
+       if(event){
+        event.stopPropagation();
+      }
+      return ecategory == "" || this.edit_category == ecategory.title;
     },
     edit(ecategory) {
       this.focusField(ecategory)
