@@ -7,7 +7,8 @@
 >
         <div class="sub-container gutter-sm">
           <div class="form-fields-container">
-            <div class="login-header"><img src="statics\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
+            <div class="login-header">
+              <img src="statics\logo\ShamagriPageLogo.svg" alt="shamagri logo" class="shamagri-logo"></div>
                       <q-input color="teal" v-model="email" filled type="email" hint="Email"></q-input>
                         <div class="q-py-sm"></div>
                       <q-input color="teal" v-model="password" filled type="password" hint="Password" ></q-input>
@@ -15,15 +16,17 @@
             <q-btn size="lg" label="Google sign-in"  @click="signInGoogle" class="q-mt-md q-mb-lg sign-in-google-btn"><q-icon class="g-icon"><img src="/statics/icons/Google-btn_icon.png" alt="Facebook-icon"></q-icon>
 </q-btn>
              
-            <div class="create-account-btn-container"><span class="txt-newuser">New User?</span><q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn></div>
+            <div class="create-account-btn-container">
+              <span class="txt-newuser">New User?</span>
+              <q-btn flat to="/register" class="signup-btn q-mx-sm">create account</q-btn>
+              </div>
           </div>
-        </div>
-      </div>
-    </transition>
+          </div>
+            </transition>
     <div class="bg-img_container">
       <img class="bg-img" src="statics\img\Login-register-bgShape@2x.png" alt="illustrator" />
     </div>
-  </div>
+ </div>
 </template>
 
 <script>
