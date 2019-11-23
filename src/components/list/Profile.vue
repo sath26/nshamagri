@@ -34,27 +34,25 @@
                         </div>
                     </div>
                     <!-- profile-detail card -->
-                    <q-card class="shadow-1 q-mt-lg">
-                      <q-card-section>
-                        <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
+                    <q-card class="shadow-1 q-mt-lg details-card_container">
+                      <q-card-section class="details-card_title row">
+                        <div class="text-h4 text-teal-5 q-ml-xl col">Profile details</div>
+                        <a href="/" target="_blank" class="col"><img src="statics\icons\edit-btn_icon.png" alt="edit button icon"></a>
                       </q-card-section>
                     <div class="card-body">
                       <ul class="info-list">
-                        <li><q-icon name="email"></q-icon>saugathapa@gmail.com <span class="edit-btn">Edit</span></li> 
-                        <li class="col"><q-icon name="phone"></q-icon> +1 123-456-7890 <span class="edit-btn">Edit</span></li>
-                        <li class="col"><q-icon name="place"></q-icon> Kathmandu, Nepal <span class="edit-btn">Edit</span></li>
-                        <li class="col"><q-icon name="note"></q-icon> 223 049 023 <span class="edit-btn">Edit</span></li>
+                        <li><q-icon name="email"></q-icon> Email  &nbsp; saugathapa@gmail.com </li> 
+                        <li class="col"><q-icon name="phone"></q-icon> Phone  &nbsp; +1 123-456-7890 </li>
+                        <li class="col"><q-icon name="place"></q-icon> Address &nbsp; Kathmandu, Nepal </li>
+                        <li class="col"><q-icon name="note"></q-icon> Vat number &nbsp;223 049 023 </li>
                       </ul>
-                          
-                    </div>
-                    </q-card>
-                    <div class="card-footer">
-                      <div class="social_media-icons">
-                          <a href="/" target="_blank"><img src="statics\icons\facebook.svg" alt="Facebook icon"></a>
-                          <a href="/" target="_blank"><img src="statics\icons\linkedin.svg" alt="Linkedin icon"></a>
-                          <a href="/" target="_blank"><img src="statics\icons\twitter.svg" alt="Twitter icon"></i></a>
+                        <div class="social_media-icons">
+                          <a href="/" target="_blank"><img src="statics\icons\facebook.svg" alt="Facebook icon"> Saugat Fb</a>
+                          <a href="/" target="_blank"><img src="statics\icons\linkedin.svg" alt="Linkedin icon"> Linkden Saugat</a>
+                          <a href="/" target="_blank"><img src="statics\icons\twitter.svg" alt="Twitter icon"> @saugatTwit</i></a>
                       </div>
                     </div>
+                    </q-card>
                 </div>    
         </q-tab-panel>
   <!-- Member profile panel -->
@@ -134,6 +132,16 @@ export default {
   width 300px
   height 300px
   box-shadow 0px 0px 7px rgba(0,0,0, .3)
+.details-card_container
+  width 60%
+.details-card_title
+  padding 20px 0 0 0
+  a
+    img
+      margin-right 20px
+      float right
+      width 40px
+      height 40px
 .card-quick_info
     text-align center
     align-self flex-end
@@ -167,12 +175,12 @@ export default {
 .card-body
   width 100%
   margin 0 auto
-  padding 20px
+  padding 0 0 20px 0 
   .info-list
     width 90%
     display inline-block
     li
-     font-size 2em
+     font-size 1.5vw
      padding 18px 0px
      list-style none
      position relative
@@ -197,25 +205,20 @@ export default {
     transition .1s ease-in-out
     &:hover
       color inherit
-.card-footer 
-  width 100%
-  height 80px
- .social_media-icons
-   text-align center
-   position relative
-   top 25%
-   a 
-    margin auto 35px
-.card-footer .social_media-icons img 
-  width 40px
-  height 40px 
-  vertical-align -50%
-  webkit-transition all .11s ease-in-out 
-  transition all .11s ease-in-out 
-  &:hover
-   transform scale(1.5)
-
-  
+ 
+  .social_media-icons
+    text-align left
+    position relative
+    top 25%
+    a 
+      width 40%
+      padding-bottom 25px
+      margin auto 38px 
+      font-size 1.5vw
+    img
+      width 40px
+      height 40px
+      transform translateY(10px)  
 </style>
 
 
