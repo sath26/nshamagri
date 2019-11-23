@@ -7,10 +7,10 @@ another ui is needed when supplier provides u good with all info and u dont have
       <s-header></s-header>
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+          <q-form @submit="onSubmit()" @reset="onReset" class="q-gutter-md">
             <q-input filled v-model="name" label="Goods/Services Name" color="secondary" />
             <q-input filled v-model="price" type="number" label="Price" color="secondary" />
-             <q-select filled v-model="unit" :options="options" label="Unit" />
+             <q-select filled v-model="unit_list" :options="unit_quotation" label="Unit" />
             <div class="q-gutter-sm">
               <q-radio v-model="business" val="good" label="Good" />
               <q-radio v-model="business" val="service" label="Service" />
@@ -24,7 +24,7 @@ another ui is needed when supplier provides u good with all info and u dont have
               use-chips
               filled
               color="tertiary"
-              :options="filterOptions"
+              :options="category_quotation"
               label="add/change category"
               use-input
               @filter="filterFn"
@@ -34,8 +34,9 @@ another ui is needed when supplier provides u good with all info and u dont have
             
             <div>
               <!-- <q-btn label="Submit" type="submit" color="primary"/> -->
-              <q-btn to="/add_goods" label="save" color="secondary" type="submit" />
-              <q-btn label="Reset" type="reset" color="secondary" flat class="q-ml-sm" />
+              <q-btn  label="save" color="secondary" type="submit" />
+              <!-- <q-btn label="Reset" type="reset" color="secondary" flat class="q-ml-sm" /> -->
+              <q-btn label="Go Back" to="/quotation" type="reset" color="secondary" flat class="q-ml-sm" />
             </div>
           </q-form>
         </div>
@@ -49,7 +50,7 @@ another ui is needed when supplier provides u good with all info and u dont have
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 //for category
 const stringOptions = [
         {
@@ -84,59 +85,52 @@ export default {
       search: "",
       business: "good",
       multiple: [],//model that takes selected values
-      filterOptions: stringOptions,//value to add on select
+      filterOptions: [],//value to add on select
       name: "",
-      price: "",
-      unit: "",
+      price: 0,
+      unit_list: [],
       inptag: "",
       tags: [{ id: 1, tag: "saugat" }, { id: 2, tag: "narmala" }],
       select: "",
-      options: [
-        //for units
-        {
-          label: "kilo",
-          value: "kilo"
-        },
-        {
-          label: "litre",
-          value: "litre"
-        },
-        {
-          label: "cartoon",
-          value: "cartoon"
-        },
-        {
-          label: "packet",
-          value: "packet"
-        },
-        {
-          label: "pieces",
-          value: "pieces"
-        },
-        {
-          label: "monthly",
-          value: "monthly"
-        }
-      ]
+      
+      options: []
     };
   },
+   created() {
+    // this.$store.dispatch('fetchCategory', db.collection('category'))
+    
+    this.fetchCategory(); // this is a variable in category but function in reddit-clone
+    this.fetchUnit();
+    
+    //db.collection('category')
+  },
+  computed:{
+    ...mapState("quotation", 
+                    ["category_quotation",
+                    "loading_category",
+                    "unit_quotation"
+                    ]),
+  },
   methods: {
+    ...mapActions("quotation", [
+      "fetchCategory",
+      "fetchUnit",
+      "createQuotation",
+      
+    ]),
     onSubmit() {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: "red-5",
-          textColor: "white",
-          icon: "fas fa-exclamation-triangle",
-          message: "You need to accept the license and terms first"
-        });
-      } else {
-        this.$q.notify({
-          color: "green-4",
-          textColor: "white",
-          icon: "fas fa-check-circle",
-          message: "Submitted"
-        });
-      }
+       this.createQuotation({
+         id: uniqid(),
+          label:this.name,
+          value:{
+            title:this.name,
+            rate:this.price,
+            enterprise_type:this.business,
+            unit: this.unit_list,
+            category: this.multiple
+          }
+      });
+      
     },
      onValueChange(){
      this.$refs['select'].__resetInputValue()

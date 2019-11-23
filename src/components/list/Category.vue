@@ -42,10 +42,10 @@ plumbing */
                   @blur="blurFocusOff()"
                   ref="focus"
                   color="secondary"
-                  v-model.lazy="new_category"
+                  v-model="new_category"
                 >
                   <template v-slot:append>
-                    <q-btn flat color="secondary" v-if="done" @click>
+                    <q-btn flat color="secondary" v-if="done" @click="insert()">
                       <q-icon name="done" />
                     </q-btn>
                   </template>
@@ -53,17 +53,22 @@ plumbing */
               </q-item-section>
             </q-item>
           </q-list>
-          <q-list bordered class="list-container">
-            <q-item multiline v-for="(categories, index) in category"
-              :key="categories.id">
+          <q-spinner color="primary" size="3em" v-if="loading_category" />
+          <q-list bordered v-else class="list-container">
+            <q-item multiline v-for="(categories, index) in category" :key="categories.id">
               <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section avatar>
-                <q-btn flat v-if="categories.hover && categories.cantChangeIconAfterFocus" :key="index"  @mouseover="mouseover(categories)">
-                  <q-icon  name="img:statics/icons/category-icon.svg" />
+                <q-btn
+                  flat
+                  v-if="categories.hover && categories.cantChangeIconAfterFocus"
+                  :key="index"
+                  @mouseover="mouseover(categories)"
+                >
+                  <q-icon name="img:statics/icons/category-icon.svg" />
                 </q-btn>
-                <q-btn flat  v-else @click="" @mouseleave="mouseleave(categories)">
-                  <q-icon  name="delete" />
+                <q-btn flat v-else @click="remove(categories)" @mouseleave="mouseleave(categories)">
+                  <q-icon name="delete" />
                 </q-btn>
               </q-item-section>
               <q-item-section>
@@ -71,7 +76,7 @@ plumbing */
                   label
                   v-show="!showField(categories)"
                   @click.exact="focusField(categories)"
-                >{{categories.title}}</q-item-section>
+                >{{categories.value}}</q-item-section>
                 <q-item-section label v-show="showField(categories)">
                   <q-input
                     filled
@@ -80,16 +85,15 @@ plumbing */
                     @blur.exact="blurField(categories)"
                     @keyup.enter="focusField(categories)"
                     ref="efocus"
-                   
-                    v-model="categories.title"
+                    v-model="categories.value"
                   ></q-input>
                 </q-item-section>
               </q-item-section>
               <q-item-section avatar>
-                <q-btn flat  v-if="categories.editIcon" @click="edit(categories)">
+                <q-btn flat v-if="categories.editIcon" @click="edit(categories)">
                   <q-icon name="edit" />
                 </q-btn>
-                <q-btn flat  v-else @click="rename(categories)">
+                <q-btn flat v-else @click="rename(categories)">
                   <q-icon name="done" />
                 </q-btn>
               </q-item-section>
@@ -105,8 +109,10 @@ plumbing */
 //consists of buyers and sellers
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import { fireDB, storage, auth, db } from '../../store/service/firebase';
+import { fireDB, storage, auth, db } from "../../store/service/firebase";
 import { mapState, mapGetters, mapActions } from "vuex";
+import swal from "sweetalert";
+import uniqid from "uniqid";
 export default {
   components: {
     SHeader,
@@ -118,18 +124,17 @@ export default {
       ecategory: "",
       edit_category: "",
       add: true,
-      cantChangeIconAfterFocus:true,//for delete from category icon
+      cantChangeIconAfterFocus: true, //for delete from category icon
       done: false,
-       editIcon: true,// for edit icon to be true,
+      editIcon: true, // for edit icon to be true,
       hover: true,
-       categories: [],
-       
+      categories: []
     };
   },
   computed: {
     ...mapGetters("layoutDemo", ["view"]),
-    ...mapState("category", ["category"]),
-    
+    ...mapState("category", ["category", "loading_category"]),
+
     newServiceToggler: {
       get() {
         return this.$store.state.layoutDemo.toggleNewService;
@@ -141,77 +146,116 @@ export default {
   },
   created() {
     // this.$store.dispatch('fetchCategory', db.collection('category'))
-    this.fetchCategory();// this is a variable in category but function in reddit-clone
+    this.fetchCategory(); // this is a variable in category but function in reddit-clone
     //db.collection('category')
   },
   methods: {
-    ...mapActions("category", ["fetchCategory", "createCategory", "updateCategory"]),
+    ...mapActions("category", [
+      "fetchCategory",
+      "createCategory",
+      "updateCategory",
+      "deleteCategory"
+    ]),
     focusOn() {
       this.add = false;
-      this.done = true;
+      this.done = true; //done is for change in icon here
       this.$refs.focus.focus();
     },
     focusOff() {
       this.add = true;
       this.done = false;
-      this.category = "";
+      this.new_category = "";
     },
     blurFocusOff() {
       // this.$refs.focus.blur();
-      
     },
     focusField(ecategory) {
-       ecategory.done = true;
-      if(event){
+      ecategory.done = true;
+      if (event) {
         event.preventDefault();
       }
-      ecategory.editIcon= false;
+      ecategory.editIcon = false;
       this.hover = false;
       this.cantChangeIconAfterFocus = false;
-      this.edit_category = ecategory.title;//variable remains same but server must have it
+      this.edit_category = ecategory.value; //variable remains same but server must have it
       //  this.$refs["efocus"].focus();
     },
     blurField(ecategory) {
-      if(event){
+      if (event) {
         event.stopPropagation();
       }
-      ecategory.done = false; 
+      ecategory.done = false;
       this.edit_category = "";
       this.hover = true;
-      
     },
-    prevent(){
-      if(event){
+    prevent() {
+      if (event) {
         event.stopPropagation();
       }
     },
     showField(ecategory) {
       return ecategory.done;
-       if(event){
+      if (event) {
         event.stopPropagation();
       }
-      return ecategory == "" || this.edit_category == ecategory.title;
+      return ecategory == "" || this.edit_category == ecategory.value;
     },
     edit(ecategory) {
-      this.focusField(ecategory)
+      this.focusField(ecategory);
     },
-    remove() {},
-    insert() {},
+    remove(ecategory) {
+      swal({
+        title: "Are you sure?",
+        text:
+          "Once deleted, you will not be able to recover this data!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          this.deleteCategory({
+            id: ecategory.id
+          });
+          swal("Poof! Your data has been deleted!", {
+            icon: "success"
+          });
+        } else {
+          swal("Your data is safe!");
+        }
+      });
+    },
+    insert() {
+      console.log(this.new_category);
+      this.createCategory({
+        id: uniqid(),
+        value: this.new_category,
+        label: this.new_category,
+        add: true,
+        cantChangeIconAfterFocus: true,
+        done: false,
+        editIcon: true,
+        hover: true
+      });
+      this.add = true;
+      this.done = false;
+      this.new_category = "";
+    },
     mouseover(categories) {
       categories.hover = false;
     },
     mouseleave(categories) {
       categories.hover = true;
     },
-    rename(ecategory){
+    rename(ecategory) {
       ecategory.hover = true;
-      ecategory.editIcon =true;
-      this.cantChangeIconAfterFocus = true;//for delete from category icon
-     
-      this.updateCategory( {
-        title:ecategory.title,
+      ecategory.editIcon = true;
+      this.cantChangeIconAfterFocus = true; //for delete from category icon
+
+      this.updateCategory({
+        value: ecategory.value,
+        label:ecategory.label,
         id: ecategory.id
-      })
+      });
       // this.$refs["efocus"].blur();
     }
   },
