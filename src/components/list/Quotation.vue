@@ -22,57 +22,23 @@
               </q-item-section>
             </q-item>
           </q-list>
-          <q-list bordered highlight>
-            <q-item multiline link>
+          <q-spinner color="primary" size="3em" v-if="loading_quotation" />
+          <q-list bordered highlight  v-else>
+            <q-item multiline link v-for="(quotations, index ) in quotation" :key="quotations.id">
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-section label>Wai Wai</q-item-section>
-                <q-item-section sublabel>Rs 20 / packet</q-item-section>
+                <q-item-section label>{{quotations.value.title}}</q-item-section>
+                <q-item-section sublabel>Rs {{quotations.value.rate}} / {{quotations.value.unit.value}}</q-item-section>
                 <q-item-section sublabel>
-                  <div>
-                    <q-chip dense>Food</q-chip>
-                    <q-chip dense>Dry</q-chip>
-                    <q-chip dense>Junk</q-chip>
-                    <q-chip dense>Cheap</q-chip>
-                    <q-chip dense>Popular</q-chip>
+                  <div >
+                    <!-- <q-chip dense v-for="n in  quotations.value.category.length" :key="n">{{quotations.value.category[n-1].value}}</q-chip> -->
+                    <q-chip dense v-for="(item,index) in  quotations.value.category" :key="index">{{item.value}}</q-chip>
                   </div>
                 </q-item-section>
               </q-item-section>
             </q-item>
 
-            <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Happy Happy</q-item-section>
-                <q-item-section sublabel>Rs 10 / packet</q-item-section>
-              </q-item-section>
-              <!--    <q-item-side right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
-                    <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
-                      </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
-                      </q-btn>
-                    </div>
-                  </q-popover>
-                </q-btn>
-              </q-item-side>-->
-            </q-item>
-
-            <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-label>Happy Happy</q-item-label>
-                <q-item-label sublabel>Rs 10 / packet</q-item-label>
-              </q-item-section>
-              <q-item-section side top>
-                <q-btn label="Unavailable" color="deep-orange" size="sm" flat />
-              </q-item-section>
-            </q-item>
+            
           </q-list>
         </div>
       </q-page>
@@ -84,8 +50,8 @@
 <script>
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-
-import { mapState, mapGetters } from "vuex";
+import uniqid from "uniqid";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   components: {
     SHeader,
@@ -97,8 +63,13 @@ export default {
       opened: false
     };
   },
+  created(){
+this.fetchQuotation();
+  },
   computed: {
-    ...mapGetters("layoutDemo", ["view"]),
+     ...mapGetters("layoutDemo", ["view"]),
+    ...mapState("quotation", ["quotation", "loading_quotation"]),
+    
     newGoodToggler: {
       get() {
         return this.$store.state.layoutDemo.toggleNewGood;
@@ -107,6 +78,12 @@ export default {
         this.$store.commit("layoutDemo/setToggleAddGood", val);
       }
     }
+  },
+  methods:{
+    ...mapActions("quotation", [
+      "fetchQuotation",
+      
+    ]),
   }
 };
 </script>

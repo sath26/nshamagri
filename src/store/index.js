@@ -4,6 +4,7 @@ import { vuexfireMutations } from 'vuexfire'
 import layoutDemo from './layoutDemo'
 import category from './category'
 import auth from './auth'
+import quotation from './quotation'
 Vue.use(Vuex)
 
 /*
@@ -20,7 +21,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       layoutDemo,
       category,
-      auth
+      auth,
+      quotation
     }
   })
   if (process.env.DEV && module.hot) {

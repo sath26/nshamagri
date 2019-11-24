@@ -3,10 +3,11 @@ import firebase from 'firebase';
 import { generate } from 'shortid';
 import { fireDB, storage, auth, db } from '../service/firebase';
 import { firestoreAction } from 'vuexfire';
+
 const state={
   category:[],
   error: null,
-  loading: false,
+  loading_category: false,
 };
 const mutations={
    setError(state, payload) {
@@ -14,7 +15,7 @@ const mutations={
   },
 
     setLoading(state, payload) {
-    state.loading = payload;
+    state.loading_category = payload;
   },
 
    setCategory(state, payload) {
@@ -22,18 +23,26 @@ const mutations={
   }
 };
 const actions= {
-  fetchCategory:firestoreAction(({ bindFirestoreRef }) => {
-   return bindFirestoreRef('category', db.collection('category'));
+  fetchCategory:firestoreAction(({ bindFirestoreRef,commit }) => {
+    commit('setLoading', true)
+    return bindFirestoreRef('category', db.collection('category'))
+      .then((data) => {
+        console.log(data);
+      })
+           .finally((data)=>{
+             commit('setLoading',false);
+            });
   }),
   async createCategory({ getters }, categories) {
     // const result = posts.doc();
     // post.id = result.id;
-    categories.title ;
-    categories.user_id = firebase.auth().currentUser.uid;
-    categories.created_at = firebase.firestore.FieldValue.serverTimestamp();
-    categories.updated_at = firebase.firestore.FieldValue.serverTimestamp();
+    // categories.created_at = firebase.firestore.FieldValue.serverTimestamp();
+    // categories.updated_at = firebase.firestore.FieldValue.serverTimestamp();
+    // categories.user_id = firebase.auth().currentUser.uid;
+     ;
     try {
-      await db.collection(category).doc(categories);
+      await db.collection('category').doc().set(categories);
+      
       //Add a new document with a generated id.
     } catch (error) {
       console.error(error);
@@ -44,7 +53,7 @@ const actions= {
     // post.id = result.id;
    console.log(categories);
     const hello = {
-      title: categories.title
+      value: categories.value
     };
     const id = categories.id;
     // categories.user_id = firebase.auth().currentUser.uid;
@@ -61,12 +70,12 @@ const actions= {
     // const result = posts.doc();
     // post.id = result.id;
     
-    id = categories.id;
+    const id = categories.id;
     // categories.user_id = firebase.auth().currentUser.uid;
 
     try {
       await db.
-        collection(category)
+        collection('category')
         .doc(id)
         .delete();
     } catch (error) {
