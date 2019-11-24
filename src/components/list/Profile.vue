@@ -23,6 +23,9 @@
                             <a href="#">Change</a>
                             <a href="#">Delete</a>
                           </div>
+                          <div class="usr-name_responsive">
+                            <h4>Saugat Thapa</h4>
+                          </div>
                         </div>
                         <div class="card-quick_info">
                           <h3>Saugat enterprise</h3>
@@ -34,9 +37,9 @@
                         </div>
                     </div>
                     <!-- profile-detail card -->
-                    <q-card class="shadow-1 q-mt-lg details-card_container">
+                    <q-card class="shadow-2 q-mt-lg details-card_container">
                       <q-card-section class="details-card_title row">
-                        <div class="text-h4 text-teal-5 q-ml-xl col">Profile details</div>
+                        <div class=" text-teal-5 q-ml-xl col">Profile details</div>
                         <a href="/" target="_blank" class="col"><img src="statics\icons\edit-btn_icon.png" alt="edit button icon"></a>
                       </q-card-section>
                     <div class="card-body">
@@ -127,7 +130,14 @@ export default {
   z-index 15
   .card-banner
     display flex
-    flex-wrap nowrap
+    flex-direction row
+    flex-wrap wrap
+.usr-name_responsive
+  text-align center
+  display none
+  h4
+    padding 0
+    margin 0
 .usr-img
   width 300px
   height 300px
@@ -135,6 +145,7 @@ export default {
 .details-card_container
   width 60%
 .details-card_title
+  font-size 2.5vw
   padding 20px 0 0 0
   a
     img
@@ -144,8 +155,9 @@ export default {
       height 40px
 .card-quick_info
     text-align center
-    align-self flex-end
     margin-left 20px
+    align-self flex-end
+
   h3
     font-size 2rem
     padding 0
@@ -219,6 +231,17 @@ export default {
       width 40px
       height 40px
       transform translateY(10px)  
+
+@media screen and (max-width: 1473px)
+  .card-banner
+    justify-content center
+    flex-direction column
+    .card-quick_info
+      display none
+  .details-card_container
+    width 100%
+  .usr-name_responsive
+    display block
 </style>
 
 
