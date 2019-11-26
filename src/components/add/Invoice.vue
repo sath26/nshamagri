@@ -17,123 +17,139 @@ add good or service after saved takes back to invoice(remember route)
             :columns="columns"
             row-key="name"
             no-data-label="Select product from below"
+            no-results-label="The filter didn't uncover any results"
             separator="vertical"
           >
             <template slot="top-left" slot-scope="props">
               <p class="q-caption">* Click on cells to edit</p>
             </template>
+            <template slot="top-right" slot-scope="props">
+              <p class="q-caption">{{total_invoice}}, {{newTotalInvoice}}</p>
+            </template>
             <q-tr slot="body" slot-scope="props" :props="props">
               <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
               <q-td key="desc" :props="props">
-                {{ props.row.value.product }}
-                <q-popup-edit v-model="props.row.product" title="Update product" buttons>
-                  <q-input type="text" v-model="props.row.value.product" />
+                {{ props.row.value.title }}
+                <q-popup-edit v-model="props.row.title" title="Update product" buttons>
+                  <q-input type="text" v-model="props.row.value.title" />
                 </q-popup-edit>
               </q-td>
 
               <q-td key="rate" :props="props">
                 {{ props.row.value.rate }}
+                <q-popup-edit v-model="rate" title="Update Price" buttons>
+                  <q-input type="number" v-model="props.row.value.rate" />
+                </q-popup-edit>
                 <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
               </q-td>
-              <q-td key="quantity" :props="props">{{ props.row.value.quantity }}</q-td>
-              <q-td key="total" :props="props">{{ props.row.value.total }}</q-td>
-              <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td>
+              <q-td key="quantity" :props="props">
+                {{ props.row.value.quantity }}
+                <q-popup-edit
+                  v-model.number="props.row.value.quantity"
+                  title="Update Quantity"
+                  buttons
+                >
+                  <q-input type="number" v-model.number="props.row.value.quantity" />
+                </q-popup-edit>
+              </q-td>
+              <q-td key="total" :props="props">{{ props.row.value.quantity * props.row.value.rate }}</q-td>
+              <!-- <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td> -->
             </q-tr>
           </q-table>
           <q-form class="q-gutter-md">
             <q-select
-               ref="select"
+              ref="select"
               v-model="multiple"
               multiple
               input-debounce="0"
               use-chips
               filled
               color="tertiary"
-              :options="filterOptions"
+              :options="quotation"
               label="Choose goods/services"
               use-input
               @filter="filterFn"
               @input="onValueChange"
-               @new-value="createValue"
+              @new-value="createValue"
             />
             <q-btn to="/add_goods" label="Save" color="secondary" type="submit" />
           </q-form>
         </div>
       </q-page>
     </q-page-container>
-    <s-footer></s-footer>
   </q-layout>
 </template>
 <script>
 //consists of buyers and sellers
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
+
 const stringOptions = [
-        {
-          label: "Google",
-          value: {
-            product: "Google",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        },
-        {
-          label: "Facebook",
-          value: {
-            product: "Facebook",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        },
-        {
-          label: "Twitter",
-          value: {
-            product: "Twitter",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        },
-        {
-          label: "Apple Inc.",
-          value: {
-            product: "Apple Inc.",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        },
-        {
-          label: "Linux Inc.",
-          value: {
-            product: "Linux Inc.",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        },
-        {
-          label: "Dell Inc.",
-          value: {
-            product: "Dell Inc.",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        },
-        {
-          label: "Oracle",
-          value: {
-            product: "Oracle",
-            rate: 30,
-            quantity: 5,
-            expiry_left: 150
-          }
-        }
-      ];
+  {
+    label: "Google",
+    value: {
+      product: "Google",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  },
+  {
+    label: "Facebook",
+    value: {
+      product: "Facebook",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  },
+  {
+    label: "Twitter",
+    value: {
+      product: "Twitter",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  },
+  {
+    label: "Apple Inc.",
+    value: {
+      product: "Apple Inc.",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  },
+  {
+    label: "Linux Inc.",
+    value: {
+      product: "Linux Inc.",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  },
+  {
+    label: "Dell Inc.",
+    value: {
+      product: "Dell Inc.",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  },
+  {
+    label: "Oracle",
+    value: {
+      product: "Oracle",
+      rate: 30,
+      quantity: 5,
+      expiry_left: 150
+    }
+  }
+];
 export default {
   components: {
     SHeader,
@@ -141,9 +157,13 @@ export default {
   },
   data() {
     return {
+      rate: 0,
+      quantity: 0,
+      total_invoice: 0,
+      sum: 0,
       lazy: [],
-      multiple: [],//model that takes selected values
-      filterOptions: stringOptions,//value to add on select
+      multiple: [], //model that takes selected values
+      filterOptions: [], //value to add on select
       columns: [
         {
           name: "desc", //dont rename name
@@ -158,7 +178,7 @@ export default {
         {
           name: "quantity",
           label: "Quantity",
-          field: "expiry_left",
+          field: "quantity",
           sortable: false
         }, //dont rename name
         {
@@ -166,40 +186,66 @@ export default {
           label: "Total",
           field: "total",
           sortable: false
-        }, //dont rename name
-        {
+        } //dont rename name
+        /*   {
           name: "expiry_left",
           label: "Expiry Left",
           field: "expiry_left",
           sortable: false
-        }
+        }  */
       ],
       filter: ""
     };
   },
+  created() {
+    this.fetchQuotation();
+  },
   computed: {
+    ...mapState("quotation", ["quotation", "loading_quotation"]),
+    
+    newTotalInvoice() {
+      let total = 0;
+      this.multiple.forEach(x => {
+        total = total + x.value.rate * x.value.quantity;
+      });
+      return total;// return is important in computed()
+    }
     // ...mapGetters("layoutDemo", ["view"])
   },
+  watch: {
+    multiple() {
+      // this.multiple.forEach(myFunction);
+
+      this.sum = this.multiple.map(arrayItem => {
+        var x = 0;
+        return (x += arrayItem.value.rate * arrayItem.value.quantity);
+      });
+      this.total_invoice = this.sum.reduce((total, value, index, array) => {
+        return (total += value);
+      });
+    }
+  },
   methods: {
-     onValueChange(){
-     this.$refs['select'].__resetInputValue()
+    ...mapActions("quotation", ["fetchQuotation"]),
+    onValueChange() {
+      this.$refs["select"].__resetInputValue();
     },
-    createValue (val, done) {
+    createValue(val, done) {
       console.log(val);
-          if (val.length > 0) {
+      if (val.length > 0) {
         if (!this.filterOptions.includes(val)) {
-          this.filterOptions.push(val)
+          this.filterOptions.push(val);
         }
-        done(val, 'toggle')
+        done(val, "toggle");
       }
     },
+
     filterFn(val, update) {
       update(() => {
         if (val === "") {
           this.filterOptions = stringOptions;
         } else {
           const needle = val.toLowerCase();
-         
 
           this.filterOptions = stringOptions.filter(
             v => v.label.toLowerCase().indexOf(needle) > -1
