@@ -13,6 +13,11 @@ const routes = [
   },
   {
     path: '/profile',
+    component: () => import('components/add/Profile.vue'),
+
+  },
+  {
+    path: '/profile/view',
     component: () => import('components/list/Profile.vue'),
 
   },
