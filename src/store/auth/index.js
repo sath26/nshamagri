@@ -6,13 +6,14 @@ const google = new firebase.auth.GoogleAuthProvider();
 
 const state={
   user: {},
+  isAuthenticated:false,
   pic: null,
   error_auth: null,
   loading_auth: false,
 };
 const getters={
   isAuthenticated(state) {
-    return !!state.user;
+    return state.isAuthenticated;
   },
   loggedInuser(state) {
     return state.user
@@ -34,6 +35,9 @@ const mutations={
 
     setError(state, payload) {
     state.error_auth = payload;
+  },
+  setAuthenticated(state,payload){
+state.isAuthenticated =payload
   }
 };
 const actions = {
@@ -83,9 +87,17 @@ const actions = {
         const accessToken = result.credential.accessToken;
         const { user } = result;
         console.log(user);
-        commit('setUser', { email: user.email, fullName: user.displayName, accessToken });
-        sessionStorage.setItem('email', user.email);
-        sessionStorage.setItem('accessToken', accessToken);
+        commit('setUser', 
+          {
+            id: result.uid,
+            name: result.displayName,
+            email: result.email,
+            photoUrl: result.photoURL,
+            accessToken
+          });
+        commit('setAuthenticated', true);
+        // sessionStorage.setItem('email', user.email);
+        // sessionStorage.setItem('accessToken', accessToken);
 
         // await this.$store.dispatch('getPhoto');
         // if (!this.$store.state.pic) {
@@ -102,16 +114,16 @@ const actions = {
       });
   },
 
-   SignIn({ commit }, payload) {
-    commit('setUser', {
-      id: payload.uid,
-      name: payload.displayName,
-      email: payload.email,
-      photoUrl: payload.photoURL
-       });
+  //  SignIn({ commit }, payload) {
+  //   commit('setUser', {
+  //     id: payload.uid,
+  //     name: payload.displayName,
+  //     email: payload.email,
+  //     photoUrl: payload.photoURL
+  //      });
     // await store.dispatch('getPhoto');
-    router.push('/');
-  },
+  //   router.push('/');
+  // },
 
   userHello({ commit }, payload){
     commit('setUser', {
@@ -130,7 +142,7 @@ const actions = {
     commit('setUser', {});
     commit('setError', null);
     // commit('setTodo', null);
-    router.push('/');
+    router.push('/login');
   },
   resetPassword({ commit }, payload) {
     commit('setLoading', true);

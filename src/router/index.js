@@ -24,11 +24,11 @@ export default function ({ store, ssrContext } ) {
   })
   Router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requireAuth)) {
-      if (store.getters['auth/loggedInuser']) {
+      if (store.getters['auth/isAuthenticated']) {
         
         next()
       } else {
-        console.log(store.getters['auth/loggedInuser'])
+        console.log(store.getters['auth/isAuthenticated'])
         next('/login')
       }
     } else {

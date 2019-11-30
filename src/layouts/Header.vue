@@ -26,13 +26,14 @@
         class="search-box_toggle-btn"></q-btn>-->
         <s-create class="q-px-sm"></s-create>
         <s-notification class="q-px-sm"></s-notification>
-        <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile">
+        <q-btn flat color="white" class="q-mr-sm profile-btn" to="/profile" v-if="isAuthenticated">
           <q-tooltip>
             <strong>{{user.name}}</strong>
           </q-tooltip>
-          <img :src=user.photoURL alt="user" />
+          <img :src=user.photoUrl alt="user" />
           <!-- <img src="statics\icons\User-icon.svg" alt="User-icon" /> -->
         </q-btn>
+        <q-btn outline color="white" class="q-mr-sm" to="/login" v-else>Login</q-btn>
         <!-- notification is also available but i need number of notification on top of the icon or change in color  -->
       </q-toolbar>
       <div
@@ -84,9 +85,9 @@
         </q-list>
         <q-separator></q-separator>
         <q-list>
-          <q-item class="side-menu_items text-red-8" to="/landing_page">
+          <q-item class="side-menu_items text-red-8"  >
             <q-item-section avatar>
-              <q-icon name="logout"></q-icon>
+              <q-icon name="logout" @click.native="logout()"></q-icon>
             </q-item-section>
             <q-item-section>Logout</q-item-section>
           </q-item>
@@ -186,8 +187,8 @@ export default {
     };
   },
   computed: {
-     ...mapGetters("auth", ["isAuthenticated","loggedInuser"]),
-    ...mapState("auth", ["user", "pic"]),
+     ...mapGetters("auth", ["","loggedInuser"]),
+    ...mapState("auth", ["user", "pic","isAuthenticated"]),
     header: {
       get() {
         return this.$store.state.layoutDemo.header;
@@ -224,8 +225,10 @@ export default {
     ])
   },
   methods: {
-     ...mapActions("auth", ["userHello"]),
-    
+     ...mapActions("auth", ["userHello", "userSignOut"]),
+    logout(){
+      this.userSignOut()
+    }
   }
 };
 </script>
