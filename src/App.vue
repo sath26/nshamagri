@@ -5,13 +5,21 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
-  name: 'App'
-}
+  name: "App",
+  methods: {
+   
+  },
+  created() {
+   
+  }
+};
 </script>
 
 <style>
-body{
-  background:#fafafa;
+body {
+  background: #fafafa;
 }
 </style>

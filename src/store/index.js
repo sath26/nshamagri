@@ -5,6 +5,8 @@ import layoutDemo from './layoutDemo'
 import category from './category'
 import auth from './auth'
 import quotation from './quotation'
+import {fauth} from './service/firebase'
+
 Vue.use(Vuex)
 
 /*
@@ -25,6 +27,8 @@ export default function (/* { ssrContext } */) {
       quotation
     }
   })
+
+  
   if (process.env.DEV && module.hot) {
     module.hot.accept(['./layoutDemo'], () => {
       const newLayoutDemo = require('./layoutDemo').default
@@ -33,4 +37,5 @@ export default function (/* { ssrContext } */) {
   }
   return Store
 }
+
 
