@@ -137,12 +137,18 @@ const actions = {
   },
 
   userSignOut({ commit }) {
-    fauth.signOut();
-    sessionStorage.clear();
-    commit('setUser', {});
-    commit('setError', null);
-    // commit('setTodo', null);
-    router.push('/login');
+    fauth.signOut() .then((result) => {
+      sessionStorage.clear();
+      localStorage.clear();
+      commit('setUser', {});
+      commit('setError', null);
+      commit('setAuthenticated', false);
+      // commit('setTodo', null);
+      this.$router.push({ path: '/login' });
+    }).catch((err) => {
+      console.log(err);
+    });;
+    
   },
   resetPassword({ commit }, payload) {
     commit('setLoading', true);

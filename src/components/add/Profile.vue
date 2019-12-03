@@ -61,25 +61,37 @@
               <div class="card-body">
                 <ul class="info-list">
                   <li>
-                    <q-input color="grey-10" filled v-model="email">
+                    <q-input
+                       color="grey-10" 
+                       filled 
+                       v-model="user.email"
+                        @focus="focusOn()"
+                  @blur="blurFocusOff()"
+                       >
                       <template v-slot:prepend>
                         <q-icon name="email" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat>
+                        <q-btn flat v-if="done">
                           <q-icon name="done" />
                         </q-btn>
                       </template>
                     </q-input>
                   </li>
                   <li class="col">
-                    <q-input color="grey-10" filled v-model="contact">
+                    <q-input 
+                    color="grey-10" 
+                    filled 
+                    v-model="contact"
+                    @focus="focusOn()"
+                  @blur="blurFocusOff()"
+                    >
                       <template v-slot:prepend>
                         <q-icon name="phone" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat>
-                          <q-icon name="done" />
+                        <q-btn flat >
+                          <q-icon v-if="done" name="done" />
                         </q-btn>
                       </template>
                     </q-input>
@@ -140,7 +152,11 @@
               </q-list>
               <q-list bordered hightlight>
                 <q-item multiline>
-                  <q-item-section avatar></q-item-section>
+                  <q-item-section avatar>
+                    <q-avatar>
+                    <img :src=user.photoUrl alt="user" />
+                    </q-avatar>
+                    </q-item-section>
                   <q-item-section>Saugat thapa</q-item-section>
                 </q-item>
               </q-list>
@@ -155,8 +171,8 @@
 //consists of me and enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
-import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
@@ -168,11 +184,27 @@ export default {
       tab: "enterprise",
       subTab: "profileInfo",
       email: "nexus.saugat26@gmail.com",
-      contact: "9841646577"
+      contact: "",
+      add: true,
+      done: false,
     };
   },
   computed: {
     // ...mapGetters("layoutDemo", ["view"])
+    ...mapState("auth", ["user", "pic","isAuthenticated"]),
+
+  },
+  methods:{
+      focusOn() {
+      this.add = false;
+      this.done = true; //done is for change in icon here
+      this.$refs.focus.focus();
+    },
+    focusOff() {
+      this.add = true;
+      this.done = false;
+      this.new_category = "";
+    },
   }
 };
 </script>

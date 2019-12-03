@@ -23,9 +23,9 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 - unit: packet
 # me
 ## changes remaining
-- finish working on database crud of category
+- finish working on database crud of category **done**
 - finish working on database crud of unit
-- finish working ond database crud of quotation
+- finish working ond database crud of quotation **create and select done**
 - finish working on database crud of invoice
 - finish working on database of enterprise
 - finish working on authentication

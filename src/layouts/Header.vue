@@ -85,9 +85,9 @@
         </q-list>
         <q-separator></q-separator>
         <q-list>
-          <q-item class="side-menu_items text-red-8"  >
+          <q-item clickable class="side-menu_items text-red-8"  @click="logout()" >
             <q-item-section avatar>
-              <q-icon name="logout" @click.native="logout()"></q-icon>
+              <q-icon name="logout"></q-icon>
             </q-item-section>
             <q-item-section>Logout</q-item-section>
           </q-item>
