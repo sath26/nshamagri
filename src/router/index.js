@@ -31,7 +31,17 @@ export default function ({ store, ssrContext } ) {
         console.log(store.getters['auth/isAuthenticated'])
         next('/login')
       }
-    } else {
+    } 
+    else if (to.matched.some(record => record.meta.alreadyAuth)){
+      if (store.getters['auth/isAuthenticated']) {
+
+        next('/landing-page')
+      } else {
+        console.log(store.getters['auth/isAuthenticated'])
+        next()
+      }
+    }
+    else {
       next()
     }
   })

@@ -60,20 +60,24 @@
               </q-card-section>
               <div class="card-body">
                 <ul class="info-list">
-                  <li>
-                    <q-input
-                       color="grey-10" 
-                       filled 
-                       v-model="user.email"
-                        @focus="focusOn()"
-                  @blur="blurFocusOff()"
-                       >
+                  <li class="col" color="grey-10" >
+                    <q-icon  name="email"></q-icon>
+                    {{user.email}}
+                  <li class="col">
+                    <q-input 
+                    color="grey-10" 
+                    filled 
+                    label="Contact Number"
+                    v-model="contact"
+                    @focus="focusOnContact()"
+                  @blur="focusOffContact()"
+                    >
                       <template v-slot:prepend>
-                        <q-icon name="email" />
+                        <q-icon name="phone" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done">
-                          <q-icon name="done" />
+                        <q-btn flat v-if="done_contact" >
+                          <q-icon  name="done" />
                         </q-btn>
                       </template>
                     </q-input>
@@ -82,16 +86,17 @@
                     <q-input 
                     color="grey-10" 
                     filled 
-                    v-model="contact"
-                    @focus="focusOn()"
-                  @blur="blurFocusOff()"
+                    label="PAN Number"
+                    v-model="pan_no"
+                    @focus="focusOnPanNo()"
+                  @blur="focusOffPanNo()"
                     >
                       <template v-slot:prepend>
-                        <q-icon name="phone" />
+                        <q-icon name="store" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat >
-                          <q-icon v-if="done" name="done" />
+                        <q-btn flat v-if="done_pan_no" >
+                          <q-icon  name="done" />
                         </q-btn>
                       </template>
                     </q-input>
@@ -157,7 +162,7 @@
                     <img :src=user.photoUrl alt="user" />
                     </q-avatar>
                     </q-item-section>
-                  <q-item-section>Saugat thapa</q-item-section>
+                  <q-item-section>{{user.name}}</q-item-section>
                 </q-item>
               </q-list>
             </div>
@@ -168,6 +173,11 @@
   </q-layout>
 </template>
 <script>
+// use sign in to insert empty values and filled values so that those values 
+// cAN BE USED HERE like in category
+// it might not work coz im saving individual fields separately
+//i have to make separate variable for each and save separately
+//because im saving on same document
 //consists of me and enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
@@ -185,8 +195,13 @@ export default {
       subTab: "profileInfo",
       email: "nexus.saugat26@gmail.com",
       contact: "",
-      add: true,
-      done: false,
+      add_email: true,
+      done_email: false,
+      add_contact: true,
+      done_contact: false,
+      add_pan_no: true,
+      done_pan_no: false,
+      pan_no:"",
     };
   },
   computed: {
@@ -195,15 +210,35 @@ export default {
 
   },
   methods:{
-      focusOn() {
-      this.add = false;
-      this.done = true; //done is for change in icon here
-      this.$refs.focus.focus();
+      focusOnEmail() {
+      this.add_email = false;
+      this.done_email = true; //done is for change in icon here
+      // this.$refs.focus.focus();
     },
-    focusOff() {
-      this.add = true;
-      this.done = false;
-      this.new_category = "";
+    focusOffEmail() {
+      this.add_email = true;
+      this.done_email = false;
+      // this.new_category = "";
+    },
+    focusOnContact() {
+      this.add_contact = false;
+      this.done_contact = true; //done is for change in icon here
+      // this.$refs.focus.focus();
+    },
+    focusOffContact() {
+      this.add_contact = true;
+      this.done_contact = false;
+      // this.new_category = "";
+    },
+    focusOnPanNo() {
+      this.add_pan_no = false;
+      this.done_pan_no = true; //done is for change in icon here
+      // this.$refs.focus.focus();
+    },
+    focusOffPanNo() {
+      this.add_pan_no = true;
+      this.done_pan_no = false;
+      // this.new_category = "";
     },
   }
 };

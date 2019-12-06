@@ -1,6 +1,6 @@
 <template>
     <div class="login-main-container">
-              <q-btn to="/home" flat class="q-ma-md" size="lg" color="grey-9" icon="home"></q-btn>
+              <q-btn to="/landing-page" flat class="q-ma-md" size="lg" color="grey-9" icon="home"></q-btn>
          <transition
   enter-active-class="animated flipInY"
   appear
