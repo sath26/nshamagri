@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div class="card-quick_info">
-                <h3>Saugat enterprise</h3>
+               
                 <ul class="info-content">
                   <li>
                     <div class="info-box">
@@ -46,7 +46,7 @@
                   </li>
                   <li>
                     <div class="info-box">
-                      <div class="info-head">Customer</div>
+                      <div class="info-head">Customers</div>
                       <div class="info-count text-h5">35</div>
                     </div>
                   </li>
@@ -60,15 +60,31 @@
               </q-card-section>
               <div class="card-body">
                 <ul class="info-list">
-                  <li class="col" color="grey-10" >
-                    <q-icon  name="email"></q-icon>
-                    {{user.email}}
+                  <li>
+                    <q-input
+                       color="grey-10" 
+                       filled 
+                       label="Name"
+                       v-model="profile[0].title"
+                        @focus="focusOnEmail()"
+                  @blur="focusOffEmail()"
+                       >
+                      <template v-slot:prepend>
+                        <q-icon name="store" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn flat v-if="done_email" @click="renameEmail()">
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
+                  </li>
                   <li class="col">
                     <q-input 
                     color="grey-10" 
                     filled 
                     label="Contact Number"
-                    v-model="contact"
+                    v-model="profile.contact"
                     @focus="focusOnContact()"
                   @blur="focusOffContact()"
                     >
@@ -76,7 +92,7 @@
                         <q-icon name="phone" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done_contact" >
+                        <q-btn flat v-if="done_contact" @click="renameContact()" >
                           <q-icon  name="done" />
                         </q-btn>
                       </template>
@@ -92,10 +108,10 @@
                   @blur="focusOffPanNo()"
                     >
                       <template v-slot:prepend>
-                        <q-icon name="store" />
+                        <q-icon name="subject" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done_pan_no" >
+                        <q-btn flat v-if="done_pan_no" @click="renamePanNo()" >
                           <q-icon  name="done" />
                         </q-btn>
                       </template>
@@ -193,7 +209,7 @@ export default {
     return {
       tab: "enterprise",
       subTab: "profileInfo",
-      email: "nexus.saugat26@gmail.com",
+      title: "",
       contact: "",
       add_email: true,
       done_email: false,
@@ -202,14 +218,25 @@ export default {
       add_pan_no: true,
       done_pan_no: false,
       pan_no:"",
+     
     };
+  },
+  created(){
+    this.fetchProfile(this.user);
   },
   computed: {
     // ...mapGetters("layoutDemo", ["view"])
     ...mapState("auth", ["user", "pic","isAuthenticated"]),
+    ...mapState("profile", ["profile"]),
 
   },
   methods:{
+    ...mapActions("profile", [
+      "fetchProfile",
+      "createCategory",
+      "updateTitle",
+      "deleteCategory"
+    ]),
       focusOnEmail() {
       this.add_email = false;
       this.done_email = true; //done is for change in icon here
@@ -219,6 +246,13 @@ export default {
       this.add_email = true;
       this.done_email = false;
       // this.new_category = "";
+    },
+    renameEmail(){
+        this.updateTitle({
+        title: this.title,
+        user_id: this.user.id
+      });
+      this.done_email = false;
     },
     focusOnContact() {
       this.add_contact = false;
@@ -230,6 +264,9 @@ export default {
       this.done_contact = false;
       // this.new_category = "";
     },
+    renameContact(){
+      
+    },
     focusOnPanNo() {
       this.add_pan_no = false;
       this.done_pan_no = true; //done is for change in icon here
@@ -239,6 +276,9 @@ export default {
       this.add_pan_no = true;
       this.done_pan_no = false;
       // this.new_category = "";
+    },
+    renamePanNo(){
+      
     },
   }
 };

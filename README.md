@@ -23,7 +23,7 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 - unit: packet
 # me
 ## changes remaining
-- finish working on database crud of category **done**
+- finish working on database crud of category **[done]**
 - finish working on database crud of unit
 - finish working ond database crud of quotation **create and select done**
 - finish working on database crud of invoice
@@ -38,6 +38,7 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 - finish working on retrieval of invoice of each date of invoice sent and each income
 - notification for verification of transaction: send request(how to find the user or enterprise)
 - (new) status for invoice created for the day
+- notification ui
 # Riwat
 ## changes remaining
 - ui when no data for enterprise profile
