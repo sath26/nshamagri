@@ -10,7 +10,7 @@ Vue.use(VueRouter)
  * directly export the Router instantiation
  */
 
-export default function (/* { store, ssrContext } */) {
+export default function ({ store, ssrContext } ) {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     
@@ -22,6 +22,28 @@ export default function (/* { store, ssrContext } */) {
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
   })
+  Router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requireAuth)) {
+      if (store.getters['auth/isAuthenticated']) {
+        
+        next()
+      } else {
+        console.log(store.getters['auth/isAuthenticated'])
+        next('/login')
+      }
+    } 
+    else if (to.matched.some(record => record.meta.alreadyAuth)){
+      if (store.getters['auth/isAuthenticated']) {
 
+        next('/landing-page')
+      } else {
+        console.log(store.getters['auth/isAuthenticated'])
+        next()
+      }
+    }
+    else {
+      next()
+    }
+  })
   return Router
 }

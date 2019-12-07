@@ -6,13 +6,20 @@ const routes = [
     path: '/',
     name:'main',
     component: () => import('components/list/Home.vue'),
+    meta: { requireAuth: true },
   },
   {
-    path: '/landing_page',
+    path: '/landing-page',
     component: () => import('layouts/LandingPage.vue'),
   },
   {
     path: '/profile',
+    component: () => import('components/add/Profile.vue'),
+    meta: { requireAuth: true },
+
+  },
+  {
+    path: '/profile/view',
     component: () => import('components/list/Profile.vue'),
 
   },
@@ -25,6 +32,7 @@ const routes = [
   {
     path: '/quotation',
     component: () => import('components/list/Quotation.vue'),
+    meta: { requireAuth: true },
 
   },
   {
@@ -40,6 +48,7 @@ const routes = [
   {
     path: '/category',
     component: () => import('components/list/Category.vue'),
+    meta: { requireAuth: true },
 
   },
   
@@ -52,21 +61,25 @@ const routes = [
   {
     path: '/bought',
     component: () => import('components/list/Bought.vue'),
+    meta: { requireAuth: true },
     //it also takes to invoce
   },
   {
     path: '/sold',
     component: () => import('components/list/Sold.vue'),
+    meta: { requireAuth: true },
     //it also takes to invoice
   },
   {
     path: '/payment_bought',
     component: () => import('components/list/PaymentBought.vue'),
+    meta: { requireAuth: true },
     //it also takes to invoce
   },
   {
     path: '/payment_sold',
     component: () => import('components/list/PaymentSold.vue'),
+    meta: { requireAuth: true },
     //it also takes to invoice
   },
   {
@@ -83,12 +96,14 @@ const routes = [
   {
     path: '/invoice',
     component: () => import('components/add/Invoice.vue'),
+    meta: { requireAuth: true },
   },
 
 
   {
     path: '/add/quotation',
     component: () => import('components/add/Quotation.vue'),//back to my_products
+    meta: { requireAuth: true },
 
   },
   
@@ -108,6 +123,7 @@ const routes = [
   {
     path: '/settings',
     component: () => import('pages/Settings.vue'),
+    meta: { requireAuth: true },
 
   },
   {
@@ -122,6 +138,7 @@ const routes = [
   {
     path: '/login',
     component: () => import('components/Login.vue'),
+    meta: { alreadyAuth: true },
   },
   {
     path: '/register',

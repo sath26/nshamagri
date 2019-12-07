@@ -9,7 +9,7 @@ another ui is needed when supplier provides u good with all info and u dont have
         <div style="width: 500px; max-width: 90vw;">
           <q-form @submit="onSubmit()" @reset="onReset" class="q-gutter-md">
             <q-input filled v-model="name" label="Goods/Services Name" color="secondary" />
-            <q-input filled v-model="price" type="number" label="Price" color="secondary" />
+            <q-input filled v-model.number="price" type="number" label="Price" color="secondary" />
              <q-select filled v-model="unit_list" :options="unit_quotation" label="Unit" />
             <div class="q-gutter-sm">
               <q-radio v-model="business" val="good" label="Good" />
@@ -49,7 +49,7 @@ another ui is needed when supplier provides u good with all info and u dont have
 <script>
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-
+import uniqid from "uniqid";
 import { mapState, mapGetters, mapActions } from "vuex";
 //for category
 const stringOptions = [
@@ -130,6 +130,7 @@ export default {
             category: this.multiple
           }
       });
+      console.log(this.price+1);
       
     },
      onValueChange(){

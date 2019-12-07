@@ -1,20 +1,23 @@
 import { generate } from 'shortid';
 import firebase from 'firebase';
-import { fireDB, storage, auth, db } from '../service/firebase';
+import { fireDB, storage, fauth, db } from '../service/firebase';
 import router from '../../router'
 const google = new firebase.auth.GoogleAuthProvider();
 
 const state={
-  user: null,
+  user: {},
+  isAuthenticated:false,
   pic: null,
-  error: null,
-  loading: false,
+  error_auth: null,
+  loading_auth: false,
 };
 const getters={
   isAuthenticated(state) {
-    return !!state.user;
+    return state.isAuthenticated;
   },
-
+  loggedInuser(state) {
+    return state.user
+  }
 };
 
 const mutations={
@@ -27,17 +30,20 @@ const mutations={
   },
 
    setLoading(state, payload) {
-    state.loading = payload;
+    state.loading_auth = payload;
   },
 
     setError(state, payload) {
-    state.error = payload;
+    state.error_auth = payload;
+  },
+  setAuthenticated(state,payload){
+state.isAuthenticated =payload
   }
 };
 const actions = {
   createUser({ commit }, payload) {
     commit('setLoading', true)
-    auth.createUserWithEmailAndPassword(payload.email, payload.password)
+    fauth.createUserWithEmailAndPassword(payload.email, payload.password)
       .then(user => {
         commit('setUser', { email: user.email });
         commit('setError', null);
@@ -54,7 +60,7 @@ const actions = {
 
   userSignIn({ commit }, payload) {
     commit('setLoading', true);
-    auth
+    fauth
       .signInWithEmailAndPassword(payload.email, payload.password)
       .then(user => {
         commit('setUser', { email: user.email });
@@ -75,15 +81,23 @@ const actions = {
   userSignInWithGoogle({ commit }, payload) {
     commit('setLoading', true);
 
-    auth
+    fauth
       .signInWithPopup(google)
       .then(async result => {
         const accessToken = result.credential.accessToken;
         const { user } = result;
         console.log(user);
-        commit('setUser', { email: user.email, fullName: user.displayName, accessToken });
-        sessionStorage.setItem('email', user.email);
-        sessionStorage.setItem('accessToken', accessToken);
+        commit('setUser', 
+          {
+            id: result.uid,
+            name: result.displayName,
+            email: result.email,
+            photoUrl: result.photoURL,
+            accessToken
+          });
+        commit('setAuthenticated', true);
+        // sessionStorage.setItem('email', user.email);
+        // sessionStorage.setItem('accessToken', accessToken);
 
         // await this.$store.dispatch('getPhoto');
         // if (!this.$store.state.pic) {
@@ -100,25 +114,45 @@ const actions = {
       });
   },
 
-  async autoSignIn({ commit }, payload) {
-    commit('setUser', { email: payload.email });
-    await store.dispatch('getPhoto');
-    router.push('/home');
+  //  SignIn({ commit }, payload) {
+  //   commit('setUser', {
+  //     id: payload.uid,
+  //     name: payload.displayName,
+  //     email: payload.email,
+  //     photoUrl: payload.photoURL
+  //      });
+    // await store.dispatch('getPhoto');
+  //   router.push('/');
+  // },
+
+  userHello({ commit }, payload){
+    commit('setUser', {
+      id: payload.uid,
+      name: payload.displayName,
+      email: payload.email,
+      photoUrl: payload.photoURL
+    });
+    // await store.dispatch('getPhoto');
+    
   },
 
-
-
   userSignOut({ commit }) {
-    auth.signOut();
-    sessionStorage.clear();
-    commit('setUser', null);
-    commit('setError', null);
-    commit('setTodo', null);
-    router.push('/');
+    fauth.signOut() .then((result) => {
+      sessionStorage.clear();
+      localStorage.clear();
+      commit('setUser', {});
+      commit('setError', null);
+      commit('setAuthenticated', false);
+      // commit('setTodo', null);
+      this.$router.push({ path: '/login' });
+    }).catch((err) => {
+      console.log(err);
+    });;
+    
   },
   resetPassword({ commit }, payload) {
     commit('setLoading', true);
-    auth
+    fauth
       .sendPasswordResetEmail(payload.email)
       .then(() => {
         commit('setError', null);

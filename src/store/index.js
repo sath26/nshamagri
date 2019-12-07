@@ -5,6 +5,10 @@ import layoutDemo from './layoutDemo'
 import category from './category'
 import auth from './auth'
 import quotation from './quotation'
+import {fauth} from './service/firebase'
+import createPersistedState from "vuex-persistedstate";
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
 Vue.use(Vuex)
 
 /*
@@ -18,6 +22,15 @@ export default function (/* { ssrContext } */) {
       // other mutations
       ...vuexfireMutations,
     },
+    plugins: [
+      createPersistedState({
+        storage: {
+          getItem: key => ls.get(key),
+          setItem: (key, value) => ls.set(key, value),
+          removeItem: key => ls.remove(key)
+        }
+      })
+    ],
     modules: {
       layoutDemo,
       category,
@@ -25,6 +38,8 @@ export default function (/* { ssrContext } */) {
       quotation
     }
   })
+
+  
   if (process.env.DEV && module.hot) {
     module.hot.accept(['./layoutDemo'], () => {
       const newLayoutDemo = require('./layoutDemo').default
@@ -33,4 +48,5 @@ export default function (/* { ssrContext } */) {
   }
   return Store
 }
+
 
