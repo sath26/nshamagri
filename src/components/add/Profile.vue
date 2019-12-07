@@ -73,7 +73,7 @@
                         <q-icon name="store" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done_email" @click="renameEmail()">
+                        <q-btn flat v-if="done_email" @click="renameEmail(profile[0].title)">
                           <q-icon name="done" />
                         </q-btn>
                       </template>
@@ -84,7 +84,7 @@
                     color="grey-10" 
                     filled 
                     label="Contact Number"
-                    v-model="profile.contact"
+                    v-model="profile[0].contact"
                     @focus="focusOnContact()"
                   @blur="focusOffContact()"
                     >
@@ -209,7 +209,7 @@ export default {
     return {
       tab: "enterprise",
       subTab: "profileInfo",
-      title: "",
+      title:"",
       contact: "",
       add_email: true,
       done_email: false,
@@ -247,9 +247,9 @@ export default {
       this.done_email = false;
       // this.new_category = "";
     },
-    renameEmail(){
+    renameEmail(title){
         this.updateTitle({
-        title: this.title,
+        title: title,
         user_id: this.user.id
       });
       this.done_email = false;
