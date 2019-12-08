@@ -4,6 +4,7 @@ import { vuexfireMutations } from 'vuexfire'
 import layoutDemo from './layoutDemo'
 import category from './category'
 import auth from './auth'
+import profile from './profile'
 import quotation from './quotation'
 import {fauth} from './service/firebase'
 import createPersistedState from "vuex-persistedstate";
@@ -35,7 +36,8 @@ export default function (/* { ssrContext } */) {
       layoutDemo,
       category,
       auth,
-      quotation
+      quotation,
+      profile
     }
   })
 
