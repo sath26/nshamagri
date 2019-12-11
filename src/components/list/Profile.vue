@@ -108,6 +108,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+calcFont = calc(1vw + 1vh + .5vmin)
+
 .footer-btn {
   border-radius: 0;
   color: #41aaa8;
@@ -159,7 +161,7 @@ export default {
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: calcFont;
   padding: 0;
   margin: 0;
   float: left;
@@ -172,12 +174,17 @@ h3 {
   list-style: none;
 
   li {
-    font-size: 1.2rem;
     display: inline;
     padding-left: 210px;
-
     .info-box {
       display: inline-block;
+      .info-head{
+        font-weight: 500;
+        font-size: 'calc(%s - 15px)' % calcFont;
+      }
+      .info-count{
+        font-size: 'calc(%s - 10px)' % calcFont;
+      }
     }
   }
 }
@@ -211,7 +218,7 @@ h3 {
     display: inline-block;
 
     li {
-      font-size: 2em;
+      font-size: 'calc(%s - 5px)' % calcFont;;
       padding: 18px 0px;
       list-style: none;
       position: relative;
