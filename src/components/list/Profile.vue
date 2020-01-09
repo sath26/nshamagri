@@ -177,7 +177,7 @@ h3 {
     display: inline;
     padding-left: 210px;
     .info-box {
-      display: inline-block;
+      display :inline-block;
       .info-head{
         font-weight: 500;
         font-size: 'calc(%s - 15px)' % calcFont;
@@ -286,6 +286,16 @@ h3 {
 
   &:hover {
     transform: scale(1.5);
+  }
+}
+// @media screen and (min-width: 1719px) {
+//  .quick-card_info{
+//     display:inline-block;
+//   }
+// }
+@media screen and (max-width: 1719px) {
+ .card-quick_info{
+    display:none;
   }
 }
 </style>
