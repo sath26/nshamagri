@@ -19,7 +19,7 @@ developed to help grow and maintain all businesses. </p>
               </div>
             </div>
         </div>
-        <img src="./assets/img/Landing-page-bg.png" class="web-bg_img" alt="Background-img-1">
+        <!-- <img src="./assets/img/Landing-page-bg.png" class="web-bg_img" alt="Background-img-1"> -->
         <img src="statics\img\devices-graphics@2x.png" class="devices_img" alt="Background-img-1">
         <img src="statics\img\landing-page-mobile-bg.png" class="mobile-bg_img" alt="Background-img-1">
       </div>
