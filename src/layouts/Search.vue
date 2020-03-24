@@ -1,5 +1,6 @@
 <template>
 <ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
+  <ais-configure :hitsPerPage="5"/>
   <div class="container">
     <ais-search-box>
     <q-input
@@ -186,7 +187,7 @@
                 
             <q-card
             
-             :key="item.objectID"
+             
               flat
               class="enterprise-card_container"
             >
@@ -268,7 +269,7 @@
                     />
                     <div class="customer-txt_info ">
                       <p class="info-header">
-                        Customers<br /><span class="info-value">234</span>
+                        Customers<br /><span class="info-value">{{item.customers}}</span>
                       </p>
                     </div>
                   </div>
@@ -278,6 +279,7 @@
             </q-card>
               </div>
             </ais-hits>
+            <ais-pagination></ais-pagination>
           </q-tab-panel>
           <q-tab-panel name="quotation">
             <p class="text-black">
@@ -299,14 +301,16 @@
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
-import { AisInstantSearch, AisSearchBox, AisHits } from 'vue-instantsearch';
+import { AisInstantSearch, AisSearchBox, AisHits,AisConfigure, AisPagination } from 'vue-instantsearch';
 import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/algolia-min.css";
 export default {
    components: {
     AisInstantSearch,
     AisSearchBox,
-    AisHits
+    AisHits,
+    AisConfigure,
+    AisPagination
   },
   name: "SSearch",
   data() {
