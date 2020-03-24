@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.5.2",
+    "algoliasearch": "^4.0.3",
     "apexcharts": "^3.15.6",
     "axios": "^0.19.2",
     "eslint": "^6.8.0",
     "firebase": "^7.9.1",
+    "instantsearch.css": "^7.4.2",
     "quasar": "^1.9.4",
     "rm": "^0.1.8",
     "secure-ls": "^1.2.6",
@@ -24,6 +26,7 @@
     "uniqid": "^5.2.0",
     "vue-apexcharts": "^1.5.2",
     "vue-i18n": "^8.15.3",
+    "vue-instantsearch": "^2.7.0",
     "vuex-persistedstate": "^2.7.1",
     "vuexfire": "^3.2.1",
     "webpack": "^4.41.6"
