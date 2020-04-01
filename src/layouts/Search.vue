@@ -57,39 +57,14 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <!-- Filter dropdown button -->
-          <q-btn flat class="colorGreen" @click="filter = true">
-            <q-avatar square class="q-mr-sm">
-              <q-img
-                class="filter-icon"
-                src="../statics/icons/Filter-icon.svg"
-                alt="filter icon"
-              ></q-img>
-            </q-avatar>
-            Filter
-          </q-btn>
-          <!-- close button -->
-          <q-btn
-            flat
-            @click="searchPopout = false"
-            class="close-btn"
-            label="X"
-            color="negative"
-          ></q-btn>
-          <!-- filter drop down menu content -->
-          <q-dialog
-            v-model="filter"
-            transition-show="flip-down"
-            transition-hide="flip-up"
-          >
-            <q-card style="width: 400px; max-width: 80vw;" class="q-pa-md">
-              <!-- category section -->
-              <q-card-section>
-                <q-btn-dropdown
+          <!-- category filter -->
+          <q-separator vertical></q-separator>
+          <div class="filter-category">
+            <q-btn-dropdown
                   auto-close
-                  stretch
                   flat
                   :label="categorySelection"
+                  size="lg"
                   class="dd dd-category q-pa-sm"
                 >
                   <q-list>
@@ -113,70 +88,71 @@
                     </q-item>
                   </q-list>
                 </q-btn-dropdown>
-              </q-card-section>
-              <!-- prices section -->
-              <q-card-section class="filter-option_price">
-                <div class="text-h6">Price</div>
-                <q-item>
-                  <q-input
+          </div>
+          <!-- distance filter slider -->
+          <q-separator vertical></q-separator>
+          <div class="q-px-md q-pa-sm filter-distance relative-position row">
+            <div class="float-left col-8">
+              <q-badge color="secondary" class="q-mb-lg">
+              Distance: {{ distance.min }}km to {{ distance.max }}km
+            </q-badge>
+            <!-- slider -->
+            <q-range
+              v-model="distance"
+              :min="0"
+              :max="100"
+              :step="4"
+              label
+              color="teal"
+              dense
+              :disable="noLimit"
+            ></q-range>
+            </div>
+            <div class="float-right col-4 q-mt-sm q-pl-md">
+              <q-checkbox
+                  v-model="noLimit"
+                  label="No Limit"
+                  color="teal">
+                </q-checkbox>
+            </div>
+          </div>
+          <q-separator vertical></q-separator>
+          <!-- price filter minimum and maximum -->
+          <div class=" filter-price">
+            <div class="filter-price_subcontainer  relative-position">
+              <div class="filter-price-min float-left">
+              <q-input
                     debounce="500"
                     color="teal"
-                    v-model.number="minPrice"
+                    v-model.lazy="minPrice"
                     type="number"
                     label="Min price"
                     dense
                     class="price-input_field"
                   ></q-input>
-                </q-item>
-                <!-- max price -->
-                <q-item>
-                  <q-input
+              </div>
+                  <div class="filter-price-max float-right">
+                    <q-input
                     debounce="500"
                     color="teal"
-                    v-model.number="maxPrice"
+                    v-model.lazy="maxPrice"
                     type="number"
                     label="Max price"
                     dense
                     class="price-input_field"
                   ></q-input>
-                </q-item>
-              </q-card-section>
-              <!-- location section -->
-              <q-card-section>
-                <div class="text-h6">Location</div>
-                <q-item>
-                  <q-badge>
-                    Range in Kilometers: {{ locationRange }}km (0 to 50)
-                  </q-badge>
-                </q-item>
-                <q-item>
-                  <q-slider
-                    v-model="locationRange"
-                    :disable="noLimit"
-                    :min="0"
-                    :max="50"
-                    color="teal"
-                  ></q-slider>
-                </q-item>
-                <q-item>
-                  <q-item-section
-                    ><q-checkbox
-                      v-model="noLimit"
-                      label="No Limit"
-                      color="teal"
-                    ></q-checkbox
-                  ></q-item-section>
-                </q-item>
-              </q-card-section>
-              <!-- done section -->
-              <q-card-section>
-                <q-item>
-                  <q-btn flat label="done" color="teal" v-close-popup></q-btn>
-                </q-item>
-              </q-card-section>
-            </q-card>
-          </q-dialog>
-          <!-- Filter UI END -->
+                  </div>
+            </div>
+          </div>
+          <q-separator vertical></q-separator>
+          <!-- close button -->
+          <q-btn
+            flat
+            @click="searchPopout = false"
+            class="close-btn"
+            label="X"
+            color="negative"
+          ></q-btn>
         </q-tabs>
         <q-separator></q-separator>
         <q-tab-panels v-model="tab" animated>
@@ -190,44 +166,52 @@
             <q-img style="width:200px; height:200px"
               src="../statics/guy-avatar.png" alt="user image">
               <div class="absolute-bottom text-subtitle2 text-center">
-                 {{item.enterprise_name}} <br /><span class="usr-name_txt"
+                 {{item.enterprise_name}} <br /><span class="usr-name_txt text-weight-bold"
                       >Saugat Thapa</span>
               </div>
             </q-img>
             <!-- distance info -->
             <q-card-section class="info-section info-distance_section">
-                <img class="info-icons distance-icon"
+                <div><img class="info-icons distance-icon"
                           src="../statics/icons/distance-icon.svg"
                           alt="distance icon"/>
+                          <q-tooltip content-class="bg-teal" :offset="[-10, -10]">
+                            Distance
+                        </q-tooltip>
+                          </div>
                         <div class="distance-txt_info txt-info">
-                          <p class="info-header">
-                            Distance<br /><span class="info-value">{{item.distance}}</span>
+                          <p class="info-value">
+                            {{item.distance}}
                           </p>
                         </div>
             </q-card-section>
             <!-- invoice info -->
             <q-card-section class="info-section info-invoice_section">
-                    <img
+                    <div><img
                       class="info-icons invoice-icon"
                       src="../statics/img/Invoice-graphics.png"
                       alt="invoice icon"
-                    />
+                    /><q-tooltip content-class="bg-teal" :offset="[-5, -5]">
+                          Invoice
+                        </q-tooltip></div>
                     <div class="invoice-txt_info txt-info">
-                      <p class="info-header">
-                        Invoice<br /><span class="info-value">{{item.invoice}}</span>
+                      <p class="info-value">
+                        {{item.invoice}}
                       </p>
                     </div>
             </q-card-section>
             <!-- customer appreciation  -->
             <q-card-section class="info-section info-customer_section">
-                    <img
-                      class="customer-icon"
+                    <div><img
+                      class="info-icons customer-icon"
                       src="../statics/icons/customers-icons.svg"
                       alt="customer icon"
-                    />
+                    /><q-tooltip content-class="bg-teal" :offset="[-5, -5]">
+                          Customer count
+                        </q-tooltip></div>
                     <div class="customer-txt_info ">
-                      <p class="info-header">
-                        Customers<br /><span class="info-value">{{item.customers}}</span>
+                      <p class="info-value">
+                        {{item.customers}}
                       </p>
                     </div>
             </q-card-section>
@@ -237,20 +221,19 @@
 
       <q-card-actions>
         <q-btn flat>
-          Open 5:30PM
+          Open
         </q-btn>
         <q-btn flat color="negative">
-          Closes 7:00PM
+          Close
         </q-btn>
         <q-btn flat color="primary">
           Contact
         </q-btn>
-        <q-btn flat>
+        <q-btn flat class="float-right">
           Date modified - 12/02/2019
         </q-btn>
       </q-card-actions>
     </q-card>
-            
               </div>
             </ais-hits>
             <ais-pagination></ais-pagination>
@@ -305,6 +288,10 @@ export default {
       maxPrice: Number,
       locationRange: 0,
       noLimit: false,
+      distance:{
+        min:0,
+        max:100
+      },
       searchClient: algoliasearch(
         "HIGFUILYRM",
         "b3cd4d3709c017e877390d653bea5eba"
@@ -356,6 +343,15 @@ export default {
 .close-btn
   position absolute
   right 10px
+// filter items
+.filter-category
+  width 10%
+  text-align center
+.filter-distance
+  width 20%
+.filter-price
+  &-min>*, &-max>*
+    margin 0 auto
 // card styling
 .list-card_container
   overflow hidden
@@ -371,23 +367,15 @@ export default {
 .info-section>*
   vertical-align middle
   margin-top 1.2rem
-
-  .info-header
-    font-weight 700
-    font-size 1.3rem
-    line-height 25px
   .info-value
-    font-weight 400
+    text-align center
+    font-weight 700
   .txt-info
     display inline-block
   .distance-text_info
     display inline-block
   .info-customer_container
     text-align center
-  .customer-icon
-    width 45px
-    height 35px
-    transform translateY(5px)
   .email-icon, .contact-icon
     width 30px
     height 30px
@@ -419,4 +407,6 @@ export default {
       visibility hidden
     }
   }
+
+  
 </style>

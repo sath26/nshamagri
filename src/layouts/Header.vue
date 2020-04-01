@@ -53,7 +53,7 @@
     </q-header>
     <q-drawer
       v-model="left"
-      :width="200"
+      :width="250"
       :breakpoint="500"
       show-if-above
       bordered
@@ -69,17 +69,17 @@
             :active="menuItem.label === 'Outbox'"
             exact
           >
-            <q-item-section avatar>
-              <img
-                v-if="menuItem.iconSrc"
-                :src="menuItem.iconSrc"
-                alt="Icon"
-                width="28"
-                height="28"
-              />
+            <q-item-section>
+              <q-avatar rounded size="45px">
+                <img
+                  class="side-menu-icon"
+                  v-if="menuItem.iconSrc"
+                  :src="menuItem.iconSrc"
+                />
               <q-icon :name="menuItem.icon"></q-icon>
+              </q-avatar>
             </q-item-section>
-            <q-item-section>{{ menuItem.label }}</q-item-section>
+            <q-item-section class="q-pr-xl" > {{ menuItem.label }}</q-item-section>
           </q-item>
           <q-separator v-if="menuItem.separator"></q-separator>
         </q-list>
@@ -233,7 +233,9 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-@import '..\css\layouts-style\header';
+  
+  @import '..\css\layouts-style\header';
+
 </style>
 
  
