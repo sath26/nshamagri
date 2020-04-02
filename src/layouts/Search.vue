@@ -57,95 +57,7 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <!-- category filter -->
-          <q-separator vertical></q-separator>
-          <div class="filter-category">
-            <q-btn-dropdown
-                  auto-close
-                  flat
-                  :label="categorySelection"
-                  size="lg"
-                  class="dd dd-category q-pa-sm"
-                >
-                  <q-list>
-                    <q-item
-                      v-for="category in categories"
-                      :key="category.name"
-                      tag="label"
-                      v-ripple
-                      class="q-pr-xl"
-                    >
-                      <q-item-section avatar>
-                        <q-radio
-                          v-model="categorySelection"
-                          :val="category.value"
-                          color="teal"
-                        ></q-radio>
-                      </q-item-section>
-                      <q-item-section>
-                        <q-item-label>{{ category.name }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-btn-dropdown>
-          </div>
-          <!-- distance filter slider -->
-          <q-separator vertical></q-separator>
-          <div class="q-px-md q-pa-sm filter-distance relative-position row">
-            <div class="float-left col-8">
-              <q-badge color="secondary" class="q-mb-lg">
-              Distance: {{ distance.min }}km to {{ distance.max }}km
-            </q-badge>
-            <!-- slider -->
-            <q-range
-              v-model="distance"
-              :min="0"
-              :max="100"
-              :step="4"
-              label
-              color="teal"
-              dense
-              :disable="noLimit"
-            ></q-range>
-            </div>
-            <div class="float-right col-4 q-mt-sm q-pl-md">
-              <q-checkbox
-                  v-model="noLimit"
-                  label="No Limit"
-                  color="teal">
-                </q-checkbox>
-            </div>
-          </div>
-          <q-separator vertical></q-separator>
-          <!-- price filter minimum and maximum -->
-          <div class=" filter-price">
-            <div class="filter-price_subcontainer  relative-position">
-              <div class="filter-price-min float-left">
-              <q-input
-                    debounce="500"
-                    color="teal"
-                    v-model.lazy="minPrice"
-                    type="number"
-                    label="Min price"
-                    dense
-                    class="price-input_field"
-                  ></q-input>
-              </div>
-                  <div class="filter-price-max float-right">
-                    <q-input
-                    debounce="500"
-                    color="teal"
-                    v-model.lazy="maxPrice"
-                    type="number"
-                    label="Max price"
-                    dense
-                    class="price-input_field"
-                  ></q-input>
-                  </div>
-            </div>
-          </div>
-          <q-separator vertical></q-separator>
-          <!-- close button -->
+           <!-- close button -->
           <q-btn
             flat
             @click="searchPopout = false"
@@ -155,12 +67,18 @@
           ></q-btn>
         </q-tabs>
         <q-separator></q-separator>
+        <!-- tab pannels -->
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="enterprise" class="ent-panel">
-            <!-- Card -->
+            <div class="row">
+              <div class="col-2">
+                <f-filter></f-filter>
+              </div>
+                  <!-- search reult Card -->
+              <div class="col-10 result-card_container">
             <ais-hits>
               <div slot="item" slot-scope="{ item }">
-                 <q-card class="my-search-card">
+                 <q-card class="my-search-card on-right">
           <q-card-section horizontal>
             <!-- user image with name -->
             <q-img style="width:200px; height:200px"
@@ -235,7 +153,10 @@
       </q-card-actions>
     </q-card>
               </div>
+
             </ais-hits>
+              </div>
+            </div>
             <ais-pagination></ais-pagination>
           </q-tab-panel>
           <q-tab-panel name="quotation">
@@ -257,6 +178,7 @@
 </ais-instant-search>
 </template>
 <script>
+import FFilter from "./search/Filter.vue"
 import { mapState, mapGetters } from "vuex";
 import { AisInstantSearch, AisSearchBox, AisHits,AisConfigure, AisPagination } from 'vue-instantsearch';
 import algoliasearch from "algoliasearch/lite";
@@ -267,7 +189,8 @@ export default {
     AisSearchBox,
     AisHits,
     AisConfigure,
-    AisPagination
+    AisPagination,
+    FFilter
   },
   name: "SSearch",
   data() {
@@ -276,22 +199,7 @@ export default {
       searchPopout: false,
       searchBox: "",
       text: "",
-      categorySelection: "category",
-      categories: [
-        { name: "All categories", value: "all" },
-        { name: "Electornics", value: "electronic" },
-        { name: "Food", value: "food" },
-        { name: "Driver", value: "driver" }
-      ],
       filter: false,
-      minPrice: Number,
-      maxPrice: Number,
-      locationRange: 0,
-      noLimit: false,
-      distance:{
-        min:0,
-        max:100
-      },
       searchClient: algoliasearch(
         "HIGFUILYRM",
         "b3cd4d3709c017e877390d653bea5eba"
