@@ -1,6 +1,6 @@
 <template>
 <ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
-  <ais-configure :hitsPerPage="5"/>
+  <ais-configure :hits-per-page.camel="6"/>
   <div class="container">
     <ais-search-box>
     <q-input
@@ -184,44 +184,29 @@
             <!-- Card -->
             <ais-hits>
               <div slot="item" slot-scope="{ item }">
-                
-            <q-card
-            
-             
-              flat
-              class="enterprise-card_container"
-            >
-              <q-card-section>
-                <div
-                  class="list-card_container row items-center shadow-4 q-my-sm"
-                >
-                  <div class="usr-img_container col">
-                    <img
-                      class="usr-img"
-                      src="../statics/guy-avatar.png"
-                      alt="dummy image"
-                    />
-                  </div>
-                  <div class="info-name_container col-2">
-                    <p class="info-name_txt">
-                      {{item.enterprise_name}} <br /><span class="usr-name_txt"
-                        >Saugat Thapa</span
-                      >
-                    </p>
-                  </div>
-                  <div class="info-distance_container info-container col">
-                    <img
-                      class="info-icons distance-icon"
-                      src="../statics/icons/distance-icon.svg"
-                      alt="distance icon"
-                    />
-                    <div class="distance-txt_info txt-info">
-                      <p class="info-header">
-                        Distance<br /><span class="info-value">{{item.distance}}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="info-invoice_container info-container col">
+                 <q-card class="my-search-card">
+          <q-card-section horizontal>
+            <!-- user image with name -->
+            <q-img style="width:200px; height:200px"
+              src="../statics/guy-avatar.png" alt="user image">
+              <div class="absolute-bottom text-subtitle2 text-center">
+                 {{item.enterprise_name}} <br /><span class="usr-name_txt"
+                      >Saugat Thapa</span>
+              </div>
+            </q-img>
+            <!-- distance info -->
+            <q-card-section class="info-section info-distance_section">
+                <img class="info-icons distance-icon"
+                          src="../statics/icons/distance-icon.svg"
+                          alt="distance icon"/>
+                        <div class="distance-txt_info txt-info">
+                          <p class="info-header">
+                            Distance<br /><span class="info-value">{{item.distance}}</span>
+                          </p>
+                        </div>
+            </q-card-section>
+            <!-- invoice info -->
+            <q-card-section class="info-section info-invoice_section">
                     <img
                       class="info-icons invoice-icon"
                       src="../statics/img/Invoice-graphics.png"
@@ -232,36 +217,9 @@
                         Invoice<br /><span class="info-value">{{item.invoice}}</span>
                       </p>
                     </div>
-                  </div>
-                  <div class="info-contact_container info-container col">
-                    <img
-                      class="info-icons contact-icon"
-                      src="../statics/icons/contact-icon.svg"
-                      alt="contact icon"
-                    />
-                    <div class="contact-txt_info txt-info">
-                      <p class="info-header">
-                        Phone no.<br /><span class="info-value"
-                          >{{item.contact}}</span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                  <div class="info-email_container info-container col">
-                    <img
-                      class="info-icons email-icon"
-                      src="../statics/icons/email-icon.svg"
-                      alt="email icon"
-                    />
-                    <div class="email-txt_info txt-info">
-                      <p class="info-header">
-                        Email address<br /><span class="info-value"
-                          >Saugat@example.com</span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                  <div class="info-customer_container col">
+            </q-card-section>
+            <!-- customer appreciation  -->
+            <q-card-section class="info-section info-customer_section">
                     <img
                       class="customer-icon"
                       src="../statics/icons/customers-icons.svg"
@@ -272,11 +230,27 @@
                         Customers<br /><span class="info-value">{{item.customers}}</span>
                       </p>
                     </div>
-                  </div>
-                  <p class="info-date_txt">Date modified - 12/02/2019</p>
-                </div>
-              </q-card-section>
-            </q-card>
+            </q-card-section>
+          </q-card-section>
+        
+      <q-separator ></q-separator>
+
+      <q-card-actions>
+        <q-btn flat>
+          Open 5:30PM
+        </q-btn>
+        <q-btn flat color="negative">
+          Closes 7:00PM
+        </q-btn>
+        <q-btn flat color="primary">
+          Contact
+        </q-btn>
+        <q-btn flat>
+          Date modified - 12/02/2019
+        </q-btn>
+      </q-card-actions>
+    </q-card>
+            
               </div>
             </ais-hits>
             <ais-pagination></ais-pagination>
@@ -368,7 +342,7 @@ export default {
   .extensionActive
     animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
   .extensionDeactive
-    display none
+    animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
   .filter-dropdown_content-list_item
     background transparent
     padding 0
@@ -389,38 +363,17 @@ export default {
   color #424242
   vertical-align center
   position relative
-  .info-container
-    text-align center
-    padding 10px
-  .usr-img_container
-    width 10vw
-    height 10vw
-    // padding-top 10px
-    // padding-bottom 5px
-    // margin 0
-    // background red
-    overflow hidden
-  .usr-img
-    width 10vw
-    height 10vw
-    // margin-left 10px
-  .info-name_container
-    text-align left
-    color #256856
-  .info-name_txt
-    font-size 2vw
-    line-height 25px
-    .usr-name_txt
-      font-size 1.1vw
-  .info-icons
-    width 40px
-    height 40px
-    margin-right 10px
-    transform translateY(5px)
-    display inline-block
+.info-icons
+  width 55px
+  height 55px
+.info-section
+  padding-left 2rem
+.info-section>*
+  vertical-align middle
+  margin-top 1.2rem
   .info-header
     font-weight 700
-    font-size 1.1vw
+    font-size 1.3rem
     line-height 25px
   .info-value
     font-weight 400
@@ -443,7 +396,6 @@ export default {
     position absolute
     bottom -5%
     right 2%
-
   @keyframes extInAnimation{
     0%{
       top:0;
@@ -452,6 +404,17 @@ export default {
     100%{
       opacity:1;
       top:70px;
+    }
+  }
+  @keyframes extOutAnimation{
+    0%{
+      top:70px;
+      opacity:1;
+    }
+    100%{
+      opacity:0;
+      top:0;
+      visibility hidden
     }
   }
 </style>

@@ -31,7 +31,9 @@ module.exports = function (ctx) {
       // lang: 'de', // Quasar language
 
       // all: true, // --- includes everything; for dev only!
-
+      // config: {
+      //   dark: 'auto' // or Boolean true/false
+      // },
       components: [
         'QLayout',
         'QHeader',

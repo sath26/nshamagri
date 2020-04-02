@@ -17,7 +17,10 @@
       <q-tab-panels v-model="tab" animated class="bg-grey-1">
         <q-tab-panel name="enterprise">
           <div class="profile-background_img_container">
-            <img src="../../assets/img/Profile-bg_graphics.png" alt="profile background image" />
+            <img
+              src="../../assets/img/Profile-bg_graphics.png"
+              alt="profile background image"
+            />
           </div>
           <!-- Profile card ~ #01 -->
           <div id="enterprise-profile_card" class="q-pa-xl">
@@ -30,7 +33,6 @@
                 </div>
               </div>
               <div class="card-quick_info">
-               
                 <ul class="info-content">
                   <li>
                     <div class="info-box">
@@ -62,57 +64,65 @@
                 <ul class="info-list">
                   <li>
                     <q-input
-                       color="grey-10" 
-                       filled 
-                       label="Name"
-                       v-model="profile[0].title"
-                        @focus="focusOnEmail()"
-                  @blur="focusOffEmail()"
-                       >
+                      color="grey-10"
+                      filled
+                      label="Name"
+                      v-model="profile[0].title"
+                      @focus="focusOnEmail()"
+                      @blur="focusOffEmail()"
+                    >
                       <template v-slot:prepend>
                         <q-icon name="store" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done_email" @click="renameEmail(profile[0].title)">
+                        <q-btn
+                          flat
+                          v-if="done_email"
+                          @click="renameEmail(profile[0].title)"
+                        >
                           <q-icon name="done" />
                         </q-btn>
                       </template>
                     </q-input>
                   </li>
                   <li class="col">
-                    <q-input 
-                    color="grey-10" 
-                    filled 
-                    label="Contact Number"
-                    v-model="profile[0].contact"
-                    @focus="focusOnContact()"
-                  @blur="focusOffContact()"
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="Contact Number"
+                      v-model="profile[0].contact"
+                      @focus="focusOnContact()"
+                      @blur="focusOffContact()"
                     >
                       <template v-slot:prepend>
                         <q-icon name="phone" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done_contact" @click="renameContact()" >
-                          <q-icon  name="done" />
+                        <q-btn
+                          flat
+                          v-if="done_contact"
+                          @click="renameContact()"
+                        >
+                          <q-icon name="done" />
                         </q-btn>
                       </template>
                     </q-input>
                   </li>
                   <li class="col">
-                    <q-input 
-                    color="grey-10" 
-                    filled 
-                    label="PAN Number"
-                    v-model="pan_no"
-                    @focus="focusOnPanNo()"
-                  @blur="focusOffPanNo()"
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="PAN Number"
+                      v-model="pan_no"
+                      @focus="focusOnPanNo()"
+                      @blur="focusOffPanNo()"
                     >
                       <template v-slot:prepend>
                         <q-icon name="subject" />
                       </template>
                       <template v-slot:append>
-                        <q-btn flat v-if="done_pan_no" @click="renamePanNo()" >
-                          <q-icon  name="done" />
+                        <q-btn flat v-if="done_pan_no" @click="renamePanNo()">
+                          <q-icon name="done" />
                         </q-btn>
                       </template>
                     </q-input>
@@ -165,7 +175,7 @@
                   <q-item-section avatar>
                     <div class="group" style=" text-align: center;">
                       <q-btn flat color="secondary">
-                        <q-icon name="add"></q-icon>
+                        <q-icon name="add" @click="medium = true"></q-icon>
                       </q-btn>
                     </div>
                   </q-item-section>
@@ -175,12 +185,27 @@
                 <q-item multiline>
                   <q-item-section avatar>
                     <q-avatar>
-                    <img :src=user.photoUrl alt="user" />
+                      <img :src="user.photoUrl" alt="user" />
                     </q-avatar>
-                    </q-item-section>
-                  <q-item-section>{{user.name}}</q-item-section>
+                  </q-item-section>
+                  <q-item-section>{{ user.name }}</q-item-section>
                 </q-item>
               </q-list>
+              <q-dialog v-model="medium">
+                <q-card style="width: 700px; max-width: 80vw;">
+                  <q-card-section>
+                    <div class="text-h6">Add Member</div>
+                  </q-card-section>
+
+                  <q-card-section class="q-pt-none">
+                    Click/Tap on the backdrop.
+                  </q-card-section>
+
+                  <q-card-actions align="right" class="bg-white text-teal">
+                    <q-btn flat label="OK" v-close-popup />
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
             </div>
           </q-page>
         </q-tab-panel>
@@ -189,7 +214,7 @@
   </q-layout>
 </template>
 <script>
-// use sign in to insert empty values and filled values so that those values 
+// use sign in to insert empty values and filled values so that those values
 // cAN BE USED HERE like in category
 // it might not work coz im saving individual fields separately
 //i have to make separate variable for each and save separately
@@ -202,14 +227,13 @@ import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     SHeader,
-    SFooter,
-    
+    SFooter
   },
   data() {
     return {
       tab: "enterprise",
       subTab: "profileInfo",
-      title:"",
+      title: "",
       contact: "",
       add_email: true,
       done_email: false,
@@ -217,27 +241,26 @@ export default {
       done_contact: false,
       add_pan_no: true,
       done_pan_no: false,
-      pan_no:"",
-     
+      pan_no: "",
+      medium: false //for dialog to appear on clicking add button
     };
   },
-  created(){
+  created() {
     this.fetchProfile(this.user);
   },
   computed: {
     // ...mapGetters("layoutDemo", ["view"])
-    ...mapState("auth", ["user", "pic","isAuthenticated"]),
-    ...mapState("profile", ["profile"]),
-
+    ...mapState("auth", ["user", "pic", "isAuthenticated"]),
+    ...mapState("profile", ["profile"])
   },
-  methods:{
+  methods: {
     ...mapActions("profile", [
       "fetchProfile",
       "createCategory",
       "updateTitle",
       "deleteCategory"
     ]),
-      focusOnEmail() {
+    focusOnEmail() {
       this.add_email = false;
       this.done_email = true; //done is for change in icon here
       // this.$refs.focus.focus();
@@ -247,8 +270,8 @@ export default {
       this.done_email = false;
       // this.new_category = "";
     },
-    renameEmail(title){
-        this.updateTitle({
+    renameEmail(title) {
+      this.updateTitle({
         title: title,
         user_id: this.user.id
       });
@@ -264,9 +287,7 @@ export default {
       this.done_contact = false;
       // this.new_category = "";
     },
-    renameContact(){
-      
-    },
+    renameContact() {},
     focusOnPanNo() {
       this.add_pan_no = false;
       this.done_pan_no = true; //done is for change in icon here
@@ -277,9 +298,7 @@ export default {
       this.done_pan_no = false;
       // this.new_category = "";
     },
-    renamePanNo(){
-      
-    },
+    renamePanNo() {}
   }
 };
 </script>
@@ -457,5 +476,3 @@ h3 {
   }
 }
 </style>
-
-

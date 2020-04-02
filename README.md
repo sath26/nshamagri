@@ -23,7 +23,7 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 - unit: packet
 # me
 ## changes remaining
-- finish working on database crud of category **[done]**
+- finish working on database crud of category **[done]**                    
 - finish working on database crud of unit
 - finish working ond database crud of quotation **create and select done**
 - finish working on database crud of invoice
@@ -55,3 +55,7 @@ i am currently looking inside [https://github.com/kefranabg/bento-starter]. this
 # Nirik
 - right now just go with the flow and provide any `improvement` u can : either `code` or `ideas`
 - `code` ma improvement dina lai chai plz create your own `branch`
+# put following code 
+`.ais-Hits-item{width:41rem;box-shadow: none;border:none;transition: transform 300ms ease;}.ais-Hits-item:hover{transform: scale(1.05);}`
+# here right at the end
+`node_modules\instantsearch.css\themes\algolia-min.css`
