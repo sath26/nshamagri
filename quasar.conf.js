@@ -111,7 +111,8 @@ module.exports = function (ctx) {
         'QSpace',
         'QSpinner',
         'QSlider',
-        'QCheckbox'
+        'QCheckbox',
+        'QRange'
       ],
 
       directives: [

@@ -3,9 +3,9 @@
     <q-page-container>
       <s-header></s-header>
 
-      <div class="profile-background_img_container">
+      <q-card class="profile-background_img_container">
         <img src="../../assets/img/Profile-bg_graphics.png" alt="profile background image" />
-      </div>
+      </q-card>
       <!-- Profile card ~ #01 -->
       <div id="enterprise-profile_card" class="q-pa-xl">
         <div class="card-banner">
@@ -42,22 +42,25 @@
         </div>
         <!-- profile-detail card -->
         <q-card class="shadow-1 q-mt-lg">
-          <q-card-section>
-            <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
+          <q-card-section class="row">
+            <div class="text-h4 text-teal-5 q-ml-xl col">Profile details</div>
+            <div class="col edit-btn_container">
+              <q-btn flat color="teal" class="float-right" icon="edit">Edit</q-btn>
+            </div>
           </q-card-section>
           <div class="card-body">
             <ul class="info-list">
               <li class="col">
-                <q-icon name="email"></q-icon>nexus.saugat26@gmail.com
+                <q-icon name="email" class="profile-detail_icon"></q-icon>nexus.saugat26@gmail.com
               </li>
               <li class="col">
-                <q-icon name="phone"></q-icon>+1 123-456-7890
+                <q-icon name="phone" class="profile-detail_icon"></q-icon>+1 123-456-7890
               </li>
               <li class="col">
-                <q-icon name="place"></q-icon>Kathmandu, Nepal
+                <q-icon name="place" class="profile-detail_icon"></q-icon>Kathmandu, Nepal
               </li>
               <li class="col">
-                <q-icon name="note"></q-icon>223 049 023
+                <q-icon name="note" class="profile-detail_icon"></q-icon>223 049 023
               </li>
             </ul>
           </div>
@@ -105,6 +108,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+calcFont = calc(1vw + 1vh + .5vmin)
+
 .footer-btn {
   border-radius: 0;
   color: #41aaa8;
@@ -121,15 +126,12 @@ export default {
 }
 
 .profile-background_img_container {
-  width: 100%;
-  position: absolute;
   z-index: 10;
+  position: absolute;
   overflow: hidden;
-
   img {
-    width: 98.5%;
+    width: 100vw;
     height: 350px;
-    border-radius: 5px;
   }
 }
 
@@ -159,7 +161,7 @@ export default {
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: calcFont;
   padding: 0;
   margin: 0;
   float: left;
@@ -172,12 +174,17 @@ h3 {
   list-style: none;
 
   li {
-    font-size: 1.2rem;
     display: inline;
     padding-left: 210px;
-
     .info-box {
-      display: inline-block;
+      display :inline-block;
+      .info-head{
+        font-weight: 500;
+        font-size: 'calc(%s - 15px)' % calcFont;
+      }
+      .info-count{
+        font-size: 'calc(%s - 10px)' % calcFont;
+      }
     }
   }
 }
@@ -211,7 +218,7 @@ h3 {
     display: inline-block;
 
     li {
-      font-size: 2em;
+      font-size: 'calc(%s - 5px)' % calcFont;;
       padding: 18px 0px;
       list-style: none;
       position: relative;
@@ -231,6 +238,8 @@ h3 {
     }
   }
 
+
+
   .address-info {
     width: 350px;
   }
@@ -249,6 +258,9 @@ h3 {
     }
   }
 }
+.profile-detail_icon
+  color #5BBF92
+  margin-right 20px
 
 .card-footer {
   width: 100%;
@@ -274,6 +286,16 @@ h3 {
 
   &:hover {
     transform: scale(1.5);
+  }
+}
+// @media screen and (min-width: 1719px) {
+//  .quick-card_info{
+//     display:inline-block;
+//   }
+// }
+@media screen and (max-width: 1719px) {
+ .card-quick_info{
+    display:none;
   }
 }
 </style>
