@@ -67,7 +67,7 @@
                       color="grey-10"
                       filled
                       label="Name"
-                      v-model="profile[0].title"
+                      v-model="enterprise[0].title"
                       @focus="focusOnEmail()"
                       @blur="focusOffEmail()"
                     >
@@ -78,7 +78,7 @@
                         <q-btn
                           flat
                           v-if="done_email"
-                          @click="renameEmail(profile[0].title)"
+                          @click="renameEmail(enterprise[0].title)"
                         >
                           <q-icon name="done" />
                         </q-btn>
@@ -90,7 +90,7 @@
                       color="grey-10"
                       filled
                       label="Contact Number"
-                      v-model="profile[0].contact"
+                      v-model="enterprise[0].contact_no"
                       @focus="focusOnContact()"
                       @blur="focusOffContact()"
                     >
@@ -173,7 +173,7 @@
                 <q-item multiline>
                   <q-item-section label>Add Members</q-item-section>
                   <q-item-section avatar>
-                    <div class="group" style=" text-align: center;">
+                    <div class="group" style="text-align: center;">
                       <q-btn flat color="secondary">
                         <q-icon name="add" @click="medium = true"></q-icon>
                       </q-btn>
@@ -182,13 +182,17 @@
                 </q-item>
               </q-list>
               <q-list bordered hightlight>
-                <q-item multiline>
+                <q-item
+                  multiline
+                  v-for="role in roles"
+                  v-bind:key="role.user_id"
+                >
                   <q-item-section avatar>
                     <q-avatar>
                       <img :src="user.photoUrl" alt="user" />
                     </q-avatar>
                   </q-item-section>
-                  <q-item-section>{{ user.name }}</q-item-section>
+                  <q-item-section>{{ role.user_name }}</q-item-section>
                 </q-item>
               </q-list>
               <q-dialog v-model="medium">
@@ -198,11 +202,23 @@
                   </q-card-section>
 
                   <q-card-section class="q-pt-none">
-                    Click/Tap on the backdrop.
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="Enter Member Email"
+                      v-model="member"
+                      hint="One email address can only have one enterprise and it applies for members also!"
+                    >
+                    </q-input>
                   </q-card-section>
 
                   <q-card-actions align="right" class="bg-white text-teal">
-                    <q-btn flat label="OK" v-close-popup />
+                    <q-btn
+                      flat
+                      label="Add as Member"
+                      @click="findMember(this.member)"
+                    />
+                    <!-- v-close-popup -->
                   </q-card-actions>
                 </q-card>
               </q-dialog>
@@ -227,13 +243,13 @@ import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     SHeader,
-    SFooter
+    SFooter,
   },
   data() {
     return {
       tab: "enterprise",
       subTab: "profileInfo",
-      title: "",
+      user_id: "",
       contact: "",
       add_email: true,
       done_email: false,
@@ -242,23 +258,26 @@ export default {
       add_pan_no: true,
       done_pan_no: false,
       pan_no: "",
-      medium: false //for dialog to appear on clicking add button
+      medium: false, //for dialog to appear on clicking add button,
+      member: "",
     };
   },
   created() {
     this.fetchProfile(this.user);
+    this.fetchRole(this.user);
   },
   computed: {
     // ...mapGetters("layoutDemo", ["view"])
     ...mapState("auth", ["user", "pic", "isAuthenticated"]),
-    ...mapState("profile", ["profile"])
+    ...mapState("profile", ["enterprise", "roles"]),
   },
   methods: {
     ...mapActions("profile", [
       "fetchProfile",
       "createCategory",
       "updateTitle",
-      "deleteCategory"
+      "deleteCategory",
+      "fetchRole",
     ]),
     focusOnEmail() {
       this.add_email = false;
@@ -273,7 +292,7 @@ export default {
     renameEmail(title) {
       this.updateTitle({
         title: title,
-        user_id: this.user.id
+        user_id: this.user.id,
       });
       this.done_email = false;
     },
@@ -298,8 +317,11 @@ export default {
       this.done_pan_no = false;
       // this.new_category = "";
     },
-    renamePanNo() {}
-  }
+    renamePanNo() {},
+    findMember(member) {
+      console.log(member);
+    },
+  },
 };
 </script>
 

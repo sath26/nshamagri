@@ -1,13 +1,13 @@
-
-import firebase from 'firebase';
-import { generate } from 'shortid';
-import { fireDB, storage, auth, db } from '../service/firebase';
-import { firestoreAction } from 'vuexfire';
-import { Notify } from 'quasar'
+import firebase from "firebase";
+import { generate } from "shortid";
+import { fireDB, storage, auth, db } from "../service/firebase";
+import { firestoreAction } from "vuexfire";
+import { Notify } from "quasar";
 const state = {
   category_quotation: [],
   unit_quotation: [],
-  profile: [],
+  enterprise: {},
+  roles: [],
   error: null,
   loading_profile: false,
 };
@@ -20,35 +20,36 @@ const mutations = {
     state.loading_profile = payload;
   },
 
-  setQuotation(state, payload) {
-    state.profile = payload;
-  }
+  setEnterprise(state, payload) {
+    state.enteprise = payload;
+  },
 };
 const actions = {
-  fetchProfile: firestoreAction(({ bindFirestoreRef, commit },user) => {
-    commit('setLoading', true)
-    return bindFirestoreRef('profile', db.collection('profile').where('user_id','==', user.id))
-      .then((data) => {
-        console.log(data);
-      })
-
+  fetchProfile: firestoreAction(({ bindFirestoreRef, commit }, user) => {
+    commit("setLoading", true);
+    return bindFirestoreRef(
+      "enterprise", //naming different due to refactoring issue that might arise
+      db.collection("enterprise").where("member_id", "array-contains", user.id)
+    ).then((data) => {
+      console.log(data);
+      console.log("from enterprise user_id");
+    });
   }),
-  fetchUnit: firestoreAction(({ bindFirestoreRef, commit }) => {
-    commit('setLoading', true)
-    return bindFirestoreRef('unit_quotation', db.collection('unit'))
-      .then((data) => {
-        console.log(data);
-      })
 
-  }),
-  fetchQuotation: firestoreAction(({ bindFirestoreRef, commit }) => {
-    commit('setLoading', true)
-    return bindFirestoreRef('quotation', db.collection('quotation'))
+  fetchRole: firestoreAction(({ bindFirestoreRef, commit }, user) => {
+    commit("setLoading", true);
+
+    console.log("wtf");
+    //here profile.user_id means "admin" which is used in "enterprise" record
+    return bindFirestoreRef(
+      "roles",
+      db.collection("enterprise").doc(user.id).collection("role")
+    )
       .then((data) => {
         console.log(data);
       })
       .finally((data) => {
-        commit('setLoading', false);
+        commit("setLoading", false);
       });
   }),
   async createQuotation({ getters }, quotations) {
@@ -59,33 +60,32 @@ const actions = {
     // quotations.user_id = firebase.auth().currentUser.uid;
 
     try {
-      await db.collection('quotation').doc().set(quotations);
+      await db.collection("quotation").doc().set(quotations);
       Notify.create({
         color: "green-4",
         textColor: "white",
         icon: "fas fa-check-circle",
-        message: "Submitted"
+        message: "Submitted",
       });
       //Add a new document with a generated id.
     } catch (error) {
       console.error(error);
     }
   },
-  async updateTitle({ getters }, profile) {
+  async updateTitle({ getters }, enterprise) {
     // const result = posts.doc();
     // post.id = result.id;
-    console.log(profile);
+    console.log(enterprise);
     const hello = {
-      title: profile.title,
-      user_id:profile.user_id
+      title: enterprise.title,
+      user_id: enterprise.user_id,
     };
-    const id = profile.user_id;
-    // profile.user_id = firebase.auth().currentUser.uid;
+    const id = enterprise.user_id;
+    console.log(enterprise.user_id);
+    // enterprise.user_id = firebase.auth().currentUser.uid;
     // authentication required here, else everything works
     try {
-      await db.collection('profile')
-        .doc(id)
-        .set(hello);
+      await db.collection("enterprise").doc(id).set(hello);
     } catch (error) {
       console.error(error);
     }
@@ -98,23 +98,18 @@ const actions = {
     // categories.user_id = firebase.auth().currentUser.uid;
 
     try {
-      await db.
-        collection('quotation')
-        .doc(id)
-        .delete();
+      await db.collection("enterprise").doc(id).delete();
     } catch (error) {
       console.error(error);
     }
   },
 };
-const getters = {
-
-};
+const getters = {};
 
 export default {
   namespaced: true,
   state,
   getters,
   mutations,
-  actions
-}
+  actions,
+};
