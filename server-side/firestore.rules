@@ -1,0 +1,27 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /enterprise/{enterpriseId} {
+     allow read: if resource.data.visibility == 'public' || request.auth != null;
+     allow write: if request.auth.email == resource.data.member_email_id;
+     //right when account gets logged in enterprise info needs to add current user id  in member_email_id
+     
+    }
+      match /bought/{boughtid} {
+      //both admin and member must be able to read
+      //the logged in user must be buyer(admin or member) or seller (admin or member)
+      //member might not be able to see if he hasnt inserted data:
+      //should i use enterprise id from enterprise he has in state management
+     allow read: if resource.data.buyer_id_enterprise == get(/databases/$(database)/documents/enterprise/$(request.auth.uid)).data.admin_id
+     //because admin_id is enterprise_id based on uid of user who created 
+     //the enterprise
+     //however when that user gets assigned to another enterprise his admin_id must be upated to the enterprise he has been assigned to
+     
+     			|| resource.data.buyer_id_user == request.auth.email;
+     //|| resource.data.seller_id_user == request.auth.email
+     //|| resource.data.seller_id_user == request.auth.email;
+     //doesnt require them becasue one portion of data is needed to be authenticated
+     allow write: if request.auth.email in resource.data.member_email_id;
+     //https://stackoverflow.com/questions/46835481/firestore-security-rules-searching-for-a-users-id-in-array-in-a-document
+    }
+  }
+}

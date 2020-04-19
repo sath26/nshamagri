@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh LpR lFf">
+    <s-header></s-header>
     <q-page-container>
-      <s-header></s-header>
       <q-tabs
         v-model="tab"
         animated
@@ -14,6 +14,7 @@
         <q-tab class="q-pa-sm" name="member" label="members" />
       </q-tabs>
       <q-separator />
+      <!-- <q-tab-panels > -->
       <q-tab-panels v-model="tab" animated class="bg-grey-1">
         <q-tab-panel name="enterprise">
           <div class="profile-background_img_container">
@@ -153,11 +154,9 @@
             </div> -->
           </div>
         </q-tab-panel>
-        <!-- Member profile panel -->
-        <q-tab-panel name="member">
-          <q-page padding class="row justify-center">
-            <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
-              <!-- <q-card inline class="bigger q-ma-sm">
+        <q-tab-panel name="member" padding class="row justify-center">
+          <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
+            <!-- <q-card inline class="bigger q-ma-sm">
               <img src="statics/parallax2.jpg" />
 
               <q-card-section class="relative-position">
@@ -169,63 +168,64 @@
                 </q-btn>
               </q-card-section>
               </q-card>-->
-              <q-list bordered separator class="q-mb-sm">
-                <q-item multiline>
-                  <q-item-section label>Add Members</q-item-section>
-                  <q-item-section avatar>
-                    <div class="group" style="text-align: center;">
-                      <q-btn flat color="secondary">
-                        <q-icon name="add" @click="medium = true"></q-icon>
-                      </q-btn>
-                    </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-              <q-list bordered hightlight>
-                <q-item
-                  multiline
-                  v-for="role in roles"
-                  v-bind:key="role.user_id"
-                >
-                  <q-item-section avatar>
-                    <q-avatar>
-                      <img :src="user.photoUrl" alt="user" />
-                    </q-avatar>
-                  </q-item-section>
-                  <q-item-section>{{ role.user_name }}</q-item-section>
-                </q-item>
-              </q-list>
-              <q-dialog v-model="medium">
-                <q-card style="width: 700px; max-width: 80vw;">
-                  <q-card-section>
-                    <div class="text-h6">Add Member</div>
-                  </q-card-section>
+            <q-list bordered separator class="q-mb-sm">
+              <q-item multiline>
+                <q-item-section label>Add Members</q-item-section>
+                <q-item-section avatar>
+                  <div class="group" style="text-align: center;">
+                    <q-btn flat color="secondary">
+                      <q-icon name="add" @click="medium = true"></q-icon>
+                    </q-btn>
+                  </div>
+                </q-item-section>
+              </q-item>
+            </q-list>
+            <q-list bordered hightlight>
+              <q-item
+                multiline
+                v-for="member in members"
+                v-bind:key="member.user_id"
+              >
+                <q-item-section avatar>
+                  <q-avatar>
+                    <img :src="user.photoUrl" alt="user" />
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section>{{ member.user_name }}</q-item-section>
+              </q-item>
+            </q-list>
+            <q-dialog v-model="medium">
+              <q-card style="width: 700px; max-width: 80vw;">
+                <q-card-section>
+                  <div class="text-h6">Add Member</div>
+                </q-card-section>
 
-                  <q-card-section class="q-pt-none">
-                    <q-input
-                      color="grey-10"
-                      filled
-                      label="Enter Member Email"
-                      v-model="member"
-                      hint="One email address can only have one enterprise and it applies for members also!"
-                    >
-                    </q-input>
-                  </q-card-section>
+                <q-card-section class="q-pt-none">
+                  <q-input
+                    color="grey-10"
+                    filled
+                    label="Enter Member Email"
+                    v-model="member"
+                    hint="One email address can only have one enterprise and it applies for members also!"
+                  >
+                  </q-input>
+                </q-card-section>
 
-                  <q-card-actions align="right" class="bg-white text-teal">
-                    <q-btn
-                      flat
-                      label="Add as Member"
-                      @click="findMember(this.member)"
-                    />
-                    <!-- v-close-popup -->
-                  </q-card-actions>
-                </q-card>
-              </q-dialog>
-            </div>
-          </q-page>
+                <q-card-actions align="right" class="bg-white text-teal">
+                  <q-btn
+                    flat
+                    label="Add as Member"
+                    @click="findMember(this.member)"
+                  />
+                  <!-- v-close-popup -->
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
+          </div>
         </q-tab-panel>
       </q-tab-panels>
+      <!-- Member profile panel -->
+      <!-- </q-tab-panels> -->
     </q-page-container>
   </q-layout>
 </template>
@@ -238,13 +238,16 @@
 //consists of me and enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+/* import SEnterprise from "./profile/Enterprise";
+import SMember from "./profile/Member"; */
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
     SHeader,
-    SFooter,
+    SFooter
   },
+
   data() {
     return {
       tab: "enterprise",
@@ -259,17 +262,29 @@ export default {
       done_pan_no: false,
       pan_no: "",
       medium: false, //for dialog to appear on clicking add button,
-      member: "",
+      member: ""
     };
   },
   created() {
     this.fetchProfile(this.user);
-    this.fetchRole(this.user);
+  },
+  mounted() {
+    // this.fetchRole(this.admin_enterprise_id);
+    /*  var parsedyourElement = JSON.parse(
+      JSON.stringify(this.admin_enterprise_id)
+    ); */
+    console.log(this.admin_enterprise_id[0].admin_enterprise_id);
+    /*  let data = {};
+    for (let d in this.admin_enterprise_id) {
+      data[d] = this.admin_enterprise_id[d];
+    }
+    console.log(data); */
   },
   computed: {
-    // ...mapGetters("layoutDemo", ["view"])
+    ...mapGetters("profile", ["admin_enterprise_id"]),
+    ...mapGetters("layoutDemo", ["view"]),
     ...mapState("auth", ["user", "pic", "isAuthenticated"]),
-    ...mapState("profile", ["enterprise", "roles"]),
+    ...mapState("profile", ["enterprise", "members"])
   },
   methods: {
     ...mapActions("profile", [
@@ -277,7 +292,7 @@ export default {
       "createCategory",
       "updateTitle",
       "deleteCategory",
-      "fetchRole",
+      "fetchRole"
     ]),
     focusOnEmail() {
       this.add_email = false;
@@ -292,7 +307,7 @@ export default {
     renameEmail(title) {
       this.updateTitle({
         title: title,
-        user_id: this.user.id,
+        user_id: this.user.id
       });
       this.done_email = false;
     },
@@ -321,7 +336,12 @@ export default {
     findMember(member) {
       console.log(member);
     },
-  },
+    createMember() {
+      // ? member msut not exit in email array
+      // ? member must not have enterprise already
+      // ? one member at a time
+    }
+  }
 };
 </script>
 
