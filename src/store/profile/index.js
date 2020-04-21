@@ -6,13 +6,15 @@ import { Notify } from "quasar";
 const state = {
   category_quotation: [],
   unit_quotation: [],
-  enterprise: [],
+  enterprise: [], //needed in vuex but not used in components
   current_enterprise: {},
   members: [],
   checkPossibleMember: [],
   error: null,
   loading_profile: false,
-  loading_finding_member: false
+  loading_finding_member: false,
+  beforeEligibleOrNot: {},
+  eligibleOrNot: {}
 };
 const mutations = {
   setError(state, payload) {
@@ -28,6 +30,10 @@ const mutations = {
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;
+  },
+  setEligibleOrNot(state, payload) {
+    state.eligibleOrNot = payload;
+    // console.log(state.eligibleOrNot);
   }
 };
 // ! fetching profile that doesnt even exist will cost like it did
@@ -38,7 +44,7 @@ const actions = {
       "enterprise", //naming different due to refactoring issue that might arise
       db.collection("enterprise").where("member_id", "array-contains", user.id)
     ).then(res => {
-      console.log(res);
+      // console.log(res);
 
       commit("setCurrentEnterprise", res);
     });
@@ -54,12 +60,12 @@ const actions = {
       // * for member_email_id "after" he/she clicks for (create enterprise)
       var enterpriseRef = db.collection("enterprise");
       return bindFirestoreRef(
-        "checkPossibleMember", // *[TODO] email id instead of member_id should have been used
+        "beforeEligibleOrNot", // *[TODO] email id instead of member_id should have been used
         //enterpriseRef.where("title", "==", "").where("email"==)
-        enterpriseRef.where("email", "==", inputEmail)
+        enterpriseRef.where("admin_email_id", "==", inputEmail)
       )
         .then(data => {
-          console.log("find member");
+          commit("setEligibleOrNot", data);
         })
         .finally(data => {
           commit("setLoadingFindingMember", false);
@@ -68,12 +74,8 @@ const actions = {
   ),
 
   fetchRole: firestoreAction(
-    ({ bindFirestoreRef, commit, state }, enterprise) => {
-      commit("setLoading", true);
-      console.log("wtf");
-      // console.log(state.enterprise);
-      /*   var parsedobj = JSON.parse(JSON.stringify(enterprise));
-    console.log(parsedobj); */
+    ({ bindFirestoreRef, commit, state }, admin_enterprise_id) => {
+      //commit("setLoading", true);
 
       //add the admin's id to admin_enterprise_id of current user who will be member
       //if he is admin above steps is not necessary
@@ -82,16 +84,9 @@ const actions = {
         "members",
         db
           .collection("enterprise")
-          .doc(this.enterprise[0].admin_enterprise_id)
+          .doc(admin_enterprise_id)
           .collection("role")
-      )
-        .then(data => {
-          console.log(data);
-        })
-        .finally(data => {
-          commit("setLoading", false);
-        })
-        .error(data => console.log(data));
+      );
     }
   ),
   async createRole({ getters }, user) {
@@ -176,7 +171,21 @@ const actions = {
 };
 const getters = {
   admin_enterprise_id: state => {
-    return state.current_enterprise;
+    return state.current_enterprise[0].admin_enterprise_id;
+  },
+  eligible: state => {
+    if (state.eligibleOrNot.length > 0 && state.eligibleOrNot[0].title !== "") {
+      return "eligible";
+    } else if (
+      state.eligibleOrNot.length > 0 &&
+      state.eligibleOrNot[0].title == ""
+    ) {
+      return "ineligible";
+    } else if (state.eligibleOrNot.length == 0) {
+      return "noHint";
+    } else {
+      return "noHint";
+    }
   }
 };
 

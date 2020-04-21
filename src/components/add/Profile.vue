@@ -68,7 +68,7 @@
                       color="grey-10"
                       filled
                       label="Name"
-                      v-model="enterprise[0].title"
+                      v-model="current_enterprise[0].title"
                       @focus="focusOnEmail()"
                       @blur="focusOffEmail()"
                     >
@@ -79,7 +79,7 @@
                         <q-btn
                           flat
                           v-if="done_email"
-                          @click="renameEmail(enterprise[0].title)"
+                          @click="renameEmail(current_enterprise[0].title)"
                         >
                           <q-icon name="done" />
                         </q-btn>
@@ -91,7 +91,7 @@
                       color="grey-10"
                       filled
                       label="Contact Number"
-                      v-model="enterprise[0].contact_no"
+                      v-model="current_enterprise[0].contact_no"
                       @focus="focusOnContact()"
                       @blur="focusOffContact()"
                     >
@@ -194,7 +194,7 @@
                 <q-item-section>{{ member.user_name }}</q-item-section>
               </q-item>
             </q-list>
-            <q-dialog v-model="medium">
+            <q-dialog v-model="medium" @hide="resetEligible()">
               <q-card style="width: 700px; max-width: 80vw;">
                 <q-card-section>
                   <div class="text-h6">Add Member</div>
@@ -202,20 +202,45 @@
 
                 <q-card-section class="q-pt-none">
                   <q-input
+                    ref="inputMemberEmail"
+                    debounce="1000"
+                    :loading="loading_finding_member"
                     color="grey-10"
                     filled
                     label="Enter Member Email"
                     v-model="member"
-                    hint="One email address can only have one enterprise and it applies for members also!"
+                    :hint="hintOrNot()"
+                    :error="notEligible()"
+                    clearable
+                    @clear="clearEligible()"
+                    :rules="[
+                      val =>
+                        val.includes('@gmail.com') ||
+                        'Field must contain @gmail.com'
+                    ]"
                   >
+                    <template v-slot:error>
+                      "This email either has already created an enterprise or is
+                      not registered!"
+                    </template>
+                    <template v-slot:append>
+                      <q-btn
+                        round
+                        flat
+                        :disable="eligible ? false : true"
+                        icon="arrow_right_alt"
+                        @click="findMember()"
+                      />
+                    </template>
                   </q-input>
                 </q-card-section>
 
                 <q-card-actions align="right" class="bg-white text-teal">
                   <q-btn
                     flat
+                    readonly
+                    :disable="eligible ? true : false"
                     label="Add as Member"
-                    @click="findMember(this.member)"
                   />
                   <!-- v-close-popup -->
                 </q-card-actions>
@@ -235,7 +260,7 @@
 // it might not work coz im saving individual fields separately
 //i have to make separate variable for each and save separately
 //because im saving on same document
-//consists of me and enterprise
+//consists of me and current_enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 /* import SEnterprise from "./profile/Enterprise";
@@ -262,29 +287,26 @@ export default {
       done_pan_no: false,
       pan_no: "",
       medium: false, //for dialog to appear on clicking add button,
-      member: ""
+      member: "",
+      eligible1: false
     };
   },
   created() {
     this.fetchProfile(this.user);
   },
   mounted() {
-    // this.fetchRole(this.admin_enterprise_id);
-    /*  var parsedyourElement = JSON.parse(
-      JSON.stringify(this.admin_enterprise_id)
-    ); */
-    console.log(this.admin_enterprise_id[0].admin_enterprise_id);
-    /*  let data = {};
-    for (let d in this.admin_enterprise_id) {
-      data[d] = this.admin_enterprise_id[d];
-    }
-    console.log(data); */
+    this.fetchRole(this.admin_enterprise_id);
   },
   computed: {
-    ...mapGetters("profile", ["admin_enterprise_id"]),
+    ...mapGetters("profile", ["admin_enterprise_id", "eligible"]),
     ...mapGetters("layoutDemo", ["view"]),
     ...mapState("auth", ["user", "pic", "isAuthenticated"]),
-    ...mapState("profile", ["enterprise", "members"])
+    ...mapState("profile", [
+      "current_enterprise",
+      "members",
+      "loading_finding_member",
+      "eligibleOrNot"
+    ])
   },
   methods: {
     ...mapActions("profile", [
@@ -292,7 +314,8 @@ export default {
       "createCategory",
       "updateTitle",
       "deleteCategory",
-      "fetchRole"
+      "fetchRole",
+      "checkAndFindMember"
     ]),
     focusOnEmail() {
       this.add_email = false;
@@ -333,13 +356,40 @@ export default {
       // this.new_category = "";
     },
     renamePanNo() {},
-    findMember(member) {
-      console.log(member);
+    findMember() {
+      console.log(this.member);
+      this.checkAndFindMember(this.member);
+      console.log(this.eligible);
     },
     createMember() {
       // ? member msut not exit in email array
       // ? member must not have enterprise already
       // ? one member at a time
+    },
+    resetEligible() {
+      this.member = "";
+
+      this.$store.commit("profile/setEligibleOrNot", {});
+      this.$refs.inputMemberEmail.resetValidation();
+    },
+    clearEligible() {
+      this.member = "";
+
+      // this.$store.commit("profile/setEligibleOrNot", {});
+      this.$refs.inputMemberEmail.resetValidation();
+    },
+    notEligible() {
+      if (this.eligible == "ineligible") {
+        return true;
+      }
+    },
+
+    hintOrNot() {
+      if (this.eligible == "eligible") {
+        return "Now you are eligible! Add As Member is enabled!";
+      } else if (this.eligible == "noHint") {
+        return "";
+      }
     }
   }
 };

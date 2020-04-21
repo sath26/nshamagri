@@ -101,8 +101,6 @@ module.exports = function(ctx) {
 
         "QPopupEdit",
 
-        "QScrollArea",
-
         "QSpace",
         "QSpinner",
         "QSlider",
