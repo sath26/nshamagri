@@ -211,8 +211,9 @@
                     v-model="member"
                     :hint="hintOrNot()"
                     :error="notEligible()"
-                    clearable
                     @clear="clearEligible()"
+                    clearable
+                    lazy-rules
                     :rules="[
                       val =>
                         val.includes('@gmail.com') ||
@@ -227,7 +228,7 @@
                       <q-btn
                         round
                         flat
-                        :disable="eligible ? false : true"
+                        :disable="disableSearchMemberButton()"
                         icon="arrow_right_alt"
                         @click="findMember()"
                       />
@@ -239,7 +240,8 @@
                   <q-btn
                     flat
                     readonly
-                    :disable="eligible ? true : false"
+                    :disable="enableAddAsMember()"
+                    @click="addAsMember()"
                     label="Add as Member"
                   />
                   <!-- v-close-popup -->
@@ -370,12 +372,11 @@ export default {
       this.member = "";
 
       this.$store.commit("profile/setEligibleOrNot", {});
-      this.$refs.inputMemberEmail.resetValidation();
     },
     clearEligible() {
       this.member = "";
 
-      // this.$store.commit("profile/setEligibleOrNot", {});
+      this.$store.commit("profile/setEligibleOrNot", {});
       this.$refs.inputMemberEmail.resetValidation();
     },
     notEligible() {
@@ -390,6 +391,23 @@ export default {
       } else if (this.eligible == "noHint") {
         return "";
       }
+    },
+    disableSearchMemberButton() {
+      if (this.eligible == "eligible") {
+        return true;
+      } else if (this.eligible == "noHint" || this.eligible == "ineligible") {
+        return false;
+      }
+    },
+    enableAddAsMember() {
+      if (this.eligible == "eligible") {
+        return false;
+      } else if (this.eligible == "noHint" || this.eligible == "ineligible") {
+        return true;
+      }
+    },
+    addAsMember() {
+      createRole(this.user);
     }
   }
 };

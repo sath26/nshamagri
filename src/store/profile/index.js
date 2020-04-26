@@ -89,6 +89,7 @@ const actions = {
       );
     }
   ),
+
   async createRole({ getters }, user) {
     // const result = posts.doc();
     // post.id = result.id;
