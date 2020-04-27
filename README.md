@@ -8,15 +8,15 @@ after search user will be told whether the member is eligible or not. only then 
 
 after the button click both `role collection` (new record of the member) and enterprise docuemnt with `member_email_id` array gets updated
 
-the enterprise gets created based on the user_id of the logged in user
+the `enterprise` gets created based on the user_id of the logged in user
 
 ```
-admin_enteprise_id: "admin_id"
-admin_user_id: profile_pic
-email_id:
-role: "member/admin"
-user_id:
-user_name:
+admin_enterprise_id: firebase.auth().currentUser.uid,
+admin_email_id: firebase.auth().currentUser.email,
+role: "member",
+user_id: state.eligibleOrNot[0].uid,
+user_name: state.eligibleOrNot[0].displayName,
+profile_pic: state.eligibleOrNot[0].photoURL
 ```
 
 # how to delete the member:
@@ -29,6 +29,8 @@ restore the `admin_email_id` and `admin_enterprise_id` but how?
 
 # enterprise
 
+the `enterprise` gets created based on the user_id of the logged in user
+
 ```
 admin_email_Id
 admin_enterprise_id
@@ -36,12 +38,14 @@ buyers
 contact_no
 map_location: "geolocation"
 member_email: array of email id
-name
+displayName
+uid
+email
+photoURL
 opened_closed
 pan_no
 quotation
 title
-user_id
 vat_no
 visibility:"public"
 ```
