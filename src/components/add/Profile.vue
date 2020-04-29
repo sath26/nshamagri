@@ -265,6 +265,7 @@
 //consists of me and current_enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+import { fireDB, storage, auth, db } from "../../store/service/firebase";
 /* import SEnterprise from "./profile/Enterprise";
 import SMember from "./profile/Member"; */
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
@@ -361,7 +362,21 @@ export default {
     findMember() {
       console.log(this.member);
       this.checkAndFindMember(this.member);
-      console.log(this.eligible);
+      /* db.collection("enterprise")
+        .where("email", "==", this.member)
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot.empty) {
+            console.log("nothing returned from database");
+          } else {
+            var doc = querySnapshot.docs[0];
+            console.log("Document data:", doc.data());
+          }
+        })
+        .catch(err => {
+          console.log("Error getting document", err);
+        }); */
+      // console.log(this.eligible);
     },
     createMember() {
       // ? member msut not exit in email array

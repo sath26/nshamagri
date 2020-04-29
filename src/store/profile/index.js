@@ -62,9 +62,10 @@ const actions = {
       return bindFirestoreRef(
         "beforeEligibleOrNot", // *[TODO] email id instead of member_id should have been used
         //enterpriseRef.where("title", "==", "").where("email"==)
-        enterpriseRef.where("admin_email_id", "==", inputEmail)
+        enterpriseRef.where("email", "==", inputEmail)
       )
         .then(data => {
+          console.log(data);
           commit("setEligibleOrNot", data);
         })
         .finally(data => {
@@ -105,7 +106,7 @@ const actions = {
         .doc(state.eligibleOrNot[0].uid)
         .set({
           admin_enterprise_id: firebase.auth().currentUser.uid,
-          admin_email_id: firebase.auth().currentUser.email,
+          admin_email_Id: firebase.auth().currentUser.email,
           role: "Member",
           user_id: state.eligibleOrNot[0].uid,
           email: state.eligibleOrNot[0].email,
@@ -125,7 +126,7 @@ const actions = {
         .doc(state.eligibleOrNot[0].uid);
       updateMemberAdminInfo.update({
         admin_enterprise_id: firebase.auth().currentUser.uid,
-        admin_email_id: firebase.auth().currentUser.email
+        admin_email_Id: firebase.auth().currentUser.email
       });
       Notify.create({
         color: "green-4",
@@ -179,7 +180,7 @@ const actions = {
         .doc(givenMemberAllInfo.user_id);
       updateMemberAdminInfo.update({
         admin_enterprise_id: givenMemberAllInfo.user_id,
-        admin_email_id: givenMemberAllInfo.email
+        admin_email_Id: givenMemberAllInfo.email
       });
     } catch (error) {
       console.error(error);
@@ -217,13 +218,13 @@ const getters = {
     if (
       state.eligibleOrNot.length > 0 &&
       state.eligibleOrNot[0].title == "" &&
-      state.eligibleOrNot[0].email == state.eligibleOrNot[0].admin_email_id
+      state.eligibleOrNot[0].email == state.eligibleOrNot[0].admin_email_Id
     ) {
       return "eligible";
     } else if (
       state.eligibleOrNot.length > 0 &&
       state.eligibleOrNot[0].title !== "" &&
-      state.eligibleOrNot[0].email !== state.eligibleOrNot[0].admin_email_id
+      state.eligibleOrNot[0].email !== state.eligibleOrNot[0].admin_email_Id
     ) {
       return "ineligible";
     } else if (state.eligibleOrNot.length == 0) {
