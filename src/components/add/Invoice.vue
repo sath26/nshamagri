@@ -71,6 +71,7 @@ add good or service after saved takes back to invoice(remember route)
               @filter="filterFn"
               @input="onValueChange"
               @new-value="createValue"
+              
             />
             <q-btn to="/add_goods" label="Save" color="secondary" type="submit" />
           </q-form>
@@ -85,71 +86,71 @@ import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 import { mapState, mapGetters, mapActions } from "vuex";
 
-const stringOptions = [
-  {
-    label: "Google",
-    value: {
-      product: "Google",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  },
-  {
-    label: "Facebook",
-    value: {
-      product: "Facebook",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  },
-  {
-    label: "Twitter",
-    value: {
-      product: "Twitter",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  },
-  {
-    label: "Apple Inc.",
-    value: {
-      product: "Apple Inc.",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  },
-  {
-    label: "Linux Inc.",
-    value: {
-      product: "Linux Inc.",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  },
-  {
-    label: "Dell Inc.",
-    value: {
-      product: "Dell Inc.",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  },
-  {
-    label: "Oracle",
-    value: {
-      product: "Oracle",
-      rate: 30,
-      quantity: 5,
-      expiry_left: 150
-    }
-  }
-];
+// const stringOptions = [
+//   {
+//     label: "Google",
+//     value: {
+//       product: "Google",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   },
+//   {
+//     label: "Facebook",
+//     value: {
+//       product: "Facebook",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   },
+//   {
+//     label: "Twitter",
+//     value: {
+//       product: "Twitter",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   },
+//   {
+//     label: "Apple Inc.",
+//     value: {
+//       product: "Apple Inc.",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   },
+//   {
+//     label: "Linux Inc.",
+//     value: {
+//       product: "Linux Inc.",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   },
+//   {
+//     label: "Dell Inc.",
+//     value: {
+//       product: "Dell Inc.",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   },
+//   {
+//     label: "Oracle",
+//     value: {
+//       product: "Oracle",
+//       rate: 30,
+//       quantity: 5,
+//       expiry_left: 150
+//     }
+//   }
+// ];
 export default {
   components: {
     SHeader,
@@ -243,11 +244,11 @@ export default {
     filterFn(val, update) {
       update(() => {
         if (val === "") {
-          this.filterOptions = stringOptions;
+          this.filterOptions = this.quotation;
         } else {
           const needle = val.toLowerCase();
 
-          this.filterOptions = stringOptions.filter(
+          this.filterOptions = this.quotation.filter(
             v => v.label.toLowerCase().indexOf(needle) > -1
           );
         }

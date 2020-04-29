@@ -1,7 +1,7 @@
 {
   "name": "shamagri",
   "version": "0.0.1",
-  "description": "To make ERP app generally available",
+  "description": "To make invoice management for credit transaction app generally available",
   "productName": "shamagri",
   "cordovaId": "org.cordova.quasar.app",
   "author": "sath26",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@quasar/app": "^1.5.8",
     "css-loader": "^3.4.2",
-    "strip-ansi": "=6.0.0"
+    "strip-ansi": "=3.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",

@@ -105,27 +105,29 @@
   </div>
 </template>
 <script>
-// use sign in to insert empty values and filled values so that those values 
+// use sign in to insert empty values and filled values so that those values
 // cAN BE USED HERE like in category
 // it might not work coz im saving individual fields separately
 //i have to make separate variable for each and save separately
 //because im saving on same document
-//consists of me and enterprise
+//consists of me and current_enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+/* import SEnterprise from "./profile/Enterprise";
+import SMember from "./profile/Member"; */
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
     SHeader,
-    SFooter,
-    
+    SFooter
   },
+
   data() {
     return {
       tab: "enterprise",
       subTab: "profileInfo",
-      title:"",
+      user_id: "",
       contact: "",
       add_email: true,
       done_email: false,
@@ -133,27 +135,39 @@ export default {
       done_contact: false,
       add_pan_no: true,
       done_pan_no: false,
-      pan_no:"",
-     
+      pan_no: "",
+      medium: false, //for dialog to appear on clicking add button,
+      member: "",
+      eligible1: false
     };
   },
-  created(){
+  created() {
     this.fetchProfile(this.user);
   },
-  computed: {
-    // ...mapGetters("layoutDemo", ["view"])
-    ...mapState("auth", ["user", "pic","isAuthenticated"]),
-    ...mapState("profile", ["profile"]),
-
+  mounted() {
+    this.fetchRole(this.admin_enterprise_id);
   },
-  methods:{
+  computed: {
+    ...mapGetters("profile", ["admin_enterprise_id", "eligible"]),
+    ...mapGetters("layoutDemo", ["view"]),
+    ...mapState("auth", ["user", "pic", "isAuthenticated"]),
+    ...mapState("profile", [
+      "current_enterprise",
+      "members",
+      "loading_finding_member",
+      "eligibleOrNot"
+    ])
+  },
+  methods: {
     ...mapActions("profile", [
       "fetchProfile",
       "createCategory",
       "updateTitle",
-      "deleteCategory"
+      "deleteCategory",
+      "fetchRole",
+      "checkAndFindMember"
     ]),
-      focusOnEmail() {
+    focusOnEmail() {
       this.add_email = false;
       this.done_email = true; //done is for change in icon here
       // this.$refs.focus.focus();
@@ -163,8 +177,8 @@ export default {
       this.done_email = false;
       // this.new_category = "";
     },
-    renameEmail(title){
-        this.updateTitle({
+    renameEmail(title) {
+      this.updateTitle({
         title: title,
         user_id: this.user.id
       });
@@ -180,9 +194,7 @@ export default {
       this.done_contact = false;
       // this.new_category = "";
     },
-    renameContact(){
-      
-    },
+    renameContact() {},
     focusOnPanNo() {
       this.add_pan_no = false;
       this.done_pan_no = true; //done is for change in icon here
@@ -193,9 +205,42 @@ export default {
       this.done_pan_no = false;
       // this.new_category = "";
     },
-    renamePanNo(){
-      
+    renamePanNo() {},
+    findMember() {
+      console.log(this.member);
+      this.checkAndFindMember(this.member);
+      console.log(this.eligible);
     },
+    createMember() {
+      // ? member msut not exit in email array
+      // ? member must not have enterprise already
+      // ? one member at a time
+    },
+    resetEligible() {
+      this.member = "";
+
+      this.$store.commit("profile/setEligibleOrNot", {});
+      this.$refs.inputMemberEmail.resetValidation();
+    },
+    clearEligible() {
+      this.member = "";
+
+      // this.$store.commit("profile/setEligibleOrNot", {});
+      this.$refs.inputMemberEmail.resetValidation();
+    },
+    notEligible() {
+      if (this.eligible == "ineligible") {
+        return true;
+      }
+    },
+
+    hintOrNot() {
+      if (this.eligible == "eligible") {
+        return "Now you are eligible! Add As Member is enabled!";
+      } else if (this.eligible == "noHint") {
+        return "";
+      }
+    }
   }
 };
 </script>
@@ -372,5 +417,3 @@ h3 {
   }
 }
 </style>
-
-

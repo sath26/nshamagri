@@ -24,8 +24,7 @@
     <div
       class="search-extension"
       :class="{
-        extensionActive: searchPopout,
-        extensionDeactive: searchPopout == false
+        extensionActive: searchPopout
       }"
     >
       <q-card class="my-card">
@@ -232,12 +231,14 @@ export default {
     position absolute
     border none
     left 0
+    display none
     .my-card
       border-radius 0px
   .extensionActive
+    display block
     animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
-  .extensionDeactive
-    animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
+  // .extensionDeactive
+  //   animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
   .filter-dropdown_content-list_item
     background transparent
     padding 0
@@ -293,28 +294,30 @@ export default {
     position absolute
     bottom -5%
     right 2%
-
   @keyframes extInAnimation{
     0%{
       top:0;
       opacity:0;
+      visibility: hidden;
     }
     100%{
       opacity:1;
       top:70px;
+      visibility: visible;
     }
   }
-  @keyframes extOutAnimation{
-    0%{
-      top:70px;
-      opacity:1;
-    }
-    100%{
-      opacity:0;
-      top:0;
-      visibility hidden
-    }
-  }
+  // @keyframes extOutAnimation{
+  //   0%{
+  //     top:70px;
+  //     opacity:1;
+  //     visibility: visible;
+  //   }
+  //   100%{
+  //     opacity: 0;
+  //     top: 0;
+  //     visibility: hidden;
+  //   }
+  // }
 
   
 </style>

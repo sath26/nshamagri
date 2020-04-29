@@ -1,27 +1,27 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { vuexfireMutations } from 'vuexfire'
-import layoutDemo from './layoutDemo'
-import category from './category'
-import auth from './auth'
-import profile from './profile'
-import quotation from './quotation'
-import {fauth} from './service/firebase'
+import Vue from "vue";
+import Vuex from "vuex";
+import { vuexfireMutations } from "vuexfire";
+import layoutDemo from "./layoutDemo";
+import category from "./category";
+import auth from "./auth";
+import profile from "./profile";
+import quotation from "./quotation";
+import { fauth } from "./service/firebase";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
 const ls = new SecureLS({ isCompression: false });
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation
  */
 
-export default function (/* { ssrContext } */) {
+export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
     mutations: {
       // other mutations
-      ...vuexfireMutations,
+      ...vuexfireMutations
     },
     plugins: [
       createPersistedState({
@@ -39,16 +39,13 @@ export default function (/* { ssrContext } */) {
       quotation,
       profile
     }
-  })
+  });
 
-  
   if (process.env.DEV && module.hot) {
-    module.hot.accept(['./layoutDemo'], () => {
-      const newLayoutDemo = require('./layoutDemo').default
-      Store.hotUpdate({ modules: { layoutDemo: newLayoutDemo } })
-    })
+    module.hot.accept(["./layoutDemo"], () => {
+      const newLayoutDemo = require("./layoutDemo").default;
+      Store.hotUpdate({ modules: { layoutDemo: newLayoutDemo } });
+    });
   }
-  return Store
+  return Store;
 }
-
-
