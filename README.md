@@ -1,4 +1,4 @@
-# role
+## enteprise/role
 
 use `admin_email_id` and `admin_enterprise_id` during registration into enterprise record
 
@@ -48,6 +48,24 @@ quotation
 title
 vat_no
 visibility:"public"
+```
+
+## enteprise/home
+
+```
+expnses
+sale
+income
+```
+
+## enterprise/setting
+
+```
+deadline_date:true
+device_number:
+reverse_vat
+service_charge
+vat_return
 ```
 
 # bought (seller)

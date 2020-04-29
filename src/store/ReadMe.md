@@ -38,3 +38,22 @@ user_id: state.eligibleOrNot[0].uid,
 user_name: state.eligibleOrNot[0].displayName,
 profile_pic: state.eligibleOrNot[0].photoURL
 ```
+
+# createRole
+
+```
+{"admin_email_id":"riwatrj@gmail.com","admin_enterprise_id":"DULkEuiCyxWzfBosXXBbOMpfnij1",
+"buyers":1000,
+"contact_no":"1000",
+"map_location":{"_lat":1,"_long":1},
+"member_email":["user1","user2"],
+"name":"Raj Kumar Pasal",
+"opened_closed":true,
+"pan_no":"1000","quotation":1000,
+"title":"rajkumar uncle pasal","user_id":"t98Blh8vyqerPbJJHLFPm1XzngR2",
+"vat_no":"1000",
+"visibility":"public"}
+```
+
+enterprise info of all member will have to be updated i.e.
+<b>functions</b> for each field of of each member will have to be created

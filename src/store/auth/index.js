@@ -103,40 +103,43 @@ const actions = {
         //commit('setPic', user.photoURL);
         // }
         //commit('setError', null);
-        this.$router.push({ path: "/" });
-        db.collection("enterprise")
-          .doc(firebase.auth().currentUser.uid)
-          .collection("role")
-          .doc(firebase.auth().currentUser.uid)
-          .set({
-            admin_enterprise_id: firebase.auth().currentUser.uid,
-            admin_email_id: firebase.auth().currentUser.email,
-            role: "Admin",
-            user_id: firebase.auth().currentUser.uid,
-            user_name: firebase.auth().currentUser.displayName,
-            profile_pic: firebase.auth().currentUser.photoURL
-          });
-        db.collection("enterprise")
-          .doc(firebase.auth().currentUser.uid)
 
-          .set({
-            admin_email_Id: firebase.auth().currentUser.email,
-            admin_enterprise_id: firebase.auth().currentUser.uid,
-            buyers: 0,
-            contact_no: "",
-            map_location: "geolocation",
-            member_email: [firebase.auth().currentUser.email],
-            displayName: firebase.auth().currentUser.displayName,
-            uid: firebase.auth().currentUser.uid,
-            email: firebase.auth().currentUser.email,
-            photoURL: firebase.auth().currentUser.photoURL,
-            opened_closed: true,
-            pan_no: "",
-            quotation: 0,
-            title: "",
-            vat_no: "",
-            visibility: "public"
-          });
+        this.$router.push({ path: "/" });
+        if (!result.additionalUserInfo.isNewUser) {
+          db.collection("enterprise")
+            .doc(firebase.auth().currentUser.uid)
+            .collection("role")
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+              admin_enterprise_id: firebase.auth().currentUser.uid,
+              admin_email_id: firebase.auth().currentUser.email,
+              role: "Admin",
+              user_id: firebase.auth().currentUser.uid,
+              user_name: firebase.auth().currentUser.displayName,
+              profile_pic: firebase.auth().currentUser.photoURL
+            });
+          db.collection("enterprise")
+            .doc(firebase.auth().currentUser.uid)
+
+            .set({
+              admin_email_Id: firebase.auth().currentUser.email,
+              admin_enterprise_id: firebase.auth().currentUser.uid,
+              buyers: 0,
+              contact_no: "",
+              map_location: "geolocation",
+              member_email: [firebase.auth().currentUser.email],
+              displayName: firebase.auth().currentUser.displayName,
+              uid: firebase.auth().currentUser.uid,
+              email: firebase.auth().currentUser.email,
+              photoURL: firebase.auth().currentUser.photoURL,
+              opened_closed: true,
+              pan_no: "",
+              quotation: 0,
+              title: "",
+              vat_no: "",
+              visibility: "public"
+            });
+        }
       })
       .catch(error => {
         commit("setError", error.message);

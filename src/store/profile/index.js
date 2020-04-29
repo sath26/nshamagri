@@ -213,11 +213,17 @@ const getters = {
     return state.current_enterprise[0].admin_enterprise_id;
   },
   eligible: state => {
-    if (state.eligibleOrNot.length > 0 && state.eligibleOrNot[0].title !== "") {
+    // ! dont remove state.eligibleOrNot.length > 0
+    if (
+      state.eligibleOrNot.length > 0 &&
+      state.eligibleOrNot[0].title == "" &&
+      state.eligibleOrNot[0].email == state.eligibleOrNot[0].admin_email_id
+    ) {
       return "eligible";
     } else if (
       state.eligibleOrNot.length > 0 &&
-      state.eligibleOrNot[0].title == ""
+      state.eligibleOrNot[0].title !== "" &&
+      state.eligibleOrNot[0].email !== state.eligibleOrNot[0].admin_email_id
     ) {
       return "ineligible";
     } else if (state.eligibleOrNot.length == 0) {
