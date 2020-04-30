@@ -80,7 +80,7 @@ plumbing */
                 <q-item-section label v-show="showField(categories)">
                   <q-input
                     filled
-                    color="grey-10"
+                    color="teal"
                     @focus.exact="focusField(categories)"
                     @blur.exact="blurField(categories)"
                     @keyup.enter="focusField(categories)"
@@ -184,9 +184,16 @@ export default {
       if (event) {
         event.stopPropagation();
       }
-      ecategory.done = false;
-      this.edit_category = "";
-      this.hover = true;
+       if(ecategory.value.length > 0 ){
+        ecategory.done = false;
+        this.edit_category = "";
+        this.hover = true;
+        // this.remove(ecategory);
+      }else{
+        this.remove(ecategory);
+      }
+
+      
     },
     prevent() {
       if (event) {
@@ -226,7 +233,16 @@ export default {
     },
     insert() {
       console.log(this.new_category);
-      this.createCategory({
+        if(this.new_category.length<=0){
+          swal({
+            title: "Nothing to add",
+            text:
+              "Please type in your category!",
+            icon: "warning",
+            dangerMode: true
+          })
+        }else{
+          this.createCategory({
         id: uniqid(),
         value: this.new_category,
         label: this.new_category,
@@ -236,6 +252,7 @@ export default {
         editIcon: true,
         hover: true
       });
+        }
       this.add = true;
       this.done = false;
       this.new_category = "";
@@ -251,11 +268,17 @@ export default {
       ecategory.editIcon = true;
       this.cantChangeIconAfterFocus = true; //for delete from category icon
 
-      this.updateCategory({
+      if(ecategory.value.length > 0 ){
+        this.updateCategory({
         value: ecategory.value,
         label:ecategory.label,
         id: ecategory.id
-      });
+        });
+        // this.remove(ecategory);
+      }else{
+        this.remove(ecategory);
+      }
+      
       // this.$refs["efocus"].blur();
     }
   },

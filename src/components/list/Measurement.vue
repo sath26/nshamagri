@@ -16,7 +16,7 @@
                 </q-btn>
               </q-item-section>
               <!-- <q-item-section image="sta tics/mountains.jpg"/> -->
-              <q-item-section label="Services">
+              <q-item-section label="Goods">
                 <q-input
                   filled
                   label="Unit"
@@ -24,10 +24,10 @@
                   @blur="blurFocusOff()"
                   ref="focus"
                   color="secondary"
-                  v-model="unit"
+                  v-model="new_unit"
                 >
                   <template v-slot:append>
-                    <q-btn flat color="secondary" v-if="done" @click>
+                    <q-btn flat color="secondary" v-if="done" @click="insert()">
                       <q-icon name="done" />
                     </q-btn>
                   </template>
@@ -35,58 +35,27 @@
               </q-item-section>
             </q-item>
           </q-list>
-          <q-list bordered highlight>
-            <q-item multiline link>
+          <q-spinner color="primary" size="3em" v-if="loading_unit" />
+          <q-list bordered v-else>
+            <q-item multiline v-for="(units) in unit" :key="units.id" >
               <!-- <q-item-side image="statics/mountains.jpg"/> -->
               <q-item-section>
-                <q-item-section label>Kilo</q-item-section>
-              </q-item-section>
-            </q-item>
-
-            <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-section label>Litre</q-item-section>
-              </q-item-section>
-              <!--    <q-item-side right>
-                <q-btn round flat>
-                  <q-icon name="more_vert"/>
-                  <q-popover>
-                    <div class="group" style=" text-align: center;">
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="edit"/>
-                      </q-btn>
-                      <q-btn flat color="secondary" v-close-overlay>
-                        <q-icon name="delete"/>
-                      </q-btn>
-                    </div>
-                  </q-popover>
-                </q-btn>
-              </q-item-side>-->
-            </q-item>
-
-            <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-label>Cartoon</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-label>Packet</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-label>Pieces</q-item-label>
-              </q-item-section>
-            </q-item>
-              <q-item multiline link>
-              <!-- <q-item-side image="statics/parallax1.jpg"/> -->
-              <q-item-section>
-                <q-item-label>Monthly</q-item-label>
+                <q-item-section
+                  label
+                  v-show="!showField(units)"
+                  @click.exact="focusField(units)"
+                >{{units.value}}</q-item-section>
+                <q-item-section label v-show="showField(units)">
+                  <q-input
+                    filled
+                    color="teal"
+                    @focus.exact="focusField(units)"
+                    @blur.exact="blurField(units)"
+                    @keyup.enter="focusField(units)"
+                    ref="efocus"
+                    v-model="units.value"
+                  ></q-input>
+                </q-item-section>
               </q-item-section>
             </q-item>
           </q-list>
@@ -100,8 +69,11 @@
 <script>
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+import { fireDB, storage, auth, db } from "../../store/service/firebase";
+import { mapState, mapGetters, mapActions } from "vuex";
+import warnS from "sweetalert";
+import uniqid from "uniqid";
 
-import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     SHeader,
@@ -110,15 +82,20 @@ export default {
   },
   data() {
     return {
-      search: "",
-      opened: false,
-       unit: "",
+      new_unit : "",
+      eunit: "",
+      edit_unit:"",
+      noFocusChange: true,
       add: true,
-      done: false
+      done:false,
+      opened: false,
+      units: [],
     };
   },
   computed: {
     ...mapGetters("layoutDemo", ["view"]),
+    ...mapState("unit", ["unit", "loading_unit"]),
+
     newGoodToggler: {
       get() {
         return this.$store.state.layoutDemo.toggleNewGood;
@@ -128,22 +105,116 @@ export default {
       }
     }
   },
-   methods: {
+    created(){
+      this.fetchUnit();
+    },
+   methods:{
+    ...mapActions("unit", [
+      "fetchUnit",
+      "createUnit",
+      "updateUnit",
+      "deleteUnit"
+    ]),
     focusOn() {
       this.add = false;
+      this.done = true; //done is for change in icon here
       this.$refs.focus.focus();
-      this.done = true;
     },
     focusOff() {
       this.add = true;
-      this.category = "";
       this.done = false;
+      this.new_unit = "";
     },
-    blurFocusOff() {
-      this.$refs.focus.blur();
-    }
-  },
+     blurFocusOff() {
+      // this.$refs.focus.blur();
+    },
+    focusField(eunit) {
+      eunit.done = true;
+      if (event) {
+        event.preventDefault();
+      }
+      eunit.editIcon = false;
+      this.hover = false;
+      this.cantChangeIconAfterFocus = false;
+      this.edit_unit = eunit.value; //variable remains same but server must have it
+      //  this.$refs["efocus"].focus();
+    },
+    blurField(eunit) {
+      if (event) {
+        event.stopPropagation();
+      }
+       if(eunit.value.length > 0 ){w
+        eunit.done = false;
+        this.edit_unit = "";
+        this.hover = true;
+        // this.remove(eunit);
+      }else{
+        this.remove(eunit);
+      }
+    },
+    showField(eunit) {
+      return eunit.done;
+      if (event) {
+        event.stopPropagation();
+      }
+      return eunit == "" || this.edit_unit == eunit.value;
+    },
+    edit(eunit) {
+      this.focusField(eunit);
+    },
+    insert() {
+      console.log(this.new_unit);
+        if(this.new_unit.length<=0){
+          swal({
+            title: "Nothing to add",
+            text:
+              "Please type in your unit!",
+            icon: "warning",
+            dangerMode: true
+          })
+        }else{
+          this.createUnit({
+        id: uniqid(),
+        value: this.new_unit,
+        label: this.new_unit,
+        add: true,
+        noFocusChange: true,
+        done: false,
+        editIcon: true,
+        hover: true
+      });
+        }
+      this.add = true;
+      this.done = false;
+      this.new_unit = "";
+    },
+     mouseover(units) {
+      units.hover = false;
+    },
+    mouseleave(units) {
+      units.hover = true;
+    },
+    rename(eunit) {
+      eunit.hover = true;
+      eunit.editIcon = true;
+      this.cantChangeIconAfterFocus = true; //for delete from unit icon
+
+      if(eunit.value.length > 0 ){
+        this.updateunit({
+        value: eunit.value,
+        label:eunit.label,
+        id: eunit.id
+        });
+        // this.remove(eunit);
+      }else{
+        this.remove(eunit);
+      }
+    },
+  }
+  
 };
+// Insert
+
 </script>
 
 <style lang="stylus" scoped>
