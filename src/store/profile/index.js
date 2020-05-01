@@ -42,7 +42,10 @@ const actions = {
     commit("setLoading", true);
     return bindFirestoreRef(
       "enterprise", //naming different due to refactoring issue that might arise
-      db.collection("enterprise").where("member_id", "array-contains", user.id)
+      // db.collection("enterprise").where("member_id", "array-contains", user.id)
+      db
+        .collection("enterprise")
+        .where("member_email", "array-contains", user.email)
     ).then(res => {
       // console.log(res);
 
@@ -125,9 +128,27 @@ const actions = {
         .collection("enterprise")
         .doc(state.eligibleOrNot[0].uid);
       updateMemberAdminInfo.update({
+        title: state.current_enterprise[0].title,
+        pan_no: state.current_enterprise[0].pan_no,
+        vat_no: state.current_enterprise[0].vat_no,
+        contact_no: state.current_enterprise[0].contact_no,
         admin_enterprise_id: firebase.auth().currentUser.uid,
         admin_email_Id: firebase.auth().currentUser.email
       });
+      await db
+        .collection("enterprise")
+        .doc(user.id)
+        .collection("role")
+        .doc(state.eligibleOrNot[0].uid)
+        .set({
+          admin_enterprise_id: firebase.auth().currentUser.uid,
+          admin_email_Id: firebase.auth().currentUser.email,
+          role: "Admin",
+          user_id: state.eligibleOrNot[0].uid,
+          email: state.eligibleOrNot[0].email,
+          user_name: state.eligibleOrNot[0].displayName,
+          profile_pic: state.eligibleOrNot[0].photoURL
+        });
       Notify.create({
         color: "green-4",
         textColor: "white",

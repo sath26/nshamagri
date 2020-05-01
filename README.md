@@ -1,3 +1,7 @@
+### admin_email_Id is used instead of admin_email_id everywhere
+
+- very important in where statement
+
 ## enteprise/role
 
 use `admin_email_id` and `admin_enterprise_id` during registration into enterprise record

@@ -314,11 +314,12 @@ export default {
   methods: {
     ...mapActions("profile", [
       "fetchProfile",
-      "createCategory",
+
       "updateTitle",
       "deleteCategory",
       "fetchRole",
-      "checkAndFindMember"
+      "checkAndFindMember",
+      "createRole"
     ]),
     focusOnEmail() {
       this.add_email = false;
@@ -422,7 +423,7 @@ export default {
       }
     },
     addAsMember() {
-      createRole(this.user);
+      this.createRole(this.member);
     }
   }
 };
