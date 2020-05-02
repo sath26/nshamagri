@@ -36,9 +36,25 @@
             </q-item>
           </q-list>
           <q-spinner color="primary" size="3em" v-if="loading_unit" />
+
+          
           <q-list bordered v-else>
-            <q-item multiline v-for="(units) in unit" :key="units.id" >
-              <!-- <q-item-side image="statics/mountains.jpg"/> -->
+            <q-item multiline v-for="(units, index) in unit" :key="units.id" >
+              <!-- unit and delete icons -->
+               <q-item-section avatar>
+                <q-btn
+                  flat
+                  v-if="units.hover && units.noFocusChange"
+                  :key="index"
+                  @mouseover="mouseover(units)"
+                >
+                  <q-icon name="img:statics/icons/unit-icon.svg"/>
+                </q-btn>
+                <q-btn flat v-else @click="remove(units)" @mouseleave="mouseleave(units)">
+                  <q-icon name="delete" />
+                </q-btn>
+              </q-item-section>
+              <!-- units field -->
               <q-item-section>
                 <q-item-section
                   label
@@ -56,9 +72,20 @@
                     v-model="units.value"
                   ></q-input>
                 </q-item-section>
+                <!-- done and edit buttons -->
+              </q-item-section>
+                <q-item-section avatar>
+                <q-btn flat v-if="units.editIcon" @click="edit(units)">
+                  <q-icon name="edit" />
+                </q-btn>
+                <q-btn flat v-else @click="rename(units)">
+                  <q-icon name="done" />
+                </q-btn>
               </q-item-section>
             </q-item>
           </q-list>
+
+
         </div>
       </q-page>
     </q-page-container>
@@ -85,11 +112,12 @@ export default {
       new_unit : "",
       eunit: "",
       edit_unit:"",
+      units: [],
       noFocusChange: true,
       add: true,
       done:false,
-      opened: false,
-      units: [],
+      hover: true,
+      editIcon: true
     };
   },
   computed: {
@@ -135,7 +163,7 @@ export default {
       }
       eunit.editIcon = false;
       this.hover = false;
-      this.cantChangeIconAfterFocus = false;
+      this.noFocusChange = false;
       this.edit_unit = eunit.value; //variable remains same but server must have it
       //  this.$refs["efocus"].focus();
     },
@@ -163,7 +191,7 @@ export default {
       this.focusField(eunit);
     },
     insert() {
-      console.log(this.new_unit);
+      // console.log(this.new_unit);
         if(this.new_unit.length<=0){
           swal({
             title: "Nothing to add",
@@ -188,7 +216,7 @@ export default {
       this.done = false;
       this.new_unit = "";
     },
-     mouseover(units) {
+    mouseover(units) {
       units.hover = false;
     },
     mouseleave(units) {
@@ -197,18 +225,40 @@ export default {
     rename(eunit) {
       eunit.hover = true;
       eunit.editIcon = true;
-      this.cantChangeIconAfterFocus = true; //for delete from unit icon
+      this.noFocusChange = true; //for delete from unit icon
 
       if(eunit.value.length > 0 ){
-        this.updateunit({
+        this.updateUnit({
         value: eunit.value,
         label:eunit.label,
         id: eunit.id
         });
         // this.remove(eunit);
+
       }else{
         this.remove(eunit);
       }
+    },
+    remove(eunit) {
+      swal({
+        title: "Are you sure?",
+        text:
+          "Once deleted, you will not be able to recover this data!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          this.deleteUnit({
+            id: eunit.id
+          });
+          swal("Poof! Your data has been deleted!", {
+            icon: "success"
+          });
+        } else {
+          swal("Your data is safe!");
+        }
+      });
     },
   }
   
