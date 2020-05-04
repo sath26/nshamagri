@@ -1,104 +1,143 @@
 <template>
-  <div>
-    <q-layout view="hHh LpR lFf">
+  <q-layout view="hHh LpR lFf">
+    <s-header></s-header>
     <q-page-container>
-      <s-header></s-header>
-      <!-- Profile card ~ #01 -->
-      <div id="enterprise-profile_card" class="q-pa-xl">
-        <div class="card-banner">
-          <div class="avatar">
-            <img class="usr-img" src="statics/parallax2.jpg" />
-            <div class="img-edit">
-              <q-btn flat color="info">change</q-btn>
-              <q-btn flat color="negative">delete</q-btn>
-            </div>
+      <q-tabs
+        v-model="tab"
+        animated
+        active-color="secondary"
+        indicator-color="secondary"
+        align="justify"
+      >
+        <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
+        <q-tab class="q-pa-sm" name="enterprise" label="enterprise" />
+        <q-tab class="q-pa-sm" name="member" label="members" />
+      </q-tabs>
+      <q-separator />
+      <!-- <q-tab-panels > -->
+      <q-tab-panels v-model="tab" animated class="bg-grey-1">
+        <q-tab-panel name="enterprise">
+          <div class="profile-background_img_container">
+            <img
+              src="../../assets/img/Profile-bg_graphics.png"
+              alt="profile background image"
+            />
           </div>
-          <div class="card-quick_info">
-            <h3>Saugat enterprise</h3>
-            <ul class="info-content">
-              <li>
-                <div class="info-box">
-                  <div class="info-head">Quotation</div>
-                  <div class="info-count text-h5">200</div>
+          <!-- Profile card ~ #01 -->
+          <div id="enterprise-profile_card" class="q-pa-xl">
+            <div class="card-banner">
+              <div class="avatar">
+                <img class="usr-img" src="statics/parallax2.jpg" />
+                <div class="img-edit">
+                  <a href="#">Change</a>
+                  <a href="#">Delete</a>
                 </div>
-              </li>
-              <li>
-                <div class="info-box">
-                  <div class="info-head">Invoice</div>
-                  <div class="info-count text-h5">120</div>
-                </div>
-              </li>
-              <li>
-                <div class="info-box">
-                  <div class="info-head">Customer</div>
-                  <div class="info-count text-h5">35</div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- profile-detail card -->
-        <div class="card__container">
-          <q-card class="shadow-1">
-            <q-card-section class="float-left on-left card__content">
-                  <q-card-section class="row">
-                    <div class="text-h4 text-teal-5 q-ml-xl col">Profile details</div>
-                  </q-card-section>
-              <div class="card-body">
-                <ul class="info-list">
-                  <li class="col">
-                    <q-icon name="email" class="profile-detail_icon"></q-icon>&nbsp;nexus.saugat26@gmail.com
+              </div>
+              <div class="card-quick_info">
+                <ul class="info-content">
+                  <li>
+                    <div class="info-box">
+                      <div class="info-head">Quotation</div>
+                      <div class="info-count text-h5">200</div>
+                    </div>
                   </li>
-                  <li class="col">
-                    <q-icon name="phone" class="profile-detail_icon"></q-icon>&nbsp;+1 123-456-7890
+                  <li>
+                    <div class="info-box">
+                      <div class="info-head">Invoice</div>
+                      <div class="info-count text-h5">120</div>
+                    </div>
                   </li>
-                  <li class="col">
-                    <q-icon name="place" class="profile-detail_icon"></q-icon>&nbsp;Kathmandu, Nepal
-                  </li>
-                  <li class="col">
-                    <q-icon name="note" class="profile-detail_icon"></q-icon>&nbsp;223 049 023
+                  <li>
+                    <div class="info-box">
+                      <div class="info-head">Customers</div>
+                      <div class="info-count text-h5">35</div>
+                    </div>
                   </li>
                 </ul>
               </div>
-            </q-card-section>
-              <!-- right content -->
-            <q-card-section class="float-right on-right card__content">
-                  <q-card-section class="row">
-                <div class="col edit-btn_container">
-                  <q-btn flat color="teal" class="float-right" icon="edit">Edit</q-btn>
-                </div>
+            </div>
+            <!-- profile-detail card -->
+            <q-card class="shadow-1 q-mt-lg">
+              <q-card-section>
+                <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
               </q-card-section>
               <div class="card-body">
                 <ul class="info-list">
-                  <li class="col">
-                    Pan number : 12312
+                  <li>
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="Name"
+                      v-model="current_enterprise[0].title"
+                      @focus="focusOnEmail()"
+                      @blur="focusOffEmail()"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="store" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn
+                          flat
+                          v-if="done_email"
+                          @click="renameEmail(current_enterprise[0].title)"
+                        >
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
                   </li>
                   <li class="col">
-                    Vat number : #231241
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="Contact Number"
+                      v-model="current_enterprise[0].contact_no"
+                      @focus="focusOnContact()"
+                      @blur="focusOffContact()"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="phone" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn
+                          flat
+                          v-if="done_contact"
+                          @click="renameContact()"
+                        >
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
                   </li>
                   <li class="col">
-                    <q-icon name="note" class="profile-detail_icon"></q-icon>223 049 023
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="PAN Number"
+                      v-model="pan_no"
+                      @focus="focusOnPanNo()"
+                      @blur="focusOffPanNo()"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="subject" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn flat v-if="done_pan_no" @click="renamePanNo()">
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
                   </li>
+                  <!-- <li class="col">
+                    <q-icon name="place"></q-icon>Kathmandu, Nepal
+                    <span class="edit-btn">Edit</span>
+                  </li>
+                  <li class="col">
+                    <q-icon name="note"></q-icon>223 049 023
+                    <span class="edit-btn">Edit</span>
+                  </li> -->
                 </ul>
               </div>
-<<<<<<< HEAD
-            </q-card-section>
-          </q-card>
-        </div>
-          
-        <!-- right contents -->
-        <!-- <div class="card-footer">
-          <div class="social_media-icons">
-            <a href="/" target="_blank">
-              <img src="statics\icons\facebook.svg" alt="Facebook icon" />
-            </a>
-            <a href="/" target="_blank">
-              <img src="statics\icons\linkedin.svg" alt="Linkedin icon" />
-            </a>
-            <a href="/" target="_blank">
-              <img src="statics\icons\twitter.svg" alt="Twitter icon" />
-            </a>
-=======
             </q-card>
             <!-- <div class="card-footer">
               <div class="social_media-icons">
@@ -119,7 +158,6 @@
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
             <!-- <q-card inline class="bigger q-ma-sm">
               <img src="statics/parallax2.jpg" />
-
               <q-card-section class="relative-position">
                 <div class="ellipsis">Saugat Thapa</div>
               </q-card-section>
@@ -209,13 +247,13 @@
                 </q-card-actions>
               </q-card>
             </q-dialog>
->>>>>>> d6c51c924e82c91b3ce5274bf470a6dc7b49b60d
           </div>
-        </div> -->
-      </div>
+        </q-tab-panel>
+      </q-tab-panels>
+      <!-- Member profile panel -->
+      <!-- </q-tab-panels> -->
     </q-page-container>
   </q-layout>
-  </div>
 </template>
 <script>
 // use sign in to insert empty values and filled values so that those values
@@ -230,13 +268,11 @@ import { fireDB, storage, auth, db } from "../../store/service/firebase";
 /* import SEnterprise from "./profile/Enterprise";
 import SMember from "./profile/Member"; */
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
-
 export default {
   components: {
     SHeader,
     SFooter
   },
-
   data() {
     return {
       tab: "enterprise",
@@ -275,7 +311,6 @@ export default {
   methods: {
     ...mapActions("profile", [
       "fetchProfile",
-
       "updateTitle",
       "deleteCategory",
       "fetchRole",
@@ -347,12 +382,10 @@ export default {
     },
     resetEligible() {
       this.member = "";
-
       this.$store.commit("profile/setEligibleOrNot", {});
     },
     clearEligible() {
       this.member = "";
-
       this.$store.commit("profile/setEligibleOrNot", {});
       this.$refs.inputMemberEmail.resetValidation();
     },
@@ -361,7 +394,6 @@ export default {
         return true;
       }
     },
-
     hintOrNot() {
       if (this.eligible == "eligible") {
         return "Now you are eligible! Add As Member is enabled!";
@@ -392,13 +424,11 @@ export default {
 
 <style lang="stylus" scoped>
 @import '..\css\app.styl';
-
 .card__container{
   width:100%;
   background:red;
   overflow: hidden;
   z-index: 13;
-  
   .card__content{
       width:49%;
       height:100%;
@@ -408,99 +438,80 @@ export default {
       background: yellow;
     }
 }
-
 #me-card, #enterprise-profile_card {
   background: $primary-white;
   margin: 0 auto;
 }
-
 .tab-me, .tab-enterprise {
   background: $tab-color;
 }
-
 #enterprise-profile_card {
   width: 100%;
   height: 100%;
   position: relative;
   background: blue;
   z-index: 12;
-
   .card-banner {
     display: flex;
     flex-wrap: nowrap;
   }
 }
-
 .usr-img {
   width: 300px;
   height: 300px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3);
 }
-
 .card-quick_info {
   text-align: center;
   align-self: flex-end;
   margin-left: 20px;
 }
-
 h3 {
   font-size: 2rem;
   padding: 0;
   margin: 0;
   float: left;
 }
-
 .info-content {
   width: 100%;
   padding: 0;
   display: inline;
   list-style: none;
-
   li {
     font-size: 1.2rem;
     display: inline;
     padding-left: 210px;
-
     .info-box {
       display: inline-block;
     }
   }
 }
-
 .card-banner {
   height: 100%;
-
   width 100% {
     background-size: cover;
   }
-
   background-position: center;
 }
-
 .img-edit {
   text-align: center;
-
   a {
     text-decoration: none;
     margin: 0 20px;
   }
 }
-
 .card-body {
   width: 100%;
   margin: 0 auto;
   padding: 20px;
-
   .info-list {
     width: 90%;
     display: inline-block;
-
     li {
       font-size: 2em;
       padding: 18px 0px;
       list-style: none;
       position: relative;
-
       .edit-btn {
         color: #40bfc1;
         cursor: pointer;
@@ -508,18 +519,15 @@ h3 {
         position: absolute;
         top: 22%;
         right: 0%;
-
         &:hover {
           opacity: 1;
         }
       }
     }
   }
-
   .address-info {
     width: 350px;
   }
-
   a {
     display: block;
     padding: 5px 0px;
@@ -528,35 +536,29 @@ h3 {
     text-decoration: none;
     webkit-transition: 0.1s ease-in-out;
     transition: 0.1s ease-in-out;
-
     &:hover {
       color: inherit;
     }
   }
 }
-
 .card-footer {
   width: 100%;
   height: 80px;
 }
-
 .social_media-icons {
   text-align: center;
   position: relative;
   top: 25%;
-
   a {
     margin: auto 35px;
   }
 }
-
 .card-footer .social_media-icons img {
   width: 40px;
   height: 40px;
   vertical-align: -50%;
   webkit-transition: all 0.11s ease-in-out;
   transition: all 0.11s ease-in-out;
-
   &:hover {
     transform: scale(1.5);
   }
