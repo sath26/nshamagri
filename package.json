@@ -15,7 +15,7 @@
     "apexcharts": "^3.15.6",
     "axios": "^0.19.2",
     "eslint": "^6.8.0",
-    "firebase": "^7.9.1",
+    "firebase": "^7.14.2",
     "instantsearch.css": "^7.4.2",
     "quasar": "^1.9.4",
     "rm": "^0.1.8",
@@ -32,7 +32,7 @@
     "webpack": "^4.41.6"
   },
   "devDependencies": {
-    "@quasar/app": "^1.5.8",
+    "@quasar/app": "^1.7.4",
     "css-loader": "^3.4.2",
     "strip-ansi": "=3.0.1"
   },

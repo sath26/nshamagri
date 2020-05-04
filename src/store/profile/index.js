@@ -42,7 +42,10 @@ const actions = {
     commit("setLoading", true);
     return bindFirestoreRef(
       "enterprise", //naming different due to refactoring issue that might arise
-      db.collection("enterprise").where("member_id", "array-contains", user.id)
+      // db.collection("enterprise").where("member_id", "array-contains", user.id)
+      db
+        .collection("enterprise")
+        .where("member_email", "array-contains", user.email)
     ).then(res => {
       // console.log(res);
 
@@ -62,9 +65,10 @@ const actions = {
       return bindFirestoreRef(
         "beforeEligibleOrNot", // *[TODO] email id instead of member_id should have been used
         //enterpriseRef.where("title", "==", "").where("email"==)
-        enterpriseRef.where("admin_email_id", "==", inputEmail)
+        enterpriseRef.where("email", "==", inputEmail)
       )
         .then(data => {
+          console.log(data);
           commit("setEligibleOrNot", data);
         })
         .finally(data => {
@@ -89,7 +93,8 @@ const actions = {
       );
     }
   ),
-  async createRole({ getters }, user) {
+
+  async createRole({ state }, user) {
     // const result = posts.doc();
     // post.id = result.id;
     // quotations.created_at = firebase.firestore.FieldValue.serverTimestamp();
@@ -100,19 +105,63 @@ const actions = {
       await db
         .collection("enterprise")
         .doc(user.id)
-        .collection("role");
+        .collection("role")
+        .doc(state.eligibleOrNot[0].uid)
+        .set({
+          admin_enterprise_id: firebase.auth().currentUser.uid,
+          admin_email_Id: firebase.auth().currentUser.email,
+          role: "Member",
+          user_id: state.eligibleOrNot[0].uid,
+          email: state.eligibleOrNot[0].email,
+          user_name: state.eligibleOrNot[0].displayName,
+          profile_pic: state.eligibleOrNot[0].photoURL
+        });
+      var updateCurrentAdminInfo = await db
+        .collection("enterprise")
+        .doc(firebase.auth().currentUser.uid);
+      updateCurrentAdminInfo.update({
+        member_email: firebase.firestore.FieldValue.arrayUnion(
+          state.eligibleOrNot[0].email
+        )
+      });
+      var updateMemberAdminInfo = await db
+        .collection("enterprise")
+        .doc(state.eligibleOrNot[0].uid);
+      updateMemberAdminInfo.update({
+        title: state.current_enterprise[0].title,
+        pan_no: state.current_enterprise[0].pan_no,
+        vat_no: state.current_enterprise[0].vat_no,
+        contact_no: state.current_enterprise[0].contact_no,
+        admin_enterprise_id: firebase.auth().currentUser.uid,
+        admin_email_Id: firebase.auth().currentUser.email
+      });
+      await db
+        .collection("enterprise")
+        .doc(user.id)
+        .collection("role")
+        .doc(state.eligibleOrNot[0].uid)
+        .set({
+          admin_enterprise_id: firebase.auth().currentUser.uid,
+          admin_email_Id: firebase.auth().currentUser.email,
+          role: "Admin",
+          user_id: state.eligibleOrNot[0].uid,
+          email: state.eligibleOrNot[0].email,
+          user_name: state.eligibleOrNot[0].displayName,
+          profile_pic: state.eligibleOrNot[0].photoURL
+        });
       Notify.create({
         color: "green-4",
         textColor: "white",
         icon: "fas fa-check-circle",
         message: "Submitted"
       });
-      //Add a new document with a generated id.
+
+      //add a new document with a generated id.
     } catch (error) {
       console.error(error);
     }
   },
-  async updateRole({ getters }, enterprise) {
+  /*  async updateRole({ getters }, enterprise) {
     console.log(enterprise);
     const hello = {
       member_email_id: [user.email]
@@ -129,19 +178,31 @@ const actions = {
     } catch (error) {
       console.error(error);
     }
-  },
-  async deleteRole({ getters }, categories) {
-    // const result = posts.doc();
-    // post.id = result.id;
-
-    const id = categories.id;
-    // categories.user_id = firebase.auth().currentUser.uid;
-
+  }, */
+  async deleteRole({ state }, givenMemberAllInfo) {
+    // givenMemberAllInfo is for individual info that can be provided in for loop to router
     try {
       await db
         .collection("enterprise")
-        .doc(id)
+        .doc(firebase.auth().currentUser.uid)
+        .collection("row")
+        .doc(givenMemberAllInfo.user_id)
         .delete();
+      var removeCurrentAdminInfo = await db
+        .collection("enterprise")
+        .doc(givenMemberAllInfo.user_id);
+      removeCurrentAdminInfo.update({
+        member_email: firebase.firestore.FieldValue.arrayRemove(
+          givenMemberAllInfo.email
+        )
+      });
+      var updateMemberAdminInfo = await db
+        .collection("enterprise")
+        .doc(givenMemberAllInfo.user_id);
+      updateMemberAdminInfo.update({
+        admin_enterprise_id: givenMemberAllInfo.user_id,
+        admin_email_Id: givenMemberAllInfo.email
+      });
     } catch (error) {
       console.error(error);
     }
@@ -174,11 +235,17 @@ const getters = {
     return state.current_enterprise[0].admin_enterprise_id;
   },
   eligible: state => {
-    if (state.eligibleOrNot.length > 0 && state.eligibleOrNot[0].title !== "") {
+    // ! dont remove state.eligibleOrNot.length > 0
+    if (
+      state.eligibleOrNot.length > 0 &&
+      state.eligibleOrNot[0].title == "" &&
+      state.eligibleOrNot[0].email == state.eligibleOrNot[0].admin_email_Id
+    ) {
       return "eligible";
     } else if (
       state.eligibleOrNot.length > 0 &&
-      state.eligibleOrNot[0].title == ""
+      state.eligibleOrNot[0].title !== "" &&
+      state.eligibleOrNot[0].email !== state.eligibleOrNot[0].admin_email_Id
     ) {
       return "ineligible";
     } else if (state.eligibleOrNot.length == 0) {

@@ -81,6 +81,7 @@
                   </li>
                 </ul>
               </div>
+<<<<<<< HEAD
             </q-card-section>
           </q-card>
         </div>
@@ -97,6 +98,118 @@
             <a href="/" target="_blank">
               <img src="statics\icons\twitter.svg" alt="Twitter icon" />
             </a>
+=======
+            </q-card>
+            <!-- <div class="card-footer">
+              <div class="social_media-icons">
+                <a href="/" target="_blank">
+                  <img src="statics\icons\facebook.svg" alt="Facebook icon" />
+                </a>
+                <a href="/" target="_blank">
+                  <img src="statics\icons\linkedin.svg" alt="Linkedin icon" />
+                </a>
+                <a href="/" target="_blank">
+                  <img src="statics\icons\twitter.svg" alt="Twitter icon" />
+                </a>
+              </div>
+            </div> -->
+          </div>
+        </q-tab-panel>
+        <q-tab-panel name="member" padding class="row justify-center">
+          <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
+            <!-- <q-card inline class="bigger q-ma-sm">
+              <img src="statics/parallax2.jpg" />
+
+              <q-card-section class="relative-position">
+                <div class="ellipsis">Saugat Thapa</div>
+              </q-card-section>
+              <q-card-section>
+                <q-btn flat>
+                  <q-icon name="phone" />9860181513
+                </q-btn>
+              </q-card-section>
+              </q-card>-->
+            <q-list bordered separator class="q-mb-sm">
+              <q-item multiline>
+                <q-item-section label>Add Members</q-item-section>
+                <q-item-section avatar>
+                  <div class="group" style="text-align: center;">
+                    <q-btn flat color="secondary">
+                      <q-icon name="add" @click="medium = true"></q-icon>
+                    </q-btn>
+                  </div>
+                </q-item-section>
+              </q-item>
+            </q-list>
+            <q-list bordered hightlight>
+              <q-item
+                multiline
+                v-for="member in members"
+                v-bind:key="member.user_id"
+              >
+                <q-item-section avatar>
+                  <q-avatar>
+                    <img :src="user.photoUrl" alt="user" />
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section>{{ member.user_name }}</q-item-section>
+              </q-item>
+            </q-list>
+            <q-dialog v-model="medium" @hide="resetEligible()">
+              <q-card style="width: 700px; max-width: 80vw;">
+                <q-card-section>
+                  <div class="text-h6">Add Member</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                  <q-input
+                    ref="inputMemberEmail"
+                    debounce="1000"
+                    :loading="loading_finding_member"
+                    color="grey-10"
+                    filled
+                    label="Enter Member Email"
+                    v-model="member"
+                    :hint="hintOrNot()"
+                    :error="notEligible()"
+                    @clear="clearEligible()"
+                    clearable
+                    lazy-rules
+                    :rules="[
+                      val =>
+                        val.includes('@gmail.com') ||
+                        'Field must contain @gmail.com'
+                    ]"
+                  >
+                    <template v-slot:error>
+                      "This email either has already created an enterprise or is
+                      not registered!"
+                    </template>
+                    <template v-slot:append>
+                      <q-btn
+                        round
+                        flat
+                        :disable="disableSearchMemberButton()"
+                        icon="arrow_right_alt"
+                        @click="findMember()"
+                      />
+                    </template>
+                  </q-input>
+                </q-card-section>
+
+                <q-card-actions align="right" class="bg-white text-teal">
+                  <q-btn
+                    flat
+                    readonly
+                    :disable="enableAddAsMember()"
+                    @click="addAsMember()"
+                    label="Add as Member"
+                  />
+                  <!-- v-close-popup -->
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
+>>>>>>> d6c51c924e82c91b3ce5274bf470a6dc7b49b60d
           </div>
         </div> -->
       </div>
@@ -113,6 +226,7 @@
 //consists of me and current_enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+import { fireDB, storage, auth, db } from "../../store/service/firebase";
 /* import SEnterprise from "./profile/Enterprise";
 import SMember from "./profile/Member"; */
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
@@ -161,11 +275,12 @@ export default {
   methods: {
     ...mapActions("profile", [
       "fetchProfile",
-      "createCategory",
+
       "updateTitle",
       "deleteCategory",
       "fetchRole",
-      "checkAndFindMember"
+      "checkAndFindMember",
+      "createRole"
     ]),
     focusOnEmail() {
       this.add_email = false;
@@ -209,7 +324,21 @@ export default {
     findMember() {
       console.log(this.member);
       this.checkAndFindMember(this.member);
-      console.log(this.eligible);
+      /* db.collection("enterprise")
+        .where("email", "==", this.member)
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot.empty) {
+            console.log("nothing returned from database");
+          } else {
+            var doc = querySnapshot.docs[0];
+            console.log("Document data:", doc.data());
+          }
+        })
+        .catch(err => {
+          console.log("Error getting document", err);
+        }); */
+      // console.log(this.eligible);
     },
     createMember() {
       // ? member msut not exit in email array
@@ -220,12 +349,11 @@ export default {
       this.member = "";
 
       this.$store.commit("profile/setEligibleOrNot", {});
-      this.$refs.inputMemberEmail.resetValidation();
     },
     clearEligible() {
       this.member = "";
 
-      // this.$store.commit("profile/setEligibleOrNot", {});
+      this.$store.commit("profile/setEligibleOrNot", {});
       this.$refs.inputMemberEmail.resetValidation();
     },
     notEligible() {
@@ -240,6 +368,23 @@ export default {
       } else if (this.eligible == "noHint") {
         return "";
       }
+    },
+    disableSearchMemberButton() {
+      if (this.eligible == "eligible") {
+        return true;
+      } else if (this.eligible == "noHint" || this.eligible == "ineligible") {
+        return false;
+      }
+    },
+    enableAddAsMember() {
+      if (this.eligible == "eligible") {
+        return false;
+      } else if (this.eligible == "noHint" || this.eligible == "ineligible") {
+        return true;
+      }
+    },
+    addAsMember() {
+      this.createRole(this.member);
     }
   }
 };
