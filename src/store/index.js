@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import { vuexfireMutations } from "vuexfire";
 import layoutDemo from "./layoutDemo";
 import category from "./category";
+import unit from "./unit";
 import auth from "./auth";
 import profile from "./profile";
 import quotation from "./quotation";
@@ -35,6 +36,7 @@ export default function(/* { ssrContext } */) {
     modules: {
       layoutDemo,
       category,
+      unit,
       auth,
       quotation,
       profile

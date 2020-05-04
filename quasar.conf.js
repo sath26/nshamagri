@@ -68,6 +68,7 @@ module.exports = function(ctx) {
         // 'QCardTitle',
         // 'QCardMain',
         // 'QCardMedia',
+        'QPopupEdit',
         "QSeparator",
         "QCardSection",
         "QCardActions",
@@ -81,7 +82,6 @@ module.exports = function(ctx) {
         "QSelect",
 
         // 'QSearch',
-
         "QDialog",
 
         "QExpansionItem",

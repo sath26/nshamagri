@@ -158,7 +158,6 @@
           <div style="width: 500px; max-width: 90vw;" class="q-mx-auto">
             <!-- <q-card inline class="bigger q-ma-sm">
               <img src="statics/parallax2.jpg" />
-
               <q-card-section class="relative-position">
                 <div class="ellipsis">Saugat Thapa</div>
               </q-card-section>
@@ -430,10 +429,22 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.footer-btn {
-  border-radius: 0;
-  color: #41aaa8;
-  background: #fafafa;
+@import '..\css\app.styl';
+
+.card__container{
+  width:100%;
+  background:red;
+  overflow: hidden;
+  z-index: 13;
+
+  .card__content{
+      width:49%;
+      height:100%;
+      margin:0;
+      padding:0;
+      border-radius: 0;
+      background: yellow;
+    }
 }
 
 #me-card, #enterprise-profile_card {
@@ -445,25 +456,12 @@ export default {
   background: $tab-color;
 }
 
-.profile-background_img_container {
-  width: 100%;
-  position: absolute;
-  z-index: 10;
-  overflow: hidden;
-
-  img {
-    width: 98.5%;
-    height: 350px;
-    border-radius: 5px;
-  }
-}
-
 #enterprise-profile_card {
   width: 100%;
   height: 100%;
-  margin-top: 3%;
   position: relative;
-  z-index: 15;
+  background: blue;
+  z-index: 12;
 
   .card-banner {
     display: flex;
