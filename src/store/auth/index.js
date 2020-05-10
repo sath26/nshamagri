@@ -105,7 +105,7 @@ const actions = {
         //commit('setError', null);
 
         this.$router.push({ path: "/" });
-        if (!result.additionalUserInfo.isNewUser) {
+        if (result.additionalUserInfo.isNewUser) {
           db.collection("enterprise")
             .doc(firebase.auth().currentUser.uid)
             .collection("role")

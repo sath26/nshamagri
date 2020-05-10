@@ -65,8 +65,8 @@
                         filled
                         label="Name"
                         v-model="current_enterprise[0].title"
-                        @focus="focusOnEmail()"
-                        @blur="focusOffEmail()"
+                        @focus="focusOnTitle()"
+                        @blur="focusOffTitle()"
                       >
                         <template v-slot:prepend>
                           <q-icon name="store" />
@@ -74,8 +74,8 @@
                         <template v-slot:append>
                           <q-btn
                             flat
-                            v-if="done_email"
-                            @click="renameEmail(current_enterprise[0].title)"
+                            v-if="done_title"
+                            @click="renameTitle(current_enterprise[0].title)"
                           >
                             <q-icon name="done" />
                           </q-btn>
@@ -262,8 +262,8 @@ export default {
       subTab: "profileInfo",
       user_id: "",
       contact: "",
-      add_email: true,
-      done_email: false,
+      add_title: true,
+      done_title: false,
       add_contact: true,
       done_contact: false,
       add_pan_no: true,
@@ -300,22 +300,22 @@ export default {
       "checkAndFindMember",
       "createRole"
     ]),
-    focusOnEmail() {
-      this.add_email = false;
-      this.done_email = true; //done is for change in icon here
+    focusOnTitle() {
+      this.add_title = false;
+      this.done_title = true; //done is for change in icon here
       // this.$refs.focus.focus();
     },
-    focusOffEmail() {
-      this.add_email = true;
-      this.done_email = false;
+    focusOffTitle() {
+      this.add_title = true;
+      this.done_title = false;
       // this.new_category = "";
     },
-    renameEmail(title) {
+    renameTitle(title) {
       this.updateTitle({
         title: title,
         user_id: this.user.id
       });
-      this.done_email = false;
+      this.done_title = false;
     },
     focusOnContact() {
       this.add_contact = false;
