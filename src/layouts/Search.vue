@@ -294,6 +294,7 @@ export default {
     position absolute
     bottom -5%
     right 2%
+
   @keyframes extInAnimation{
     0%{
       top:0;
@@ -306,6 +307,7 @@ export default {
       visibility: visible;
     }
   }
+  
   // @keyframes extOutAnimation{
   //   0%{
   //     top:70px;
