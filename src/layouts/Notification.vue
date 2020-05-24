@@ -26,10 +26,10 @@
     </q-btn>
     <div
       :class="{ notiBoxActive: notificationBox }"
-      class="notification-box shadow-8"
+      class="notification-box"
     >
       <q-card
-        v-for="n in 5"
+        v-for="n in 10"
         :key="n"
         class="container-card "
         label="Notification"
@@ -80,7 +80,8 @@ export default {
     top 0
     display none
     overflow scroll
-    transform translateY(-1.6%)
+    transform translateY(-1%)
+    background #439E7A
     &::-webkit-scrollbar
       width 0px
     .container-card

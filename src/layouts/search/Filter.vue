@@ -34,9 +34,9 @@
           <q-separator></q-separator>
           <div class=" filter-distance q-my-lg">
               <div class="text-h6 q-mb-sm">Distance</div>
-              <q-badge color="white" class="q-mb-lg">
-              {{ distance.min }}km to {{ distance.max }}km
-            </q-badge>
+              <q-badge outline color="white" class="q-mb-lg q-pa-sm">
+                {{ distance.min }}km to {{ distance.max }}km
+              </q-badge>
             <!-- slider -->
             <q-range
               v-model="distance"
