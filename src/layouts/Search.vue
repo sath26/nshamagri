@@ -70,11 +70,11 @@
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="enterprise" class="ent-panel shadow-0">
             <div class="row">
-              <div class="col-2">
+              <div class="col-xl-2 col-md-4 col-sm-3">
                 <f-filter></f-filter>
               </div>
                   <!-- search reult Card -->
-              <div class="col-10 result-card_container">
+              <div class="col-xl-10 col-md-8 col-sm-9 result-card_container">
             <ais-hits>
               <div class="result-card" slot="item" slot-scope="{ item }">
                  <q-card class=" my-search-card on-right">
@@ -307,7 +307,7 @@ export default {
     }
     100%{
       opacity:1;
-      top:70px;
+      top:80px;
       visibility: visible;
     }
   }

@@ -86,8 +86,8 @@
         <q-separator></q-separator>
         <q-list>
           <q-item clickable class="side-menu_items text-red-8"  @click="logout()" >
-            <q-item-section avatar>
-              <q-icon name="logout"></q-icon>
+            <q-item-section avatar >
+              <q-icon name="logout" size="40px"></q-icon>
             </q-item-section>
             <q-item-section>Logout</q-item-section>
           </q-item>
@@ -136,19 +136,19 @@ export default {
       drawer: true,
       menuList: [
         {
-          icon: "home",
+          iconSrc: "statics/icons/home-icon.svg",
           label: "Home",
           route: "/",
           separator: false
         },
         {
-          icon: "face",
+          iconSrc: "statics/icons/profile-icon.svg",
           label: "Profile",
           route: "/profile",
           separator: true
         },
         {
-          iconSrc: "statics/icons/Quotation-icon.svg",
+          iconSrc: "statics/icons/quotation-icon.svg",
           label: "Quotation",
           route: "/quotation",
           separator: false
@@ -178,7 +178,7 @@ export default {
           separator: true
         },
         {
-          icon: "settings",
+          iconSrc: "./statics/icons/setting-icon.svg",
           label: "Settings",
           route: "/settings",
           separator: false
