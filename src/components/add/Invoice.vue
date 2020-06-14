@@ -1,9 +1,6 @@
-/* 
-seller makes the invoice 
-user dont even have the option
-add good or service after saved takes back to invoice(remember route)
- */
- <template>
+/* seller makes the invoice user dont even have the option add good or service
+after saved takes back to invoice(remember route) */
+<template>
   <q-layout view="hHh LpR lFf">
     <q-page-container>
       <s-header></s-header>
@@ -24,13 +21,19 @@ add good or service after saved takes back to invoice(remember route)
               <p class="q-caption">* Click on cells to edit</p>
             </template>
             <template slot="top-right" slot-scope="props">
-              <p class="q-caption">{{total_invoice}}, {{newTotalInvoice}}</p>
+              <p class="q-caption">
+                {{ total_invoice }}, {{ newTotalInvoice }}
+              </p>
             </template>
             <q-tr slot="body" slot-scope="props" :props="props">
               <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
               <q-td key="desc" :props="props">
                 {{ props.row.value.title }}
-                <q-popup-edit v-model="props.row.title" title="Update product" buttons>
+                <q-popup-edit
+                  v-model="props.row.title"
+                  title="Update product"
+                  buttons
+                >
                   <q-input type="text" v-model="props.row.value.title" />
                 </q-popup-edit>
               </q-td>
@@ -49,10 +52,15 @@ add good or service after saved takes back to invoice(remember route)
                   title="Update Quantity"
                   buttons
                 >
-                  <q-input type="number" v-model.number="props.row.value.quantity" />
+                  <q-input
+                    type="number"
+                    v-model.number="props.row.value.quantity"
+                  />
                 </q-popup-edit>
               </q-td>
-              <q-td key="total" :props="props">{{ props.row.value.quantity * props.row.value.rate }}</q-td>
+              <q-td key="total" :props="props">{{
+                props.row.value.quantity * props.row.value.rate
+              }}</q-td>
               <!-- <q-td key="expiry_left" :props="props">{{ props.row.value.expiry_left }}</q-td> -->
             </q-tr>
           </q-table>
@@ -71,9 +79,13 @@ add good or service after saved takes back to invoice(remember route)
               @filter="filterFn"
               @input="onValueChange"
               @new-value="createValue"
-              
             />
-            <q-btn to="/add_goods" label="Save" color="secondary" type="submit" />
+            <q-btn
+              label="Save"
+              @click="saveInvoice"
+              color="secondary"
+              type="submit"
+            />
           </q-form>
         </div>
       </q-page>
@@ -164,6 +176,8 @@ export default {
       sum: 0,
       lazy: [],
       multiple: [], //model that takes selected values
+      multipleObject: {},
+      // data: multiple,
       filterOptions: [], //value to add on select
       columns: [
         {
@@ -203,13 +217,13 @@ export default {
   },
   computed: {
     ...mapState("quotation", ["quotation", "loading_quotation"]),
-    
+
     newTotalInvoice() {
       let total = 0;
       this.multiple.forEach(x => {
         total = total + x.value.rate * x.value.quantity;
       });
-      return total;// return is important in computed()
+      return total; // return is important in computed()
     }
     // ...mapGetters("layoutDemo", ["view"])
   },
@@ -224,15 +238,22 @@ export default {
       this.total_invoice = this.sum.reduce((total, value, index, array) => {
         return (total += value);
       });
+      var biggerMultiple = [];
+      var mapped = this.multiple.map(item => ({ title: item.value.title }));
+      // var multipleObject = Object.assign({}, ...mapped);
+      // var multipleObject = Object.assign(multipleObject, ...mapped);
+      biggerMultiple.push(mapped);
+      console.log(biggerMultiple[0]);
     }
   },
   methods: {
     ...mapActions("quotation", ["fetchQuotation"]),
     onValueChange() {
+      // console.log(multiple);
       this.$refs["select"].__resetInputValue();
     },
     createValue(val, done) {
-      console.log(val);
+      // console.log(val);
       if (val.length > 0) {
         if (!this.filterOptions.includes(val)) {
           this.filterOptions.push(val);
@@ -245,6 +266,7 @@ export default {
       update(() => {
         if (val === "") {
           this.filterOptions = this.quotation;
+          // console.log(this.filterOptions);
         } else {
           const needle = val.toLowerCase();
 
@@ -253,11 +275,12 @@ export default {
           );
         }
       });
+    },
+    saveInvoice() {
+      console.log(this.multiple);
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped></style>
-
-

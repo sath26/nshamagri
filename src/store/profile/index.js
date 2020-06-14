@@ -26,7 +26,7 @@ const mutations = {
   },
 
   setCurrentEnterprise(state, payload) {
-    state.current_enteprise = Object.assign({}, payload);
+    state.current_enterprise = Object.assign({}, payload);
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;
