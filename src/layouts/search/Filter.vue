@@ -5,6 +5,7 @@
             <q-btn-dropdown
                   auto-close
                   flat
+                  color="teal"
                   :label="categorySelection"
                   class="dd dd-category q-pa-sm full-width"
                 >
@@ -33,10 +34,10 @@
           <!-- distance filter slider -->
           <q-separator></q-separator>
           <div class=" filter-distance q-my-lg">
-              <div class="text-h6 q-mb-sm">Distance</div>
-              <q-badge color="white" class="q-mb-lg">
-              {{ distance.min }}km to {{ distance.max }}km
-            </q-badge>
+              <div class="text-h6 q-mb-sm text-teal">Distance</div>
+              <q-badge outline color="teal" class="q-mb-lg q-pa-sm">
+                {{ distance.min }}km to {{ distance.max }}km
+              </q-badge>
             <!-- slider -->
             <q-range
               v-model="distance"
@@ -44,30 +45,31 @@
               :max="100"
               :step="4"
               label
-              color="white"
+              color="teal"
               dense
-              dark
+              light
               :disable="noLimit"
             ></q-range>
             <div class="q-mt-sm">
               <q-checkbox
-                  dark
+                  light
+                  class="text-teal"
                   v-model="noLimit"
                   label="No Limit"
-                  color="orange">
+                  color="teal">
                 </q-checkbox>
             </div>
           </div>
           <q-separator></q-separator>
           <!-- price filter minimum and maximum -->
           <div class=" filter-price q-my-lg">
-              <div class="text-h6 q-mb-sm">Price</div>
+              <div class="text-h6 q-mb-sm text-teal">Price</div>
             <div class="filter-price_subcontainer  relative-position">
               <div class="filter-price-min">
               <q-input
                     debounce="500"
-                    dark
-                    color="white"
+                    light
+                    color="teal"
                     v-model.lazy="minPrice"
                     type="number"
                     label="Min price"
@@ -78,8 +80,8 @@
                   <div class="filter-price-max">
                     <q-input
                     debounce="500"
-                    dark
-                    color="white"
+                    light
+                    color="teal"
                     v-model.lazy="maxPrice"
                     type="number"
                     label="Max price"
@@ -90,7 +92,7 @@
             </div>
           </div>
          <!-- done button -->
-         <q-btn class="full-width q-mt-lg" dark color="white" text-color="grey-9" unelevated>filter</q-btn>
+         <q-btn class="full-width q-mt-lg " color="teal" text-color="grey-1" unelevated>filter</q-btn>
         <!-- end tab filter -->
     </div>
 </template>

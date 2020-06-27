@@ -1,22 +1,10 @@
 <template>
   <div>
      <q-btn-dropdown color="secondary text-white" label="Create" flat>
-      <q-list >
-        <q-item clickable  v-close-popup @click="onItemClick">
+      <q-list v-for="(createItem, index) in createList" :key="index">
+        <q-item clickable  :to="createItem.route" v-close-popup @click="onItemClick">
           <q-item-section>
-            <q-item-label >Quotation</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Category</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Unit</q-item-label>
+            <q-item-label>{{ createItem.label }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -26,10 +14,28 @@
 <script>
 export default {
     name:"SCreate",
-     methods: {
-    onItemClick () {
-      console.log('Clicked on an Item')
-    }
+    data(){
+      return  {
+        createList:[
+          {
+            label:"Quotation",
+            route:"/add/quotation"
+          },
+          {
+            label:"Category",
+            route:"/category"
+          },
+          {
+            label:"Unit",
+            route:"/unit"
+          }
+        ]
+      }
+    },
+    methods: {
+      onItemClick () {
+        console.log('Clicked on an Item')
+      }
   }
 };
 </script>

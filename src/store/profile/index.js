@@ -168,7 +168,6 @@ const actions = {
     };
     const id = enterprise.user_id;
     console.log(enterprise.user_id);
-
     try {
       //merge is for not to override the record
       await db

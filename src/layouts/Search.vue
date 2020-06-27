@@ -11,7 +11,7 @@
       debounce="500"
       slot-scope="{ currentRefinement, refine }"
       :value="currentRefinement"
-          @input="refine($event)"
+      @input="refine($event)"
       input-class="text-right"
       class="q-ml-md search-box"
     >
@@ -68,16 +68,16 @@
         <q-separator></q-separator>
         <!-- tab pannels -->
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="enterprise" class="ent-panel">
+          <q-tab-panel name="enterprise" class="ent-panel shadow-0">
             <div class="row">
-              <div class="col-2">
+              <div class="col-xl-2 col-md-4 col-sm-3">
                 <f-filter></f-filter>
               </div>
                   <!-- search reult Card -->
-              <div class="col-10 result-card_container">
+              <div class="col-xl-10 col-md-8 col-sm-9 result-card_container">
             <ais-hits>
-              <div slot="item" slot-scope="{ item }">
-                 <q-card class="my-search-card on-right">
+              <div class="result-card" slot="item" slot-scope="{ item }">
+                 <q-card class=" my-search-card on-right">
           <q-card-section horizontal>
             <!-- user image with name -->
             <q-img style="width:200px; height:200px"
@@ -156,7 +156,7 @@
             </ais-hits>
               </div>
             </div>
-            <ais-pagination></ais-pagination>
+            <ais-pagination class="q-pa-lg"></ais-pagination>
           </q-tab-panel>
           <q-tab-panel name="quotation">
             <p class="text-black">
@@ -219,7 +219,8 @@ export default {
   .colorGreen
     color #4B7D6E
   .ent-panel
-    background #399779
+    max-height 1000px
+    box-shadow none
   .enterprise-card_container
     background none
   .filter-icon
@@ -234,11 +235,14 @@ export default {
     display none
     .my-card
       border-radius 0px
+  // extension active class
   .extensionActive
     display block
     animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
   // .extensionDeactive
   //   animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
+  .my-search-card
+    box-shadow 0px 0px 10px 1px rgba(0,0,0,.09)
   .filter-dropdown_content-list_item
     background transparent
     padding 0
@@ -294,6 +298,7 @@ export default {
     position absolute
     bottom -5%
     right 2%
+
   @keyframes extInAnimation{
     0%{
       top:0;
@@ -302,10 +307,11 @@ export default {
     }
     100%{
       opacity:1;
-      top:70px;
+      top:80px;
       visibility: visible;
     }
   }
+  
   // @keyframes extOutAnimation{
   //   0%{
   //     top:70px;
