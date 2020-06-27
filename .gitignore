@@ -1,7 +1,12 @@
 .quasar
 .DS_Store
 .thumbs.db
-node_modules
+node_modules/*
+!node_modules/instantsearch.css
+node_modules/instantsearch.css/*
+!node_modules/instantsearch.css/themes
+node_modules/instantsearch.css/themes/*
+!node_modules/instantsearch.css/themes/algolia-min.css
 /dist
 /src-cordova/node_modules
 /src-cordova/platforms
