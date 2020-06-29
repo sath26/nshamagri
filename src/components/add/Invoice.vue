@@ -1,5 +1,7 @@
 /* seller makes the invoice user dont even have the option add good or service
-after saved takes back to invoice(remember route) */
+after saved takes back to invoice(remember route) */ /* validation process -
+select tag(required at least one) - find member(required) - validate quantity
+title and rate */
 <template>
   <q-layout view="hHh LpR lFf">
     <q-page-container>
@@ -7,6 +9,34 @@ after saved takes back to invoice(remember route) */
 
       <q-page padding class="docs-table">
         <div class="q-gutter-y-md column">
+          <!--    debounce="1000"
+          lazy-rules
+            clearable
+           -->
+          <!-- <q-input
+            filled
+            :loading="loadingState"
+            color="tertiary"
+            label="Buyer's Email"
+            v-model="buyer_email"
+            debounce="1000"
+            lazy-rules
+            :rules="[myRules]"
+          ></q-input> 
+          @input="$v.email.$touch()" :rules="[ val => $v.email.required ||
+          'Email is required', val => $v.email.email || 'Invalid email format',
+          ]"-->
+          <q-input
+            filled
+            v-model.trim="email"
+            label="Your Email..."
+            @input="$v.email.$touch()"
+            debounce="1000"
+            :rules="[
+              val => $v.email.required || 'Email is required',
+              val => $v.email.email || 'Invalid email format'
+            ]"
+          ></q-input>
           <q-table
             title="Invoice"
             class="invoice-table"
@@ -97,7 +127,8 @@ after saved takes back to invoice(remember route) */
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 import { mapState, mapGetters, mapActions } from "vuex";
-
+import { required, email } from "vuelidate/lib/validators";
+import { db } from "../../store/service/firebase";
 // const stringOptions = [
 //   {
 //     label: "Google",
@@ -173,7 +204,9 @@ export default {
       rate: 0,
       quantity: 0,
       total_invoice: 0,
+      loadingState: false,
       sum: 0,
+      email: "",
       lazy: [],
       multiple: [], //model that takes selected values
       multipleObject: {},
@@ -248,6 +281,29 @@ export default {
   },
   methods: {
     ...mapActions("quotation", ["fetchQuotation"]),
+    /* myRules(val) {
+      return new Promise((resolve, reject) => {
+        console.log(val.includes("@gmail.com"));
+        console.log(val);
+
+        if (!val.includes("@gmail.com")) {
+          resolve(!!val || "Field must contain @gmail.com");
+        } else {
+          this.loadingState = true;
+          db.collection("enterprise")
+            .where("email", "==", val)
+            .get()
+            .then(data => {
+              this.loadingState = false;
+              if (data.docs.length !== 0) {
+                console.log(val);
+                resolve(!!val || "This user doesnt exist");
+              }
+            })
+            .catch(data => console.log(data));
+        }
+      });
+    }, */
     onValueChange() {
       // console.log(multiple);
       this.$refs["select"].__resetInputValue();
@@ -279,6 +335,15 @@ export default {
     saveInvoice() {
       console.log(this.multiple);
     }
+  },
+  validations: {
+    email: {
+      required,
+      email
+    }
+    /* password: {
+      required,
+    }, */
   }
 };
 </script>
