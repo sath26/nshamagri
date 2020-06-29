@@ -307,7 +307,7 @@ export default {
     }
     100%{
       opacity:1;
-      top:80px;
+      top:100%;
       visibility: visible;
     }
   }
