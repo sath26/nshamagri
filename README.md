@@ -135,7 +135,7 @@ total:
 
 here seller_id_enterprise's `admin_enterprise_id` will be used to fetch data
 
-## sold/invoice
+## sold/invoices
 
 ```
 invoice_no
@@ -152,7 +152,7 @@ total
 unit
 ```
 
-## sold/received_date
+## solds/received_date
 
 ```
 mode:"cash"
@@ -161,4 +161,60 @@ paid_by_enterprise:
 paid_by_user:
 received_by_enterprise:
 received_by_user
+```
+
+## quotations
+
+```json
+"id":"1k3ck5e8o",
+"label":"oreo",
+"value":{
+   "category":  [
+            {
+            "add":true,
+            "cantChangeIconAfterFocus":true,
+            "done":false,
+            "editIcon":true,
+            "hover":true,
+            "id":"CZEL84yPhusuceB2m1e9",
+            "label":"crash course",
+            "value":"crash course",
+            }
+    ]
+},
+"enterprise_type":"good",
+"quantity":1,
+"rate":25,
+"title":"oreo",
+"unit":{
+    "id":"MRlshUmJyJQxzCR5Jhi3",
+    "label":'"packet",
+    "value":"packet",
+}
+```
+
+## units
+
+```
+    "add":true,
+    "done":false,
+    "editIcon":true,
+    "hover":true,
+    "id":"CZEL84yPhusuceB2m1e9",
+    "label":"crash course",
+    "noFocusChange":true,
+    "value":"crash course",
+```
+
+## categories
+
+```
+    "add":true,
+    "cantChangeIconAfterFocus":true,
+    "done":false,
+    "editIcon":true,
+    "hover":true,
+    "id":"CZEL84yPhusuceB2m1e9",
+    "label":"crash course",
+    "value":"crash course",
 ```

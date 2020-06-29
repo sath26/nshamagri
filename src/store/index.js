@@ -6,6 +6,7 @@ import category from "./category";
 import unit from "./unit";
 import auth from "./auth";
 import profile from "./profile";
+import bought from "./bought";
 import quotation from "./quotation";
 import { fauth } from "./service/firebase";
 import createPersistedState from "vuex-persistedstate";
@@ -39,7 +40,8 @@ export default function(/* { ssrContext } */) {
       unit,
       auth,
       quotation,
-      profile
+      profile,
+      bought
     }
   });
 

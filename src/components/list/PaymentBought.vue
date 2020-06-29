@@ -7,46 +7,51 @@
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
           <q-toolbar class="bg-secondary text-white shadow-2">
-              <q-toolbar-title class="q-pa-sm text-uppercase">bought</q-toolbar-title>
+            <q-toolbar-title class="q-pa-sm text-uppercase"
+              >bought</q-toolbar-title
+            >
           </q-toolbar>
           <q-list bordered highlight class="list-container">
-            <q-item clickable to="/bought">
-              <q-item-section avatar>
-                <q-avatar>
-                  <img src="statics/boy-avatar.png"  />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section  label-lines="1">RajKumar Bogati Kirana Pasal</q-item-section>
-              <!-- <q-item-section right stamp="(1)"></q-item-section> -->
-            </q-item>
-            <q-item>
-              <q-item-section avatar>
-                <q-avatar>
-                  <img src="statics/guy-avatar.png"  />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section label="Pawan Kirana" label-lines="1" >Pawan Kirana</q-item-section>
-              <!-- <q-item-section right stamp="(3)" /> -->
-            </q-item>
-            <q-item>
-              <q-item-section avatar>
-                <q-avatar>
-                  <img src="statics/linux-avatar.png"  />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section label="" label-lines="1" >Vaiya ko Furniture Pasal</q-item-section>
-              <!-- <q-item-section right stamp="(4)" /> -->
-            </q-item>
-            <q-item>
-              <q-item-section avatar>
-                <q-avatar>
-                  <img src="statics/mountains.jpg"  />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section label="" label-lines="1" >RajKumar Bogati Kirana Pasal</q-item-section>
-              <!-- <q-item-section right stamp="(20)" /> -->
-            </q-item>
+            <q-infinite-scroll @load="onLoad" :offset="50">
+              <q-item
+                v-for="bought in boughts"
+                :key="bought.id"
+                clickable
+                to="/bought"
+              >
+                <q-item-section avatar>
+                  <q-avatar>
+                    <img src="statics/boy-avatar.png" />
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section label-lines="1">{{
+                  bought.updated_at.toDate()
+                }}</q-item-section>
+                <!-- <q-item-section right stamp="(1)"></q-item-section>  -->
+              </q-item>
+              <template v-slot:loading>
+                <div class="row justify-center q-my-md">
+                  <q-spinner-dots color="primary" size="40px" />
+                </div>
+              </template>
+            </q-infinite-scroll>
           </q-list>
+          <!-- <q-infinite-scroll @load="onLoad" :offset="250">
+            <div v-for="(item, index) in items" :key="index" class="caption">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+                repellendus sit voluptate voluptas eveniet porro. Rerum
+                blanditiis perferendis totam, ea at omnis vel numquam
+                exercitationem aut, natus minima, porro labore.
+              </p>
+            </div>
+
+            <template v-slot:loading>
+              <div class="row justify-center q-my-md">
+                <q-spinner-dots color="primary" size="40px" />
+              </div>
+            </template>
+          </q-infinite-scroll> -->
         </div>
       </q-page>
     </q-page-container>
@@ -58,13 +63,42 @@
 //consists of buyers and sellers
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import { mapState, mapGetters } from "vuex";
+import { db } from "../../store/service/firebase";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     SHeader,
     SFooter
   },
-  computed: {}
+  computed: {
+    ...mapState("bought", ["boughts", "furtherBoughtLoad"])
+  },
+  data() {
+    return {
+      items: [{}, {}, {}, {}, {}, {}, {}],
+      vue_boughts: []
+    };
+  },
+  created() {
+    this.firstLoad();
+  },
+  methods: {
+    ...mapActions("bought", ["firstLoad", "furtherLoad"]),
+    ...mapMutations("bought", ["setBoughts", "setAnchorDoc"]),
+    onLoad(index, done) {
+      /*  setTimeout(() => {$
+        if (this.items) {
+          this.items.push({}, {}, {}, {}, {}, {}, {});
+          done();
+        }
+      }, 2000); */
+      console.log(index);
+
+      this.furtherLoad();
+
+      done();
+    }
+  }
 };
 </script>
 
@@ -85,5 +119,3 @@ export default {
   background: $primary-white;
 }
 </style>
-
-
