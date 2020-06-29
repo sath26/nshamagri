@@ -9,34 +9,26 @@ title and rate */
 
       <q-page padding class="docs-table">
         <div class="q-gutter-y-md column">
-          <!--    debounce="1000"
-          lazy-rules
-            clearable
-           -->
-          <!-- <q-input
-            filled
-            :loading="loadingState"
-            color="tertiary"
-            label="Buyer's Email"
-            v-model="buyer_email"
-            debounce="1000"
-            lazy-rules
-            :rules="[myRules]"
-          ></q-input> 
-          @input="$v.email.$touch()" :rules="[ val => $v.email.required ||
-          'Email is required', val => $v.email.email || 'Invalid email format',
-          ]"-->
           <q-input
             filled
             v-model.trim="email"
-            label="Your Email..."
+            label="Buyer's Email..."
             @input="$v.email.$touch()"
             debounce="1000"
             :rules="[
               val => $v.email.required || 'Email is required',
-              val => $v.email.email || 'Invalid email format'
+              val => $v.email.email || 'Invalid email format',
+              val => {
+                $v.email.isUnique;
+              }
             ]"
-          ></q-input>
+            bottom-slots
+            :error="emailExist"
+          >
+            <template v-slot:error>
+              Buyer has not registered yet!
+            </template>
+          </q-input>
           <q-table
             title="Invoice"
             class="invoice-table"
@@ -207,6 +199,7 @@ export default {
       loadingState: false,
       sum: 0,
       email: "",
+      emailExist: false,
       lazy: [],
       multiple: [], //model that takes selected values
       multipleObject: {},
@@ -339,7 +332,35 @@ export default {
   validations: {
     email: {
       required,
-      email
+      email,
+      isUnique(val) {
+        // standalone validator ideally should not assume a field is required
+        if (val === "") {
+          return true;
+        }
+        // return !true;
+        return new Promise((resolve, reject) => {
+          db.collection("enterprise")
+            .where("email", "==", val)
+            .get()
+            .then(success => {
+              if (success.docs.length === 1) {
+                this.emailExist = false;
+                this.isUnique = true;
+                resolve(true);
+              } else {
+                this.emailExist = true;
+                this.isUnique = false;
+                reject(false);
+              }
+            })
+            .catch(error => {
+              // console.log(error);
+              this.isUnique = false;
+              reject(false);
+            });
+        });
+      }
     }
     /* password: {
       required,
