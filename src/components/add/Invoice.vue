@@ -10,7 +10,9 @@ title and rate */
       <q-page padding class="docs-table">
         <div class="q-gutter-y-md column">
           <q-input
+            ref="buyer_email"
             filled
+            color="secondary"
             v-model.trim="email"
             label="Buyer's Email..."
             @input="$v.email.$touch()"
@@ -40,30 +42,35 @@ title and rate */
             separator="vertical"
           >
             <template slot="top-left" slot-scope="props">
-              <p class="q-caption">* Click on cells to edit</p>
+              <p class="q-caption">
+                * Click on rate's or quantity's cells to edit
+              </p>
             </template>
             <template slot="top-right" slot-scope="props">
               <p class="q-caption">
-                {{ total_invoice }}, {{ newTotalInvoice }}
+                <b>{{ newTotalInvoice }}</b>
               </p>
             </template>
             <q-tr slot="body" slot-scope="props" :props="props">
               <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
               <q-td key="desc" :props="props">
                 {{ props.row.value.title }}
-                <q-popup-edit
+                <!-- <q-popup-edit
                   v-model="props.row.title"
                   title="Update product"
                   buttons
                 >
                   <q-input type="text" v-model="props.row.value.title" />
-                </q-popup-edit>
+                </q-popup-edit> -->
               </q-td>
 
               <q-td key="rate" :props="props">
                 {{ props.row.value.rate }}
                 <q-popup-edit v-model="rate" title="Update Price" buttons>
-                  <q-input type="number" v-model="props.row.value.rate" />
+                  <q-input
+                    type="number"
+                    v-model.number="props.row.value.rate"
+                  />
                 </q-popup-edit>
                 <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
               </q-td>
@@ -88,20 +95,28 @@ title and rate */
           </q-table>
           <q-form class="q-gutter-md">
             <q-select
+              color="secondary"
               ref="select"
               v-model="multiple"
               multiple
               input-debounce="0"
               use-chips
               filled
-              color="tertiary"
-              :options="quotation"
-              label="Choose goods/services"
+              :options="filterOptions"
+              label="Search and Choose goods/services"
               use-input
               @filter="filterFn"
               @input="onValueChange"
-              @new-value="createValue"
-            />
+            >
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    No results! Go to Quotation to add.
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+            <!-- @new-value="createValue" -->
             <q-btn
               label="Save"
               @click="saveInvoice"
@@ -121,6 +136,7 @@ import SFooter from "../../layouts/Footer";
 import { mapState, mapGetters, mapActions } from "vuex";
 import { required, email } from "vuelidate/lib/validators";
 import { db } from "../../store/service/firebase";
+import firebase from "firebase";
 // const stringOptions = [
 //   {
 //     label: "Google",
@@ -193,6 +209,8 @@ export default {
   },
   data() {
     return {
+      buyer_enterprise_id: "",
+      this_enterprise_buyer_bought_list_id: "",
       rate: 0,
       quantity: 0,
       total_invoice: 0,
@@ -200,6 +218,7 @@ export default {
       sum: 0,
       email: "",
       emailExist: false,
+      buyer_exist: false,
       lazy: [],
       multiple: [], //model that takes selected values
       multipleObject: {},
@@ -243,6 +262,7 @@ export default {
   },
   computed: {
     ...mapState("quotation", ["quotation", "loading_quotation"]),
+    ...mapState("profile", ["current_enterprise"]),
 
     newTotalInvoice() {
       let total = 0;
@@ -326,7 +346,169 @@ export default {
       });
     },
     saveInvoice() {
-      console.log(this.multiple);
+      /*  const messageRef = db
+        .collection("rooms")
+        .add({ hey: "there" })
+        .then(ref => {
+          console.log("messageRef " + ref);
+          db.collection("rooms")
+            .doc(ref.id)
+            .collection("message")
+            .add({ ok: "plz work" })
+            .then(ref2 => {
+              db.collection("rooms")
+                .doc(ref.id)
+                .collection("message")
+                .doc(ref2.id)
+                .collection("toilet")
+                .add({ ok: "plz work" });
+              console.log("success");
+            });
+        }); */
+
+      this.$refs.buyer_email.validate();
+      if (this.multiple.length === 0) {
+        this.$q.notify({
+          message: "Choose at least one goods or services",
+          position: "top-right",
+          timeout: 2500,
+          color: "negative",
+          textColor: "white"
+        });
+      } else if (this.$refs.buyer_email.hasError) {
+        this.$q.notify({
+          message: "Enter buyer's email",
+          position: "top-right",
+          timeout: 2500,
+          color: "negative",
+          textColor: "white"
+        });
+      } else if (this.buyer_exist === true) {
+        const res = db
+          .collection("bought")
+          .doc(this.this_enterprise_buyer_bought_list_id)
+          .collection("invoice")
+          .add({
+            individual_total: this.newTotalInvoice,
+            created_at: firebase.firestore.Timestamp.now()
+          })
+          .then(ref => {
+            console.log("bought-->invoice_id " + ref.id);
+            db.collection("bought")
+              .doc(this.this_enterprise_buyer_bought_list_id)
+              .collection("invoice")
+              .doc(ref.id)
+              .collection("invoice_details")
+              .add({
+                items: this.multiple
+              });
+          });
+        console.log(
+          "already added document with id" +
+            res.id +
+            " " +
+            this.this_enterprise_buyer_bought_list_id
+        );
+        /* **************************************sold************************ */
+        const sold_res = db
+          .collection("sold")
+          .doc(this.this_enterprise_buyer_bought_list_id)
+          .collection("invoice")
+          .add({
+            individual_total: this.newTotalInvoice,
+            created_at: firebase.firestore.Timestamp.now()
+          })
+          .then(ref => {
+            console.log("sold-->invoice_id " + ref.id);
+
+            db.collection("sold")
+              .doc(this.this_enterprise_buyer_bought_list_id)
+              .collection("invoice")
+              .doc(ref.id)
+              .collection("invoice_details")
+              .add({
+                items: this.multiple
+              })
+              .then(ref2 => {
+                console.log("sold-->invoice_id-->invoice_details" + ref2.id);
+              })
+              .catch(error => console.log(error));
+          });
+        console.log(
+          "already added sold document with id" +
+            sold_res.id +
+            " " +
+            this.this_enterprise_buyer_bought_list_id
+        );
+      } else {
+        const res = db
+          .collection("bought")
+          .add({
+            buyer_email_id: this.email,
+            buyer_enterprise_id: this.buyer_enterprise_id,
+            //*this bought will come based on buyer_enterprise_id so this info wont come in this enterprise
+            seller_enterprise_id: this.current_enterprise[0]
+              .admin_enterprise_id,
+            enterprise_name: this.current_enterprise[0].title,
+            updated_at: firebase.firestore.Timestamp.now(),
+            seller_profile_pic: this.current_enterprise[0].photoURL
+          })
+          .then(ref => {
+            db.collection("bought")
+              .doc(ref.id)
+              .collection("invoice")
+              .add({
+                individual_total: this.newTotalInvoice,
+                created_at: firebase.firestore.Timestamp.now()
+              })
+              .then(ref2 => {
+                db.collection("bought")
+                  .doc(ref.id)
+                  .collection("invoice")
+                  .doc(ref2.id)
+                  .collection("invoice_details")
+                  .add({
+                    items: this.multiple
+                  });
+              });
+          });
+        console.log("bought data inserted " + res.id);
+        /* **************************************sold************************ */
+
+        const sold_res = db
+          .collection("sold")
+          .add({
+            buyer_email_id: this.email,
+            buyer_enterprise_id: this.buyer_enterprise_id,
+            seller_enterprise_id: this.current_enterprise[0]
+              .admin_enterprise_id,
+            //?this enterprise sold so data will come from seller_enterprise_id as condtion in sold
+
+            enterprise_name: this.current_enterprise[0].title,
+            updated_at: firebase.firestore.Timestamp.now(),
+            seller_profile_pic: this.current_enterprise[0].photoURL
+          })
+          .then(ref => {
+            db.collection("sold")
+              .doc(ref.id)
+              .collection("invoice")
+              .add({
+                individual_total: this.newTotalInvoice,
+                created_at: firebase.firestore.Timestamp.now()
+              })
+              .then(ref2 => {
+                db.collection("sold")
+                  .doc(ref.id)
+                  .collection("invoice")
+                  .doc(ref2.id)
+                  .collection("invoice_details")
+                  .add({
+                    items: this.multiple
+                  });
+              });
+          });
+        console.log("sold data inserted " + sold_res.id);
+      }
     }
   },
   validations: {
@@ -345,6 +527,44 @@ export default {
             .get()
             .then(success => {
               if (success.docs.length === 1) {
+                success.forEach(doc => {
+                  console.log(doc.id);
+
+                  this.buyer_enterprise_id = doc.data().admin_enterprise_id;
+                });
+                //here and of both of buyer_enterprise_id and seller_enterprise_id
+                //must match
+                //*then else if condition of enterprise or client that already exist insert query must run
+                //else new entprise or client has to be created
+                console.log("buyer_enterprise_id " + this.buyer_enterprise_id);
+                console.log(
+                  "current_enterprise[0].admin_enterprise_id " +
+                    this.current_enterprise[0].admin_enterprise_id
+                );
+                db.collection("sold")
+                  .where("buyer_enterprise_id", "==", this.buyer_enterprise_id)
+                  .where(
+                    "seller_enterprise_id",
+                    "==",
+                    this.current_enterprise[0].admin_enterprise_id
+                  )
+                  .get()
+                  .then(success => {
+                    console.log(success.docs);
+                    if (success.docs.length == 1) {
+                      this.buyer_exist = true;
+                      console.log(this.buyer_exist);
+                      success.forEach(docs => {
+                        this.this_enterprise_buyer_bought_list_id = docs.id;
+                        console.log(docs.id);
+                      });
+                    } else {
+                      console.log("new buyer");
+                    }
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
                 this.emailExist = false;
                 this.isUnique = true;
                 resolve(true);
@@ -355,7 +575,10 @@ export default {
               }
             })
             .catch(error => {
-              // console.log(error);
+              console.log("error");
+              console.log(error);
+              this.emailExist = true;
+
               this.isUnique = false;
               reject(false);
             });
