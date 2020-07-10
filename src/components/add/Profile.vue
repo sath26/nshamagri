@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="hHh LpR lFf">
+  <q-layout view="hHh LpR lFf" >
     <s-header></s-header>
-    <q-page-container>
+    <q-page-container class="main-container">
       <q-tabs
         v-model="tab"
         animated
@@ -15,7 +15,7 @@
       </q-tabs>
       <q-separator />
       <!-- <q-tab-panels > -->
-      <q-tab-panels v-model="tab" animated class="bg-grey-1">
+      <q-tab-panels v-model="tab" animated class="bg-grey-1" >
         <q-tab-panel name="enterprise">
          
           <!-- Profile card ~ #01 -->
@@ -404,6 +404,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  @import '..\css\components-style\_profile.styl';
-
+  @import '..\..\css\components-style\_profile.styl';
+    .main-container
+        overflow hidden
+        
 </style>

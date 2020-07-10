@@ -1,0 +1,141 @@
+@import '..\css\app.styl';
+  .colorGreen
+    color #4B7D6E
+  .filter-container
+    width 100%
+    height 90vh
+    background $primary-white
+  .ent-panel
+    width 100vw
+    height 90vh
+    // overflow-y hidden
+    padding 0
+    box-shadow none
+    background-color $primary-grey
+    background-size cover
+    .result-card_container
+        margin-top 2.5rem
+        .result-card 
+            display flex 
+            flex-direction row
+            width 500px
+            height 300px
+            & *
+                background $primary-white
+  .enterprise-card_container
+    background none
+  .filter-icon
+    width 25px
+    height 20px
+  .search-extension
+    width 100%
+    height 100%
+    position absolute
+    border none
+    left 0
+    display none
+    
+  // extension active class
+  .extensionActive
+    display block
+    animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
+  // .extensionDeactive
+  //   animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
+  .my-search-card
+    color #424242
+    margin-bottom 0
+    border-radius 7px
+    padding 1.2rem
+    box-shadow 0px 0px 10px 1px rgba(0,0,0,.09)
+    .card-img
+        width 150px
+        height 150px
+    .card-info-txt
+        width 62%
+        &_header
+            line-height .9
+            padding 0
+            margin 1rem 0     
+        &_p
+            padding 0
+    .card-info-footer-date
+        font-size .7em
+        width 100%
+        height 85px
+        display flex
+        align-items flex-end
+
+  .filter-dropdown_content-list_item
+    background transparent
+    padding 0
+    margin 0
+  .dd
+    width 100%
+  .dd-price, .dd-location
+    padding 9px
+  .price-input_field
+    width 50%
+.close-btn
+  position absolute
+  right 10px
+// filter items
+.filter-category
+  width 10%
+  text-align center
+.filter-distance
+  width 20%
+.filter-price
+  &-min>*, &-max>*
+    margin 0 auto
+// card styling
+.list-card_container
+  overflow hidden
+  background #fafafa
+  color #424242
+  vertical-align center
+  position relative
+.info-icons
+  width 55px
+  height 55px
+.q-card__section--vert
+    padding 0
+.info-section>*
+  vertical-align middle
+  .info-value
+    text-align center
+    font-weight 700
+  .txt-info
+    display inline-block
+  .distance-text_info
+    display inline-block
+  .info-customer_container
+    text-align center
+  .email-icon, .contact-icon
+    width 30px
+    height 30px
+
+  @keyframes extInAnimation{
+    0%{
+      top:0;
+      opacity:0;
+      visibility: hidden;
+    }
+    100%{
+      opacity:1;
+      top:100%;
+      visibility: visible;
+    }
+  }
+  
+  // @keyframes extOutAnimation{
+  //   0%{
+  //     top:70px;
+  //     opacity:1;
+  //     visibility: visible;
+  //   }
+  //   100%{
+  //     opacity: 0;
+  //     top: 0;
+  //     visibility: hidden;
+  //   }
+  // }

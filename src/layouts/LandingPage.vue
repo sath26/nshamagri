@@ -1,11 +1,11 @@
  <template>
     <div class="container">
       <q-toolbar class="navbar">
-          <div class="logo-container q-pl-xl">
+          <div class="logo-container">
             <img src="\statics\logo\logo-sm.svg" alt="Shamagri Logo" class="shamagri-logo vertical-middle q-pa-xs">
           </div>
           <q-toolbar-title class="text-title">Shamagri</q-toolbar-title>
-         <q-btn outline color="white" class="q-mr-xl" to="/login">Login</q-btn>
+         <q-btn outline color="white" class="login--btn" to="/login">Login</q-btn>
       </q-toolbar>
       <div class="intro-section">
         <div class="intro-text q-px-lg">
@@ -13,9 +13,9 @@
           <p class="intro-body-text">Welcome to Shamagri, a simple resource management app <br class="p-breaker"> 
 developed to help grow and maintain all businesses <br class="p-breaker"> and fulfil all customer needs. </p>
             <div class="get-started-section">
-              <div class="text-caption sub-header">Try Shamagri for free!</div>
               <div class="email-submit">
                 <q-btn size="lg" class="shadow-1 q-px-xl" label="Get Started" color="teal-7"></q-btn>
+                <div class="text-caption sub-header q-pa-sm">Try Shamagri for free !</div>
               </div>
             </div>
         </div>
@@ -32,8 +32,8 @@ developed to help grow and maintain all businesses <br class="p-breaker"> and fu
       </div>
       <!-- INFO CARDS SECTION -->
       <section id="infoCards" class="info-cards q-pa-lg">
-        <div class="text-h4 text-grey-2 infoCards-header-text">Finding product and services couldn't get any easier</div>
-        <div class="cards-wrapper">
+        <div class="text-h4 text-grey-2 infoCards-header-text q-my-xl">Finding product and services couldn't get any easier</div>
+        <div class="cards-wrapper q-my-xl">
           <q-card class="info-card info-card_invoice q-ma-xl">
             <div class="graphics_container">
                 <img src="statics/img/Invoice-graphics.png" alt="Invoice graphics">
