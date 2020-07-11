@@ -102,8 +102,8 @@
             
             <q-card-section horizontal>
                   <!-- distance info -->
-                <q-card-section class="info-section info-distance_section ">
-                    <div class="info-section-container q-pr-xl">
+                <q-card-section class="q-ml-sm info-section info-distance_section ">
+                    <div class="info-section-container">
                       <div><img class="info-icons distance-icon"
                               src="../statics/icons/distance-icon.svg"
                               alt="distance icon"/>
@@ -120,7 +120,7 @@
                 </q-card-section>
                 <!-- invoice info -->
                 <q-card-section class="info-section info-invoice_section">
-                    <div class="info-section-container q-pr-xl">
+                    <div class="info-section-container">
                     <div><img
                       class="info-icons invoice-icon"
                       src="../statics/img/Invoice-graphics.png"
@@ -137,7 +137,7 @@
             </q-card-section>
             <!-- customer appreciation  -->
             <q-card-section class="info-section info-customer_section">
-                    <div class="info-section-container q-pr-lg">
+                    <div class="info-section-container ">
                     <div><img
                       class="info-icons customer-icon"
                       src="../statics/icons/customers-icons.svg"
@@ -152,8 +152,8 @@
                     </div>
                     </div>
             </q-card-section>
-            <q-card-section>
-              <div class="card-info-footer-date">Date modified: 12/02/2020</div>
+            <q-card-section class="card-info-footer-date on-right float-right">
+              <p class="card-info-footer-date-txt">Date modified: 12/02/2020</p>
             </q-card-section>
             </q-card-section>
         

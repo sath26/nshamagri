@@ -2,7 +2,25 @@
     <div class="filter-container">
         <!-- category filter -->
           <div class="filter-category">
-            <q-btn-dropdown
+            <div class="row no-wrap">
+              <q-toolbar class="col-8 flat text-teal-7">
+                <q-toolbar-title class="text-h5">Filters</q-toolbar-title>
+              </q-toolbar>
+              <q-toolbar class="col-4">
+                <q-list>
+                  <q-item clickable class="filter-reset-btn text-red-8">
+                    <q-item-section class="filter-reset-btn-icon" avatar >
+                      <img
+                        class="side-menu-icon"
+                        src="statics/icons/reset-icon.svg"
+                      />
+                    </q-item-section>
+                    <q-item-section class="text-teal-6">Reset</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-toolbar>
+            </div>
+            <!-- <q-btn-dropdown
                   auto-close
                   flat
                   color="teal"
@@ -29,12 +47,12 @@
                       </q-item-section>
                     </q-item>
                   </q-list>
-                </q-btn-dropdown>
+                </q-btn-dropdown> -->
           </div>
           <!-- distance filter slider -->
           <q-separator></q-separator>
           <div class=" filter-distance q-my-lg">
-              <div class="text-h6 q-mb-sm text-teal">Distance</div>
+              <div class="text-h6 q-mb-sm text-teal-5">Distance</div>
               <q-badge outline color="teal" class="q-mb-lg q-pa-sm">
                 {{ distance.min }}km to {{ distance.max }}km
               </q-badge>
@@ -63,7 +81,7 @@
           <q-separator></q-separator>
           <!-- price filter minimum and maximum -->
           <div class=" filter-price q-my-lg">
-              <div class="text-h6 q-mb-sm text-teal">Price</div>
+              <div class="text-h6 q-mb-sm text-teal-5">Price</div>
             <div class="filter-price_subcontainer  relative-position">
               <div class="filter-price-min">
               <q-input
@@ -125,10 +143,14 @@ export default {
     }
 }
 </script>
-<style >
-    .filter-container{
-        width:100%;
-        height:100%;
-        padding: 10px;        
-    }
-</style>
+<style lang="stylus" scoped>
+  .filter-container
+    width 100%
+    height 100%
+    padding 10px  
+    .filter-reset-btn
+      &-icon
+        min-width 28px 
+        padding 0 
+</style>>
+    
