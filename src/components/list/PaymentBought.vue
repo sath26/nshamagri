@@ -12,21 +12,25 @@
             >
           </q-toolbar>
           <q-list bordered highlight class="list-container">
-            <q-infinite-scroll @load="onLoad" :offset="50">
+            <q-infinite-scroll @load="onLoad" :offset="250">
               <q-item
                 v-for="bought in boughts"
-                :key="bought.id"
+                :key="bought.key"
                 clickable
-                to="/bought"
+                :to="{ name: 'boughtOverview', params: { id: bought.key } }"
               >
                 <q-item-section avatar>
                   <q-avatar>
                     <img src="statics/boy-avatar.png" />
                   </q-avatar>
                 </q-item-section>
-                <q-item-section label-lines="1">{{
-                  bought.updated_at.toDate()
-                }}</q-item-section>
+
+                <q-item-section label-lines="1">
+                  <q-item-label overline>{{
+                    bought.enterprise_name
+                  }}</q-item-label>
+                  <q-item-label caption>{{ bought.updated_at }}</q-item-label>
+                </q-item-section>
                 <!-- <q-item-section right stamp="(1)"></q-item-section>  -->
               </q-item>
               <template v-slot:loading>
@@ -71,32 +75,66 @@ export default {
     SFooter
   },
   computed: {
-    ...mapState("bought", ["boughts", "furtherBoughtLoad"])
+    // ...mapState("bought", ["boughts", "furtherBoughtLoad"])
+    ...mapState("profile", ["current_enterprise"])
   },
   data() {
     return {
-      items: [{}, {}, {}, {}, {}, {}, {}],
-      vue_boughts: []
+      boughts: [],
+      furtherUpdatedAt: new Date()
     };
   },
   created() {
-    this.firstLoad();
+    // this.firstLoad();
   },
   methods: {
-    ...mapActions("bought", ["firstLoad", "furtherLoad"]),
-    ...mapMutations("bought", ["setBoughts", "setAnchorDoc"]),
-    onLoad(index, done) {
-      /*  setTimeout(() => {$
+    // ...mapActions("bought", ["firstLoad", "furtherLoad"]),
+    // ...mapMutations("bought", ["setBoughts", "setAnchorDoc"]),
+    /*  setTimeout(() => {$
         if (this.items) {
           this.items.push({}, {}, {}, {}, {}, {}, {});
           done();
         }
-      }, 2000); */
+      }, 2000); 
       console.log(index);
 
       this.furtherLoad();
 
-      done();
+      done(); */
+    onLoad(index, done) {
+      db.collection("bought")
+        .where(
+          "buyer_enterprise_id",
+          "==",
+          this.current_enterprise[0].admin_enterprise_id
+        )
+        .orderBy("updated_at", "desc")
+        .startAfter(this.furtherUpdatedAt)
+        .limit(5)
+        .get()
+        .then(res => {
+          res.forEach(doc => {
+            this.boughts.push({
+              key: doc.id,
+              updated_at: doc.data().updated_at.toDate(),
+              enterprise_name: doc.data().enterprise_name,
+              paid: doc.data().paid,
+              total: doc.data().total,
+              unpaid: doc.data().unpaid
+            });
+          });
+
+          if (res.docs.length == 0) {
+            // stop();
+            done(true);
+          } else {
+            this.furtherUpdatedAt = res.docs[res.docs.length - 1]
+              .data()
+              .updated_at.toDate();
+
+            done();
+          }
+        });
     }
   }
 };

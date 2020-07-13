@@ -62,8 +62,23 @@ const routes = [
   },
 
   {
-    path: "/bought",
+    name: "boughtOverview",
+    path: "/bought/:id",
     component: () => import("components/list/Bought.vue"),
+    redirect: "/invoice/:id",
+
+    children: [
+      {
+        path: "/invoice/:id",
+        name: "invoice",
+        component: () => import("components/list/bought/Invoice.vue")
+      },
+      {
+        path: "/paid_by/:id",
+        name: "paid_by",
+        component: () => import("components/list/bought/Paid-date.vue")
+      }
+    ],
     meta: { requireAuth: true }
     //it also takes to invoce
   },
