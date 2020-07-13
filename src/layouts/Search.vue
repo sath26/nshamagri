@@ -1,6 +1,6 @@
 <template>
 <ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
-  <ais-configure :hits-per-page.camel="6"/>
+  <ais-configure :hits-per-page.camel="9"/>
   <div class="container">
     <ais-search-box>
     <q-input
@@ -21,6 +21,8 @@
       </template>
     </q-input>
     </ais-search-box>
+  </div>
+  <!-- search extension modal -->
     <div
       class="search-extension"
       :class="{
@@ -67,7 +69,12 @@
         </q-tabs>
         <q-separator></q-separator>
         <!-- tab pannels -->
-        <q-tab-panels v-model="tab" animated>
+        <q-tab-panels v-model="tab" 
+        animated 
+        swipeable
+        vertical
+        infinite
+        >
           <q-tab-panel name="enterprise" class="ent-panel shadow-0">
             <div class="row">
               <div class="col-xl-2 col-md-4 col-sm-3">
@@ -77,33 +84,43 @@
               <div class="col-xl-10 col-md-8 col-sm-9 result-card_container">
             <ais-hits>
               <div class="result-card" slot="item" slot-scope="{ item }">
-                 <q-card class=" my-search-card on-right">
-          <q-card-section horizontal>
+                 <q-card class="my-search-card on-right">
+          <q-card-section horizontal class="row">
             <!-- user image with name -->
-            <q-img style="width:200px; height:200px"
+            <q-img class="q-mr-lg card-img col-4" style="width:150px; height:150px"
               src="../statics/guy-avatar.png" alt="user image">
-              <div class="absolute-bottom text-subtitle2 text-center">
+              <!-- <div class="absolute-bottom text-subtitle2 text-center">
                  {{item.enterprise_name}} <br /><span class="usr-name_txt text-weight-bold"
                       >Saugat Thapa</span>
-              </div>
+              </div> -->
             </q-img>
-            <!-- distance info -->
-            <q-card-section class="info-section info-distance_section">
-                <div><img class="info-icons distance-icon"
-                          src="../statics/icons/distance-icon.svg"
-                          alt="distance icon"/>
-                          <q-tooltip content-class="bg-teal" :offset="[-10, -10]">
-                            Distance
-                        </q-tooltip>
-                          </div>
-                        <div class="distance-txt_info txt-info">
-                          <p class="info-value">
-                            {{item.distance}}
-                          </p>
-                        </div>
+            <q-card-section class="card-info-txt col-8">
+              <h4 class="card-info-txt_header">Saugat Thapa</h4>
+              <p class="card-info-txt_p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta deleniti repudiandae nemo nam pariatur ..</p>
             </q-card-section>
-            <!-- invoice info -->
-            <q-card-section class="info-section info-invoice_section">
+          </q-card-section>
+            
+            <q-card-section horizontal>
+                  <!-- distance info -->
+                <q-card-section class="q-ml-sm info-section info-distance_section ">
+                    <div class="info-section-container">
+                      <div><img class="info-icons distance-icon"
+                              src="../statics/icons/distance-icon.svg"
+                              alt="distance icon"/>
+                              <q-tooltip content-class="bg-teal" :offset="[-10, -10]">
+                                Distance
+                            </q-tooltip>
+                              </div>
+                            <div class="distance-txt_info txt-info">
+                              <p class="info-value">
+                                {{item.distance}}
+                              </p>
+                            </div>
+                    </div>
+                </q-card-section>
+                <!-- invoice info -->
+                <q-card-section class="info-section info-invoice_section">
+                    <div class="info-section-container">
                     <div><img
                       class="info-icons invoice-icon"
                       src="../statics/img/Invoice-graphics.png"
@@ -116,9 +133,11 @@
                         {{item.invoice}}
                       </p>
                     </div>
+                    </div>
             </q-card-section>
             <!-- customer appreciation  -->
             <q-card-section class="info-section info-customer_section">
+                    <div class="info-section-container ">
                     <div><img
                       class="info-icons customer-icon"
                       src="../statics/icons/customers-icons.svg"
@@ -131,32 +150,23 @@
                         {{item.customers}}
                       </p>
                     </div>
+                    </div>
             </q-card-section>
-          </q-card-section>
+            <q-card-section class="card-info-footer-date on-right float-right">
+              <p class="card-info-footer-date-txt">Date modified: 12/02/2020</p>
+            </q-card-section>
+            </q-card-section>
         
       <q-separator ></q-separator>
 
-      <q-card-actions>
-        <q-btn flat>
-          Open
-        </q-btn>
-        <q-btn flat color="negative">
-          Close
-        </q-btn>
-        <q-btn flat color="primary">
-          Contact
-        </q-btn>
-        <q-btn flat class="float-right">
-          Date modified - 12/02/2019
-        </q-btn>
-      </q-card-actions>
+    
     </q-card>
               </div>
 
             </ais-hits>
+            <ais-pagination class="q-pa-lg"></ais-pagination>
               </div>
             </div>
-            <ais-pagination class="q-pa-lg"></ais-pagination>
           </q-tab-panel>
           <q-tab-panel name="quotation">
             <p class="text-black">
@@ -173,7 +183,6 @@
         </q-tab-panels>
       </q-card>
     </div>
-  </div>
 </ais-instant-search>
 </template>
 <script>
@@ -216,114 +225,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .colorGreen
-    color #4B7D6E
-  .ent-panel
-    max-height 1000px
-    box-shadow none
-  .enterprise-card_container
-    background none
-  .filter-icon
-    width 25px
-    height 20px
-  .search-extension
-    width 100%
-    height 100%
-    position absolute
-    border none
-    left 0
-    display none
-    .my-card
-      border-radius 0px
-  // extension active class
-  .extensionActive
-    display block
-    animation extInAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
-  // .extensionDeactive
-  //   animation extOutAnimation 500ms cubic-bezier(0.22, 0.44, 0, 1) forwards
-  .my-search-card
-    box-shadow 0px 0px 10px 1px rgba(0,0,0,.09)
-  .filter-dropdown_content-list_item
-    background transparent
-    padding 0
-    margin 0
-  .dd
-    width 100%
-  .dd-price, .dd-location
-    padding 9px
-  .price-input_field
-    width 50%
-.close-btn
-  position absolute
-  right 10px
-// filter items
-.filter-category
-  width 10%
-  text-align center
-.filter-distance
-  width 20%
-.filter-price
-  &-min>*, &-max>*
-    margin 0 auto
-// card styling
-.list-card_container
-  overflow hidden
-  background #fafafa
-  color #424242
-  vertical-align center
-  position relative
-.info-icons
-  width 55px
-  height 55px
-.info-section
-  padding-left 2rem
-.info-section>*
-  vertical-align middle
-  margin-top 1.2rem
-  .info-value
-    text-align center
-    font-weight 700
-  .txt-info
-    display inline-block
-  .distance-text_info
-    display inline-block
-  .info-customer_container
-    text-align center
-  .email-icon, .contact-icon
-    width 30px
-    height 30px
-  .info-date_txt
-    font-size 1vw
-    opacity .8
-    position absolute
-    bottom -5%
-    right 2%
+  @import '..\css\components-style\_search';
 
-  @keyframes extInAnimation{
-    0%{
-      top:0;
-      opacity:0;
-      visibility: hidden;
-    }
-    100%{
-      opacity:1;
-      top:80px;
-      visibility: visible;
-    }
-  }
-  
-  // @keyframes extOutAnimation{
-  //   0%{
-  //     top:70px;
-  //     opacity:1;
-  //     visibility: visible;
-  //   }
-  //   100%{
-  //     opacity: 0;
-  //     top: 0;
-  //     visibility: hidden;
-  //   }
-  // }
-
-  
 </style>

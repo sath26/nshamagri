@@ -13,7 +13,8 @@ export default {
 </script>
 
 <style>
-body {
-  background: #fafafa;
-}
+  /* @import './css/app.styl'; */
+  body {
+    background: #fafafa;
+  }
 </style>

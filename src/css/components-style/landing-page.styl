@@ -17,7 +17,6 @@
     color: #fafafa
     @media screen and (max-width: 720px) 
       opacity 0
-
  .web-bg_img
     width 100%
   .mobile-bg_img
@@ -102,13 +101,24 @@
     transition all .45s linear
     animation fadeDown .68s infinite ease
 // Media queries
-@media screen and (max-width: 1140px) {
-  .intro-text {
+@media screen and (min-width: 1140px) 
+  .logo-container
+    margin-left 5rem
+  .login--btn
+    margin-right 5rem
+@media screen and (max-width: 1140px) 
+  .intro-text 
     top: 100px;
     left: 60px;
-  }
-}
+  .logo-container
+    margin-left 2rem
+  .login--btn
+    margin-right 2rem
 @media screen and (max-width: 850px)
+  .logo-container
+    margin-left 2rem
+  .login--btn
+    margin-right 2rem
   .web-bg_img
     height 40vh
   .devices_img
@@ -119,10 +129,20 @@
     width 80%
   .learn-more_btn
     display none
+  p.intro-head-text
+    font-size 4em
+  p.intro-body-text
+    font-size 2em
 @media screen and (min-width: 565px)
   .mobile-bg_img
     display none
 @media screen and (max-width: 564px)
+  .logo-container
+    margin-left 1rem
+  .login--btn
+    margin-right 1rem
+  .mobile-bg_img
+    margin-bottom .1rem
   .intro-section 
     background #49957D
   .info-cards
@@ -148,6 +168,7 @@
         top 0
     p.intro-head-text
       line-height 1
+      font-size 2em
     p.intro-body-text
       font-size 1.4em
 @media screen and (max-width: 650px)

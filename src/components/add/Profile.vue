@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="hHh LpR lFf">
+  <q-layout view="hHh LpR lFf" >
     <s-header></s-header>
-    <q-page-container>
+    <q-page-container class="main-container">
       <q-tabs
         v-model="tab"
         animated
@@ -15,7 +15,7 @@
       </q-tabs>
       <q-separator />
       <!-- <q-tab-panels > -->
-      <q-tab-panels v-model="tab" animated class="bg-grey-1">
+      <q-tab-panels v-model="tab" animated class="bg-grey-1" >
         <q-tab-panel name="enterprise">
          
           <!-- Profile card ~ #01 -->
@@ -56,8 +56,7 @@
               <q-card-section>
                 <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
               </q-card-section>
-              <div class="row">
-                <div class="card-body card-body_left col">
+                <div class="card-body card-body_left">
                   <ul class="info-list">
                     <li>
                       <q-input
@@ -126,14 +125,13 @@
                     </li>
                   </ul>
                 </div>
-                <div class="card-body_right col">
+                <div class="card-body card-body-maps">
                   <iframe 
                   class="q-mb-lg card-body-map"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56516.31625948592!2d85.29111343800308!3d27.70895594445841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2suk!4v1588802629572!5m2!1sen!2suk"
                   width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
                   </iframe>
                 </div>
-              </div>
             </q-card>
           </div>
         </q-tab-panel>
@@ -406,153 +404,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '..\css\app.styl';
-.card__container{
-  width:100%;
-  background:red;
-  overflow: hidden;
-  z-index: 13;
-  .card__content{
-      width:49%;
-      height:100%;
-      margin:0;
-      padding:0;
-      border-radius: 0;
-      background: yellow;
-    }
-}
-#me-card, #enterprise-profile_card {
-  background: $primary-white;
-  margin: 0 auto;
-}
-.tab-me, .tab-enterprise {
-  background: $tab-color;
-}
-#enterprise-profile_card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  padding:12px;
-  // background: blue;
-  z-index: 12;
-  .card-banner {
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 20px;
-    background-image: url("../../assets/img/Profile-bg_graphics.png");
-    background-size: cover;
-    border-radius: .25em;
-  }
-}
-.usr-img {
-  width: 300px;
-  height: 300px;
-  border-radius: .25em;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3);
-}
-.card-quick_info {
-  text-align: center;
-  align-self: flex-end;
-  margin-left: 20px;
-}
-h3 {
-  font-size: 2rem;
-  padding: 0;
-  margin: 0;
-  float: left;
-}
-.info-content {
-  width: 100%;
-  padding: 0;
-  display: inline;
-  list-style: none;
-  li {
-    font-size: 1.2rem;
-    display: inline;
-    padding-left: 210px;
-    .info-box {
-      display: inline-block;
-      color: $primary-white;
-      font-weight:700;
-    }
-  }
-}
-
-.img-edit {
-  text-align: center;
-  a {
-    text-decoration: none;
-    margin: 0 20px;
-  }
-}
-.card-body {
-  width: 100%;
-  // margin: 0 auto;
-  padding: 20px;
-  &_right{
-    text-align:center;
-    .card-body-map{
-      padding:0;
-      border-radius: .25em;
-    }
-  }
-  .info-list {
-    width: 90%;
-    display: inline-block;
-    li {
-      font-size: 2em;
-      padding: 18px 0px;
-      list-style: none;
-      position: relative;
-      .edit-btn {
-        color: #40bfc1;
-        cursor: pointer;
-        opacity: 0.5;
-        position: absolute;
-        top: 22%;
-        right: 0%;
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
-  }
-  .address-info {
-    width: 350px;
-  }
-  a {
-    display: block;
-    padding: 5px 0px;
-    font-size: 1.8em;
-    color: #9E9E9E;
-    text-decoration: none;
-    webkit-transition: 0.1s ease-in-out;
-    transition: 0.1s ease-in-out;
-    &:hover {
-      color: inherit;
-    }
-  }
-}
-.card-footer {
-  width: 100%;
-  height: 80px;
-}
-.social_media-icons {
-  text-align: center;
-  position: relative;
-  top: 25%;
-  a {
-    margin: auto 35px;
-  }
-}
-.card-footer .social_media-icons img {
-  width: 40px;
-  height: 40px;
-  vertical-align: -50%;
-  webkit-transition: all 0.11s ease-in-out;
-  transition: all 0.11s ease-in-out;
-  &:hover {
-    transform: scale(1.5);
-  }
-}
+  @import '..\..\css\components-style\_profile.styl';
+    .main-container
+        overflow hidden
+        
 </style>
