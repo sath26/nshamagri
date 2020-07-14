@@ -4,7 +4,7 @@
       <div style="width: 500px; max-width: 90vw;">
         <q-infinite-scroll @load="onLoad" :offset="200">
           <q-list
-            v-for="item in paid_bys"
+            v-for="item in received_bys"
             :key="item.id"
             bordered
             separator
@@ -17,12 +17,12 @@
                 </q-item-section>
               </q-item-section>
               <q-item-section>
-                {{ item.paid_amount }}
+                {{ item.received_amount }}
               </q-item-section>
               <q-item-section avatar>
                 <q-item-section side sublabel lines="2">
-                  <span>Paid by:</span>
-                  {{ item.paid_by_displayName }}
+                  <span>received by:</span>
+                  {{ item.received_by_displayName }}
                 </q-item-section>
               </q-item-section>
             </q-item>
@@ -43,27 +43,28 @@ import { db } from "../../../store/service/firebase";
 export default {
   data() {
     return {
-      paid_bys: [],
+      tab: "received_by",
+      received_bys: [],
       furtherUpdatedAt: new Date()
     };
   },
   methods: {
     onLoad(index, done) {
-      const paid = db
-        .collection("bought")
+      const received = db
+        .collection("sold")
         .doc(this.$route.params.id)
-        .collection("paid_by")
+        .collection("received_by")
         .orderBy("created_at", "desc")
         .startAfter(this.furtherUpdatedAt)
         .limit(5);
-      paid.get().then(snapshot => {
+      received.get().then(snapshot => {
         snapshot.forEach(doc => {
-          this.paid_bys.push({
+          this.received_bys.push({
             key: doc.id,
             created_at: doc.data().created_at.toDate(),
             individual_total: doc.data().individual_total,
-            paid_amount: doc.data().paid_amount,
-            paid_by_displayName: doc.data().paid_by_displayName,
+            received_amount: doc.data().received_amount,
+            received_by_displayName: doc.data().received_by_displayName,
             receiver_member_displayName: doc.data().receiver_member_dispalyName
           });
         });

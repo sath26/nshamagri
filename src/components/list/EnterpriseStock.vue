@@ -1,28 +1,18 @@
-/* 
-Product name
-Category
-brand
-Stock change (depending on the stock finishes the list goes away)
-    Stock left
-    Expiration left
-    Price
-    purchased from
-    date of purchase
-features
-usecases
- */
- <template>
+/* Product name Category brand Stock change (depending on the stock finishes the
+list goes away) Stock left Expiration left Price purchased from date of purchase
+features usecases */
+<template>
   <q-layout view="hHh LpR lFf ">
     <q-page-container>
       <s-header></s-header>
 
       <q-page padding class="docs-table">
-        <q-btn label="Wai Wai" color="secondary" push flat class="col-6"/>
+        <q-btn label="Wai Wai" color="secondary" push flat class="col-6" />
         <q-btn flat>Refill Stock</q-btn>
         <q-btn flat to="/bought">Payment</q-btn>
         <q-table :data="tableData" :columns="columns" row-key="name">
           <template slot="top-right" slot-scope="props">
-            <q-search hide-underline v-model="filter" color="secondary"/>
+            <q-search hide-underline v-model="filter" color="secondary" />
           </template>
           <template slot="top-left" slot-scope="props">
             <q-btn flat>Raj Kumar Bogati Kirana Pasal</q-btn>
@@ -31,7 +21,6 @@ usecases
             slot="body"
             slot-scope="props"
             :props="props"
-            @click.native="$router.push({ path: '/invoice_good', query: {  } })"
             class="cursor-pointer"
           >
             <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
@@ -41,7 +30,9 @@ usecases
               {{ props.row.stock }}
               <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
             </q-td>
-            <q-td key="expiration" :props="props">{{ props.row.expiry_left }}</q-td>
+            <q-td key="expiration" :props="props">{{
+              props.row.expiry_left
+            }}</q-td>
             <q-td key="timeline" :props="props">{{ props.row.timeline }}</q-td>
             <q-td key="action" :props="props">{{ props.row.action }}</q-td>
           </q-tr>
@@ -134,5 +125,3 @@ export default {
   }
 }
 </style>
-
-

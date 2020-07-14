@@ -5,7 +5,7 @@
       <s-header></s-header>
       <q-toolbar inverted color="secondary">
         <q-toolbar-title>
-          <q-btn flat>{{ bought.enterprise_name }}</q-btn>
+          <q-btn flat>BOUGHT / {{ bought.enterprise_name }}</q-btn>
         </q-toolbar-title>
         <div class="q-pa-sm q-gutter-sm">
           <q-btn flat color="red"

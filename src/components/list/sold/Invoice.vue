@@ -1,39 +1,79 @@
 <template>
-  <q-tab-pane name="buyers">
-    <q-page padding class="docs-table">
-      <!-- <q-btn flat to="/enterprise_stock">Stock</q-btn> -->
-      total: 25000
-      Paid:20000
-      Unpaid:5000
-      <q-list highlight>
-        <q-item to="/bought">
-          <q-item-side avatar="statics/boy-avatar.png"/>
-          <q-item-main label="RajKumar Bogati Kirana Pasal" label-lines="1"/>
-          <q-item-side right stamp="1 min"/>
-        </q-item>
-        <q-item>
-          <q-item-side avatar="statics/guy-avatar.png"/>
-          <q-item-main label="Pawan Kirana" label-lines="1"/>
-          <q-item-side right stamp="3 min"/>
-        </q-item>
-        <q-item>
-          <q-item-side avatar="statics/linux-avatar.png"/>
-          <q-item-main label="Vaiya ko Furniture Pasal" label-lines="1"/>
-          <q-item-side right stamp="1 hr"/>
-        </q-item>
-        <q-item>
-          <q-item-side avatar="statics/mountains.jpg"/>
-          <q-item-main label="RajKumar Bogati Kirana Pasal" label-lines="1"/>
-          <q-item-side right stamp="1 day"/>
-        </q-item>
-      </q-list>
+  <div>
+    <q-page padding class="row justify-center">
+      <div style="width: 500px; max-width: 90vw;">
+        <q-infinite-scroll @load="onLoad" :offset="200">
+          <q-list v-for="item in invoices" :key="item.id">
+            <q-item
+              class="caption"
+              clickable
+              :to="{ name: 'soldDetails', params: { id: item.key } }"
+            >
+              <q-item-section>
+                <q-item-label>{{ item.invoice_no }}</q-item-label>
+                <!-- <q-item-label caption>{{ item.total }}</q-item-label> -->
+              </q-item-section>
+              <q-item-section side>
+                <q-item-label>{{ item.individual_total }}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-separator></q-separator>
+          </q-list>
+          <template v-slot:loading>
+            <div class="row justify-center q-my-md">
+              <q-spinner-dots color="primary" size="40px" />
+            </div>
+          </template>
+        </q-infinite-scroll>
+      </div>
     </q-page>
-  </q-tab-pane>
+  </div>
 </template>
 <script>
+import { db } from "../../../store/service/firebase";
+
 export default {
   data() {
-    return {};
+    return {
+      tab: "sale-invoice",
+      sold: {},
+      furtherUpdatedAt: new Date(),
+      invoices: [],
+      paid_bys: []
+    };
+  },
+  methods: {
+    onLoad(index, done) {
+      db.collection("sold")
+        .doc(this.$route.params.id)
+        .collection("invoice")
+
+        .orderBy("created_at", "desc")
+        .startAfter(this.furtherUpdatedAt)
+        .limit(10)
+        .get()
+        .then(res => {
+          res.forEach(doc => {
+            this.invoices.push({
+              key: doc.id,
+              created_at: doc.data().created_at.toDate(),
+              individual_total: doc.data().individual_total,
+              invoice_no: doc.data().invoice_no
+            });
+          });
+
+          if (res.docs.length == 0) {
+            // stop();
+            done(true);
+          } else {
+            this.furtherUpdatedAt = res.docs[res.docs.length - 1]
+              .data()
+              .created_at.toDate();
+
+            done();
+          }
+        });
+    }
   }
 };
 </script>

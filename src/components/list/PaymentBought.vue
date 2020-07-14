@@ -6,10 +6,14 @@
 
       <q-page padding class="row justify-center">
         <div style="width: 500px; max-width: 90vw;">
-          <q-toolbar class="bg-secondary text-white shadow-2">
+          <q-toolbar class="  shadow-2">
             <q-toolbar-title class="q-pa-sm text-uppercase"
               >bought</q-toolbar-title
             >
+            <q-btn dense round flat color="white">
+              <q-icon name="help_outline" color="black" />
+              <q-tooltip v-model="showing">Seller</q-tooltip>
+            </q-btn>
           </q-toolbar>
           <q-list bordered highlight class="list-container">
             <q-infinite-scroll @load="onLoad" :offset="250">
@@ -29,9 +33,11 @@
                   <q-item-label overline>{{
                     bought.enterprise_name
                   }}</q-item-label>
-                  <q-item-label caption>{{ bought.updated_at }}</q-item-label>
+                  <q-item-label caption>{{ bought.total }}</q-item-label>
                 </q-item-section>
-                <!-- <q-item-section right stamp="(1)"></q-item-section>  -->
+                <q-item-section side>
+                  {{ bought.unpaid }}
+                </q-item-section>
               </q-item>
               <template v-slot:loading>
                 <div class="row justify-center q-my-md">
@@ -81,6 +87,7 @@ export default {
   data() {
     return {
       boughts: [],
+      showing: false,
       furtherUpdatedAt: new Date()
     };
   },

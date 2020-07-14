@@ -5,109 +5,78 @@
       <s-header></s-header>
       <q-toolbar inverted color="secondary">
         <q-toolbar-title>
-          <q-btn flat>rajkumar pasal</q-btn>
+          <q-btn flat>SOLD / {{ sold.enterprise_name }}</q-btn>
         </q-toolbar-title>
         <div class="q-pa-sm q-gutter-sm">
-          <q-btn flat color="black">
-            (5000)
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
-              <strong>Unreceived</strong>
+          <q-btn flat color="red"
+            >{{ sold.unpaid }}
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
+              <strong>Unpaid</strong>
             </q-tooltip>
           </q-btn>
-          <q-btn flat color="secondary">
-            20000
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
-              <strong>Received</strong>
+          <q-btn flat color="black"
+            >{{ sold.paid }}
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
+              <strong>paid</strong>
             </q-tooltip>
           </q-btn>
-          <q-btn flat color="black">
-            25000
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+          <q-btn flat color="black"
+            >{{ sold.total }}
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Total</strong>
             </q-tooltip>
           </q-btn>
         </div>
       </q-toolbar>
-      <q-separator />
-
-      <q-tabs animated swipeable inverted active-color="secondary"
-            indicator-color="secondary" v-model="tab" align="justify">
-        <q-tab default name="invoice"  label="invoice" sublabel="25000" />
-        <!-- <q-tab default name="buyers"  icon="mail" label="BUyers" /> -->
-        <q-tab name="paid_date"  label="received date" />
-        <!-- each item leads to its particular statement bought and sold statement  -->
-        <!-- dark orange to those whose payment is due or unreceived  -->
-      </q-tabs>
-      <q-tab-panels v-model="tab">
-        <q-tab-panel name="invoice">
-          <q-page padding class="row justify-center">
-            <div style="width: 500px; max-width: 90vw;">
-              <q-list bordered highlight>
-                <q-item to="/invoice_good">
-                  <q-item-section label="123" label-lines="1">
-                    <q-item-section sublabel lines="2">
-                      <span>Unreceived:</span>
-                      1000
-                    </q-item-section>
-                  </q-item-section>
-                  <q-item-section side color="secondary">+ 5000</q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section label="345" label-lines="1" >345</q-item-section>
-                  <q-item-section side stamp="3 min" >3 min</q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section label="74j8" label-lines="1" >74j8</q-item-section>
-                  <q-item-section side stamp="1 hr" >1 hr</q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section label="433" label-lines="1" >433</q-item-section>
-                  <q-item-section side stamp="1 day" >1 day</q-item-section>
-                </q-item>
-              </q-list>
-            </div>
-          </q-page>
-        </q-tab-panel>
-
-        <q-tab-panel name="paid_date">
-          <q-page padding class="row justify-center">
-            <div style="width: 500px; max-width: 90vw;">
-              <q-list highlight>
-                <q-item to="/invoice_good">
-                  <q-item-section label="123" label-lines="1">
-                    <q-item-section sublabel lines="2">
-                      <span>Received by:</span>
-                      Saugat Thapa
-                    </q-item-section>
-                  </q-item-section>
-                  <q-item-section side color="secondary">+ 5000</q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section label="334" label-lines="1" >334</q-item-section>
-                  <q-item-section side stamp="3 min" >3 min</q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section label="3434" label-lines="1" >3434</q-item-section>
-                  <q-item-section side stamp="1 hr" >1 hr</q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section label="1123" label-lines="1" >1123</q-item-section>
-                  <q-item-section side stamp="1 day" > 1 day</q-item-section>
-                </q-item>
-              </q-list>
-            </div>
-          </q-page>
-        </q-tab-panel>
-      </q-tab-panels>
     </q-page-container>
+    <q-separator />
+    <q-tabs
+      v-model="tab"
+      animated
+      swipeable
+      inverted
+      active-color="secondary"
+      indicator-color="secondary"
+      align="justify"
+    >
+      <q-route-tab
+        name="sale-invoice"
+        label="invoice"
+        :to="{ name: 'sale-invoice', params: { id: $route.params.id } }"
+      />
+      <!-- <q-tab default name="buyers" slot="title" icon="mail" label="BUyers" /> -->
+      <q-route-tab
+        name="received_by"
+        label="Received by"
+        :to="{ name: 'received_by', params: { id: $route.params.id } }"
+      />
+      <!-- each item leads to its particular statement sold and sold statement  -->
+      <!-- dark orange to those whose payment is due or unreceived  -->
+    </q-tabs>
+
+    <q-page-container> <router-view :key="$route.params.id"/></q-page-container>
 
     <s-footer></s-footer>
   </q-layout>
 </template>
 <script>
 //consists of buyers and sellers
+import { db } from "../../store/service/firebase";
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
+// import SInvoice from "../components/sold/Invoice.vue";
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
@@ -116,13 +85,26 @@ export default {
   },
   data() {
     return {
-      tab: "invoice"
+      tab: "invoice",
+      sold: {},
+      furtherUpdatedAt: new Date(),
+      paid_bys: []
     };
   },
+  created() {
+    const ref = db.collection("sold").doc(this.$route.params.id);
+    ref.get().then(doc => {
+      if (doc.exists) {
+        console.log(doc.data());
+        this.sold = doc.data();
+      } else {
+        alert("No such document!");
+      }
+    });
+  },
+  methods: {},
   computed: {}
 };
 </script>
 
 <style lang="stylus" scoped></style>
-
-

@@ -4,7 +4,10 @@
       <s-header></s-header>
 
       <q-card class="profile-background_img_container">
-        <img src="../../assets/img/Profile-bg_graphics.png" alt="profile background image" />
+        <img
+          src="../../assets/img/Profile-bg_graphics.png"
+          alt="profile background image"
+        />
       </q-card>
       <!-- Profile card ~ #01 -->
       <div id="enterprise-profile_card" class="q-pa-xl">
@@ -45,22 +48,28 @@
           <q-card-section class="row">
             <div class="text-h4 text-teal-5 q-ml-xl col">Profile details</div>
             <div class="col edit-btn_container">
-              <q-btn flat color="teal" class="float-right" icon="edit">Edit</q-btn>
+              <q-btn flat color="teal" class="float-right" icon="edit"
+                >Edit</q-btn
+              >
             </div>
           </q-card-section>
           <div class="card-body">
             <ul class="info-list">
               <li class="col">
-                <q-icon name="email" class="profile-detail_icon"></q-icon>nexus.saugat26@gmail.com
+                <q-icon name="email" class="profile-detail_icon"></q-icon
+                >nexus.saugat26@gmail.com
               </li>
               <li class="col">
-                <q-icon name="phone" class="profile-detail_icon"></q-icon>+1 123-456-7890
+                <q-icon name="phone" class="profile-detail_icon"></q-icon>+1
+                123-456-7890
               </li>
               <li class="col">
-                <q-icon name="place" class="profile-detail_icon"></q-icon>Kathmandu, Nepal
+                <q-icon name="place" class="profile-detail_icon"></q-icon
+                >Kathmandu, Nepal
               </li>
               <li class="col">
-                <q-icon name="note" class="profile-detail_icon"></q-icon>223 049 023
+                <q-icon name="note" class="profile-detail_icon"></q-icon>223 049
+                023
               </li>
             </ul>
           </div>
@@ -86,7 +95,7 @@
 //consists of me and enterprise
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
-import GINVOICE from "./Invoice_good";
+
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
@@ -299,5 +308,3 @@ h3 {
   }
 }
 </style>
-
-

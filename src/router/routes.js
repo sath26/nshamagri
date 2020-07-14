@@ -42,8 +42,9 @@ const routes = [
     meta: { requireAuth: true }
   },
   {
-    path: "/invoice_good",
-    component: () => import("components/list/Invoice_good.vue")
+    name: "oldBoughtInvoice",
+    path: "/invoice/:invoice_id/old-bought-invoice/:invoice_detail_id",
+    component: () => import("components/list/OldBoughtInvoice.vue")
     //back to bought or sold
     //back to enterprise stock
   },
@@ -83,8 +84,22 @@ const routes = [
     //it also takes to invoce
   },
   {
-    path: "/sold",
+    name: "soldOverview",
+    path: "/sold/:id",
+    redirect: "/sale-invoice/:id",
     component: () => import("components/list/Sold.vue"),
+    children: [
+      {
+        path: "/sale-invoice/:id",
+        name: "sale-invoice",
+        component: () => import("components/list/sold/Invoice.vue")
+      },
+      {
+        path: "/receivied_by/:id",
+        name: "received_by",
+        component: () => import("components/list/sold/Received-date.vue")
+      }
+    ],
     meta: { requireAuth: true }
     //it also takes to invoice
   },
