@@ -7,7 +7,10 @@
             <q-item
               class="caption"
               clickable
-              :to="{ name: 'soldDetails', params: { id: item.key } }"
+              :to="{
+                name: 'oldSoldInvoice',
+                params: { invoice_id: item.key, sold_id: item.sold_id }
+              }"
             >
               <q-item-section>
                 <q-item-label>{{ item.invoice_no }}</q-item-label>
@@ -58,7 +61,8 @@ export default {
               key: doc.id,
               created_at: doc.data().created_at.toDate(),
               individual_total: doc.data().individual_total,
-              invoice_no: doc.data().invoice_no
+              invoice_no: doc.data().invoice_no,
+              sold_id: this.$route.params.id
             });
           });
 

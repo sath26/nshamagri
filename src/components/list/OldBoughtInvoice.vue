@@ -100,7 +100,7 @@
         <!--  class="invoice-table"
           dark-->
         <q-table
-          :data="tableData"
+          :data="details"
           :columns="columns"
           row-key="name"
           :filter="filter"
@@ -113,7 +113,7 @@
           </template>
           <q-tr slot="body" slot-scope="props" :props="props">
             <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
-            <q-td key="desc" :props="props">{{ props.row.product }}</q-td>
+            <q-td key="desc" :props="props">{{ props.row.title }}</q-td>
 
             <q-td key="rate" :props="props">
               {{ props.row.rate }}
@@ -121,9 +121,6 @@
             </q-td>
             <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
             <q-td key="total" :props="props">{{ props.row.total }}</q-td>
-            <q-td key="expiry_left" :props="props">{{
-              props.row.expiry_left
-            }}</q-td>
           </q-tr>
         </q-table>
       </q-page>
@@ -156,7 +153,7 @@ export default {
           required: false,
           label: "Goods/Services",
           align: "left",
-          field: "product",
+          field: "title",
           sortable: false
         },
 
@@ -172,14 +169,7 @@ export default {
           label: "Total",
           field: "total",
           sortable: false
-        }, //dont rename name
-        {
-          name: "expiry_left",
-          label: "Expiry Left",
-          field: "expiry_left",
-          sortable: false,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
-        }
+        } //dont rename name
       ],
 
       filter: "",
@@ -199,7 +189,8 @@ export default {
       .collection("invoice_details")
       .get()
       .then(doc => {
-        console.log(doc);
+        // console.log(doc.docs[0].data());
+        this.details = doc.docs[0].data().items;
       });
   }
 };

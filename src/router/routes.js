@@ -43,12 +43,18 @@ const routes = [
   },
   {
     name: "oldBoughtInvoice",
-    path: "/invoice/:invoice_id/old-bought-invoice/:invoice_detail_id",
+    path: "/invoice/:bought_id/old-bought-invoice/:invoice_id",
     component: () => import("components/list/OldBoughtInvoice.vue")
     //back to bought or sold
     //back to enterprise stock
   },
-
+  {
+    name: "oldSoldInvoice",
+    path: "/invoice/:sold_id/old-sold-invoice/:invoice_id",
+    component: () => import("components/list/OldSoldInvoice.vue")
+    //back to bought or sold
+    //back to enterprise stock
+  },
   /* *********************services********************************* */
 
   {
