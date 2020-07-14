@@ -63,14 +63,14 @@
         <q-list v-for="(menuItem, index) in menuList" :key="index">
           <q-item
             class="side-menu_items"
-            active-class="bg-teal text-white"
+            active-class="bg-teal-7 text-white"
             :to="menuItem.route"
             clickable
             :active="menuItem.label === 'Outbox'"
             exact
           >
             <q-item-section>
-              <q-avatar rounded size="45px">
+              <q-avatar rounded size="42px">
                 <img
                   class="side-menu-icon"
                   v-if="menuItem.iconSrc"
@@ -79,7 +79,7 @@
               <q-icon :name="menuItem.icon"></q-icon>
               </q-avatar>
             </q-item-section>
-            <q-item-section class="q-pr-xl" > {{ menuItem.label }}</q-item-section>
+            <q-item-section class="q-pr-xl text-subtitle1" > {{ menuItem.label }}</q-item-section>
           </q-item>
           <q-separator v-if="menuItem.separator"></q-separator>
         </q-list>

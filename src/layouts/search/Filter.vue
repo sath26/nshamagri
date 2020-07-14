@@ -20,34 +20,6 @@
                 </q-list>
               </q-toolbar>
             </div>
-            <!-- <q-btn-dropdown
-                  auto-close
-                  flat
-                  color="teal"
-                  :label="categorySelection"
-                  class="dd dd-category q-pa-sm full-width"
-                >
-                  <q-list>
-                    <q-item
-                      v-for="category in categories"
-                      :key="category.name"
-                      tag="label"
-                      v-ripple
-                      class="q-pr-xl"
-                    >
-                      <q-item-section avatar>
-                        <q-radio
-                          v-model="categorySelection"
-                          :val="category.value"
-                          color="teal"
-                        ></q-radio>
-                      </q-item-section>
-                      <q-item-section>
-                        <q-item-label>{{ category.name }}</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-btn-dropdown> -->
           </div>
           <!-- distance filter slider -->
           <q-separator></q-separator>
@@ -83,8 +55,20 @@
           <div class=" filter-price q-my-lg">
               <div class="text-h6 q-mb-sm text-teal-5">Price</div>
             <div class="filter-price_subcontainer  relative-position">
+                  <div class="filter-price-max">
+                      <q-input
+                      debounce="500"
+                      light
+                      color="teal"
+                      v-model.lazy="maxPrice"
+                      type="number"
+                      label="Max price"
+                      dense
+                      class="price-input_field"
+                    ></q-input>
+                  </div>
               <div class="filter-price-min">
-              <q-input
+                <q-input
                     debounce="500"
                     light
                     color="teal"
@@ -95,22 +79,10 @@
                     class="price-input_field"
                   ></q-input>
               </div>
-                  <div class="filter-price-max">
-                    <q-input
-                    debounce="500"
-                    light
-                    color="teal"
-                    v-model.lazy="maxPrice"
-                    type="number"
-                    label="Max price"
-                    dense
-                    class="price-input_field"
-                  ></q-input>
-                  </div>
             </div>
           </div>
          <!-- done button -->
-         <q-btn class="full-width q-mt-lg " color="teal" text-color="grey-1" unelevated>filter</q-btn>
+         <q-btn class="full-width q-mt-lg" color="teal" text-color="grey-1" unelevated label="find it now"></q-btn>
         <!-- end tab filter -->
     </div>
 </template>
@@ -147,7 +119,7 @@ export default {
   .filter-container
     width 100%
     height 100%
-    padding 10px  
+    padding 2.1rem 
     .filter-reset-btn
       &-icon
         min-width 28px 

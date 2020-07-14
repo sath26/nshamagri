@@ -94,10 +94,14 @@
                       >Saugat Thapa</span>
               </div> -->
             </q-img>
-            <q-card-section class="card-info-txt col-8">
+            <q-card-section class="card-info-txt col-7">
+              <img class="on-right float-right" :src="staticon" alt="open close notifier icons">
               <h4 class="card-info-txt_header">Saugat Thapa</h4>
               <p class="card-info-txt_p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta deleniti repudiandae nemo nam pariatur ..</p>
             </q-card-section>
+            <!-- <q-card-section class="col-1">
+                <img src="../statics/icons/open-icon.svg" alt="open close notifier icons">
+            </q-card-section> -->
           </q-card-section>
             
             <q-card-section horizontal>
@@ -208,6 +212,8 @@ export default {
       searchBox: "",
       text: "",
       filter: false,
+      staticon:"",
+      statcheck: true,
       searchClient: algoliasearch(
         "HIGFUILYRM",
         "b3cd4d3709c017e877390d653bea5eba"
@@ -215,12 +221,18 @@ export default {
       )
     };
   },
-  // methods:{
-  //   al(){
-  //     this.searchPopout = true;
-  //   }
-  // },
-  computed: {}
+  mounted: function() {
+    this.checkStat();
+  },
+  methods:{
+    checkStat(){
+      if(this.statcheck == true){
+        this.staticon = "../statics/icons/open-icon.svg"
+      }else{
+        this.staticon = "../statics/icons/close-icon.svg"
+      }
+    }
+  }
 };
 </script>
 
