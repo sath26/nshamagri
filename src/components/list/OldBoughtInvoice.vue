@@ -100,6 +100,7 @@
         <!--  class="invoice-table"
           dark-->
         <q-table
+          title="Invoice"
           :data="details"
           :columns="columns"
           row-key="name"
@@ -161,7 +162,7 @@ export default {
         {
           name: "quantity",
           label: "Quantity",
-          field: "expiry_left",
+          field: "quantity",
           sortable: false
         }, //dont rename name
         {

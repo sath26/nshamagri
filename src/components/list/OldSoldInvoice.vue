@@ -100,6 +100,7 @@
         <!--  class="invoice-table"
           dark-->
         <q-table
+          title="Invoice"
           :data="details"
           :columns="columns"
           row-key="name"
@@ -155,21 +156,26 @@ export default {
           required: false,
           label: "Goods/Services",
           align: "left",
-          field: "title",
+          field: row => row.value.title,
           sortable: true
         },
 
-        { name: "rate", label: "Rate(Rs)", field: "rate", sortable: false }, //dont rename name
+        {
+          name: "rate",
+          label: "Rate(Rs)",
+          field: row => row.value.rate,
+          sortable: false
+        }, //dont rename name
         {
           name: "quantity",
           label: "Quantity",
-          field: "expiry_left",
+          field: row => row.value.quantity,
           sortable: false
         }, //dont rename name
         {
           name: "total",
           label: "Total",
-          field: "total",
+          field: row => row.value.total,
           sortable: false
         } //dont rename name
       ],
@@ -194,6 +200,24 @@ export default {
         // console.log(doc.docs[0].data());
         this.details = doc.docs[0].data().items;
       });
+  },
+  methods: {
+    /*  hey(terms) {
+      // console.log(rows);
+      // console.log(terms);
+      // console.log(cols);
+      // console.log(getCellValue);
+      var a, b;
+      this.details.filter(row => {
+        b = row.value.title;
+        console.log(b);
+        console.log(typeof b);
+        a = row.value.title.toLowerCase().indexOf(terms);
+        console.log(a);
+        return a;
+      });
+      return this.details.filter(row => row.value.title);
+    } */
   }
 };
 </script>

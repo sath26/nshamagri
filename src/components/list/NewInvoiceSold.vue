@@ -104,6 +104,14 @@
           :columns="columns"
           row-key="name"
           :filter="filter"
+          :filter-method="
+            (rows, terms, cols, getCellValue) => {
+              console.log(rows);
+              console.log(terms);
+              console.log(cols);
+              console.log(getCellValue);
+            }
+          "
         >
           <template slot="top-right" slot-scope="props">
             <q-input hide-underline v-model="filter" color="secondary" />
@@ -122,7 +130,7 @@
             <q-td key="quantity" :props="props">{{
               props.row.value.quantity
             }}</q-td>
-            <q-td key="total" :props="props">{{ props.row.value.total }}</q-td>
+            <!-- <q-td key="total" :props="props">{{ props.row.value.total }}</q-td> -->
           </q-tr>
         </q-table>
       </q-page>
@@ -149,29 +157,35 @@ export default {
     return {
       tableData,
       details: [],
+      result: [],
       columns: [
         {
           name: "desc", //dont rename name
           required: false,
           label: "Goods/Services",
           align: "left",
-          field: "title",
+          field: row => row.value.title,
           sortable: true
         },
 
-        { name: "rate", label: "Rate(Rs)", field: "rate", sortable: false }, //dont rename name
         {
-          name: "quantity",
-          label: "Quantity",
-          field: "expiry_left",
+          name: "rate",
+          label: "Rate(Rs)",
+          field: row => row.value.rate,
           sortable: false
         }, //dont rename name
         {
+          name: "quantity",
+          label: "Quantity",
+          field: row => row.value.quantity,
+          sortable: false
+        } //dont rename name
+        /*  {
           name: "total",
           label: "Total",
           field: "total",
           sortable: false
-        } //dont rename name
+        } //dont rename name */
       ],
 
       filter: "",
