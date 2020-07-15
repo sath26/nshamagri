@@ -55,17 +55,19 @@ const routes = [
     //back to bought or sold
     //back to enterprise stock
   },
+  {
+    name: "newSoldInvoice",
+    path: "/newSoldInvoice",
+    component: () => import("components/list/NewInvoiceSold.vue")
+    //back to bought or sold
+    //back to enterprise stock
+  },
   /* *********************services********************************* */
 
   {
     path: "/category",
     component: () => import("components/list/Category.vue"),
     meta: { requireAuth: true }
-  },
-
-  {
-    path: "/single_service",
-    component: () => import("components/list/SingleService.vue") //back to my_services
   },
 
   {
@@ -121,12 +123,12 @@ const routes = [
     meta: { requireAuth: true }
     //it also takes to invoice
   },
-  {
+  /* {
     path: "/enterprise_stock",
     component: () => import("components/list/EnterpriseStock.vue")
     //back to single_product
     //it also takes to invoice
-  },
+  }, */
 
   /***************add********************************************************/
   {

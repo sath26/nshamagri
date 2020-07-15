@@ -185,13 +185,13 @@ export default {
   created() {
     const ref = db
       .collection("sold")
-      .doc(this.$route.params.sold_id)
+      .doc(this.$route.query.sold_id)
       .collection("invoice")
-      .doc(this.$route.params.invoice_id)
+      .doc(this.$route.query.invoice_id)
       .collection("invoice_details")
       .get()
       .then(doc => {
-        // console.log(doc.docs[0].data());
+        console.log(doc.docs[0].data());
         this.details = doc.docs[0].data().items;
       });
   }

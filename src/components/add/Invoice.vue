@@ -145,6 +145,8 @@ export default {
   },
   data() {
     return {
+      sold_id: "",
+      invoice_id: "",
       buyer_enterprise_id: "",
       this_enterprise_buyer_bought_list_id: "",
       rate: 0,
@@ -356,7 +358,7 @@ export default {
           })
           .then(ref => {
             console.log("sold-->invoice_id " + ref.id);
-
+            this.invoice_id = ref.id;
             db.collection("sold")
               .doc(this.this_enterprise_buyer_bought_list_id)
               .collection("invoice")
@@ -366,16 +368,19 @@ export default {
                 items: this.multiple
               })
               .then(ref2 => {
-                console.log("sold-->invoice_id-->invoice_details" + ref2.id);
+                console.log("sold-->invoice_id " + ref.id);
+                console.log("sold-->invoice_id-->invoice_details " + ref2.id);
+                this.$router.push({
+                  name: "newSoldInvoice",
+                  //item.key and item.sold_id not defined yet
+                  query: {
+                    invoice_id: ref.id,
+                    sold_id: this.this_enterprise_buyer_bought_list_id
+                  }
+                });
               })
               .catch(error => console.log(error));
           });
-        console.log(
-          "already added sold document with id " +
-            sold_res.id +
-            " " +
-            this.this_enterprise_buyer_bought_list_id
-        );
       } else {
         const res = db
           .collection("bought")
@@ -436,6 +441,8 @@ export default {
                 created_at: firebase.firestore.Timestamp.now()
               })
               .then(ref2 => {
+                this.sold_id = ref.id;
+                this.invoice_id = ref2.id;
                 db.collection("sold")
                   .doc(ref.id)
                   .collection("invoice")
@@ -443,10 +450,17 @@ export default {
                   .collection("invoice_details")
                   .add({
                     items: this.multiple
+                  })
+                  .then(ref3 => {
+                    console.log("sold data inserted " + sold_res.id);
+                    this.$router.push({
+                      name: "newSoldInvoice",
+                      //item.key and item.sold_id not defined yet
+                      query: { invoice_id: ref2.id, sold_id: ref.id }
+                    });
                   });
               });
           });
-        console.log("sold data inserted " + sold_res.id);
       }
     }
   },

@@ -154,7 +154,7 @@ export default {
           label: "Goods/Services",
           align: "left",
           field: "title",
-          sortable: false
+          sortable: true
         },
 
         { name: "rate", label: "Rate(Rs)", field: "rate", sortable: false }, //dont rename name
