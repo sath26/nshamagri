@@ -42,12 +42,26 @@ const routes = [
     meta: { requireAuth: true }
   },
   {
-    path: "/invoice_good",
-    component: () => import("components/list/Invoice_good.vue")
+    name: "oldBoughtInvoice",
+    path: "/invoice/:bought_id/old-bought-invoice/:invoice_id",
+    component: () => import("components/list/OldBoughtInvoice.vue")
     //back to bought or sold
     //back to enterprise stock
   },
-
+  {
+    name: "oldSoldInvoice",
+    path: "/invoice/:sold_id/old-sold-invoice/:invoice_id",
+    component: () => import("components/list/OldSoldInvoice.vue")
+    //back to bought or sold
+    //back to enterprise stock
+  },
+  {
+    name: "newSoldInvoice",
+    path: "/newSoldInvoice",
+    component: () => import("components/list/NewInvoiceSold.vue")
+    //back to bought or sold
+    //back to enterprise stock
+  },
   /* *********************services********************************* */
 
   {
@@ -57,19 +71,43 @@ const routes = [
   },
 
   {
-    path: "/single_service",
-    component: () => import("components/list/SingleService.vue") //back to my_services
-  },
-
-  {
-    path: "/bought",
+    name: "boughtOverview",
+    path: "/bought/:id",
     component: () => import("components/list/Bought.vue"),
+    redirect: "/invoice/:id",
+
+    children: [
+      {
+        path: "/invoice/:id",
+        name: "invoice",
+        component: () => import("components/list/bought/Invoice.vue")
+      },
+      {
+        path: "/paid_by/:id",
+        name: "paid_by",
+        component: () => import("components/list/bought/Paid-date.vue")
+      }
+    ],
     meta: { requireAuth: true }
     //it also takes to invoce
   },
   {
-    path: "/sold",
+    name: "soldOverview",
+    path: "/sold/:id",
+    redirect: "/sale-invoice/:id",
     component: () => import("components/list/Sold.vue"),
+    children: [
+      {
+        path: "/sale-invoice/:id",
+        name: "sale-invoice",
+        component: () => import("components/list/sold/Invoice.vue")
+      },
+      {
+        path: "/receivied_by/:id",
+        name: "received_by",
+        component: () => import("components/list/sold/Received-date.vue")
+      }
+    ],
     meta: { requireAuth: true }
     //it also takes to invoice
   },
@@ -85,12 +123,12 @@ const routes = [
     meta: { requireAuth: true }
     //it also takes to invoice
   },
-  {
+  /* {
     path: "/enterprise_stock",
     component: () => import("components/list/EnterpriseStock.vue")
     //back to single_product
     //it also takes to invoice
-  },
+  }, */
 
   /***************add********************************************************/
   {

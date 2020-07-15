@@ -6,59 +6,91 @@
       <s-header></s-header>
       <q-toolbar inverted class="secondary">
         <q-toolbar-title>
-          <q-btn flat >RajKumar pasal</q-btn>
+          <q-btn flat>RajKumar pasal</q-btn>
         </q-toolbar-title>
         <q-btn-group outline class="desktop-transition-mid_toolbar">
-          <q-btn flat >
+          <q-btn flat>
             25 Jun, 2019
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Date</strong>
             </q-tooltip>
           </q-btn>
           <q-btn flat color="black">
             (5000)
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Unreceived</strong>
             </q-tooltip>
           </q-btn>
           <q-btn flat color="secondary">
             20000
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Received</strong>
             </q-tooltip>
           </q-btn>
           <q-btn flat color="black">
             25000
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Total</strong>
             </q-tooltip>
           </q-btn>
         </q-btn-group>
       </q-toolbar>
-      <q-separator/>
+      <q-separator />
       <div class="mobile-transition-mid_toolbar">
         <q-btn-group outline class="q-ml-lg">
-          <q-btn flat >
+          <q-btn flat>
             25 Jun, 2019
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Date</strong>
             </q-tooltip>
           </q-btn>
           <q-btn flat color="black">
             (5000)
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Unreceived</strong>
             </q-tooltip>
           </q-btn>
           <q-btn flat color="secondary">
             20000
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Received</strong>
             </q-tooltip>
           </q-btn>
           <q-btn flat color="black">
             25000
-            <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+            <q-tooltip
+              anchor="bottom middle"
+              self="top middle"
+              :offset="[10, 10]"
+            >
               <strong>Total</strong>
             </q-tooltip>
           </q-btn>
@@ -68,21 +100,21 @@
         <!--  class="invoice-table"
           dark-->
         <q-table
-          
-          :data="tableData"
+          title="Invoice"
+          :data="details"
           :columns="columns"
           row-key="name"
           :filter="filter"
         >
           <template slot="top-right" slot-scope="props">
-            <q-input hide-underline v-model="filter" color="secondary"/>
+            <q-input hide-underline v-model="filter" color="secondary" />
           </template>
           <template slot="top-left" slot-scope="props">
             <p class="q-caption">* Invoice(cannot be edited once made)</p>
           </template>
           <q-tr slot="body" slot-scope="props" :props="props">
             <!-- <q-tr slot="body" slot-scope="props" :props="props" @click.native="$router.push({ path: '/invoice', query: { tripId: props.row._id } })" class="cursor-pointer" > -->
-            <q-td key="desc" :props="props">{{ props.row.product }}</q-td>
+            <q-td key="desc" :props="props">{{ props.row.title }}</q-td>
 
             <q-td key="rate" :props="props">
               {{ props.row.rate }}
@@ -90,7 +122,6 @@
             </q-td>
             <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
             <q-td key="total" :props="props">{{ props.row.total }}</q-td>
-            <q-td key="expiry_left" :props="props">{{ props.row.expiry_left }}</q-td>
           </q-tr>
         </q-table>
       </q-page>
@@ -105,6 +136,7 @@ import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 
 import tableData from "../../assets/invoice-data";
+import { db } from "../../store/service/firebase";
 
 import { mapState, mapGetters } from "vuex";
 export default {
@@ -115,21 +147,22 @@ export default {
   data() {
     return {
       tableData,
+      details: [],
       columns: [
         {
           name: "desc", //dont rename name
           required: false,
           label: "Goods/Services",
           align: "left",
-          field: "product",
-          sortable: false
+          field: "title",
+          sortable: true
         },
 
         { name: "rate", label: "Rate(Rs)", field: "rate", sortable: false }, //dont rename name
         {
           name: "quantity",
           label: "Quantity",
-          field: "expiry_left",
+          field: "quantity",
           sortable: false
         }, //dont rename name
         {
@@ -137,14 +170,7 @@ export default {
           label: "Total",
           field: "total",
           sortable: false
-        }, //dont rename name
-        {
-          name: "expiry_left",
-          label: "Expiry Left",
-          field: "expiry_left",
-          sortable: false,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
-        }
+        } //dont rename name
       ],
 
       filter: "",
@@ -155,9 +181,19 @@ export default {
       ]
     };
   },
-  watch: {},
-  computed: {},
-  methods: {}
+  created() {
+    const ref = db
+      .collection("bought")
+      .doc(this.$route.params.bought_id)
+      .collection("invoice")
+      .doc(this.$route.params.invoice_id)
+      .collection("invoice_details")
+      .get()
+      .then(doc => {
+        // console.log(doc.docs[0].data());
+        this.details = doc.docs[0].data().items;
+      });
+  }
 };
 </script>
 
@@ -186,5 +222,3 @@ export default {
   }
 }
 </style>
-
-

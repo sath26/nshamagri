@@ -8,13 +8,16 @@
               class="caption"
               clickable
               :to="{
-                name: 'oldSoldInvoice',
-                params: { invoice_id: item.key, sold_id: item.sold_id }
+                name: 'oldBoughtInvoice',
+                params: {
+                  invoice_id: item.key,
+                  bought_id: item.bought_id
+                }
               }"
             >
               <q-item-section>
                 <q-item-label>{{ item.invoice_no }}</q-item-label>
-                <!-- <q-item-label caption>{{ item.total }}</q-item-label> -->
+                <!-- <q-item-label caption>{{ item.individual_total }}</q-item-label> -->
               </q-item-section>
               <q-item-section side>
                 <q-item-label>{{ item.individual_total }}</q-item-label>
@@ -38,8 +41,8 @@ import { db } from "../../../store/service/firebase";
 export default {
   data() {
     return {
-      tab: "sale-invoice",
-      sold: {},
+      tab: "invoice",
+      bought: {},
       furtherUpdatedAt: new Date(),
       invoices: [],
       paid_bys: []
@@ -47,7 +50,7 @@ export default {
   },
   methods: {
     onLoad(index, done) {
-      db.collection("sold")
+      db.collection("bought")
         .doc(this.$route.params.id)
         .collection("invoice")
 
@@ -62,7 +65,7 @@ export default {
               created_at: doc.data().created_at.toDate(),
               individual_total: doc.data().individual_total,
               invoice_no: doc.data().invoice_no,
-              sold_id: this.$route.params.id
+              bought_id: this.$route.params.id
             });
           });
 

@@ -137,71 +137,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import { required, email } from "vuelidate/lib/validators";
 import { db } from "../../store/service/firebase";
 import firebase from "firebase";
-// const stringOptions = [
-//   {
-//     label: "Google",
-//     value: {
-//       product: "Google",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   },
-//   {
-//     label: "Facebook",
-//     value: {
-//       product: "Facebook",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   },
-//   {
-//     label: "Twitter",
-//     value: {
-//       product: "Twitter",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   },
-//   {
-//     label: "Apple Inc.",
-//     value: {
-//       product: "Apple Inc.",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   },
-//   {
-//     label: "Linux Inc.",
-//     value: {
-//       product: "Linux Inc.",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   },
-//   {
-//     label: "Dell Inc.",
-//     value: {
-//       product: "Dell Inc.",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   },
-//   {
-//     label: "Oracle",
-//     value: {
-//       product: "Oracle",
-//       rate: 30,
-//       quantity: 5,
-//       expiry_left: 150
-//     }
-//   }
-// ];
+
 export default {
   components: {
     SHeader,
@@ -209,6 +145,8 @@ export default {
   },
   data() {
     return {
+      sold_id: "",
+      invoice_id: "",
       buyer_enterprise_id: "",
       this_enterprise_buyer_bought_list_id: "",
       rate: 0,
@@ -404,7 +342,7 @@ export default {
               });
           });
         console.log(
-          "already added document with id" +
+          "already added document with id " +
             res.id +
             " " +
             this.this_enterprise_buyer_bought_list_id
@@ -420,7 +358,7 @@ export default {
           })
           .then(ref => {
             console.log("sold-->invoice_id " + ref.id);
-
+            this.invoice_id = ref.id;
             db.collection("sold")
               .doc(this.this_enterprise_buyer_bought_list_id)
               .collection("invoice")
@@ -430,16 +368,19 @@ export default {
                 items: this.multiple
               })
               .then(ref2 => {
-                console.log("sold-->invoice_id-->invoice_details" + ref2.id);
+                console.log("sold-->invoice_id " + ref.id);
+                console.log("sold-->invoice_id-->invoice_details " + ref2.id);
+                this.$router.push({
+                  name: "newSoldInvoice",
+                  //item.key and item.sold_id not defined yet
+                  query: {
+                    invoice_id: ref.id,
+                    sold_id: this.this_enterprise_buyer_bought_list_id
+                  }
+                });
               })
               .catch(error => console.log(error));
           });
-        console.log(
-          "already added sold document with id" +
-            sold_res.id +
-            " " +
-            this.this_enterprise_buyer_bought_list_id
-        );
       } else {
         const res = db
           .collection("bought")
@@ -450,6 +391,7 @@ export default {
             seller_enterprise_id: this.current_enterprise[0]
               .admin_enterprise_id,
             enterprise_name: this.current_enterprise[0].title,
+            //*enterprise name is of seller enterprise
             updated_at: firebase.firestore.Timestamp.now(),
             seller_profile_pic: this.current_enterprise[0].photoURL
           })
@@ -485,6 +427,8 @@ export default {
             //?this enterprise sold so data will come from seller_enterprise_id as condtion in sold
 
             enterprise_name: this.current_enterprise[0].title,
+            //*enterprise name is of bought enterprise
+
             updated_at: firebase.firestore.Timestamp.now(),
             seller_profile_pic: this.current_enterprise[0].photoURL
           })
@@ -497,6 +441,8 @@ export default {
                 created_at: firebase.firestore.Timestamp.now()
               })
               .then(ref2 => {
+                this.sold_id = ref.id;
+                this.invoice_id = ref2.id;
                 db.collection("sold")
                   .doc(ref.id)
                   .collection("invoice")
@@ -504,10 +450,17 @@ export default {
                   .collection("invoice_details")
                   .add({
                     items: this.multiple
+                  })
+                  .then(ref3 => {
+                    console.log("sold data inserted " + sold_res.id);
+                    this.$router.push({
+                      name: "newSoldInvoice",
+                      //item.key and item.sold_id not defined yet
+                      query: { invoice_id: ref2.id, sold_id: ref.id }
+                    });
                   });
               });
           });
-        console.log("sold data inserted " + sold_res.id);
       }
     }
   },
