@@ -318,11 +318,21 @@ export default {
       // this.new_category = "";
     },
     renameTitle(title) {
-      this.updateTitle({
-        title: title,
-        user_id: this.user.id
-      });
-      this.done_title = false;
+      if (enterprise.user_id === enterprise.admin_enterprise_id) {
+        this.updateTitle({
+          title: title,
+          user_id: this.user.id
+        });
+        this.done_title = false;
+      } else {
+        this.$q.notify({
+          message: "only admin can update title",
+          position: "top-right",
+          timeout: 2500,
+          color: "negative",
+          textColor: "white"
+        });
+      }
     },
     focusOnContact() {
       this.add_contact = false;
