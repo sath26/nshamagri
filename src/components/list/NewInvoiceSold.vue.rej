@@ -1,0 +1,19 @@
+diff a/src/components/list/NewInvoiceSold.vue b/src/components/list/NewInvoiceSold.vue	(rejected hunks)
+@@ -179,13 +179,13 @@
+           label: "Quantity",
+           field: row => row.value.quantity,
+           sortable: false
+-        } //dont rename name
+-        /*  {
++        }, //dont rename name
++        {
+           name: "total",
+           label: "Total",
+-          field: "total",
++          field: row => row.value.total,
+           sortable: false
+-        } //dont rename name */
++        } //dont rename name
+       ],
+ 
+       filter: "",

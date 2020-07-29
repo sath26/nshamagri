@@ -6,9 +6,8 @@ import { Notify } from "quasar";
 const state = {
   category_quotation: [],
   unit_quotation: [],
-  // enterprise: [], //needed in vuex but not used in components
+  enterprise: [], //needed in vuex but not used in components
   current_enterprise: {},
-  others_enterprise: {},
   members: [],
   checkPossibleMember: [],
   error: null,
@@ -27,8 +26,7 @@ const mutations = {
   },
 
   setCurrentEnterprise(state, payload) {
-    // console.log("this is payload:      " + payload);
-    state.current_enterprise = Object.assign(state.current_enterprise, payload);
+    state.current_enterprise = Object.assign({}, payload);
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;
@@ -212,19 +210,20 @@ const actions = {
   async updateTitle({ getters }, enterprise) {
     // const result = posts.doc();
     // post.id = result.id;
-    // console.log(enterprise);
+    console.log(enterprise);
     const hello = {
-      title: enterprise.title
+      title: enterprise.title,
+      user_id: enterprise.user_id
     };
     const id = enterprise.user_id;
-    // console.log(enterprise.user_id);
+    console.log(enterprise.user_id);
     // enterprise.user_id = firebase.auth().currentUser.uid;
     // authentication required here, else everything works
     try {
       await db
         .collection("enterprise")
         .doc(id)
-        .udpate(hello);
+        .set(hello);
     } catch (error) {
       console.error(error);
     }
@@ -232,7 +231,6 @@ const actions = {
 };
 const getters = {
   admin_enterprise_id: state => {
-    // console.log(state.current_enterprise[0]);
     return state.current_enterprise[0].admin_enterprise_id;
   },
   eligible: state => {

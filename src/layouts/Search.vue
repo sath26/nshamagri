@@ -1,33 +1,28 @@
 <template>
-  <ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
-    <ais-configure :hits-per-page.camel="9" />
-    <div class="container">
-      <ais-search-box>
-        <q-input
-          @click="searchPopout = true"
-          dark
-          dense
-          standout
-          debounce="500"
-          slot-scope="{ currentRefinement, refine }"
-          :value="currentRefinement"
-          @input="refine($event)"
-          input-class="text-right"
-          class="q-ml-md search-box"
-        >
-          <template v-slot:append>
-            <q-icon v-if="text === ''" name="search" />
-            <q-icon
-              v-else
-              name="clear"
-              class="cursor-pointer"
-              @click="text = ''"
-            />
-          </template>
-        </q-input>
-      </ais-search-box>
-    </div>
-    <!-- search extension modal -->
+<ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
+  <ais-configure :hits-per-page.camel="9"/>
+  <div class="container">
+    <ais-search-box>
+    <q-input
+      @click="searchPopout = true"
+      dark
+      dense
+      standout
+      debounce="500"
+      slot-scope="{ currentRefinement, refine }"
+      :value="currentRefinement"
+      @input="refine($event)"
+      input-class="text-right"
+      class="q-ml-md search-box"
+    >
+      <template v-slot:append>
+        <q-icon v-if="text === ''" name="search" />
+        <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
+      </template>
+    </q-input>
+    </ais-search-box>
+  </div>
+  <!-- search extension modal -->
     <div
       class="search-extension"
       :class="{
@@ -63,7 +58,7 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <!-- close button -->
+           <!-- close button -->
           <q-btn
             flat
             @click="searchPopout = false"
@@ -74,15 +69,19 @@
         </q-tabs>
         <q-separator></q-separator>
         <!-- tab pannels -->
-        <q-tab-panels v-model="tab" animated swipeable vertical infinite>
+        <q-tab-panels v-model="tab" 
+        animated 
+        swipeable
+        vertical
+        infinite
+        >
           <q-tab-panel name="enterprise" class="ent-panel shadow-0">
             <div class="row">
               <div class="col-xl-2 col-md-4 col-sm-3">
                 <f-filter></f-filter>
               </div>
-              <!-- search reult Card -->
+                  <!-- search reult Card -->
               <div class="col-xl-10 col-md-8 col-sm-9 result-card_container">
-<<<<<<< HEAD
             <ais-hits>
               <div class="result-card" slot="item" slot-scope="{ item }">
                  <q-card class="my-search-card on-right">
@@ -113,121 +112,63 @@
                               src="../statics/icons/distance-icon.svg"
                               alt="distance icon"/>
                               <q-tooltip content-class="bg-teal" :offset="[-10, -10]">
-=======
-                <ais-hits>
-                  <div class="result-card" slot="item" slot-scope="{ item }">
-                    <q-card class="my-search-card on-right">
-                      <q-card-section horizontal class="row">
-                        <!-- user image with name -->
-                        <q-img
-                          class="q-mr-lg card-img col-4"
-                          style="width:150px; height:150px"
-                          src="../statics/guy-avatar.png"
-                          alt="user image"
-                        >
-                        </q-img>
-                        <div class="absolute-bottom text-subtitle2 text-center">
-                          {{ item.enterprise_name }} <br /><span
-                            class="usr-name_txt text-weight-bold"
-                            >Saugat Thapa</span
-                          >
-                        </div>
-                        <q-card-section class="card-info-txt col-8">
-                          <p class="card-info-txt_p">
-                            {{ item.title }}
-                          </p>
-                        </q-card-section>
-                      </q-card-section>
-
-                      <q-card-section horizontal>
-                        <!-- distance info -->
-                        <q-card-section
-                          class="q-ml-sm info-section info-distance_section "
-                        >
-                          <div class="info-section-container">
-                            <div>
-                              <img
-                                class="info-icons distance-icon"
-                                src="../statics/icons/distance-icon.svg"
-                                alt="distance icon"
-                              />
-                              <q-tooltip
-                                content-class="bg-teal"
-                                :offset="[-10, -10]"
-                              >
->>>>>>> 1af0af4256ace470eee92f615ceff5a2563dbb54
                                 Distance
-                              </q-tooltip>
-                            </div>
+                            </q-tooltip>
+                              </div>
                             <div class="distance-txt_info txt-info">
                               <p class="info-value">
-                                {{ item.distance }}
+                                {{item.distance}}
                               </p>
                             </div>
-                          </div>
-                        </q-card-section>
-                        <!-- invoice info -->
-                        <q-card-section
-                          class="info-section info-invoice_section"
-                        >
-                          <div class="info-section-container">
-                            <div>
-                              <img
-                                class="info-icons invoice-icon"
-                                src="../statics/img/Invoice-graphics.png"
-                                alt="invoice icon"
-                              /><q-tooltip
-                                content-class="bg-teal"
-                                :offset="[-5, -5]"
-                              >
-                                Invoice
-                              </q-tooltip>
-                            </div>
-                            <div class="invoice-txt_info txt-info">
-                              <p class="info-value">
-                                {{ item.invoice }}
-                              </p>
-                            </div>
-                          </div>
-                        </q-card-section>
-                        <!-- customer appreciation  -->
-                        <q-card-section
-                          class="info-section info-customer_section"
-                        >
-                          <div class="info-section-container ">
-                            <div>
-                              <img
-                                class="info-icons customer-icon"
-                                src="../statics/icons/customers-icons.svg"
-                                alt="customer icon"
-                              /><q-tooltip
-                                content-class="bg-teal"
-                                :offset="[-5, -5]"
-                              >
-                                Customer count
-                              </q-tooltip>
-                            </div>
-                            <div class="customer-txt_info ">
-                              <p class="info-value">
-                                {{ item.customers }}
-                              </p>
-                            </div>
-                          </div>
-                        </q-card-section>
-                        <q-card-section
-                          class="card-info-footer-date on-right float-right"
-                        >
-                          <p class="card-info-footer-date-txt">
-                            Date modified: 12/02/2020
-                          </p>
-                        </q-card-section>
-                      </q-card-section>
+                    </div>
+                </q-card-section>
+                <!-- invoice info -->
+                <q-card-section class="info-section info-invoice_section">
+                    <div class="info-section-container">
+                    <div><img
+                      class="info-icons invoice-icon"
+                      src="../statics/img/Invoice-graphics.png"
+                      alt="invoice icon"
+                    /><q-tooltip content-class="bg-teal" :offset="[-5, -5]">
+                          Invoice
+                        </q-tooltip></div>
+                    <div class="invoice-txt_info txt-info">
+                      <p class="info-value">
+                        {{item.invoice}}
+                      </p>
+                    </div>
+                    </div>
+            </q-card-section>
+            <!-- customer appreciation  -->
+            <q-card-section class="info-section info-customer_section">
+                    <div class="info-section-container ">
+                    <div><img
+                      class="info-icons customer-icon"
+                      src="../statics/icons/customers-icons.svg"
+                      alt="customer icon"
+                    /><q-tooltip content-class="bg-teal" :offset="[-5, -5]">
+                          Customer count
+                        </q-tooltip></div>
+                    <div class="customer-txt_info ">
+                      <p class="info-value">
+                        {{item.customers}}
+                      </p>
+                    </div>
+                    </div>
+            </q-card-section>
+            <q-card-section class="card-info-footer-date on-right float-right">
+              <p class="card-info-footer-date-txt">Date modified: 12/02/2020</p>
+            </q-card-section>
+            </q-card-section>
+        
+      <q-separator ></q-separator>
 
-                      <q-separator></q-separator>
-                    </q-card>
-                  </div>
-                </ais-hits>
-                <ais-pagination class="q-pa-lg"></ais-pagination>
+    
+    </q-card>
+              </div>
+
+            </ais-hits>
+            <ais-pagination class="q-pa-lg"></ais-pagination>
               </div>
             </div>
           </q-tab-panel>
@@ -246,22 +187,16 @@
         </q-tab-panels>
       </q-card>
     </div>
-  </ais-instant-search>
+</ais-instant-search>
 </template>
 <script>
-import FFilter from "./search/Filter.vue";
+import FFilter from "./search/Filter.vue"
 import { mapState, mapGetters } from "vuex";
-import {
-  AisInstantSearch,
-  AisSearchBox,
-  AisHits,
-  AisConfigure,
-  AisPagination
-} from "vue-instantsearch";
+import { AisInstantSearch, AisSearchBox, AisHits,AisConfigure, AisPagination } from 'vue-instantsearch';
 import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/algolia-min.css";
 export default {
-  components: {
+   components: {
     AisInstantSearch,
     AisSearchBox,
     AisHits,
@@ -302,5 +237,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '..\css\components-style\_search';
+  @import '..\css\components-style\_search';
+
 </style>

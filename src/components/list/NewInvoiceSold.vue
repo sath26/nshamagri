@@ -179,13 +179,13 @@ export default {
           label: "Quantity",
           field: row => row.value.quantity,
           sortable: false
-        }, //dont rename name
-        {
+        } //dont rename name
+        /*  {
           name: "total",
           label: "Total",
-          field: row => row.value.total,
+          field: "total",
           sortable: false
-        } //dont rename name
+        } //dont rename name */
       ],
 
       filter: "",

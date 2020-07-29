@@ -1,0 +1,8 @@
+diff a/src/store/profile/index.js b/src/store/profile/index.js	(rejected hunks)
+@@ -263,4 +263,4 @@
+   getters,
+   mutations,
+   actions
+-};
+\ No newline at end of file
++};
