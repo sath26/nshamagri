@@ -8,10 +8,11 @@
         active-color="secondary"
         indicator-color="secondary"
         align="justify"
+        class="container__tab"
       >
         <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
-        <q-tab class="q-pa-sm" name="enterprise" label="enterprise" />
-        <q-tab class="q-pa-sm" name="member" label="members" />
+        <q-tab class="q-pa-sm container__tab--1" name="enterprise" label="enterprise" />
+        <q-tab class="q-pa-sm  container__tab--2" name="member" label="members" />
       </q-tabs>
       <q-separator />
       <!-- <q-tab-panels > -->
@@ -21,41 +22,30 @@
           <!-- Profile card ~ #01 -->
           <div id="enterprise-profile_card" class="q-pa-xl">
             <div class="card-banner">
-              <div class="avatar">
+              <q-btn class="float-right" outline color="grey-4">+Add banner</q-btn>
+            </div>
                 <q-img class="usr-img" basic src="statics/parallax2.jpg">
                   <div class="img-edit absolute-bottom text-subtitle2 text-center">
                    <q-btn flat label="Update Image"></q-btn>
                   </div>
                 </q-img>
-              </div>
-              <div class="card-quick_info">
-                <ul class="info-content">
-                  <li>
-                    <div class="info-box">
-                      <div class="info-head text-h5">Quotation</div>
-                      <div class="info-count">200</div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="info-box">
-                      <div class="info-head text-h5">Invoice</div>
-                      <div class="info-count">120</div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="info-box">
-                      <div class="info-head text-h5">Customers</div>
-                      <div class="info-count">35</div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <!-- counter info -->
+            <q-card class="profile__info profile__info--top">
+                <div class="profile__info--box profile__info--box--quotation">
+                  <div class="profile__info--box__head text-h5">Quotation</div>
+                  <div class="profile__info--box__count">300</div>
+                </div>
+                <div class="profile__info--box profile__info--box--invoice">
+                  <div class="profile__info--box__head text-h5">Invoice</div>
+                  <div class="profile__info--box--count">500</div>
+                </div>
+                <div class="profile__info--box profile__info--box--customer">
+                  <div class="profile__info--box__head text-h5">Customers</div>
+                  <div class="profile__info--box--count">150</div>
+                </div>
+            </q-card>
             <!-- profile-detail card -->
-            <q-card class="shadow-1 q-mt-lg ">
-              <q-card-section>
-                <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
-              </q-card-section>
+            <q-card class="q-mt-lg profile__info--box__mid">
                 <div class="card-body card-body_left">
                   <ul class="info-list">
                     <li>
