@@ -86,7 +86,7 @@ const actions = {
       .then(async result => {
         const accessToken = result.credential.accessToken;
         const { user } = result;
-        console.log(user);
+        // console.log(user);
         commit("setUser", {
           id: result.uid,
           name: result.displayName,
@@ -126,7 +126,7 @@ const actions = {
               admin_enterprise_id: firebase.auth().currentUser.uid,
               buyers: 0,
               contact_no: "",
-              map_location: "geolocation",
+              geoloc: "geolocation",
               member_email: [firebase.auth().currentUser.email],
               displayName: firebase.auth().currentUser.displayName,
               uid: firebase.auth().currentUser.uid,
