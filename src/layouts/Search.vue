@@ -1,5 +1,8 @@
 <template>
-  <ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
+  <ais-instant-search
+    index-name="dev_shamagri_geo_price_enterprice"
+    :search-client="searchClient"
+  >
     <ais-configure :hits-per-page.camel="9" />
     <div class="container">
       <ais-search-box>
@@ -95,14 +98,12 @@
                         >
                         </q-img>
                         <div class="absolute-bottom text-subtitle2 text-center">
-                          {{ item.enterprise_name }} <br /><span
-                            class="usr-name_txt text-weight-bold"
-                            >Saugat Thapa</span
+                          {{ item.title }} <br />
                           >
                         </div>
                         <q-card-section class="card-info-txt col-8">
                           <p class="card-info-txt_p">
-                            {{ item.title }}
+                            {{ item.quotation[0].title }}
                           </p>
                         </q-card-section>
                       </q-card-section>
