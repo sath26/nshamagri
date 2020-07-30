@@ -318,7 +318,11 @@ export default {
       // this.new_category = "";
     },
     renameTitle(title) {
-      if (enterprise.user_id === enterprise.admin_enterprise_id) {
+      // console.log(this.current_enterprise[0]);
+      if (
+        this.current_enterprise[0].user_id ===
+        this.current_enterprise[0].admin_enterprise_id
+      ) {
         this.updateTitle({
           title: title,
           user_id: this.user.id

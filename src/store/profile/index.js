@@ -210,9 +210,7 @@ const actions = {
   },
 
   async updateTitle({ getters }, enterprise) {
-    // const result = posts.doc();
-    // post.id = result.id;
-    // console.log(enterprise);
+    //* only admin can update so here user_id can be used
     const hello = {
       title: enterprise.title
     };
@@ -224,7 +222,7 @@ const actions = {
       await db
         .collection("enterprise")
         .doc(id)
-        .udpate(hello);
+        .update(hello);
     } catch (error) {
       console.error(error);
     }
