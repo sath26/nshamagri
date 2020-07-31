@@ -101,13 +101,18 @@
                           alt="user image"
                         >
                         </q-img>
-                        <div class="absolute-bottom text-subtitle2 text-center">
-                          {{ item.title }} <br />
-                          >
-                        </div>
-                        <q-card-section class="card-info-txt col-8">
+                        <q-card-section class="card-info-txt col-7">
+                          <img
+                            class="on-right float-right"
+                            :src="staticon"
+                            alt="open close notifier icons"
+                          />
+                          <h4 class="card-info-txt_header">{{ item.title }}</h4>
                           <p class="card-info-txt_p">
                             {{ item.quotation[0].title }}
+                          </p>
+                          <p class="card-info-txt_p">
+                            {{ item.quotation[0].rate }}
                           </p>
                         </q-card-section>
                       </q-card-section>
@@ -165,7 +170,7 @@
                               </q-tooltip>
                             </div>
                             <div class="invoice-txt_info txt-info">
-                              <p class="info-value">{{ item.invoice_count }}</p>
+                              <p class="info-value">{{ item.invoice }}</p>
                             </div>
                           </div>
                         </q-card-section>
@@ -256,6 +261,8 @@ export default {
       searchBox: "",
       text: "",
       filter: false,
+      staticon: "",
+      statcheck: true,
       searchClient: algoliasearch(
         "HIGFUILYRM",
         "b3cd4d3709c017e877390d653bea5eba"
@@ -263,12 +270,22 @@ export default {
       )
     };
   },
+  mounted: function() {
+    this.checkStat();
+  },
   methods: {
     // al(){
     //   this.searchPopout = true;
     // }
     getFormattedDistance(distance) {
       return parseFloat(distance / 1000);
+    },
+    checkStat() {
+      if (this.statcheck == true) {
+        this.staticon = "../statics/icons/open-icon.svg";
+      } else {
+        this.staticon = "../statics/icons/close-icon.svg";
+      }
     }
   },
   computed: {}
