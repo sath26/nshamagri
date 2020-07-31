@@ -3,7 +3,11 @@
     index-name="dev_shamagri_geo_price_enterprice"
     :search-client="searchClient"
   >
-    <ais-configure :hits-per-page.camel="9" />
+    <ais-configure
+      :hits-per-page.camel="9"
+      :getRankingInfo="true"
+      aroundLatLng="27.7017421,85.2648352"
+    />
     <div class="container">
       <ais-search-box>
         <q-input
@@ -112,6 +116,10 @@
                         <!-- distance info -->
                         <q-card-section
                           class="q-ml-sm info-section info-distance_section "
+                          v-if="
+                            item._rankingInfo &&
+                              item._rankingInfo.matchedGeoLocation
+                          "
                         >
                           <div class="info-section-container">
                             <div>
@@ -129,7 +137,12 @@
                             </div>
                             <div class="distance-txt_info txt-info">
                               <p class="info-value">
-                                {{ item.distance }}
+                                {{
+                                  getFormattedDistance(
+                                    item._rankingInfo.matchedGeoLocation
+                                      .distance
+                                  )
+                                }}
                               </p>
                             </div>
                           </div>
@@ -152,9 +165,7 @@
                               </q-tooltip>
                             </div>
                             <div class="invoice-txt_info txt-info">
-                              <p class="info-value">
-                                {{ item.invoice }}
-                              </p>
+                              <p class="info-value">{{ item.invoice_count }}</p>
                             </div>
                           </div>
                         </q-card-section>
@@ -252,11 +263,14 @@ export default {
       )
     };
   },
-  // methods:{
-  //   al(){
-  //     this.searchPopout = true;
-  //   }
-  // },
+  methods: {
+    // al(){
+    //   this.searchPopout = true;
+    // }
+    getFormattedDistance(distance) {
+      return parseFloat(distance / 1000);
+    }
+  },
   computed: {}
 };
 </script>
