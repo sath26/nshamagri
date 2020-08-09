@@ -45,12 +45,19 @@ export default {
       paid_bys: []
     };
   },
+  computed: {
+    ...mapState("profile", ["current_enterprise"])
+  },
   methods: {
     onLoad(index, done) {
       db.collection("sold")
         .doc(this.$route.params.id)
         .collection("invoice")
-
+        .where(
+          "seller_enterprise_id",
+          "==",
+          this.current_enterprise[0].admin_enterprise_id
+        )
         .orderBy("created_at", "desc")
         .startAfter(this.furtherUpdatedAt)
         .limit(10)
