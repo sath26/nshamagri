@@ -1,3 +1,8 @@
+# future plans
+
+- ui must differentiate whether the list of sold is of consumer or an enterprise
+- i will use function for one of bothside entry i.e. bought of invoice. this will help to create less expensive security rule
+
 ### admin_email_Id is used instead of admin_email_id everywhere
 
 - very important in where statement
@@ -119,7 +124,7 @@ received_by_enterprise:
 received_by_user
 ```
 
-# sold (buyer)
+# sold (buyer):
 
 ```
 buyer_id_enterprise: "admin_enterprise_id"

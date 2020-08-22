@@ -1,9 +1,5 @@
-/* 
-   explain what we do in the best way possible
-   opened or closed
-   
- */
- <template>
+/* explain what we do in the best way possible opened or closed */
+<template>
   <q-layout view="hHh LpR lFf">
     <!-- this view put header and footer fixed but tab is not fixed yet-->
     <q-page-container class="">
@@ -16,7 +12,9 @@
                 <q-card-section class="relative-position">
                   <div class="ellipsis">Expenses(March)</div>
                 </q-card-section>
-                <q-card-section>5000</q-card-section>
+                <q-card-section>{{
+                  this.current_enterprise[0].expenses
+                }}</q-card-section>
               </div>
             </q-card>
             <q-separator inset></q-separator>
@@ -25,7 +23,9 @@
                 <q-card-section class="relative-position">
                   <div class="ellipsis">Sales(March)</div>
                 </q-card-section>
-                <q-card-section>5000</q-card-section>
+                <q-card-section>{{
+                  this.current_enterprise[0].sales
+                }}</q-card-section>
               </div>
             </q-card>
             <q-separator inset></q-separator>
@@ -34,7 +34,9 @@
                 <q-card-section class="relative-position">
                   <div class="ellipsis">Profit(March)</div>
                 </q-card-section>
-                <q-card-section>5000</q-card-section>
+                <q-card-section>{{
+                  this.current_enterprise[0].profit
+                }}</q-card-section>
               </div>
             </q-card>
           </div>
@@ -61,7 +63,7 @@
 import SHeader from "../../layouts/Header";
 import SFooter from "../../layouts/Footer";
 import VueApexCharts from "vue-apexcharts";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   components: {
     SHeader,
@@ -73,7 +75,22 @@ export default {
       this.show = true;
     });
   },
-  computed: {},
+  methods: {
+    ...mapActions("profile", [
+      "fetchProfile",
+      "updateTitle",
+      "deleteCategory",
+      "fetchRole",
+      "checkAndFindMember",
+      "createRole"
+    ])
+  },
+  created() {
+    this.fetchProfile(this.user);
+  },
+  computed: {
+    ...mapState("profile", ["current_enterprise"])
+  },
   data: function() {
     return {
       show: false,
@@ -129,5 +146,3 @@ export default {
   }
 }
 </style>
-
-

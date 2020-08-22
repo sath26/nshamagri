@@ -6,8 +6,25 @@ import { Notify } from "quasar";
 const state = {
   category_quotation: [],
   unit_quotation: [],
+<<<<<<< HEAD
   enterprise: [], //needed in vuex but not used in components
   current_enterprise: {},
+=======
+  // enterprise: [], //needed in vuex but not used in components
+  current_enterprise: [
+    {
+      admin_enterprise_id: "",
+      admin_email_Id: "",
+      user_id: "",
+      member_email: [],
+      profit: 0,
+      expenses: 0,
+      sales: 0,
+      title: ""
+    }
+  ],
+  others_enterprise: {},
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
   members: [],
   checkPossibleMember: [],
   error: null,
@@ -26,7 +43,12 @@ const mutations = {
   },
 
   setCurrentEnterprise(state, payload) {
+<<<<<<< HEAD
     state.current_enterprise = Object.assign({}, payload);
+=======
+    // console.log("this is payload:      " + payload);
+    state.current_enterprise[0] = payload[0];
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;
@@ -208,9 +230,13 @@ const actions = {
   },
 
   async updateTitle({ getters }, enterprise) {
+<<<<<<< HEAD
     // const result = posts.doc();
     // post.id = result.id;
     console.log(enterprise);
+=======
+    //* only admin can update so here user_id can be used
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     const hello = {
       title: enterprise.title,
       user_id: enterprise.user_id
@@ -223,7 +249,11 @@ const actions = {
       await db
         .collection("enterprise")
         .doc(id)
+<<<<<<< HEAD
         .set(hello);
+=======
+        .update(hello);
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     } catch (error) {
       console.error(error);
     }

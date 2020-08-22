@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 <ais-instant-search index-name="dev_enterprise" :search-client="searchClient">
   <ais-configure :hits-per-page.camel="9"/>
   <div class="container">
@@ -23,6 +24,44 @@
     </ais-search-box>
   </div>
   <!-- search extension modal -->
+=======
+  <ais-instant-search
+    index-name="dev_shamagri_geo_price_enterprice"
+    :search-client="searchClient"
+  >
+    <ais-configure
+      :hits-per-page.camel="9"
+      :getRankingInfo="true"
+      aroundLatLng="27.7017421,85.2648352"
+    />
+    <div class="container">
+      <ais-search-box>
+        <q-input
+          @click="searchPopout = true"
+          dark
+          dense
+          standout
+          debounce="500"
+          slot-scope="{ currentRefinement, refine }"
+          :value="currentRefinement"
+          @input="refine($event)"
+          input-class="text-right"
+          class="q-ml-md search-box"
+        >
+          <template v-slot:append>
+            <q-icon v-if="text === ''" name="search" />
+            <q-icon
+              v-else
+              name="clear"
+              class="cursor-pointer"
+              @click="text = ''"
+            />
+          </template>
+        </q-input>
+      </ais-search-box>
+    </div>
+    <!-- search extension modal -->
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     <div
       class="search-extension"
       :class="{
@@ -82,6 +121,7 @@
               </div>
                   <!-- search reult Card -->
               <div class="col-xl-10 col-md-8 col-sm-9 result-card_container">
+<<<<<<< HEAD
             <ais-hits>
               <div class="result-card" slot="item" slot-scope="{ item }">
                  <q-card class="my-search-card on-right">
@@ -112,12 +152,117 @@
                               src="../statics/icons/distance-icon.svg"
                               alt="distance icon"/>
                               <q-tooltip content-class="bg-teal" :offset="[-10, -10]">
+=======
+                <ais-hits>
+                  <div class="result-card" slot="item" slot-scope="{ item }">
+                    <q-card class="my-search-card on-right">
+                      <q-card-section horizontal class="row">
+                        <!-- user image with name -->
+                        <q-img
+                          class="q-mr-lg card-img col-4"
+                          style="width:150px; height:150px"
+                          src="../statics/guy-avatar.png"
+                          alt="user image"
+                        >
+                        </q-img>
+                        <q-card-section class="card-info-txt col-7">
+                          <img
+                            class="on-right float-right"
+                            :src="staticon"
+                            alt="open close notifier icons"
+                          />
+                          <h4 class="card-info-txt_header">{{ item.title }}</h4>
+                          <p class="card-info-txt_p">
+                            {{ item.quotation[0].title }}
+                          </p>
+                          <p class="card-info-txt_p">
+                            {{ item.quotation[0].rate }}
+                          </p>
+                        </q-card-section>
+                      </q-card-section>
+
+                      <q-card-section horizontal>
+                        <!-- distance info -->
+                        <q-card-section
+                          class="q-ml-sm info-section info-distance_section "
+                          v-if="
+                            item._rankingInfo &&
+                              item._rankingInfo.matchedGeoLocation
+                          "
+                        >
+                          <div class="info-section-container">
+                            <div>
+                              <img
+                                class="info-icons distance-icon"
+                                src="../statics/icons/distance-icon.svg"
+                                alt="distance icon"
+                              />
+                              <q-tooltip
+                                content-class="bg-teal"
+                                :offset="[-10, -10]"
+                              >
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
                                 Distance
                             </q-tooltip>
                               </div>
                             <div class="distance-txt_info txt-info">
                               <p class="info-value">
+<<<<<<< HEAD
                                 {{item.distance}}
+=======
+                                {{
+                                  getFormattedDistance(
+                                    item._rankingInfo.matchedGeoLocation
+                                      .distance
+                                  )
+                                }}
+                              </p>
+                            </div>
+                          </div>
+                        </q-card-section>
+                        <!-- invoice info -->
+                        <q-card-section
+                          class="info-section info-invoice_section"
+                        >
+                          <div class="info-section-container">
+                            <div>
+                              <img
+                                class="info-icons invoice-icon"
+                                src="../statics/img/Invoice-graphics.png"
+                                alt="invoice icon"
+                              /><q-tooltip
+                                content-class="bg-teal"
+                                :offset="[-5, -5]"
+                              >
+                                Invoice
+                              </q-tooltip>
+                            </div>
+                            <div class="invoice-txt_info txt-info">
+                              <p class="info-value">{{ item.invoice }}</p>
+                            </div>
+                          </div>
+                        </q-card-section>
+                        <!-- customer appreciation  -->
+                        <q-card-section
+                          class="info-section info-customer_section"
+                        >
+                          <div class="info-section-container ">
+                            <div>
+                              <img
+                                class="info-icons customer-icon"
+                                src="../statics/icons/customers-icons.svg"
+                                alt="customer icon"
+                              /><q-tooltip
+                                content-class="bg-teal"
+                                :offset="[-5, -5]"
+                              >
+                                Customer count
+                              </q-tooltip>
+                            </div>
+                            <div class="customer-txt_info ">
+                              <p class="info-value">
+                                {{ item.customers }}
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
                               </p>
                             </div>
                     </div>
@@ -212,7 +357,11 @@ export default {
       searchBox: "",
       text: "",
       filter: false,
+<<<<<<< HEAD
       staticon:"",
+=======
+      staticon: "",
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
       statcheck: true,
       searchClient: algoliasearch(
         "HIGFUILYRM",
@@ -224,6 +373,7 @@ export default {
   mounted: function() {
     this.checkStat();
   },
+<<<<<<< HEAD
   methods:{
     checkStat(){
       if(this.statcheck == true){
@@ -233,6 +383,24 @@ export default {
       }
     }
   }
+=======
+  methods: {
+    // al(){
+    //   this.searchPopout = true;
+    // }
+    getFormattedDistance(distance) {
+      return parseFloat(distance / 1000);
+    },
+    checkStat() {
+      if (this.statcheck == true) {
+        this.staticon = "../statics/icons/open-icon.svg";
+      } else {
+        this.staticon = "../statics/icons/close-icon.svg";
+      }
+    }
+  },
+  computed: {}
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
 };
 </script>
 

@@ -338,6 +338,9 @@ export default {
               .doc(ref.id)
               .collection("invoice_details")
               .add({
+                individual_total: this.newTotalInvoice,
+                created_at: firebase.firestore.Timestamp.now(),
+
                 items: this.multiple
               });
           });
@@ -365,6 +368,9 @@ export default {
               .doc(ref.id)
               .collection("invoice_details")
               .add({
+                individual_total: this.newTotalInvoice,
+                created_at: firebase.firestore.Timestamp.now(),
+
                 items: this.multiple
               })
               .then(ref2 => {
@@ -382,6 +388,8 @@ export default {
               .catch(error => console.log(error));
           });
       } else {
+        //* bought shows seller but
+        //! "buyer_enterprise_id" must consist of current_enterprise[0].admin_enterprise_id in invoice.vue(for bought)
         const res = db
           .collection("bought")
           .add({
@@ -410,12 +418,19 @@ export default {
                   .doc(ref2.id)
                   .collection("invoice_details")
                   .add({
+                    buyer_enterprise_id: this.buyer_enterprise_id,
+                    seller_enterprise_id: this.current_enterprise[0],
+                    seller_enterprise_name: this.current_enterprise[0].title,
+                    individual_total: this.newTotalInvoice,
+                    created_at: firebase.firestore.Timestamp.now(),
                     items: this.multiple
                   });
               });
           });
         console.log("bought data inserted " + res.id);
         /* **************************************sold************************ */
+        //* sold shows buyer but
+        //! "buyer_enterprise_id" must consist of this.buyer_enterprise_id in invoice.vue(for sold)
 
         const sold_res = db
           .collection("sold")
@@ -449,6 +464,11 @@ export default {
                   .doc(ref2.id)
                   .collection("invoice_details")
                   .add({
+                    buyer_enterprise_id: this.buyer_enterprise_id,
+                    seller_enterprise_id: this.current_enterprise[0],
+                    seller_enterprise_name: this.current_enterprise[0].title,
+                    individual_total: this.newTotalInvoice,
+                    created_at: firebase.firestore.Timestamp.now(),
                     items: this.multiple
                   })
                   .then(ref3 => {

@@ -270,7 +270,7 @@ export default {
     };
   },
   created() {
-    this.fetchProfile(this.user);
+    // this.fetchProfile(this.user);
   },
   mounted() {
     this.fetchRole(this.admin_enterprise_id);
@@ -306,11 +306,33 @@ export default {
       // this.new_category = "";
     },
     renameTitle(title) {
+<<<<<<< HEAD
       this.updateTitle({
         title: title,
         user_id: this.user.id
       });
       this.done_title = false;
+=======
+      // console.log(this.current_enterprise[0]);
+      if (
+        this.current_enterprise[0].user_id ===
+        this.current_enterprise[0].admin_enterprise_id
+      ) {
+        this.updateTitle({
+          title: title,
+          user_id: this.user.id
+        });
+        this.done_title = false;
+      } else {
+        this.$q.notify({
+          message: "only admin can update title",
+          position: "top-right",
+          timeout: 2500,
+          color: "negative",
+          textColor: "white"
+        });
+      }
+>>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     },
     focusOnContact() {
       this.add_contact = false;
