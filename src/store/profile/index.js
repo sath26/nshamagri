@@ -7,7 +7,17 @@ const state = {
   category_quotation: [],
   unit_quotation: [],
   // enterprise: [], //needed in vuex but not used in components
-  current_enterprise: {},
+  current_enterprise: [
+    {
+      admin_enterprise_id: "",
+      admin_email_Id: "",
+      user_id: "",
+      member_email: [],
+      profit: 0,
+      expenses: 0,
+      title: ""
+    }
+  ],
   others_enterprise: {},
   members: [],
   checkPossibleMember: [],
@@ -28,7 +38,10 @@ const mutations = {
 
   setCurrentEnterprise(state, payload) {
     // console.log("this is payload:      " + payload);
-    state.current_enterprise = Object.assign(state.current_enterprise, payload);
+    state.current_enterprise[0] = Object.assign(
+      state.current_enterprise[0],
+      payload
+    );
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;

@@ -34,6 +34,7 @@
 </template>
 <script>
 import { db } from "../../../store/service/firebase";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   data() {
