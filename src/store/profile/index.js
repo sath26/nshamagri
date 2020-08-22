@@ -6,10 +6,6 @@ import { Notify } from "quasar";
 const state = {
   category_quotation: [],
   unit_quotation: [],
-<<<<<<< HEAD
-  enterprise: [], //needed in vuex but not used in components
-  current_enterprise: {},
-=======
   // enterprise: [], //needed in vuex but not used in components
   current_enterprise: [
     {
@@ -24,7 +20,6 @@ const state = {
     }
   ],
   others_enterprise: {},
->>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
   members: [],
   checkPossibleMember: [],
   error: null,
@@ -43,12 +38,8 @@ const mutations = {
   },
 
   setCurrentEnterprise(state, payload) {
-<<<<<<< HEAD
-    state.current_enterprise = Object.assign({}, payload);
-=======
     // console.log("this is payload:      " + payload);
     state.current_enterprise[0] = payload[0];
->>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;
@@ -230,30 +221,19 @@ const actions = {
   },
 
   async updateTitle({ getters }, enterprise) {
-<<<<<<< HEAD
-    // const result = posts.doc();
-    // post.id = result.id;
-    console.log(enterprise);
-=======
     //* only admin can update so here user_id can be used
->>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     const hello = {
-      title: enterprise.title,
-      user_id: enterprise.user_id
+      title: enterprise.title
     };
     const id = enterprise.user_id;
-    console.log(enterprise.user_id);
+    // console.log(enterprise.user_id);
     // enterprise.user_id = firebase.auth().currentUser.uid;
     // authentication required here, else everything works
     try {
       await db
         .collection("enterprise")
         .doc(id)
-<<<<<<< HEAD
-        .set(hello);
-=======
         .update(hello);
->>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     } catch (error) {
       console.error(error);
     }
@@ -261,6 +241,7 @@ const actions = {
 };
 const getters = {
   admin_enterprise_id: state => {
+    // console.log(state.current_enterprise[0]);
     return state.current_enterprise[0].admin_enterprise_id;
   },
   eligible: state => {

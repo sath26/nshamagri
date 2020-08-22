@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh LpR lFf" >
+  <q-layout view="hHh LpR lFf">
     <s-header></s-header>
     <q-page-container class="main-container">
       <q-tabs
@@ -8,28 +8,31 @@
         active-color="secondary"
         indicator-color="secondary"
         align="justify"
-        class="container__tab"
       >
         <!-- <q-tab default name="me" slot="section" icon="mail" label="me" /> -->
         <q-tab class="q-pa-sm container__tab--1" name="enterprise" label="enterprise" />
-        <q-tab class="q-pa-sm  container__tab--2" name="member" label="members" />
+        <q-tab class="q-pa-sm container__tab--2" name="member" label="members" />
       </q-tabs>
       <q-separator />
       <!-- <q-tab-panels > -->
-      <q-tab-panels v-model="tab" animated class="bg-grey-1" >
+      <q-tab-panels v-model="tab" animated class="bg-grey-1">
         <q-tab-panel name="enterprise">
-         
           <!-- Profile card ~ #01 -->
           <div id="enterprise-profile_card" class="q-pa-xl">
-            <div class="card-banner">
+            <!-- banner-section if needed -->
+            <!-- <div class="card-banner">
               <q-btn class="float-right" outline color="grey-4">+Add banner</q-btn>
-            </div>
-                <q-img class="usr-img" basic src="statics/parallax2.jpg">
-                  <div class="img-edit absolute-bottom text-subtitle2 text-center">
-                   <q-btn flat label="Update Image"></q-btn>
-                  </div>
-                </q-img>
-            <!-- counter info -->
+            </div> -->
+                <div class="user__img--container">
+                    <q-img class="user-img" basic src="statics/parallax2.jpg">
+                    <div
+                      class="img-edit absolute-bottom text-subtitle2 text-center"
+                    >
+                      <q-btn flat label="Update Image"></q-btn>
+                    </div>
+                  </q-img>
+                </div>
+              <!-- counter info -->
             <q-card class="profile__info profile__info--top">
                 <div class="profile__info--box profile__info--box--quotation">
                   <div class="profile__info--box__head text-h5">Quotation</div>
@@ -45,78 +48,83 @@
                 </div>
             </q-card>
             <!-- profile-detail card -->
-            <q-card class="q-mt-lg profile__info--box__mid">
-                <div class="card-body card-body_left">
-                  <ul class="info-list">
-                    <li>
-                      <q-input
-                        color="grey-10"
-                        filled
-                        label="Name"
-                        v-model="current_enterprise[0].title"
-                        @focus="focusOnTitle()"
-                        @blur="focusOffTitle()"
-                      >
-                        <template v-slot:prepend>
-                          <q-icon name="store" />
-                        </template>
-                        <template v-slot:append>
-                          <q-btn
-                            flat
-                            v-if="done_title"
-                            @click="renameTitle(current_enterprise[0].title)"
-                          >
-                            <q-icon name="done" />
-                          </q-btn>
-                        </template>
-                      </q-input>
-                    </li>
-                    <li class="col">
-                      <q-input
-                        color="grey-10"
-                        filled
-                        label="PAN Number"
-                        v-model="pan_no"
-                        @focus="focusOnPanNo()"
-                        @blur="focusOffPanNo()"
-                      >
-                        <template v-slot:prepend>
-                          <q-icon name="subject" />
-                        </template>
-                        <template v-slot:append>
-                          <q-btn flat v-if="done_pan_no" @click="renamePanNo()">
-                            <q-icon name="done" />
-                          </q-btn>
-                        </template>
-                      </q-input>
-                    </li>
-                    <li class="col">
-                      <q-input
-                        color="grey-10"
-                        filled
-                        label="Contact Number"
-                        v-model="current_enterprise[0].contact_no"
-                        @focus="focusOnContact()"
-                        @blur="focusOffContact()"
-                      >
-                        <template v-slot:prepend>
-                          <q-icon name="phone" />
-                        </template>
-                        <template v-slot:append>
-                          <q-btn
-                            flat
-                            v-if="done_contact"
-                            @click="renameContact()"
-                          >
-                            <q-icon name="done" />
-                          </q-btn>
-                        </template>
-                      </q-input>
-                    </li>
-                  </ul>
-                </div>
-                <div class="card-body card-body-maps">
-                  <iframe 
+            <q-card class="shadow-1 q-mt-lg ">
+              <q-card-section>
+                <div class="text-h4 text-teal-5 q-ml-xl">Profile details</div>
+              </q-card-section>
+              <div class="card-body card-body_left">
+                <ul class="info-list">
+                  <li>
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="Name"
+                      v-model="current_enterprise[0].title"
+                      @focus="focusOnTitle()"
+                      @blur="focusOffTitle()"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="store" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn
+                          flat
+                          v-if="done_title"
+                          @click="renameTitle(current_enterprise[0].title)"
+                        >
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
+                  </li>
+                  <li class="col">
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="PAN Number"
+                      v-model="pan_no"
+                      @focus="focusOnPanNo()"
+                      @blur="focusOffPanNo()"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="subject" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn flat v-if="done_pan_no" @click="renamePanNo()">
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
+                  </li>
+                  <li class="col">
+                    <q-input
+                      color="grey-10"
+                      filled
+                      label="Contact Number"
+                      v-model="current_enterprise[0].contact_no"
+                      @focus="focusOnContact()"
+                      @blur="focusOffContact()"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="phone" />
+                      </template>
+                      <template v-slot:append>
+                        <q-btn
+                          flat
+                          v-if="done_contact"
+                          @click="renameContact()"
+                        >
+                          <q-icon name="done" />
+                        </q-btn>
+                      </template>
+                    </q-input>
+                  </li>
+                  <li class="col"></li>
+                </ul>
+              </div>
+              <!-- maps section -->
+              <!-- <div class="card-body card-body-maps">
+                <iframe
                   class="q-mb-lg card-body-map"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56516.31625948592!2d85.29111343800308!3d27.70895594445841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2suk!4v1588802629572!5m2!1sen!2suk"
                   width="600"
@@ -128,7 +136,7 @@
                   tabindex="0"
                 >
                 </iframe>
-              </div>
+              </div> -->
             </q-card>
           </div>
         </q-tab-panel>
@@ -306,13 +314,6 @@ export default {
       // this.new_category = "";
     },
     renameTitle(title) {
-<<<<<<< HEAD
-      this.updateTitle({
-        title: title,
-        user_id: this.user.id
-      });
-      this.done_title = false;
-=======
       // console.log(this.current_enterprise[0]);
       if (
         this.current_enterprise[0].user_id ===
@@ -332,7 +333,6 @@ export default {
           textColor: "white"
         });
       }
->>>>>>> d75869c0e38e821d4ba87de13c58bc8deaa545fd
     },
     focusOnContact() {
       this.add_contact = false;
@@ -423,8 +423,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  @import '..\..\css\components-style\_profile.styl';
-    .main-container
-        overflow hidden
-        
+@import '..\..\css\components-style\_profile.styl';
+  .main-container
+      overflow hidden
 </style>
