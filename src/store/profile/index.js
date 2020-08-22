@@ -15,6 +15,7 @@ const state = {
       member_email: [],
       profit: 0,
       expenses: 0,
+      sales: 0,
       title: ""
     }
   ],
@@ -38,10 +39,7 @@ const mutations = {
 
   setCurrentEnterprise(state, payload) {
     // console.log("this is payload:      " + payload);
-    state.current_enterprise[0] = Object.assign(
-      state.current_enterprise[0],
-      payload
-    );
+    state.current_enterprise[0] = payload[0];
   },
   setLoadingFindingMember(state, payload) {
     state.loading_finding_member = payload;

@@ -282,7 +282,7 @@ export default {
     };
   },
   created() {
-    this.fetchProfile(this.user);
+    // this.fetchProfile(this.user);
   },
   mounted() {
     this.fetchRole(this.admin_enterprise_id);

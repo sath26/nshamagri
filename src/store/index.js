@@ -25,7 +25,7 @@ export default function(/* { ssrContext } */) {
       // other mutations
       ...vuexfireMutations
     },
-    plugins: [
+    /*  plugins: [
       createPersistedState({
         storage: {
           getItem: key => ls.get(key),
@@ -33,7 +33,8 @@ export default function(/* { ssrContext } */) {
           removeItem: key => ls.remove(key)
         }
       })
-    ],
+    ], */
+    plugins: [createPersistedState()],
     modules: {
       layoutDemo,
       category,
