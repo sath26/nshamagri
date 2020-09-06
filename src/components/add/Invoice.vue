@@ -483,7 +483,7 @@ export default {
           });
       }
     }
-  },
+  }, //methods
   validations: {
     email: {
       required,
