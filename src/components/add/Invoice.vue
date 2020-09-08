@@ -66,10 +66,18 @@ title and rate */
 
               <q-td key="rate" :props="props">
                 {{ props.row.value.rate }}
-                <q-popup-edit v-model="rate" title="Update Price" buttons>
+                <q-popup-edit
+                  v-model.number="props.row.value.rate"
+                  title="Update Price"
+                  buttons
+                  :validate="rateRangeValidation"
+                  @hide="rateRangeValidation"
+                >
                   <q-input
                     type="number"
                     v-model.number="props.row.value.rate"
+                    :error="errorrate"
+                    :error-message="errorMessagerate"
                   />
                 </q-popup-edit>
                 <!-- <q-chip small square color="amber">{{ props.row.unpaid }}</q-chip> -->
@@ -80,10 +88,14 @@ title and rate */
                   v-model.number="props.row.value.quantity"
                   title="Update Quantity"
                   buttons
+                  :validate="quantityRangeValidation"
+                  @hide="quantityRangeValidation"
                 >
                   <q-input
                     type="number"
                     v-model.number="props.row.value.quantity"
+                    :error="errorquantity"
+                    :error-message="errorMessagequantity"
                   />
                 </q-popup-edit>
               </q-td>
@@ -162,6 +174,10 @@ export default {
       multipleObject: {},
       // data: multiple,
       filterOptions: [], //value to add on select
+      errorquantity: false,
+      errorMessagequantity: "",
+      errorrate: false,
+      errorMessagerate: "",
       columns: [
         {
           name: "desc", //dont rename name
@@ -255,6 +271,26 @@ export default {
         }
       });
     }, */
+    rateRangeValidation(val) {
+      if (val > 0 || val < 1000001) {
+        this.errorrate = true;
+        this.errorMessagerate = "The value must be between 0 and 10,00,000!";
+        return false;
+      }
+      this.errorrate = false;
+      this.errorMessagerate = "";
+      return true;
+    },
+    quantityRangeValidation(val) {
+      if (val > 0 || val < 10001) {
+        this.errorquantity = true;
+        this.errorMessagequantity = "The value must be between 0 and 10,000!";
+        return false;
+      }
+      this.errorquantity = false;
+      this.errorMessagequantity = "";
+      return true;
+    },
     onValueChange() {
       // console.log(multiple);
       this.$refs["select"].__resetInputValue();

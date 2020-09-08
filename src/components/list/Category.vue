@@ -1,21 +1,9 @@
-/* tailoring
-sectiontenaince(bike, car, electronic, plumbing) 
-food and restaurant
-Wash(vehicle, clothes) 
-printing
-furniture
-engineering firms(it, civil)
-sales
-security
-tuition classes
-tour and travel(guide)
-Legal Services
-Advertising Agency
-Event Management
-Healthcare / Pharma / Biotech / Health Care/ R &D
-electronics
-plumbing */
-// can choose what type of service i am in enterprise detail no need of service option 
+/* tailoring sectiontenaince(bike, car, electronic, plumbing) food and
+restaurant Wash(vehicle, clothes) printing furniture engineering firms(it,
+civil) sales security tuition classes tour and travel(guide) Legal Services
+Advertising Agency Event Management Healthcare / Pharma / Biotech / Health Care/
+R &D electronics plumbing */ // can choose what type of service i am in
+enterprise detail no need of service option
 <template>
   <q-layout view="hHh LpR lFf">
     <!-- this view put header and footer fixed but tab is not fixed yet-->
@@ -43,6 +31,10 @@ plumbing */
                   ref="focus"
                   color="secondary"
                   v-model="new_category"
+                  :rules="[
+                    val =>
+                      val.length <= 70 || 'Please use maximum 70 characters'
+                  ]"
                 >
                   <template v-slot:append>
                     <q-btn flat color="secondary" v-if="done" @click="insert()">
@@ -55,7 +47,11 @@ plumbing */
           </q-list>
           <q-spinner color="primary" size="3em" v-if="loading_category" />
           <q-list bordered v-else class="list-container">
-            <q-item multiline v-for="(categories, index) in category" :key="categories.id">
+            <q-item
+              multiline
+              v-for="(categories, index) in category"
+              :key="categories.id"
+            >
               <!-- to="/single_service" -->
               <!-- <q-item-section image="statics/mountains.jpg"/> -->
               <q-item-section avatar>
@@ -67,7 +63,12 @@ plumbing */
                 >
                   <q-icon name="img:statics/icons/category-icon.svg" />
                 </q-btn>
-                <q-btn flat v-else @click="remove(categories)" @mouseleave="mouseleave(categories)">
+                <q-btn
+                  flat
+                  v-else
+                  @click="remove(categories)"
+                  @mouseleave="mouseleave(categories)"
+                >
                   <q-icon name="delete" />
                 </q-btn>
               </q-item-section>
@@ -76,7 +77,8 @@ plumbing */
                   label
                   v-show="!showField(categories)"
                   @click.exact="focusField(categories)"
-                >{{categories.value}}</q-item-section>
+                  >{{ categories.value }}</q-item-section
+                >
                 <q-item-section label v-show="showField(categories)">
                   <q-input
                     filled
@@ -86,11 +88,19 @@ plumbing */
                     @keyup.enter="focusField(categories)"
                     ref="efocus"
                     v-model="categories.value"
+                    :rules="[
+                      val =>
+                        val.length <= 70 || 'Please use maximum 70 characters'
+                    ]"
                   ></q-input>
                 </q-item-section>
               </q-item-section>
               <q-item-section avatar>
-                <q-btn flat v-if="categories.editIcon" @click="edit(categories)">
+                <q-btn
+                  flat
+                  v-if="categories.editIcon"
+                  @click="edit(categories)"
+                >
                   <q-icon name="edit" />
                 </q-btn>
                 <q-btn flat v-else @click="rename(categories)">
@@ -184,16 +194,14 @@ export default {
       if (event) {
         event.stopPropagation();
       }
-       if(ecategory.value.length > 0 ){
+      if (ecategory.value.length > 0) {
         ecategory.done = false;
         this.edit_category = "";
         this.hover = true;
         // this.remove(ecategory);
-      }else{
+      } else {
         this.remove(ecategory);
       }
-
-      
     },
     prevent() {
       if (event) {
@@ -213,8 +221,7 @@ export default {
     remove(ecategory) {
       swal({
         title: "Are you sure?",
-        text:
-          "Once deleted, you will not be able to recover this data!",
+        text: "Once deleted, you will not be able to recover this data!",
         icon: "warning",
         buttons: true,
         dangerMode: true
@@ -233,26 +240,25 @@ export default {
     },
     insert() {
       console.log(this.new_category);
-        if(this.new_category.length<=0){
-          swal({
-            title: "Nothing to add",
-            text:
-              "Please type in your category!",
-            icon: "warning",
-            dangerMode: true
-          })
-        }else{
-          this.createCategory({
-        id: uniqid(),
-        value: this.new_category,
-        label: this.new_category,
-        add: true,
-        cantChangeIconAfterFocus: true,
-        done: false,
-        editIcon: true,
-        hover: true
-      });
-        }
+      if (this.new_category.length <= 0) {
+        swal({
+          title: "Nothing to add",
+          text: "Please type in your category!",
+          icon: "warning",
+          dangerMode: true
+        });
+      } else {
+        this.createCategory({
+          id: uniqid(),
+          value: this.new_category,
+          label: this.new_category,
+          add: true,
+          cantChangeIconAfterFocus: true,
+          done: false,
+          editIcon: true,
+          hover: true
+        });
+      }
       this.add = true;
       this.done = false;
       this.new_category = "";
@@ -268,17 +274,17 @@ export default {
       ecategory.editIcon = true;
       this.cantChangeIconAfterFocus = true; //for delete from category icon
 
-      if(ecategory.value.length > 0 ){
+      if (ecategory.value.length > 0) {
         this.updateCategory({
-        value: ecategory.value,
-        label:ecategory.label,
-        id: ecategory.id
+          value: ecategory.value,
+          label: ecategory.label,
+          id: ecategory.id
         });
         // this.remove(ecategory);
-      }else{
+      } else {
         this.remove(ecategory);
       }
-      
+
       // this.$refs["efocus"].blur();
     }
   },
@@ -293,5 +299,3 @@ export default {
   background: $primary-white;
 }
 </style>
-
-
