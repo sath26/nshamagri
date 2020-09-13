@@ -53,14 +53,16 @@ const mutations = {
 const actions = {
   fetchProfile: firestoreAction(({ bindFirestoreRef, commit }, user) => {
     commit("setLoading", true);
+    //console.log(user);
     return bindFirestoreRef(
       "enterprise", //naming different due to refactoring issue that might arise
       // db.collection("enterprise").where("member_id", "array-contains", user.id)
+
       db
         .collection("enterprise")
         .where("member_email", "array-contains", user.email)
     ).then(res => {
-      // console.log(res);
+      //console.log(res);
 
       commit("setCurrentEnterprise", res);
     });

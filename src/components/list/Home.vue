@@ -89,7 +89,8 @@ export default {
     this.fetchProfile(this.user);
   },
   computed: {
-    ...mapState("profile", ["current_enterprise"])
+    ...mapState("profile", ["current_enterprise"]),
+    ...mapState("auth", ["user", "pic", "isAuthenticated"])
   },
   data: function() {
     return {
