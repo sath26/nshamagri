@@ -37,23 +37,39 @@
 </template>
 <script>
 import { db } from "../../../store/service/firebase";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   data() {
     return {
       tab: "invoice",
       bought: {},
-      furtherUpdatedAt: new Date(),
+      furtherCreatedAt: new Date(),
       invoices: [],
       paid_bys: []
     };
   },
+
+  created() {
+    this.fetchProfile(this.user);
+  },
   computed: {
-    ...mapState("profile", ["current_enterprise"])
+    ...mapState("profile", ["current_enterprise"]),
+    ...mapState("auth", ["user", "pic", "isAuthenticated"])
   },
   methods: {
+    ...mapActions("profile", [
+      "fetchProfile",
+      "updateTitle",
+      "deleteCategory",
+      "fetchRole",
+      "checkAndFindMember",
+      "createRole"
+    ]),
     onLoad(index, done) {
-      db.collection("bought")
+      //buyer_enteprise_id is needed for security rule
+      const invoice = db
+        .collection("bought")
         .doc(this.$route.params.id)
         .collection("invoice")
         .where(
@@ -62,31 +78,30 @@ export default {
           this.current_enterprise[0].admin_enterprise_id
         )
         .orderBy("created_at", "desc")
-        .startAfter(this.furtherUpdatedAt)
-        .limit(10)
-        .get()
-        .then(res => {
-          res.forEach(doc => {
-            this.invoices.push({
-              key: doc.id,
-              created_at: doc.data().created_at.toDate(),
-              individual_total: doc.data().individual_total,
-              invoice_no: doc.data().invoice_no,
-              bought_id: this.$route.params.id
-            });
+        .startAfter(this.furtherCreatedAt)
+        .limit(10);
+      invoice.get().then(res => {
+        res.forEach(doc => {
+          this.invoices.push({
+            key: doc.id,
+            created_at: doc.data().created_at.toDate(),
+            individual_total: doc.data().individual_total,
+            invoice_no: doc.data().invoice_no,
+            bought_id: this.$route.params.id
           });
-
-          if (res.docs.length == 0) {
-            // stop();
-            done(true);
-          } else {
-            this.furtherUpdatedAt = res.docs[res.docs.length - 1]
-              .data()
-              .created_at.toDate();
-
-            done();
-          }
         });
+
+        if (res.docs.length == 0) {
+          // stop();
+          done(true);
+        } else {
+          this.furtherCreatedAt = res.docs[res.docs.length - 1]
+            .data()
+            .created_at.toDate();
+
+          done();
+        }
+      });
     }
   }
 };

@@ -92,7 +92,11 @@ export default {
     };
   },
   created() {
-    // this.firstLoad();
+    this.fetchProfile(this.user);
+  },
+  computed: {
+    ...mapState("profile", ["current_enterprise"]),
+    ...mapState("auth", ["user", "pic", "isAuthenticated"])
   },
   methods: {
     // ...mapActions("bought", ["firstLoad", "furtherLoad"]),
@@ -108,6 +112,14 @@ export default {
       this.furtherLoad();
 
       done(); */
+    ...mapActions("profile", [
+      "fetchProfile",
+      "updateTitle",
+      "deleteCategory",
+      "fetchRole",
+      "checkAndFindMember",
+      "createRole"
+    ]),
     onLoad(index, done) {
       db.collection("bought")
         .where(
