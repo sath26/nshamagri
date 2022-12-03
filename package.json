@@ -25,7 +25,7 @@
     "sweetalert": "^2.1.2",
     "uniqid": "^5.2.0",
     "vue-apexcharts": "^1.5.2",
-    "vue-i18n": "^8.15.3",
+    "vue-i18n": "^8.28.2",
     "vue-instantsearch": "^2.7.0",
     "vuelidate": "^0.7.5",
     "vuex-persistedstate": "^2.7.1",
