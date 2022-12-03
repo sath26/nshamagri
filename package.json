@@ -17,7 +17,7 @@
     "eslint": "^6.8.0",
     "firebase": "^7.14.2",
     "instantsearch.css": "^7.4.2",
-    "quasar": "^1.9.4",
+    "quasar": "^1.22.1",
     "rm": "^0.1.8",
     "secure-ls": "^1.2.6",
     "shortid": "^2.2.15",
