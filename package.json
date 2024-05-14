@@ -30,7 +30,7 @@
     "vuelidate": "^0.7.5",
     "vuex-persistedstate": "^2.7.1",
     "vuexfire": "^3.2.1",
-    "webpack": "^4.41.6"
+    "webpack": "^5.0.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.7.4",
