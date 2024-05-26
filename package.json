@@ -14,7 +14,7 @@
     "algoliasearch": "^4.0.3",
     "apexcharts": "^3.24.0",
     "axios": "^0.21.1",
-    "eslint": "^6.8.0",
+    "eslint": "^9.0.0",
     "firebase": "^7.14.2",
     "instantsearch.css": "^7.4.2",
     "quasar": "^1.9.4",
@@ -30,7 +30,7 @@
     "vuelidate": "^0.7.5",
     "vuex-persistedstate": "^2.7.1",
     "vuexfire": "^3.2.1",
-    "webpack": "^4.41.6"
+    "webpack": "^5.1.1"
   },
   "devDependencies": {
     "@quasar/app": "^1.7.4",
