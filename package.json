@@ -19,7 +19,7 @@
     "instantsearch.css": "^7.4.2",
     "quasar": "^1.9.4",
     "rm": "^0.1.8",
-    "secure-ls": "^1.2.6",
+    "secure-ls": "^2.0.0",
     "shortid": "^2.2.15",
     "stylus": "^0.54.7",
     "sweetalert": "^2.1.2",
