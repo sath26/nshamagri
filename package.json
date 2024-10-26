@@ -21,7 +21,7 @@
     "rm": "^0.1.8",
     "secure-ls": "^1.2.6",
     "shortid": "^2.2.15",
-    "stylus": "^0.54.7",
+    "stylus": "^0.64.0",
     "sweetalert": "^2.1.2",
     "uniqid": "^5.2.0",
     "vue-apexcharts": "^1.5.2",
