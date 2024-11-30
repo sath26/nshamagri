@@ -33,7 +33,7 @@
     "webpack": "^4.41.6"
   },
   "devDependencies": {
-    "@quasar/app": "^1.7.4",
+    "@quasar/app": "^3.3.3",
     "css-loader": "^3.4.2",
     "strip-ansi": "=3.0.1"
   },
